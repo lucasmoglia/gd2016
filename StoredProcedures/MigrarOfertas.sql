@@ -5,7 +5,8 @@ GO
 -- =============================================
 -- Author:		Germán Rodriguez
 -- Create date: 04/06/2016
--- Description:	SP para Migrar las Ofertas y Compras
+-- Description:	SP para Migrar las Ofertas y Compras.
+-- Este SP no se podrá ejecutar antes de la Migración de la Tabla Usuario.
 -- =============================================
 CREATE PROCEDURE [DE_UNA].[Migrar_Ofertas] AS
 BEGIN
@@ -13,11 +14,16 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-	PRINT '-------- Migración de Ofertas --------';
+	PRINT '-------- Migrando Ofertas... --------';
 
 	INSERT INTO [DE_UNA].[Ofertas]
-	SELECT *
-	  FROM [gd_esquema].[Maestra]
-	 WHERE 
+	SELECT M.[Publicacion_Cod]
+		 , C.[cod_usuario]
+		 , M.[Oferta_Fecha]
+		 , M.[Oferta_Monto]
+	  FROM [gd_esquema].[Maestra] M
+	  JOIN [DE_UNA].[Clientes] C ON M.[cli_dni] = C.[dni]
+	 WHERE M.[Oferta_Monto] IS NOT NULL;
+
 END
 GO
