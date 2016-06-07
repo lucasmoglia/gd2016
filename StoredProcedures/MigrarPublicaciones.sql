@@ -26,23 +26,25 @@ BEGIN
 			  , M.[Publicacion_Visibilidad_Cod]
 			  , P.[cod_estado]
 			  , R.[cod_rubro]
-			  --, (IF [Publ_Empresa_Cuit] IS NULL 
-			  --      C.[cod_usuario]
-			  --   ELSE
-			  --      E.[cod_usuario] 
-			  --   END) -- O algo así...!
+			  , cod_usuario = CASE
+					 WHEN (M.[Publ_Empresa_Cuit] IS NULL AND C.[cod_usuario] IS NOT NULL) THEN
+						C.[cod_usuario]
+					 ELSE
+						E.[cod_usuario] 
+					 END -- O algo así...!
 			  , T.[cod_tipo_publi]
 			  , 0 AS con_envio
 			  , 0 AS con_preguntas
 		   FROM [gd_esquema].[Maestra] M
 		   JOIN [DE_UNA].[EstadosPublicacion] P ON M.[Publicacion_Estado] = P.[descripcion]
-		   JOIN [DE_UNA].[Tipos_Publicacion] T  ON M.[Publicacion_Tipo] = T.[descripcion]
-		   JOIN [DE_UNA].[Rubros] R ON M.[Publicacion_Rubro_Descripcion] = R.[desc_larga]
-		   --JOIN [DE_UNA].[Clientes] C ON M.[Publ_Cli_Dni] = C.[dni]
-		   --JOIN [DE_UNA].[Empresas] E ON M.[Publ_Empresa_Cuit] = E.[cuit]
+		   JOIN [DE_UNA].[Tipos_Publicacion]  T ON M.[Publicacion_Tipo] = T.[descripcion]
+		   JOIN [DE_UNA].[Rubros]             R ON M.[Publicacion_Rubro_Descripcion] = R.[desc_larga]
+		   JOIN [DE_UNA].[Clientes]           C ON M.[Publ_Cli_Dni] = C.[dni]
+		   JOIN [DE_UNA].[Empresas]           E ON M.[Publ_Empresa_Cuit] = E.[cuit]
 		   WHERE M.[Publicacion_Cod] IS NOT NULL;
 
 	PRINT '------- Publicaciones migradas -------';
 
 END
 GO
+
