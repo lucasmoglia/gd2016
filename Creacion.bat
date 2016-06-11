@@ -1,1 +1,1 @@
-sqlcmd -S localhost\SQLSERVER2012 -U gd -P gd2016 -i DE_UNA.Schema.sql,DE_UNA.Nuevas.Tables.sql  -a 32767 -o resultado_output.txt
+sqlcmd -S localhost\SQLSERVER2012 -U gd -P gd2016 -i DE_UNA.Schema.sql, DropTablas.sql, CrearTablas.sql, PoblarTablasSinDependencias.sql, MigrarUsuarioEmpresa(SIN CURSOR).sql, MigrarUsuarioCliente.sql, MigrarPublicaciones.sql, MigrarCompras.sql, MigrarOfertas.sql, MigrarFacturas.sql -a 32767 -o resultado_output.txt
