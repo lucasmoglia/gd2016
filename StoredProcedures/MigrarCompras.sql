@@ -19,15 +19,18 @@ BEGIN
 		 SELECT M.[Publicacion_Cod]
 			  , C.[cod_usuario]
 	 		  , M.[Compra_fecha]
-			  , M.[Factura_Total] -- NO! Hay que ver q mandarle aca!
+			  , M.[Publicacion_Precio]
+			  , M.[Compra_Cantidad]
+			  , M.[Calificacion_Codigo]
 			  , M.[Calificacion_Cant_Estrellas]
 			  , M.[Calificacion_Descripcion]
-			  , M.[Compra_Cantidad]
 		   FROM [gd_esquema].[Maestra] M
 			JOIN [DE_UNA].[Clientes] C ON M.[cli_dni] = C.[dni]
-		  WHERE [Compra_fecha] IS NOT NULL;
+		  WHERE [Compra_fecha] IS NOT NULL
+		  ORDER BY M.[Publicacion_Cod], C.[cod_usuario];
 
 	PRINT '----- Tabla de Compras, Migrada -----';
 
 END
 GO
+
