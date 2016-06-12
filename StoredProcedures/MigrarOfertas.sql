@@ -8,7 +8,7 @@ GO
 -- Description:	SP para Migrar las Ofertas.
 -- Este SP no se podrá ejecutar antes de la Migración de las Tablas Clientes y Publicaciones.
 -- =============================================
-ALTER PROCEDURE [DE_UNA].[Migrar_Ofertas] AS
+CREATE PROCEDURE [DE_UNA].[Migrar_Ofertas] AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from interfering with SELECT statements.
 	SET NOCOUNT ON;

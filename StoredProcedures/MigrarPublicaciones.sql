@@ -8,7 +8,7 @@ GO
 -- Description:	SP para migrar las Publicaciones
 -- Éste SP no se podrá ejecutar antes de PoblarTablasSinDependencias ni MigrarUsuarios (Clientes y Empresas).
 -- =============================================
-ALTER PROCEDURE [DE_UNA].MigrarPublicaciones AS
+CREATE PROCEDURE [DE_UNA].MigrarPublicaciones AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
 	-- interfering with SELECT statements.
