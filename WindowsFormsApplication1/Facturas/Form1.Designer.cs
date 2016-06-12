@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApplication1.Facturas
+﻿namespace ME.UI.Facturas
 {
     partial class Form1
     {

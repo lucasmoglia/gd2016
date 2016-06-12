@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApplication1.Generar_Publicación
+﻿namespace ME.UI.Generar_Publicación
 {
     partial class Form1
     {

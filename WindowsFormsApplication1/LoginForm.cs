@@ -35,6 +35,8 @@ namespace ME.UI
             else
             {
                 MessageBox.Show("Los datos ingresados son incorrectos. Intente nuevamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtPassword.Text = string.Empty;
+                txtUser.Focus();
             }           
         }
 

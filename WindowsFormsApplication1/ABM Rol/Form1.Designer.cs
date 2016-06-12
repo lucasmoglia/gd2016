@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApplication1.ABM_Rol
+﻿namespace ME.UI.ABM_Rol
 {
     partial class Form1
     {
@@ -28,11 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.gvRoles = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.gvRoles)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // gvRoles
+            // 
+            this.gvRoles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gvRoles.Location = new System.Drawing.Point(12, 121);
+            this.gvRoles.Name = "gvRoles";
+            this.gvRoles.Size = new System.Drawing.Size(538, 248);
+            this.gvRoles.TabIndex = 0;
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(562, 394);
+            this.Controls.Add(this.gvRoles);
+            this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.gvRoles)).EndInit();
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.DataGridView gvRoles;
     }
 }

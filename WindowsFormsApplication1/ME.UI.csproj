@@ -56,17 +56,17 @@
     <Compile Include="ABM Rubro\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="ABM Usuario\ClienteUserControl.cs">
+    <Compile Include="ABM Usuario\UsuarioUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ABM Usuario\ClienteUserControl.Designer.cs">
-      <DependentUpon>ClienteUserControl.cs</DependentUpon>
+    <Compile Include="ABM Usuario\UsuarioUserControl.Designer.cs">
+      <DependentUpon>UsuarioUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="ABM Usuario\NuevoClienteForm.cs">
+    <Compile Include="ABM Usuario\NuevoUsuarioForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ABM Usuario\NuevoClienteForm.Designer.cs">
-      <DependentUpon>NuevoClienteForm.cs</DependentUpon>
+    <Compile Include="ABM Usuario\NuevoUsuarioForm.Designer.cs">
+      <DependentUpon>NuevoUsuarioForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ABM Visibilidad\Form1.cs">
       <SubType>Form</SubType>
@@ -124,11 +124,14 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="ABM Usuario\ClienteUserControl.resx">
-      <DependentUpon>ClienteUserControl.cs</DependentUpon>
+    <EmbeddedResource Include="ABM Rol\Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ABM Usuario\NuevoClienteForm.resx">
-      <DependentUpon>NuevoClienteForm.cs</DependentUpon>
+    <EmbeddedResource Include="ABM Usuario\UsuarioUserControl.resx">
+      <DependentUpon>UsuarioUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABM Usuario\NuevoUsuarioForm.resx">
+      <DependentUpon>NuevoUsuarioForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Home\Home.resx">
       <DependentUpon>Home.cs</DependentUpon>
