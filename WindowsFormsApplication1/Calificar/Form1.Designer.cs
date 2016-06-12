@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApplication1.Calificar
+﻿namespace ME.UI.Calificar
 {
     partial class Form1
     {

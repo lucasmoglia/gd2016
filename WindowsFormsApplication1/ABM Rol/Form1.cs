@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ME.Business;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,13 +9,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsFormsApplication1.ABM_Rol
+namespace ME.UI.ABM_Rol
 {
     public partial class Form1 : Form
     {
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            gvRoles.DataSource = RolesHandler.GetRoles();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApplication1.ComprarOfertar
+﻿namespace ME.UI.ComprarOfertar
 {
     partial class Form1
     {
