@@ -39,5 +39,12 @@ namespace ME.UI
             NuevoUsuarioForm form = new NuevoUsuarioForm();
             form.Show();
         }
+
+        private void rolesToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            //Cuando hago click en una opción del menu, cambio el controlador.
+            this.pnlMaster.Controls.Clear();
+            this.pnlMaster.Controls.Add(new RolUserControl());
+        }
     }
 }

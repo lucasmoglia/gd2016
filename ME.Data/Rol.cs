@@ -16,6 +16,7 @@ namespace ME.Data
         public Rol(decimal cod_rol, string nombre)
         {
             this.cod_rol = cod_rol;
+
             this.nombre = nombre;
         }
 

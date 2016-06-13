@@ -22,9 +22,23 @@ namespace ME.UI
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            if (_usuarioHandler.Login(txtUser.Text, txtPassword.Text) > 0)
+            if (String.IsNullOrEmpty(txtUser.Text))
             {
-                MessageBox.Show("Bienvenido a MercadoEnvío", "Bienvenido!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                errLogin.SetError(txtUser, "El nombre de usuario es requerido");
+                label1.Text = "El nombre de usuario es requerido";
+                label1.Visible = true;
+            }
+            else if (String.IsNullOrEmpty(txtPassword.Text))
+            {
+                errLogin.SetError(txtPassword, "La contraseña es requerida");
+                label1.Text = "La contraseña es requerida";
+                label1.Visible = true;
+            }
+            else if (_usuarioHandler.Login(txtUser.Text, txtPassword.Text) > 0)
+            {
+                label1.Visible = false;
+                errLogin.Clear();
+
                 var frm = new Home();
                 frm.Location = this.Location;
                 frm.StartPosition = FormStartPosition.Manual;
@@ -34,8 +48,10 @@ namespace ME.UI
             }
             else
             {
-                MessageBox.Show("Los datos ingresados son incorrectos. Intente nuevamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                errLogin.SetError(txtPassword, "Los datos ingresados son incorrectos");
                 txtPassword.Text = string.Empty;
+                label1.Text = "Los datos ingresados son incorrectos";
+                label1.Visible = true;
                 txtUser.Focus();
             }           
         }

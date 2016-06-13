@@ -1,4 +1,4 @@
-﻿namespace ME.UI.ABM_Rol
+﻿namespace ME.UI
 {
     partial class RolUserControl
     {
@@ -28,56 +28,76 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.gvRoles = new System.Windows.Forms.DataGridView();
+            this.btnRemoveRol = new System.Windows.Forms.Button();
+            this.btnEditRol = new System.Windows.Forms.Button();
+            this.btnNuevoRol = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.gvRoles)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // gvRoles
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 109);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(794, 324);
-            this.dataGridView1.TabIndex = 0;
+            this.gvRoles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gvRoles.Location = new System.Drawing.Point(3, 109);
+            this.gvRoles.Name = "gvRoles";
+            this.gvRoles.Size = new System.Drawing.Size(794, 324);
+            this.gvRoles.TabIndex = 0;
             // 
-            // button1
+            // btnRemoveRol
             // 
-            this.button1.Location = new System.Drawing.Point(721, 440);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnRemoveRol.BackColor = System.Drawing.Color.DarkRed;
+            this.btnRemoveRol.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnRemoveRol.Location = new System.Drawing.Point(72, 80);
+            this.btnRemoveRol.Name = "btnRemoveRol";
+            this.btnRemoveRol.Size = new System.Drawing.Size(63, 23);
+            this.btnRemoveRol.TabIndex = 5;
+            this.btnRemoveRol.Text = "Borrar";
+            this.btnRemoveRol.UseVisualStyleBackColor = false;
+            this.btnRemoveRol.Visible = false;
             // 
-            // button2
+            // btnEditRol
             // 
-            this.button2.Location = new System.Drawing.Point(640, 440);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnEditRol.BackColor = System.Drawing.Color.LimeGreen;
+            this.btnEditRol.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnEditRol.Location = new System.Drawing.Point(3, 80);
+            this.btnEditRol.Name = "btnEditRol";
+            this.btnEditRol.Size = new System.Drawing.Size(63, 23);
+            this.btnEditRol.TabIndex = 4;
+            this.btnEditRol.Text = "Editar";
+            this.btnEditRol.UseVisualStyleBackColor = false;
+            this.btnEditRol.Visible = false;
+            // 
+            // btnNuevoRol
+            // 
+            this.btnNuevoRol.Location = new System.Drawing.Point(721, 80);
+            this.btnNuevoRol.Name = "btnNuevoRol";
+            this.btnNuevoRol.Size = new System.Drawing.Size(75, 23);
+            this.btnNuevoRol.TabIndex = 6;
+            this.btnNuevoRol.Text = "Nuevo Rol";
+            this.btnNuevoRol.UseVisualStyleBackColor = true;
+            this.btnNuevoRol.Click += new System.EventHandler(this.btnNuevoRol_Click);
             // 
             // RolUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.btnNuevoRol);
+            this.Controls.Add(this.btnRemoveRol);
+            this.Controls.Add(this.btnEditRol);
+            this.Controls.Add(this.gvRoles);
             this.Name = "RolUserControl";
             this.Size = new System.Drawing.Size(800, 500);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.Load += new System.EventHandler(this.RolUserControl_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.gvRoles)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.DataGridView gvRoles;
+        private System.Windows.Forms.Button btnRemoveRol;
+        private System.Windows.Forms.Button btnEditRol;
+        private System.Windows.Forms.Button btnNuevoRol;
     }
 }
