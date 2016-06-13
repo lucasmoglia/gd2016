@@ -11,7 +11,7 @@ namespace ME.Business
     {
         public static List<FuncionalidadModel> GetFuncionalidades()
         {
-            return Funcionalidad.GetFuncionalidades(true);
+            return Funcionalidad.GetFuncionalidades();
         }
 
         public static List<FuncionalidadModel> GetFuncionalidadesByRol(decimal cod_rol)

@@ -21,7 +21,7 @@ namespace ME.Data
 
     public class Funcionalidad
     {
-        public static List<FuncionalidadModel> GetFuncionalidades(bool activeOnly)
+        public static List<FuncionalidadModel> GetFuncionalidades()
         {
             List<FuncionalidadModel> funcionalidadList = new List<FuncionalidadModel>();
 
@@ -29,7 +29,6 @@ namespace ME.Data
             {
                 SqlCommand command = new SqlCommand("[DE_UNA].[GetFuncionalidades]", connection);
                 command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.Add("@activeOnly", SqlDbType.Bit).Value = activeOnly;
 
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
