@@ -21,8 +21,8 @@ namespace ME.UI
 
         private void UsuariosUserControl_Load(object sender, EventArgs e)
         {
-            //gvClientes.DataSource = UsuarioHandler.GetUsuarios(true);
-            //gvClientes.Columns.Remove("cod_usuario");
+            gvClientes.DataSource = UsuarioHandler.GetUsuarios(true);
+            gvClientes.Columns.Remove("cod_usuario");
         }
 
         private void button1_Click(object sender, EventArgs e)

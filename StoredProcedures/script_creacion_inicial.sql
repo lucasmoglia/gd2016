@@ -15,8 +15,15 @@ BEGIN
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
 
---	EXECUTE [DE_UNA].Schema;
+--	DECLARE @crearSchema nvarchar(200) = 'CREATE SCHEMA [DE_UNA]';
+
 	EXECUTE [DE_UNA].[DropTables];
+--	EXECUTE [DE_UNA].[DropProcedures];
+
+--	DROP SCHEMA [DE_UNA];
+
+--	EXEC(@crearSchema);
+
 	EXECUTE [DE_UNA].[CrearTablas];
 	EXECUTE [DE_UNA].[PoblarTablasSinDependencias];
 	EXECUTE [DE_UNA].[MigrarUsuarioEmpresa];
