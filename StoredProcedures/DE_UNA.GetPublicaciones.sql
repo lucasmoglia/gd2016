@@ -1,6 +1,5 @@
 ﻿USE [GD1C2016]
 GO
-/****** Object:  StoredProcedure [DE_UNA].[GetGridUsuarios]    Script Date: 13/06/2016 0:01:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -50,6 +49,7 @@ BEGIN
 		  ,R.desc_corta
 		  ,R.desc_larga
 		  ,P.cod_usuario
+		  ,U.username
 		  ,P.cod_tipo_publi
 		  ,T.descripcion AS tipo_publi
 		  ,P.con_envio
@@ -59,6 +59,7 @@ BEGIN
 	 LEFT JOIN [DE_UNA].EstadosPublicacion E ON P.cod_estado = E.cod_estado
 	 LEFT JOIN [DE_UNA].Rubros             R ON P.cod_rubro = R.cod_rubro
 	 LEFT JOIN [DE_UNA].Tipos_Publicacion  T ON P.cod_tipo_publi = T.cod_tipo_publi
+	 LEFT JOIN [DE_UNA].Usuarios           U ON P.cod_usuario = U.cod_usuario
 	WHERE (E.cod_estado    IN (@estado, @publicada)   OR @estado IS NULL)
 	  AND (p.cod_rubro     IN (SELECT cod_Rubro FROM @rubros) OR @rubros IS NULL)
 	  AND (P.descripcion LIKE (%@descripcion%)        OR @descripcion IS NULL)
