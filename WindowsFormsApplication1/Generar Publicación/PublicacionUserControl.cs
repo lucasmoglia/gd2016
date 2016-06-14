@@ -15,14 +15,14 @@ namespace ME.UI
     public partial class PublicacionesUserControl : UserControl
     {
         private const int pageSize = 10;
-        private List<UsuarioModel> listaUsuarios = new List<UsuarioModel>();
+        private List<Publicacion> listaPublicaciones = new List<Publicacion>();
         
         public PublicacionesUserControl()
         {
             InitializeComponent();
-            listaUsuarios = UsuarioHandler.GetUsuarios(true);
-            gvPublicaciones.DataSource = listaUsuarios;
-            gvPublicaciones.Columns.Remove("cod_usuario");
+            listaPublicaciones = PublicacionHandler.GetPublicaciones("Activa");
+            gvPublicaciones.DataSource = listaPublicaciones;
+            gvPublicaciones.Columns.Remove("cod_publi");
             bindingNav1.BindingSource = bindingSource1;
             bindingSource1.CurrentChanged += new System.EventHandler(bindingSource1_CurrentChanged);
             bindingSource1.DataSource = new PageOffsetList(gvPublicaciones.RowCount);
@@ -32,9 +32,9 @@ namespace ME.UI
         {
             // The desired page has changed, so fetch the page of records using the "Current" offset 
             int offset = (int)bindingSource1.Current;
-            var records = new List<UsuarioModel>();
-            for (int i = offset; i < offset + pageSize && i < listaUsuarios.Count; i++)
-                records.Add(listaUsuarios.ElementAt(i));
+            var records = new List<Publicacion>();
+            for (int i = offset; i < offset + pageSize && i < listaPublicaciones.Count; i++)
+                records.Add(listaPublicaciones.ElementAt(i));
             gvPublicaciones.DataSource = records;
         }
 
@@ -58,15 +58,15 @@ namespace ME.UI
             }
         }
 
-        private void UsuariosUserControl_Load(object sender, EventArgs e)
+        private void PublicacionesUserControl_Load(object sender, EventArgs e)
         {
 
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Form nuevoUsuarioForm = new NuevoUsuarioForm();
-            nuevoUsuarioForm.ShowDialog(this);
+            Form nuevaPublicacionForm = new NuevaPublicacionForm();
+            nuevaPublicacionForm.ShowDialog(this);
         }
 
         private void gvClientes_SelectionChanged(object sender, EventArgs e)
@@ -82,9 +82,9 @@ namespace ME.UI
 
         private void btnEditUser_Click(object sender, EventArgs e)
         {
-            UsuarioModel usuario = (UsuarioModel)gvPublicaciones.SelectedRows[0].DataBoundItem;
-            Form nuevoUsuarioForm = new NuevoUsuarioForm(usuario);
-            nuevoUsuarioForm.ShowDialog(this);
+            Publicacion publicacion = (Publicacion)gvPublicaciones.SelectedRows[0].DataBoundItem;
+            Form nuevaPublicacionForm = new NuevaPublicacionForm(publicacion);
+            nuevaPublicacionForm.ShowDialog(this);
         }
 
     }

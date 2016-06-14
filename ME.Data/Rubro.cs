@@ -21,9 +21,32 @@ namespace ME.Data
             this.desc_larga = desc_larga;
         }
 
+        //public static Rubro GetRubro(decimal cod_rubro)
+        //{
+        //    using (SqlConnection connection = MEEntity.GetConnection())
+        //    {
+        //        SqlCommand command = new SqlCommand("[DE_UNA].[GetRubro]", connection);
+        //        command.CommandType = CommandType.StoredProcedure;
+        //        command.Parameters.Add("@cod_rubro", SqlDbType.Decimal).Value = cod_rubro;
+
+        //        connection.Open();
+        //        SqlDataReader reader = command.ExecuteReader();
+
+        //        reader.Read();
+
+        //        Rubro unRubro = new Rubro(
+        //              decimal.Parse(reader["cod_rubro"].ToString())
+        //            , reader["desc_corta"].ToString()
+        //            , reader["desc_larga"].ToString()
+        //        );
+
+        //        return unRubro;
+        //    }
+        //}
+
         public static List<Rubro> GetRubros()
         {
-            List<Rubro> rubrosList = new List<Rubro>();
+            List<Rubro> rubroList = new List<Rubro>();
 
             using (SqlConnection connection = MEEntity.GetConnection())
             {
@@ -36,17 +59,17 @@ namespace ME.Data
 
                 while (reader.Read())
                 {
-                    Rubro rol = new Rubro(
+                    Rubro rubro = new Rubro(
                           int.Parse(reader["cod_rubro"].ToString())
                         , reader["desc_corta"].ToString()
                         , reader["desc_larga"].ToString()
                     );
 
-                    rubrosList.Add(rol);
+                    rubroList.Add(rubro);
                 }
             }
 
-            return rubrosList;
+            return rubroList;
         }
     }
 }

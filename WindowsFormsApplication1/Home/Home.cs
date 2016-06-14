@@ -19,7 +19,8 @@ namespace ME.UI
 
         private void Home_Load(object sender, EventArgs e)
         {
-        
+            //this.pnlMaster.Clear();
+            //this.pnlMaster.Controls.Add(new PublicacionUserControl());
         }
 
         private void misFacturasToolStripMenuItem_Click(object sender, EventArgs e)
@@ -31,7 +32,7 @@ namespace ME.UI
         {
             //Cuando hago click en una opción del menu, cambio el controlador.
             this.pnlMaster.Controls.Clear();
-            this.pnlMaster.Controls.Add(new UsuarioUserControl());
+            this.pnlMaster.Controls.Add(new PublicacionesUserControl());
         }
 
         private void inicioToolStripMenuItem_Click(object sender, EventArgs e)
