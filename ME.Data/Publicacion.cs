@@ -30,7 +30,8 @@ namespace ME.Data
         public Publicacion(decimal cod_publi, string descripcion, ulong stock, DateTime fecha_inicio, DateTime fecha_vencimiento, decimal precio_producto,
                            decimal cod_visibilidad, string  visibilidad, decimal costo_publicar, decimal porcentaje_venta, decimal costo_envio,
                            decimal cod_estado, string  estado, decimal cod_rubro, string  desc_corta, string  desc_larga,
-                           UsuarioModel usuario, decimal cod_tipo_publi, string tipo_publicacion, bool con_envio, bool con_preguntas)
+                           //UsuarioModel usuario, 
+                           decimal cod_usuario, string username,decimal cod_tipo_publi, string tipo_publicacion, bool con_envio, bool con_preguntas)
         {
             this.cod_publi = cod_publi;
             this.descripcion = descripcion;
@@ -41,7 +42,9 @@ namespace ME.Data
             this.visibilidad = new Visibilidad(cod_visibilidad, visibilidad, costo_publicar, porcentaje_venta, costo_envio);
             this.estado = new Estado(cod_estado, estado);
             this.rubro = new Rubro(cod_rubro, desc_corta, desc_larga);
-            this.usuario = usuario;
+            //this.usuario = usuario;
+            this.cod_usuario = cod_usuario;
+            this.username = username;
             this.tipo_publi = new TipoPublicacion(cod_tipo_publi, tipo_publicacion);
             this.con_envio = con_envio;
             this.con_preguntas = con_preguntas;
@@ -56,7 +59,7 @@ namespace ME.Data
         //    return MEEntity.ExecuteSP("[DE_UNA].[Login]", parameters);
         //}
 
-        public static List<Publicacion> GetPublicaciones(string estado)
+        public static List<Publicacion> GetPublicaciones(byte estado, List<decimal> rubros, string descripcion)
         {
             List<Publicacion> publicacionList = new List<Publicacion>();
 
@@ -64,7 +67,9 @@ namespace ME.Data
             {
                 SqlCommand command = new SqlCommand("[DE_UNA].[GetPublicaciones]", connection);
                 command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.Add("@estado", SqlDbType.NVarChar).Value = estado;
+                command.Parameters.Add("@estado", SqlDbType.Byte).Value = estado;
+                command.Parameters.Add("@rubros", SqlDbType.Structured).Value = rubros;
+                command.Parameters.Add("@descripcion", SqlDbType.NVarChar).Value = descripcion;
 
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
@@ -88,17 +93,19 @@ namespace ME.Data
                         , decimal.Parse(reader["cod_rubro"].ToString())
                         , reader["desc_corta"].ToString()
                         , reader["desc_larga"].ToString()
-                        , Usuario.GetUsuario(decimal.Parse(reader["cod_usuario"].ToString()))
+                        //, Usuario.GetUsuario(decimal.Parse(reader["cod_usuario"].ToString()))
+                        , decimal.Parse(reader["cod_usuario"].ToString())
+                        , reader["username"].ToString()
                         , decimal.Parse(reader["cod_tipo_publi"].ToString())
                         , reader["tipo_publi"].ToString()
                         , bool.Parse(reader["con_envio"].ToString())
                         , bool.Parse(reader["con_preguntas"].ToString())
 
-                        //, visibilidad = Visibilidad.GetVisibilidad(decimal.Parse(reader["cod_visibilidad"].ToString()))
-                        //, estado = Estado.GetEstado(decimal.Parse(reader["cod_estado"].ToString()))
-                        //, rubro = Rubro.GetRubro(decimal.Parse(reader["cod_rubro"].ToString()))
-                        //, usuario = Usuario.GetUsuario(decimal.Parse(reader["cod_rubro"].ToString()))
-                        //, tipo_publi = TipoPubli.GetTipoPubli()
+                        //, Visibilidad.GetVisibilidad(decimal.Parse(reader["cod_visibilidad"].ToString()))
+                        //, Estado.GetEstado(decimal.Parse(reader["cod_estado"].ToString()))
+                        //, Rubro.GetRubro(decimal.Parse(reader["cod_rubro"].ToString()))
+                        //, Usuario.GetUsuario(decimal.Parse(reader["cod_usuario"].ToString()))
+                        //, TipoPubli.GetTipoPubli(decimal.Parse(reader["cod_tipo_publi"].ToString()))
                     );
 
                     publicacionList.Add(publicacion);
