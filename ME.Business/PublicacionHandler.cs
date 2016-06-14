@@ -20,9 +20,9 @@ namespace ME.Business
                                    usuario, cod_tipo_publi, tipo_publicacion, con_envio, con_preguntas);
         }
 
-        public static List<Publicacion> ListarPublicaciones(string estado)
+        public static List<Publicacion> ListarPublicaciones(byte estado, List<decimal> rubros, string descripcion)
         {
-            return Publicacion.GetPublicaciones(estado);
+            return Publicacion.GetPublicaciones(estado, rubros, descripcion);
         }
     }
 }
