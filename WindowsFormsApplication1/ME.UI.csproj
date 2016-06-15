@@ -80,12 +80,6 @@
     <Compile Include="Calificar\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="ComprarOfertar\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ComprarOfertar\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Facturas\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,11 +92,11 @@
     <Compile Include="Generar Publicación\NuevaPublicacionForm.Designer.cs">
       <DependentUpon>NuevaPublicacionForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Generar Publicación\PublicacionUserControl.cs">
+    <Compile Include="ComprarOfertar\ComprarOfertarUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Generar Publicación\PublicacionUserControl.Designer.cs">
-      <DependentUpon>PublicacionUserControl.cs</DependentUpon>
+    <Compile Include="ComprarOfertar\ComprarOfertarUserControl.Designer.cs">
+      <DependentUpon>ComprarOfertarUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Home\Home.cs">
       <SubType>Form</SubType>
@@ -145,8 +139,8 @@
     <EmbeddedResource Include="Generar Publicación\NuevaPublicacionForm.resx">
       <DependentUpon>NuevaPublicacionForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Generar Publicación\PublicacionUserControl.resx">
-      <DependentUpon>PublicacionUserControl.cs</DependentUpon>
+    <EmbeddedResource Include="ComprarOfertar\ComprarOfertarUserControl.resx">
+      <DependentUpon>ComprarOfertarUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Home\Home.resx">
       <DependentUpon>Home.cs</DependentUpon>

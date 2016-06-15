@@ -32,7 +32,7 @@ namespace ME.UI
         {
             //Cuando hago click en una opción del menu, cambio el controlador.
             this.pnlMaster.Controls.Clear();
-            this.pnlMaster.Controls.Add(new PublicacionesUserControl());
+            this.pnlMaster.Controls.Add(new ComprarOfertarUserControl());
         }
 
         private void inicioToolStripMenuItem_Click(object sender, EventArgs e)
