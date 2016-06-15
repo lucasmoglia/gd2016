@@ -32,6 +32,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -86,11 +88,11 @@
     <Compile Include="Facturas\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Generar Publicación\NuevaPublicacionForm.cs">
+    <Compile Include="Generar Publicación\PublicacionForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Generar Publicación\NuevaPublicacionForm.Designer.cs">
-      <DependentUpon>NuevaPublicacionForm.cs</DependentUpon>
+    <Compile Include="Generar Publicación\PublicacionForm.Designer.cs">
+      <DependentUpon>PublicacionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ComprarOfertar\ComprarOfertarUserControl.cs">
       <SubType>UserControl</SubType>
@@ -136,8 +138,8 @@
     <EmbeddedResource Include="ABM Usuario\NuevoUsuarioForm.resx">
       <DependentUpon>NuevoUsuarioForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Generar Publicación\NuevaPublicacionForm.resx">
-      <DependentUpon>NuevaPublicacionForm.cs</DependentUpon>
+    <EmbeddedResource Include="Generar Publicación\PublicacionForm.resx">
+      <DependentUpon>PublicacionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ComprarOfertar\ComprarOfertarUserControl.resx">
       <DependentUpon>ComprarOfertarUserControl.cs</DependentUpon>

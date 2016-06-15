@@ -20,8 +20,11 @@ namespace ME.Data
         public Visibilidad     visibilidad { get; set; }
         public Estado          estado      { get; set; }
         public Rubro           rubro       { get; set; }
-        public UsuarioModel    usuario     { get; set; }
-        public TipoPublicacion tipo_publi  { get; set; }
+//        public UsuarioModel    usuario     { get; set; }
+        public decimal  cod_usuario        { get; set; }
+        public string   username           { get; set; }
+
+        public TipoPublicacion tipo_publi { get; set; }
 
         public bool con_envio              { get; set; }
         public bool con_preguntas          { get; set; }
