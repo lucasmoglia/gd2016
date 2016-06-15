@@ -37,7 +37,7 @@ namespace ME.UI
 
         private void inicioToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            NuevaPublicacionForm form = new NuevaPublicacionForm();
+            PublicacionForm form = new PublicacionForm();
             form.Show();
         }
 
