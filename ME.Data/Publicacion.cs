@@ -67,7 +67,7 @@ namespace ME.Data
             {
                 SqlCommand command = new SqlCommand("[DE_UNA].[GetPublicaciones]", connection);
                 command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.Add("@estado", SqlDbType.Byte).Value = estado;
+                command.Parameters.Add("@estado", SqlDbType.Decimal).Value = estado;
                 command.Parameters.Add("@rubros", SqlDbType.Structured).Value = rubros;
                 command.Parameters.Add("@descripcion", SqlDbType.NVarChar).Value = descripcion;
 

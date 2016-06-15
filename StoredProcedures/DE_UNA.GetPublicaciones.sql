@@ -7,12 +7,18 @@ GO
 -- =============================================
 -- Author:		Germán Rodriguez
 -- Create date: 14/06/2016
--- Description:	SP para llenar la grilla de Publicaciones.
+-- Description:	SP para llenar la grilla de Publicaciones y permitir filtrar.
 -- =============================================
+/* Creo un Tipo Tabla que va a ser un parametro. */  
+CREATE TYPE [DE_UNA].Rubros AS TABLE   
+( cod_rubro decimal(10) );  
+GO  
+
 CREATE PROCEDURE [DE_UNA].GetPublicaciones
 	-- Add the parameters for the stored procedure here
-	@estado numeric(1)
-	@rubros TABLE(cod_Rubro decimal(10))
+	@estado numeric(1),
+--	@rubros decimal(10),
+	@rubros [DE_UNA].Rubros READONLY,
 	@descripcion nvarchar(255)
 	-- Faltarían poner 2 parametros: - cod_usuario
 	--                               - una condicion que indique si se debe comparar el cod_usuario por igual o distinto
@@ -24,13 +30,14 @@ BEGIN
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
 
-        DECLARE @publicada numeric(1) 
+--  DECLARE @publicada numeric(1) 
 
-        IF @estado IS NULL
-            @publicada = NULL;
-        ELSE
-            @publicada = (SELECT cod_estado FROM [DE_UNA].EstadosPublicacion WHERE descripcion = 'Publicada');
-        END
+    --IF @estado IS NULL
+    --    set @publicada = NULL
+    --ELSE
+    --    @publicada = (SELECT cod_estado FROM [DE_UNA].EstadosPublicacion WHERE descripcion = 'Publicada');
+    --END
+    DECLARE @publicada numeric(1) = (SELECT cod_estado FROM [DE_UNA].EstadosPublicacion WHERE descripcion = 'Publicada');
 
 	SELECT P.cod_publi
 		  ,P.descripcion
@@ -61,7 +68,8 @@ BEGIN
 	 LEFT JOIN [DE_UNA].Tipos_Publicacion  T ON P.cod_tipo_publi = T.cod_tipo_publi
 	 LEFT JOIN [DE_UNA].Usuarios           U ON P.cod_usuario = U.cod_usuario
 	WHERE (E.cod_estado    IN (@estado, @publicada)   OR @estado IS NULL)
-	  AND (p.cod_rubro     IN (SELECT cod_Rubro FROM @rubros) OR @rubros IS NULL)
-	  AND (P.descripcion LIKE (%@descripcion%)        OR @descripcion IS NULL)
+	  AND (p.cod_rubro     IN (SELECT cod_Rubro FROM @rubros) OR (SELECT cod_Rubro FROM @rubros) IS NULL)
+--	  AND (p.cod_rubro     IN (@rubros) OR @rubros IS NULL)
+	  AND (P.descripcion LIKE '%@descripcion%'        OR @descripcion IS NULL)
 	ORDER BY P.cod_visibilidad
 END
