@@ -12,20 +12,20 @@ using ME.Data;
 
 namespace ME.UI
 {
-    public partial class PublicacionesUserControl : UserControl
+    public partial class UsuarioUserControl : UserControl
     {
         private const int pageSize = 10;
         private List<UsuarioModel> listaUsuarios = new List<UsuarioModel>();
         
-        public PublicacionesUserControl()
+        public UsuarioUserControl()
         {
             InitializeComponent();
             listaUsuarios = UsuarioHandler.GetUsuarios(true);
-            gvPublicaciones.DataSource = listaUsuarios;
-            gvPublicaciones.Columns.Remove("cod_usuario");
-            bindingNav1.BindingSource = bindingSource1;
+            gvClientes.DataSource = listaUsuarios;
+            gvClientes.Columns.Remove("cod_usuario");
+            bindingNavigator1.BindingSource = bindingSource1;
             bindingSource1.CurrentChanged += new System.EventHandler(bindingSource1_CurrentChanged);
-            bindingSource1.DataSource = new PageOffsetList(gvPublicaciones.RowCount);
+            bindingSource1.DataSource = new PageOffsetList(gvClientes.RowCount);
         }
 
         private void bindingSource1_CurrentChanged(object sender, EventArgs e)
@@ -35,7 +35,7 @@ namespace ME.UI
             var records = new List<UsuarioModel>();
             for (int i = offset; i < offset + pageSize && i < listaUsuarios.Count; i++)
                 records.Add(listaUsuarios.ElementAt(i));
-            gvPublicaciones.DataSource = records;
+            gvClientes.DataSource = records;
         }
 
         class PageOffsetList : System.ComponentModel.IListSource
@@ -76,13 +76,13 @@ namespace ME.UI
 
         private void gvClientes_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            btnEditPublicacion.Visible = true;
-            btnRemovePublicacion.Visible = true;
+            btnEditUser.Visible = true;
+            btnRemoveUser.Visible = true;
         }
 
         private void btnEditUser_Click(object sender, EventArgs e)
         {
-            UsuarioModel usuario = (UsuarioModel)gvPublicaciones.SelectedRows[0].DataBoundItem;
+            UsuarioModel usuario = (UsuarioModel)gvClientes.SelectedRows[0].DataBoundItem;
             Form nuevoUsuarioForm = new NuevoUsuarioForm(usuario);
             nuevoUsuarioForm.ShowDialog(this);
         }

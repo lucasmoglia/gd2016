@@ -15,7 +15,7 @@ CREATE TYPE [DE_UNA].Rubros AS TABLE
 GO  
 
 CREATE PROCEDURE [DE_UNA].GetPublicaciones
-	-- Add the parameters for the stored procedure here
+	-- Parámetros para los filtros.
 	@estado numeric(1),
 --	@rubros decimal(10),
 	@rubros [DE_UNA].Rubros READONLY,
