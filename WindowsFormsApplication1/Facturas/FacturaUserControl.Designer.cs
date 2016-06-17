@@ -31,11 +31,11 @@
             this.gvFacturas = new System.Windows.Forms.DataGridView();
             this.DTPFechaHasta = new System.Windows.Forms.DateTimePicker();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.DTPFechaDesde = new System.Windows.Forms.DateTimePicker();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.TxtUsuario = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.TxtUsuario = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.DTPFechaDesde = new System.Windows.Forms.DateTimePicker();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnBuscar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gvFacturas)).BeginInit();
@@ -52,7 +52,7 @@
             this.gvFacturas.Location = new System.Drawing.Point(23, 154);
             this.gvFacturas.Name = "gvFacturas";
             this.gvFacturas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gvFacturas.Size = new System.Drawing.Size(746, 346);
+            this.gvFacturas.Size = new System.Drawing.Size(746, 343);
             this.gvFacturas.TabIndex = 1;
             // 
             // DTPFechaHasta
@@ -83,24 +83,22 @@
             this.groupBox1.Text = "Filtros";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
-            // DTPFechaDesde
+            // label3
             // 
-            this.DTPFechaDesde.AllowDrop = true;
-            this.DTPFechaDesde.Checked = false;
-            this.DTPFechaDesde.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DTPFechaDesde.Location = new System.Drawing.Point(313, 32);
-            this.DTPFechaDesde.Name = "DTPFechaDesde";
-            this.DTPFechaDesde.Size = new System.Drawing.Size(200, 20);
-            this.DTPFechaDesde.TabIndex = 4;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(17, 16);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(54, 13);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Usuario:";
             // 
-            // label1
+            // TxtUsuario
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(312, 16);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(84, 13);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Fecha desde:";
+            this.TxtUsuario.Location = new System.Drawing.Point(17, 32);
+            this.TxtUsuario.Name = "TxtUsuario";
+            this.TxtUsuario.Size = new System.Drawing.Size(139, 20);
+            this.TxtUsuario.TabIndex = 7;
+            this.TxtUsuario.TextChanged += new System.EventHandler(this.TextUsuario_TextChanged);
             // 
             // label2
             // 
@@ -111,22 +109,24 @@
             this.label2.TabIndex = 6;
             this.label2.Text = "Fecha Hasta:";
             // 
-            // TxtUsuario
+            // label1
             // 
-            this.TxtUsuario.Location = new System.Drawing.Point(17, 32);
-            this.TxtUsuario.Name = "TxtUsuario";
-            this.TxtUsuario.Size = new System.Drawing.Size(139, 20);
-            this.TxtUsuario.TabIndex = 7;
-            this.TxtUsuario.TextChanged += new System.EventHandler(this.TextUsuario_TextChanged);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(312, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(84, 13);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Fecha desde:";
             // 
-            // label3
+            // DTPFechaDesde
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(17, 16);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(54, 13);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "Usuario:";
+            this.DTPFechaDesde.AllowDrop = true;
+            this.DTPFechaDesde.Checked = false;
+            this.DTPFechaDesde.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DTPFechaDesde.Location = new System.Drawing.Point(313, 32);
+            this.DTPFechaDesde.Name = "DTPFechaDesde";
+            this.DTPFechaDesde.Size = new System.Drawing.Size(200, 20);
+            this.DTPFechaDesde.TabIndex = 4;
             // 
             // btnLimpiar
             // 
