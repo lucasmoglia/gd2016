@@ -19,7 +19,7 @@ BEGIN
 
 	FROM [DE_UNA].Ofertas
 
-	WHERE (cod_publi    IN (@cod_publi)   OR @cod_publi IS NULL)
-	  AND (cod_usuario     IN (@cod_usuario) OR (@cod_usuario) IS NULL)
+	WHERE (cod_publi    = @cod_publi   OR @cod_publi   IS NULL)
+	  AND (cod_usuario  = @cod_usuario OR @cod_usuario IS NULL)
 	ORDER BY cod_publi
 END
