@@ -60,7 +60,7 @@ namespace ME.UI
 
         private void PublicacionesUserControl_Load(object sender, EventArgs e)
         {
-            this.cmbBoxRubros.DataSource = RubrosHandler.GetRubros();
+            this.cmbBoxRubros.DataSource = RubroHandler.ListarRubros();
             this.gvPublicaciones.DataSource = PublicacionHandler.ListarPublicaciones(1, null, null);
         }
 

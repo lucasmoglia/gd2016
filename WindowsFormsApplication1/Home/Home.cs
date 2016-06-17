@@ -25,6 +25,8 @@ namespace ME.UI
 
         private void misFacturasToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            this.pnlMaster.Controls.Clear();
+            this.pnlMaster.Controls.Add(new FacturaUserControl());
 
         }
 

@@ -7,9 +7,14 @@ using ME.Data;
 
 namespace ME.Business
 {
-    public class RolesHandler
+    public class RolHandler
     {
-        public static List<Rol> GetRoles()
+        public static Rol ObtenerRol(decimal cod_rol)
+        {
+            return Rol.GetRol(cod_rol);
+        }
+
+        public static List<Rol> ListarRoles()
         {
             return Rol.GetRoles(true);
         }

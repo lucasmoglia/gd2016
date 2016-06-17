@@ -21,28 +21,32 @@ namespace ME.Data
             this.desc_larga = desc_larga;
         }
 
-        //public static Rubro GetRubro(decimal cod_rubro)
-        //{
-        //    using (SqlConnection connection = MEEntity.GetConnection())
-        //    {
-        //        SqlCommand command = new SqlCommand("[DE_UNA].[GetRubro]", connection);
-        //        command.CommandType = CommandType.StoredProcedure;
-        //        command.Parameters.Add("@cod_rubro", SqlDbType.Decimal).Value = cod_rubro;
+        public static Rubro GetRubro(string rubro)
+        {
+            using (SqlConnection connection = MEEntity.GetConnection())
+            {
+                SqlCommand command = new SqlCommand("[DE_UNA].[GetRubro]", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add("@rubro", SqlDbType.NVarChar).Value = rubro;
 
-        //        connection.Open();
-        //        SqlDataReader reader = command.ExecuteReader();
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
 
-        //        reader.Read();
+                if (reader.Read())
+                {
+                    Rubro unRubro = new Rubro(
+                          decimal.Parse(reader["cod_rubro"].ToString())
+                        , reader["desc_corta"].ToString()
+                        , reader["desc_larga"].ToString()
+                    );
 
-        //        Rubro unRubro = new Rubro(
-        //              decimal.Parse(reader["cod_rubro"].ToString())
-        //            , reader["desc_corta"].ToString()
-        //            , reader["desc_larga"].ToString()
-        //        );
+                    return unRubro;
+                } else {
+                    return null;
+                }
 
-        //        return unRubro;
-        //    }
-        //}
+            }
+        }
 
         public static List<Rubro> GetRubros()
         {

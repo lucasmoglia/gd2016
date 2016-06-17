@@ -7,9 +7,14 @@ using System.Threading.Tasks;
 
 namespace ME.Business
 {
-    public class RubrosHandler
+    public class RubroHandler
     {
-        public static List<Rubro> GetRubros()
+        public static Rubro ObtenerRubro(string rubro)
+        {
+            return Rubro.GetRubro(rubro);
+        }
+
+        public static List<Rubro> ListarRubros()
         {
             return Rubro.GetRubros();
         }
