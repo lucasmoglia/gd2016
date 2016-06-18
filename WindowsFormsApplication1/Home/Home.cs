@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ME.UI;
 
 namespace ME.UI
 {
@@ -19,11 +20,14 @@ namespace ME.UI
 
         private void Home_Load(object sender, EventArgs e)
         {
-        
+            //this.pnlMaster.Clear();
+            //this.pnlMaster.Controls.Add(new PublicacionUserControl());
         }
 
         private void misFacturasToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            this.pnlMaster.Controls.Clear();
+            this.pnlMaster.Controls.Add(new FacturaUserControl());
 
         }
 
@@ -36,8 +40,10 @@ namespace ME.UI
 
         private void inicioToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            NuevoUsuarioForm form = new NuevoUsuarioForm();
-            form.Show();
+            //this.pnlMaster.Controls.Clear();
+            //this.pnlMaster.Controls.Add(new ComprarOfertarUserControl());
+            //PublicacionForm form = new PublicacionForm(null, false);
+            //form.Show();
         }
 
         private void rolesToolStripMenuItem1_Click(object sender, EventArgs e)

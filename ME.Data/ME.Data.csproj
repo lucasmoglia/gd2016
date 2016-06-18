@@ -41,6 +41,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cliente.cs" />
+    <Compile Include="Factura.cs" />
+    <Compile Include="Item.cs" />
+    <Compile Include="TipoPublicacion.cs" />
+    <Compile Include="Estado.cs" />
+    <Compile Include="Visibilidad.cs" />
+    <Compile Include="Publicacion.cs" />
     <Compile Include="Empresa.cs" />
     <Compile Include="Funcionalidad.cs" />
     <Compile Include="MEEntity.cs" />

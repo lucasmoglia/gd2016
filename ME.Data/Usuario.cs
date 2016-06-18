@@ -41,9 +41,8 @@ namespace ME.Data
     public class Usuario
     {
         public decimal cod_usuario { get; set; }
-        public decimal login_fallidos { get; set; }
-
         public string username { get; set; }
+        public decimal login_fallidos { get; set; }
         public string password { get; set; }
         public bool activo { get; set; }
         public string mail { get; set; }
@@ -69,6 +68,46 @@ namespace ME.Data
             return MEEntity.ExecuteSP("[DE_UNA].[Login]", parameters);
         }
 
+        public static UsuarioModel GetUsuario(decimal cod_usuario)
+        {
+            using (SqlConnection connection = MEEntity.GetConnection())
+            {
+                SqlCommand command = new SqlCommand("[DE_UNA].[GetUsuario]", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add("@cod_usuario", SqlDbType.Decimal).Value = cod_usuario;
+
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                reader.Read();
+
+                UsuarioModel unUsuario = new UsuarioModel()
+                    {
+                         dni = reader["dni"].ToString()
+                        ,nombre = reader["nombre"].ToString()
+                        ,apellido = reader["apellido"].ToString()
+                        ,cuit = reader["cuit"].ToString()
+                        ,razon_social = reader["razon_social"].ToString()
+                        ,dir_ciudad = reader["dir_ciudad"].ToString()
+                        ,nombre_contacto = reader["nombre_contacto"].ToString()
+                        ,rubro = reader["rubro"].ToString()
+                        ,mail = reader["mail"].ToString()
+                        ,username = reader["username"].ToString()
+                        ,activo = bool.Parse(reader["activo"].ToString())
+                        ,telefono = reader["telefono"].ToString()
+                        ,dir_calle = reader["dir_calle"].ToString()
+                        ,dir_nro = reader["dir_nro"].ToString()
+                        ,dir_piso = reader["dir_piso"].ToString()
+                        ,dir_depto = reader["dir_depto"].ToString()
+                        ,dir_localidad = reader["dir_localidad"].ToString()
+                        ,dir_cod_post = reader["dir_cod_post"].ToString()
+                        ,fecha_nacimiento = reader["fecha_nacimiento"].ToString() != "" ? DateTime.Parse(reader["fecha_nacimiento"].ToString()) : (DateTime?)null
+                    };
+
+                return unUsuario;
+            }
+        }
+
         public static List<UsuarioModel> GetUsuarios(bool activeOnly)
         {
             List<UsuarioModel> usuarioList = new List<UsuarioModel>();
@@ -84,7 +123,7 @@ namespace ME.Data
 
                 while (reader.Read())
                 {
-                    UsuarioModel usuario = new UsuarioModel()
+                    UsuarioModel unUsuario = new UsuarioModel()
                     {
                          cod_usuario = decimal.Parse(reader["cod_usuario"].ToString())
                         ,nombre = reader["nombre"].ToString()
@@ -108,7 +147,7 @@ namespace ME.Data
                         ,fecha_nacimiento = reader["fecha_nacimiento"].ToString() != "" ? DateTime.Parse(reader["fecha_nacimiento"].ToString()) : (DateTime?)null
                     };
 
-                    usuarioList.Add(usuario);
+                    usuarioList.Add(unUsuario);
                 }
             }
 

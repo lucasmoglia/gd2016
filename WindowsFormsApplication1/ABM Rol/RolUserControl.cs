@@ -20,7 +20,7 @@ namespace ME.UI
 
         private void RolUserControl_Load(object sender, EventArgs e)
         {
-            gvRoles.DataSource = RolesHandler.GetRoles();
+            gvRoles.DataSource = RolHandler.ListarRoles();
         }
 
         private void btnNuevoRol_Click(object sender, EventArgs e)

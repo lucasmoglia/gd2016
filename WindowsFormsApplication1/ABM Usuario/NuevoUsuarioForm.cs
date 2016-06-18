@@ -14,11 +14,6 @@ namespace ME.UI
 {
     public partial class NuevoUsuarioForm : Form
     {
-        public NuevoUsuarioForm()
-        {
-            InitializeComponent();
-        }
-
         public NuevoUsuarioForm(UsuarioModel usuario)
         {
             InitializeComponent();
@@ -65,11 +60,11 @@ namespace ME.UI
         {
             ddlRol.ValueMember = "cod_rol";
             ddlRol.DisplayMember = "nombre";
-            ddlRol.DataSource = RolesHandler.GetRoles();
+            ddlRol.DataSource = RolHandler.ListarRoles();
 
             ddlRubro.ValueMember = "cod_rubro";
             ddlRubro.DisplayMember = "desc_larga";
-            ddlRubro.DataSource = RubrosHandler.GetRubros();
+            ddlRubro.DataSource = RubroHandler.ListarRubros();
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)

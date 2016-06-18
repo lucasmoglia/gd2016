@@ -24,8 +24,8 @@ BEGIN
 
 	DECLARE @stock numeric(18,0) = (SELECT stock FROM [DE_UNA].Publicaciones WHERE cod_publi = @cod_publi);
 
-	IF (!([DE_UNA].esMayorAUltimaOferta(@monto, @cod_publi))
-		RETURN 0;
+	--IF (!([DE_UNA].esMayorAUltimaOferta(@monto, @cod_publi))
+	--	RETURN 0;
 
 	INSERT INTO [DE_UNA].Ofertas
 	VALUES(@cod_publi, @cod_usuario, @fecha_oferta, @monto);

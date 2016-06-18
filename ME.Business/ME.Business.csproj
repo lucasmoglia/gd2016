@@ -40,10 +40,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClienteHandler.cs" />
+    <Compile Include="EstadoHandler.cs" />
+    <Compile Include="VisibilidadHandler.cs" />
+    <Compile Include="TipoPublicacionHandler.cs" />
+    <Compile Include="FacturaHandler.cs" />
+    <Compile Include="PublicacionHandler.cs" />
     <Compile Include="EmpresaHandler.cs" />
     <Compile Include="FuncionalidadHandler.cs" />
-    <Compile Include="RolesHandler.cs" />
-    <Compile Include="RubrosHandler.cs" />
+    <Compile Include="RolHandler.cs" />
+    <Compile Include="RubroHandler.cs" />
     <Compile Include="UsuarioHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

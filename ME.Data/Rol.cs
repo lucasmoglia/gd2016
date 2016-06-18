@@ -16,9 +16,36 @@ namespace ME.Data
         public Rol(decimal cod_rol, string nombre)
         {
             this.cod_rol = cod_rol;
-
             this.nombre = nombre;
         }
+
+        public static Rol GetRol(decimal cod_rol)
+        {
+            using (SqlConnection connection = MEEntity.GetConnection())
+            {
+
+                SqlCommand command = new SqlCommand("[DE_UNA].[GetRol]", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add("@cod_rol", SqlDbType.Bit).Value = cod_rol;
+
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    Rol unRol = new Rol(
+                          int.Parse(reader["cod_rol"].ToString())
+                        , reader["nombre"].ToString()
+                    );
+
+                    return unRol;
+                }else
+                {
+                    return null;
+                }
+            }
+        }
+
 
         public static List<Rol> GetRoles(bool? activeOnly)
         {
