@@ -31,15 +31,21 @@
             this.gvFacturas = new System.Windows.Forms.DataGridView();
             this.DTPFechaHasta = new System.Windows.Forms.DateTimePicker();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.TxtUsuario = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.DTPFechaDesde = new System.Windows.Forms.DateTimePicker();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnBuscar = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.TxtDetalleFactura = new System.Windows.Forms.TextBox();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.gvFacturas)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.SuspendLayout();
             // 
             // gvFacturas
@@ -60,7 +66,7 @@
             this.DTPFechaHasta.AllowDrop = true;
             this.DTPFechaHasta.Checked = false;
             this.DTPFechaHasta.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DTPFechaHasta.Location = new System.Drawing.Point(519, 32);
+            this.DTPFechaHasta.Location = new System.Drawing.Point(14, 70);
             this.DTPFechaHasta.Name = "DTPFechaHasta";
             this.DTPFechaHasta.Size = new System.Drawing.Size(200, 20);
             this.DTPFechaHasta.TabIndex = 3;
@@ -68,8 +74,12 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.numericUpDown2);
+            this.groupBox1.Controls.Add(this.numericUpDown1);
+            this.groupBox1.Controls.Add(this.TxtDetalleFactura);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.TxtUsuario);
+            this.groupBox1.Controls.Add(this.label);
+            this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.DTPFechaDesde);
@@ -83,27 +93,10 @@
             this.groupBox1.Text = "Filtros";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(17, 16);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(54, 13);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "Usuario:";
-            // 
-            // TxtUsuario
-            // 
-            this.TxtUsuario.Location = new System.Drawing.Point(17, 32);
-            this.TxtUsuario.Name = "TxtUsuario";
-            this.TxtUsuario.Size = new System.Drawing.Size(139, 20);
-            this.TxtUsuario.TabIndex = 7;
-            this.TxtUsuario.TextChanged += new System.EventHandler(this.TextUsuario_TextChanged);
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(520, 17);
+            this.label2.Location = new System.Drawing.Point(15, 55);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(83, 13);
             this.label2.TabIndex = 6;
@@ -112,7 +105,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(312, 16);
+            this.label1.Location = new System.Drawing.Point(14, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(84, 13);
             this.label1.TabIndex = 5;
@@ -123,7 +116,7 @@
             this.DTPFechaDesde.AllowDrop = true;
             this.DTPFechaDesde.Checked = false;
             this.DTPFechaDesde.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DTPFechaDesde.Location = new System.Drawing.Point(313, 32);
+            this.DTPFechaDesde.Location = new System.Drawing.Point(15, 32);
             this.DTPFechaDesde.Name = "DTPFechaDesde";
             this.DTPFechaDesde.Size = new System.Drawing.Size(200, 20);
             this.DTPFechaDesde.TabIndex = 4;
@@ -149,6 +142,54 @@
             this.btnBuscar.UseVisualStyleBackColor = true;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(234, 16);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(89, 13);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Monto Minimo:";
+            // 
+            // label
+            // 
+            this.label.AutoSize = true;
+            this.label.Location = new System.Drawing.Point(234, 55);
+            this.label.Name = "label";
+            this.label.Size = new System.Drawing.Size(92, 13);
+            this.label.TabIndex = 10;
+            this.label.Text = "Monto Maximo:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(436, 16);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(127, 13);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "Detalle de la factura:";
+            // 
+            // TxtDetalleFactura
+            // 
+            this.TxtDetalleFactura.Location = new System.Drawing.Point(439, 35);
+            this.TxtDetalleFactura.Name = "TxtDetalleFactura";
+            this.TxtDetalleFactura.Size = new System.Drawing.Size(261, 20);
+            this.TxtDetalleFactura.TabIndex = 14;
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(233, 70);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(124, 20);
+            this.numericUpDown1.TabIndex = 15;
+            // 
+            // numericUpDown2
+            // 
+            this.numericUpDown2.Location = new System.Drawing.Point(237, 32);
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDown2.TabIndex = 16;
+            // 
             // FacturaUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -164,6 +205,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.gvFacturas)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -173,12 +216,16 @@
         private System.Windows.Forms.DataGridView gvFacturas;
         private System.Windows.Forms.DateTimePicker DTPFechaHasta;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox TxtUsuario;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker DTPFechaDesde;
         private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.Button btnBuscar;
+        private System.Windows.Forms.TextBox TxtDetalleFactura;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
     }
 }
