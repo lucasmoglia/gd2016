@@ -29,7 +29,37 @@ namespace ME.Data
             this.cod_usuario   = cod_usuario;
             this.items         = items;
         }
-    
+
+        public static Factura GetFactura(decimal num_factura)
+        {
+            using (SqlConnection connection = MEEntity.GetConnection())
+            {
+
+                SqlCommand command = new SqlCommand("[DE_UNA].[GetFactura]", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add("@Num_factura", SqlDbType.Decimal).Value = num_factura;
+
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read()) {
+                    Factura factura = new Factura(
+                          decimal.Parse(reader["num_factura"].ToString())
+                        , decimal.Parse(reader["cod_publi"].ToString())
+                        , DateTime.Parse(reader["fecha_factura"].ToString())
+                        , decimal.Parse(reader["total"].ToString())
+                        , reader["forma_pago"].ToString()
+                        , decimal.Parse(reader["cod_usuario"].ToString())
+                        , null
+                    );
+
+                    return factura;
+                } else {
+                    return null;
+                }
+            }
+        }
+
         public static List<Factura> GetFacturas(decimal num_factura, DateTime fecha_desde, DateTime fecha_hasta, decimal monto_minimo, decimal monto_maximo)
         {
             List<Factura> facturaList = new List<Factura>();

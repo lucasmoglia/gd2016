@@ -79,7 +79,6 @@
             this.lblTitle.Size = new System.Drawing.Size(187, 31);
             this.lblTitle.TabIndex = 3;
             this.lblTitle.Text = "MercadoEnvío";
-            this.lblTitle.Click += new System.EventHandler(this.label1_Click);
             // 
             // btnLogin
             // 

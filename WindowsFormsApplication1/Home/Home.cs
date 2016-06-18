@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ME.UI;
 
 namespace ME.UI
 {
@@ -34,13 +35,15 @@ namespace ME.UI
         {
             //Cuando hago click en una opción del menu, cambio el controlador.
             this.pnlMaster.Controls.Clear();
-            this.pnlMaster.Controls.Add(new ComprarOfertarUserControl());
+            this.pnlMaster.Controls.Add(new UsuarioUserControl());
         }
 
         private void inicioToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PublicacionForm form = new PublicacionForm();
-            form.Show();
+            //this.pnlMaster.Controls.Clear();
+            //this.pnlMaster.Controls.Add(new ComprarOfertarUserControl());
+            //PublicacionForm form = new PublicacionForm(null, false);
+            //form.Show();
         }
 
         private void rolesToolStripMenuItem1_Click(object sender, EventArgs e)
