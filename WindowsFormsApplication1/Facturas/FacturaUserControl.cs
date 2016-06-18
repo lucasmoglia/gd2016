@@ -50,7 +50,7 @@ namespace ME.UI.Facturas
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            gvFacturas.DataSource = FacturaHandler.ListarFacturas(TxtUsuario.Text, DTPFechaDesde.Value, DTPFechaHasta.Value);
+            gvFacturas.DataSource = FacturaHandler.ListarFacturas(cod_usuario, DTPFechaDesde, DTPFechaHasta, TxtMontoMinimo, TxtMontoMaximo, TxtDetalleFactura); // agregar los .value
         }
     }
 }
