@@ -19,6 +19,33 @@ namespace ME.Data
             this.nombre = nombre;
         }
 
+        public static TipoPublicacion GetTipoPublicacion(string tipoPubli)
+        {
+            using (SqlConnection connection = MEEntity.GetConnection())
+            {
+                SqlCommand command = new SqlCommand("[DE_UNA].[GetTiposPublicacion]", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add("@tipo_publi", SqlDbType.NVarChar).Value = tipoPubli;
+
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    TipoPublicacion unTipoPubli = new TipoPublicacion(
+                          int.Parse(reader["cod_tipo_publi"].ToString())
+                        , reader["descripcion"].ToString()
+                    );
+
+                    return unTipoPubli;
+                }else
+                {
+                    return null;
+                }
+            }
+        }
+
+
         public static List<TipoPublicacion> GetTiposPublicacion()
         {
             List<TipoPublicacion> tipoPubliList = new List<TipoPublicacion>();

@@ -50,7 +50,7 @@ namespace ME.Data
             }
         }
 
-        public static List<Visibilidad> GetVisibilidades(bool? activeOnly)
+        public static List<Visibilidad> GetVisibilidades()
         {
             List<Visibilidad> visibilidadList = new List<Visibilidad>();
 
@@ -58,8 +58,8 @@ namespace ME.Data
             {
 
                 SqlCommand command = new SqlCommand("[DE_UNA].[GetVisibilidades]", connection);
-                command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.Add("@activeOnly", SqlDbType.Bit).Value = activeOnly ?? false;
+                //command.CommandType = CommandType.StoredProcedure;
+                //command.Parameters.Add("@activeOnly", SqlDbType.Bit).Value = activeOnly ?? false;
 
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
