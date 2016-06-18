@@ -47,5 +47,24 @@ namespace ME.Data
 
             return rolesList;
         }
+
+        public static int Nuevo(string nombre, decimal[] funcionalidades)
+        {
+            int result = 0; 
+            using (SqlConnection connection = MEEntity.GetConnection())
+            {
+
+                SqlCommand command = new SqlCommand("[DE_UNA].[CrearRol]", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add("@nombre", SqlDbType.NVarChar).Value = nombre;
+                command.Parameters.Add("@activo", SqlDbType.Bit).Value = true;
+                command.Parameters.Add("@funcionalidades", SqlDbType.Structured).Value = funcionalidades;
+
+                connection.Open();
+                result = int.Parse(command.ExecuteScalar().ToString());
+            }
+
+            return result;
+        }
     }
 }

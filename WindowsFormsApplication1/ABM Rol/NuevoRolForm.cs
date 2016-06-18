@@ -1,4 +1,5 @@
-﻿using ME.Data;
+﻿using ME.Business;
+using ME.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -28,38 +29,54 @@ namespace ME.UI
 
         private void btnAgregarFuncionalidad_Click(object sender, EventArgs e)
         {
-            List<FuncionalidadModel> list_disponibles = (List<FuncionalidadModel>)lstFuncionalidadesDisponibles.DataSource;
-            List<FuncionalidadModel> list_asignadas = (List<FuncionalidadModel>)lstFuncionalidadesAsignadas.DataSource ?? new List<FuncionalidadModel>();
-            list_asignadas.Add(list_disponibles[lstFuncionalidadesDisponibles.SelectedIndex]);
-            list_disponibles.Remove(list_disponibles[lstFuncionalidadesDisponibles.SelectedIndex]);
+            if (lstFuncionalidadesDisponibles.SelectedIndex > -1)
+            {
+                List<FuncionalidadModel> list_disponibles = (List<FuncionalidadModel>)lstFuncionalidadesDisponibles.DataSource;
+                List<FuncionalidadModel> list_asignadas = (List<FuncionalidadModel>)lstFuncionalidadesAsignadas.DataSource ?? new List<FuncionalidadModel>();
+                list_asignadas.Add(list_disponibles[lstFuncionalidadesDisponibles.SelectedIndex]);
+                list_disponibles.Remove(lstFuncionalidadesDisponibles.SelectedItem as FuncionalidadModel);
 
-            lstFuncionalidadesDisponibles.DataSource = null;
-            lstFuncionalidadesDisponibles.DataSource = list_disponibles;
+                lstFuncionalidadesDisponibles.DataSource = null;
+                lstFuncionalidadesDisponibles.DataSource = list_disponibles;
 
-            lstFuncionalidadesAsignadas.DataSource = null;
-            lstFuncionalidadesAsignadas.DataSource = list_asignadas;
-            lstFuncionalidadesDisponibles.DisplayMember = "descripcion";
-            lstFuncionalidadesDisponibles.ValueMember = "cod_funcionalidad";
-            lstFuncionalidadesAsignadas.DisplayMember = "descripcion";
-            lstFuncionalidadesAsignadas.ValueMember = "cod_funcionalidad";
+                lstFuncionalidadesAsignadas.DataSource = null;
+                lstFuncionalidadesAsignadas.DataSource = list_asignadas;
+                lstFuncionalidadesDisponibles.DisplayMember = "descripcion";
+                lstFuncionalidadesDisponibles.ValueMember = "cod_funcionalidad";
+                lstFuncionalidadesAsignadas.DisplayMember = "descripcion";
+                lstFuncionalidadesAsignadas.ValueMember = "cod_funcionalidad";
+            }
         }
 
         private void btnQuitarFuncionalidad_Click(object sender, EventArgs e)
         {
-            List<FuncionalidadModel> list_disponibles = (List<FuncionalidadModel>)lstFuncionalidadesDisponibles.DataSource;
-            List<FuncionalidadModel> list_asignadas = (List<FuncionalidadModel>)lstFuncionalidadesAsignadas.DataSource ?? new List<FuncionalidadModel>();
-            list_asignadas.Remove(list_asignadas[lstFuncionalidadesAsignadas.SelectedIndex]);
-            list_disponibles.Add(list_asignadas[lstFuncionalidadesAsignadas.SelectedIndex]);
+            if (lstFuncionalidadesAsignadas.SelectedIndex > -1)
+            {
+                List<FuncionalidadModel> list_disponibles = (List<FuncionalidadModel>)lstFuncionalidadesDisponibles.DataSource;
+                List<FuncionalidadModel> list_asignadas = (List<FuncionalidadModel>)lstFuncionalidadesAsignadas.DataSource ?? new List<FuncionalidadModel>();
+                list_asignadas.Remove(list_asignadas[lstFuncionalidadesAsignadas.SelectedIndex]);
+                list_disponibles.Add(lstFuncionalidadesAsignadas.SelectedItem as FuncionalidadModel);
 
-            lstFuncionalidadesDisponibles.DataSource = null;
-            lstFuncionalidadesDisponibles.DataSource = list_disponibles;
+                lstFuncionalidadesDisponibles.DataSource = null;
+                lstFuncionalidadesDisponibles.DataSource = list_disponibles;
 
-            lstFuncionalidadesAsignadas.DataSource = null;
-            lstFuncionalidadesAsignadas.DataSource = list_asignadas;
-            lstFuncionalidadesDisponibles.DisplayMember = "descripcion";
-            lstFuncionalidadesDisponibles.ValueMember = "cod_funcionalidad";
-            lstFuncionalidadesAsignadas.DisplayMember = "descripcion";
-            lstFuncionalidadesAsignadas.ValueMember = "cod_funcionalidad";
+                lstFuncionalidadesAsignadas.DataSource = null;
+                lstFuncionalidadesAsignadas.DataSource = list_asignadas;
+                lstFuncionalidadesDisponibles.DisplayMember = "descripcion";
+                lstFuncionalidadesDisponibles.ValueMember = "cod_funcionalidad";
+                lstFuncionalidadesAsignadas.DisplayMember = "descripcion";
+                lstFuncionalidadesAsignadas.ValueMember = "cod_funcionalidad";
+            }
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            RolesHandler.nuevo(txtNombre.Text, lstFuncionalidadesAsignadas.DataSource as List<FuncionalidadModel>);
         }
     }
 }
