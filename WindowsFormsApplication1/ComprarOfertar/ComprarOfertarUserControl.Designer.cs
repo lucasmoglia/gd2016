@@ -53,13 +53,12 @@
             this.cmbBoxRubros = new System.Windows.Forms.ComboBox();
             this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.lblDescripcion = new System.Windows.Forms.Label();
-            this.bindSourceRubros = new System.Windows.Forms.BindingSource(this.components);
+            this.btnVer = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gvPublicaciones)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindNav1)).BeginInit();
             this.bindNav1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindSourcePublicaciones)).BeginInit();
             this.gBoxFiltros.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindSourceRubros)).BeginInit();
             this.SuspendLayout();
             // 
             // gvPublicaciones
@@ -88,7 +87,7 @@
             this.btnComprar.TabIndex = 1;
             this.btnComprar.Text = "Comprar / Ofertar";
             this.btnComprar.UseVisualStyleBackColor = true;
-            this.btnComprar.Click += new System.EventHandler(this.button1_Click);
+            this.btnComprar.Click += new System.EventHandler(this.btnComprar_Click);
             // 
             // btnEditPublicacion
             // 
@@ -101,7 +100,7 @@
             this.btnEditPublicacion.Text = "Editar";
             this.btnEditPublicacion.UseVisualStyleBackColor = false;
             this.btnEditPublicacion.Visible = false;
-            this.btnEditPublicacion.Click += new System.EventHandler(this.btnEditUser_Click);
+            this.btnEditPublicacion.Click += new System.EventHandler(this.btnEditPublicacion_Click);
             // 
             // btnRemovePublicacion
             // 
@@ -276,7 +275,6 @@
             this.cmbBoxRubros.Name = "cmbBoxRubros";
             this.cmbBoxRubros.Size = new System.Drawing.Size(291, 21);
             this.cmbBoxRubros.TabIndex = 2;
-            this.cmbBoxRubros.Text = "(Ninguno)";
             this.cmbBoxRubros.SelectedIndexChanged += new System.EventHandler(this.cmbBoxRubros_SelectedIndexChanged);
             this.cmbBoxRubros.Click += new System.EventHandler(this.cmbBoxRubros_Click);
             // 
@@ -302,11 +300,22 @@
             this.lblDescripcion.TabIndex = 0;
             this.lblDescripcion.Text = "Descripción";
             // 
+            // btnVer
+            // 
+            this.btnVer.Location = new System.Drawing.Point(547, 467);
+            this.btnVer.Name = "btnVer";
+            this.btnVer.Size = new System.Drawing.Size(76, 23);
+            this.btnVer.TabIndex = 8;
+            this.btnVer.Text = "Ver";
+            this.btnVer.UseVisualStyleBackColor = true;
+            this.btnVer.Click += new System.EventHandler(this.btnVer_Click);
+            // 
             // ComprarOfertarUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
+            this.Controls.Add(this.btnVer);
             this.Controls.Add(this.gBoxFiltros);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.btnLimpiar);
@@ -325,7 +334,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.bindSourcePublicaciones)).EndInit();
             this.gBoxFiltros.ResumeLayout(false);
             this.gBoxFiltros.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindSourceRubros)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -356,6 +364,6 @@
         private System.Windows.Forms.TextBox txtDescripcion;
         private System.Windows.Forms.Label lblRubros;
         private System.Windows.Forms.ComboBox cmbBoxRubros;
-        private System.Windows.Forms.BindingSource bindSourceRubros;
+        private System.Windows.Forms.Button btnVer;
     }
 }

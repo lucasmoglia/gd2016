@@ -20,15 +20,16 @@ namespace ME.UI
         public ComprarOfertarUserControl()
         {
             InitializeComponent();
+
             listaPublicaciones = PublicacionHandler.ListarPublicaciones(1, null, null);
             gvPublicaciones.DataSource = listaPublicaciones;
             gvPublicaciones.Columns.Remove("cod_publi");
             bindNav1.BindingSource = bindSourcePublicaciones;
-            bindSourcePublicaciones.CurrentChanged += new System.EventHandler(bindingSource1_CurrentChanged);
+            bindSourcePublicaciones.CurrentChanged += new System.EventHandler(bindSourcePublicaciones_CurrentChanged);
             bindSourcePublicaciones.DataSource = new PageOffsetList(gvPublicaciones.RowCount);
         }
 
-        private void bindingSource1_CurrentChanged(object sender, EventArgs e)
+        private void bindSourcePublicaciones_CurrentChanged(object sender, EventArgs e)
         {
             // The desired page has changed, so fetch the page of records using the "Current" offset 
             int offset = (int)bindSourcePublicaciones.Current;
@@ -41,6 +42,7 @@ namespace ME.UI
         class PageOffsetList : System.ComponentModel.IListSource
         {
             private int totalRecords { get; set; }
+
             public PageOffsetList(int totalRecords)
             {
                 this.totalRecords = totalRecords;
@@ -64,22 +66,27 @@ namespace ME.UI
             this.gvPublicaciones.DataSource = PublicacionHandler.ListarPublicaciones(1, null, null);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnComprar_Click(object sender, EventArgs e)
         {
-            Form PublicacionForm = new PublicacionForm();
+            Form PublicacionForm = new PublicacionForm(null, false);
             PublicacionForm.ShowDialog(this);
         }
 
         private void gvClientes_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             btnEditPublicacion.Visible = true;
-            btnRemovePublicacion.Visible = true;
+
+            bool esAdmin = false; // SACAR esto va a estar en la variable global de usuario logueado.
+
+            if (esAdmin) {
+                btnRemovePublicacion.Visible = true;
+            }
         }
 
-        private void btnEditUser_Click(object sender, EventArgs e)
+        private void btnEditPublicacion_Click(object sender, EventArgs e)
         {
             Publicacion publicacion = (Publicacion)gvPublicaciones.SelectedRows[0].DataBoundItem;
-            Form nuevaPublicacionForm = new PublicacionForm(publicacion);
+            Form nuevaPublicacionForm = new PublicacionForm(publicacion, true);
             nuevaPublicacionForm.ShowDialog(this);
         }
 
@@ -115,9 +122,16 @@ namespace ME.UI
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            List<decimal> rubros = new List<decimal>;
-            rubros.Add(cmbBoxRubros.SelectedValue);
+            List<decimal> rubros = new List<decimal>();
+            rubros.Add(decimal.Parse(cmbBoxRubros.SelectedValue.ToString()));
             gvPublicaciones.DataSource = PublicacionHandler.ListarPublicaciones(1, rubros, txtDescripcion.Text);
+        }
+
+        private void btnVer_Click(object sender, EventArgs e)
+        {
+            Publicacion publicacion = (Publicacion)gvPublicaciones.SelectedRows[0].DataBoundItem;
+            Form nuevaPublicacionForm = new PublicacionForm(publicacion, false);
+            nuevaPublicacionForm.ShowDialog(this);
         }
 
 

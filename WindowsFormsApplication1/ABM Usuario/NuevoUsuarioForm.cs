@@ -14,7 +14,7 @@ namespace ME.UI
 {
     public partial class NuevoUsuarioForm : Form
     {
-        public NuevoUsuarioForm(/*UsuarioModel usuario*/)
+        public NuevoUsuarioForm(UsuarioModel usuario)
         {
             InitializeComponent();
             
