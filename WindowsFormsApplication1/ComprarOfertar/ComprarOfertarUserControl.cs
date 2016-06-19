@@ -21,7 +21,7 @@ namespace ME.UI
         {
             InitializeComponent();
 
-            listaPublicaciones = PublicacionHandler.ListarPublicaciones(1, null, null);
+            listaPublicaciones = PublicacionHandler.ListarPublicaciones(1, null, String.Empty);
             gvPublicaciones.DataSource = listaPublicaciones;
             gvPublicaciones.Columns.Remove("cod_publi");
             bindNav1.BindingSource = bindSourcePublicaciones;
@@ -62,8 +62,8 @@ namespace ME.UI
 
         private void PublicacionesUserControl_Load(object sender, EventArgs e)
         {
-            this.cmbBoxRubros.DataSource = RubroHandler.ListarRubros();
-            this.gvPublicaciones.DataSource = PublicacionHandler.ListarPublicaciones(1, null, null);
+            //this.cmbBoxRubros.DataSource = RubroHandler.ListarRubros();
+            //this.gvPublicaciones.DataSource = PublicacionHandler.ListarPublicaciones(1, null, null);
         }
 
         private void btnComprar_Click(object sender, EventArgs e)
@@ -72,13 +72,12 @@ namespace ME.UI
             PublicacionForm.ShowDialog(this);
         }
 
-        private void gvClientes_RowEnter(object sender, DataGridViewCellEventArgs e)
+        private void gvPublicaciones_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            btnEditPublicacion.Visible = true;
-
             bool esAdmin = false; // SACAR esto va a estar en la variable global de usuario logueado.
 
             if (esAdmin) {
+                btnEditPublicacion.Visible = true;
                 btnRemovePublicacion.Visible = true;
             }
         }
