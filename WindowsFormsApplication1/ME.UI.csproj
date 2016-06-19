@@ -107,7 +107,6 @@
     <Compile Include="ComprarOfertar\ComprarOfertarUserControl.Designer.cs">
       <DependentUpon>ComprarOfertarUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Home\FacturaUserControl.cs" />
     <Compile Include="Home\Home.cs">
       <SubType>Form</SubType>
     </Compile>

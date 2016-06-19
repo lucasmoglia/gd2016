@@ -13,6 +13,8 @@ namespace ME.UI
 {
     public partial class Home : Form
     {
+        bool esAdmin = true; // SACAR, esto va a estar en la variable global de usuario logueado.
+
         public Home()
         {
             InitializeComponent();
@@ -20,8 +22,21 @@ namespace ME.UI
 
         private void Home_Load(object sender, EventArgs e)
         {
+            if (esAdmin) {
+                administracionToolStripMenuItem.Enabled = true;
+                administracionToolStripMenuItem.Visible = true;
+            } else {
+                administracionToolStripMenuItem.Enabled = false;
+                administracionToolStripMenuItem.Visible = false;
+            }
             //this.pnlMaster.Clear();
             //this.pnlMaster.Controls.Add(new PublicacionUserControl());
+        }
+
+        private void inicioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //this.pnlMaster.Controls.Clear();
+            //this.pnlMaster.Controls.Add(new ComprarOfertarUserControl());
         }
 
         private void misFacturasToolStripMenuItem_Click(object sender, EventArgs e)
@@ -38,19 +53,23 @@ namespace ME.UI
             this.pnlMaster.Controls.Add(new UsuarioUserControl());
         }
 
-        private void inicioToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //this.pnlMaster.Controls.Clear();
-            //this.pnlMaster.Controls.Add(new ComprarOfertarUserControl());
-            //PublicacionForm form = new PublicacionForm(null, false);
-            //form.Show();
-        }
-
         private void rolesToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             //Cuando hago click en una opción del menu, cambio el controlador.
             this.pnlMaster.Controls.Clear();
             this.pnlMaster.Controls.Add(new RolUserControl());
+        }
+
+        private void comprarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.pnlMaster.Controls.Clear();
+            this.pnlMaster.Controls.Add(new ComprarOfertarUserControl());
+        }
+
+        private void venderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PublicacionForm nuevaPublicacion = new PublicacionForm(null, false);
+            nuevaPublicacion.Show();
         }
     }
 }
