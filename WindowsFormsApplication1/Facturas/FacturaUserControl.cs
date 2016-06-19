@@ -21,15 +21,16 @@ namespace ME.UI
             InitializeComponent();
 
             gvFacturas.DataSource = FacturaHandler.ListarFacturas(cod_usuario, null, null, 0, Decimal.MaxValue, null);
-            DTPFechaDesde.Value = System.DateTime.Today;
-            DTPFechaHasta.Value = System.DateTime.Today;
             numMontoMax.Value = 0;
             numMontoMin.Value = 0;
         }
 
         private void FacturaUserControl_Load(object sender, EventArgs e)
         {
-
+            DTPFechaDesde.Value = System.DateTime.Today;
+            DTPFechaHasta.Value = System.DateTime.Today;
+            numMontoMax.Value = 0;
+            numMontoMin.Value = 0;
         }
 
          private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
@@ -40,6 +41,10 @@ namespace ME.UI
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             gvFacturas.DataSource = FacturaHandler.ListarFacturas(cod_usuario, null, null, 0, decimal.MaxValue, null);
+            DTPFechaDesde.Value = System.DateTime.Today;
+            DTPFechaHasta.Value = System.DateTime.Today;
+            numMontoMax.Value = 0;
+            numMontoMin.Value = 0;
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)

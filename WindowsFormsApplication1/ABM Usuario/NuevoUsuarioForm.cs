@@ -17,42 +17,64 @@ namespace ME.UI
         public NuevoUsuarioForm(UsuarioModel usuario)
         {
             InitializeComponent();
-            
-            if(usuario.dni != null){
-                txtNombreC.Text = usuario.nombre;
-                txtApellido.Text = usuario.apellido;
-                txtNumeroDocC.Text = usuario.dni;
-                ddlRol.SelectedValue = usuario.cod_rol;
-                //txtTipoDocC.Text 
-                txtMailC.Text = usuario.mail;
-                txtUserNameC.Text = usuario.username;
-                //txtPasswordC.Text = usuario.password;
-                txtTelefonoC.Text = usuario.telefono;
-                txtDirCalleC.Text = usuario.dir_calle;
-                txtDirNumeroC.Text = usuario.dir_nro;
-                txtDirPisoC.Text = usuario.dir_piso;
-                txtDirDeptoC.Text = usuario.dir_depto;
-                txtDirLocalidadC.Text = usuario.dir_localidad;
-                txtDirCPC.Text = usuario.dir_cod_post;
-                txtFechaNacC.Text = usuario.fecha_nacimiento.ToString();
-            }
-            else{
-                txtRazonSocial.Text = usuario.razon_social;
-                txtCiudadE.Text = usuario.dir_ciudad;
-                txtNombreContacto.Text = usuario.nombre_contacto;
-                ddlRol.SelectedValue = usuario.cod_rol;
-                ddlRubro.SelectedValue = usuario.cod_rubro;
-                txtCUIT.Text = usuario.cuit;
-                txtMailEmpresa.Text = usuario.mail; 
-                txtUsernameE.Text = usuario.username;
-                //txtPasswordE.Text = usuario.password;
-                txtTelefonoEmpresa.Text = usuario.telefono;
-                txtDomCalleE.Text = usuario.dir_calle;
-                txtDomNumeroE.Text = usuario.dir_nro;
-                txtDomPisoE.Text = usuario.dir_piso;
-                txtDomDeptoE.Text = usuario.dir_depto;
-                txtLocalidadE.Text = usuario.dir_localidad;
-                txtDomCPE.Text = usuario.dir_cod_post;
+
+            if (usuario != null)
+            {
+                if (usuario.dni != null)
+                {
+                    txtNombreC.Text = usuario.nombre;
+                    txtApellido.Text = usuario.apellido;
+                    txtNumeroDocC.Text = usuario.dni;
+                    ddlRol.SelectedValue = usuario.cod_rol;
+                    //txtTipoDocC.Text 
+                    txtMailC.Text = usuario.mail;
+                    txtUserNameC.Text = usuario.username;
+                    //txtPasswordC.Text = usuario.password;
+                    txtTelefonoC.Text = usuario.telefono;
+                    txtDirCalleC.Text = usuario.dir_calle;
+                    txtDirNumeroC.Text = usuario.dir_nro;
+                    txtDirPisoC.Text = usuario.dir_piso;
+                    txtDirDeptoC.Text = usuario.dir_depto;
+                    txtDirLocalidadC.Text = usuario.dir_localidad;
+                    txtDirCPC.Text = usuario.dir_cod_post;
+                    txtFechaNacC.Text = usuario.fecha_nacimiento.ToString();
+                }
+                else
+                {
+                    txtRazonSocial.Text = usuario.razon_social;
+                    txtCiudadE.Text = usuario.dir_ciudad;
+                    txtNombreContacto.Text = usuario.nombre_contacto;
+                    ddlRol.SelectedValue = usuario.cod_rol;
+                    ddlRubro.SelectedValue = usuario.cod_rubro;
+                    txtCUIT.Text = usuario.cuit;
+                    txtMailEmpresa.Text = usuario.mail;
+                    txtUsernameE.Text = usuario.username;
+                    //txtPasswordE.Text = usuario.password;
+                    txtTelefonoEmpresa.Text = usuario.telefono;
+                    txtDomCalleE.Text = usuario.dir_calle;
+                    txtDomNumeroE.Text = usuario.dir_nro;
+                    txtDomPisoE.Text = usuario.dir_piso;
+                    txtDomDeptoE.Text = usuario.dir_depto;
+                    txtLocalidadE.Text = usuario.dir_localidad;
+                    txtDomCPE.Text = usuario.dir_cod_post;
+                }
+            } else {
+                txtRazonSocial.Text = String.Empty;
+                txtCiudadE.Text = String.Empty;
+                txtNombreContacto.Text = String.Empty;
+                ddlRol.SelectedValue = String.Empty;
+                ddlRubro.SelectedValue = String.Empty;
+                txtCUIT.Text = String.Empty;
+                txtMailEmpresa.Text = String.Empty;
+                txtUsernameE.Text = String.Empty;
+                txtPasswordE.Text = String.Empty;
+                txtTelefonoEmpresa.Text = String.Empty;
+                txtDomCalleE.Text = String.Empty;
+                txtDomNumeroE.Text = String.Empty;
+                txtDomPisoE.Text = String.Empty;
+                txtDomDeptoE.Text = String.Empty;
+                txtLocalidadE.Text = String.Empty;
+                txtDomCPE.Text = String.Empty;
             }
         }
 
