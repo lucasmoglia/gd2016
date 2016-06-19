@@ -64,12 +64,13 @@ namespace ME.UI
             btnLogin.Visible = funcionalidades.Any(f => f == "Login");
         }
 
-        //private void txtPassword_KeyDown(object sender, KeyEventArgs e)
-        //{
-        //    if (e.KeyCode == Keys.Enter) {
-        //        //btnLogin_Click();
-        //    }
-        //}
+        private void txtPassword_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.btnLogin_Click(sender, e);
+            }
+        }
 
     }
 }

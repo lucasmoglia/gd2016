@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ME.Business;
+using ME.Data;
 
 namespace ME.UI
 {
@@ -20,13 +21,29 @@ namespace ME.UI
 
         private void RolUserControl_Load(object sender, EventArgs e)
         {
-            gvRoles.DataSource = RolHandler.ListarRoles();
+            gvRoles.DataSource = RolHandler.ListarRoles(true);
         }
 
         private void btnNuevoRol_Click(object sender, EventArgs e)
         {
             NuevoRolForm nuevoRolForm = new NuevoRolForm(null);
             nuevoRolForm.ShowDialog(this);
+            this.RolUserControl_Load(sender, e);
         }
+
+        private void btnEditRol_Click(object sender, EventArgs e)
+        {
+            NuevoRolForm nuevoRolForm = new NuevoRolForm((Rol)gvRoles.SelectedRows[0].DataBoundItem);
+            nuevoRolForm.ShowDialog(this);
+            this.RolUserControl_Load(sender, e);
+        }
+
+        private void btnRemoveRol_Click(object sender, EventArgs e)
+        {
+            RolHandler.Eliminar((decimal)gvRoles.SelectedRows[0].Cells["cod_rol"].Value);
+            this.RolUserControl_Load(sender, e);
+        }
+        
+
     }
 }

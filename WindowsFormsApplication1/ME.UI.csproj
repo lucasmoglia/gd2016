@@ -33,7 +33,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.DirectoryServices" />
@@ -107,7 +106,6 @@
     <Compile Include="ComprarOfertar\ComprarOfertarUserControl.Designer.cs">
       <DependentUpon>ComprarOfertarUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Home\FacturaUserControl.cs" />
     <Compile Include="Home\Home.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -145,9 +143,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ABM Usuario\NuevoUsuarioForm.resx">
       <DependentUpon>NuevoUsuarioForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Calificar\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Facturas\FacturaUserControl.resx">
       <DependentUpon>FacturaUserControl.cs</DependentUpon>

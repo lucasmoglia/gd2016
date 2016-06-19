@@ -14,7 +14,7 @@ namespace ME.UI
 {
     public partial class PublicacionForm : Form
     {
-        public PublicacionForm(Publicacion publicacion)
+        public PublicacionForm(Publicacion publicacion, bool unBool)
         {
             //InitializeComponent();
 

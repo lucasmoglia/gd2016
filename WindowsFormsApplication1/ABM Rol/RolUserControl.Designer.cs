@@ -37,9 +37,14 @@
             // 
             // gvRoles
             // 
+            this.gvRoles.AllowUserToAddRows = false;
+            this.gvRoles.AllowUserToDeleteRows = false;
             this.gvRoles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gvRoles.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.gvRoles.Location = new System.Drawing.Point(3, 109);
+            this.gvRoles.MultiSelect = false;
             this.gvRoles.Name = "gvRoles";
+            this.gvRoles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gvRoles.Size = new System.Drawing.Size(794, 324);
             this.gvRoles.TabIndex = 0;
             // 
@@ -53,7 +58,7 @@
             this.btnRemoveRol.TabIndex = 5;
             this.btnRemoveRol.Text = "Borrar";
             this.btnRemoveRol.UseVisualStyleBackColor = false;
-            this.btnRemoveRol.Visible = false;
+            this.btnRemoveRol.Click += new System.EventHandler(this.btnRemoveRol_Click);
             // 
             // btnEditRol
             // 
@@ -65,7 +70,7 @@
             this.btnEditRol.TabIndex = 4;
             this.btnEditRol.Text = "Editar";
             this.btnEditRol.UseVisualStyleBackColor = false;
-            this.btnEditRol.Visible = false;
+            this.btnEditRol.Click += new System.EventHandler(this.btnEditRol_Click);
             // 
             // btnNuevoRol
             // 

@@ -14,18 +14,32 @@ namespace ME.UI
 {
     public partial class NuevoRolForm : Form
     {
-        //Recibo como parametro el codigo del rol que voy a editar en caso de edición.
-        public NuevoRolForm(decimal? cod_rol)
+        private bool isUpdate = false;
+        private decimal aux_cod_rol = 0;
+
+        public NuevoRolForm(Rol rol)
         {
             InitializeComponent();
-            lstFuncionalidadesAsignadas.DataSource = cod_rol.HasValue ? Funcionalidad.GetFuncionalidadesByRol(cod_rol.Value) : null;
-            lstFuncionalidadesDisponibles.DataSource = Funcionalidad.GetFuncionalidades().Where(x => lstFuncionalidadesAsignadas.Items.IndexOf(x) < 0).ToList();
+            if (rol != null)
+            {
+                lstFuncionalidadesAsignadas.DataSource = rol != null ? Funcionalidad.GetFuncionalidadesByRol(rol.cod_rol) : null;
+                lstFuncionalidadesDisponibles.DataSource = Funcionalidad.GetFuncionalidades().Where(x => ((List<FuncionalidadModel>)lstFuncionalidadesAsignadas.DataSource).All(y => x.cod_funcionalidad != y.cod_funcionalidad)).ToList();
+                txtNombre.Text = rol.nombre;
+                isUpdate = true;
+                aux_cod_rol = rol.cod_rol;
+            }
+            else
+            {
+                lstFuncionalidadesDisponibles.DataSource = Funcionalidad.GetFuncionalidades();
+            }
+
             lstFuncionalidadesDisponibles.DisplayMember = "descripcion";
             lstFuncionalidadesDisponibles.ValueMember = "cod_funcionalidad";
             lstFuncionalidadesAsignadas.DisplayMember = "descripcion";
             lstFuncionalidadesAsignadas.ValueMember = "cod_funcionalidad";
-        }
 
+            this.Text = isUpdate ? "Editar Rol" : "Nuevo Rol";
+        }
 
         private void btnAgregarFuncionalidad_Click(object sender, EventArgs e)
         {
@@ -76,7 +90,16 @@ namespace ME.UI
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            RolesHandler.nuevo(txtNombre.Text, lstFuncionalidadesAsignadas.DataSource as List<FuncionalidadModel>);
+            if (!isUpdate)
+            {
+                RolHandler.Nuevo(txtNombre.Text, lstFuncionalidadesAsignadas.DataSource as List<FuncionalidadModel>);
+            }
+            else
+            {
+                RolHandler.Actualizar(aux_cod_rol, txtNombre.Text, lstFuncionalidadesAsignadas.DataSource as List<FuncionalidadModel>);
+            }
+
+            this.Close();
         }
     }
 }

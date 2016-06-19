@@ -108,7 +108,7 @@
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.TabIndex = 6;
-            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.Text = "Cerrar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
@@ -146,7 +146,7 @@
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.txtNombre);
             this.Name = "NuevoRolForm";
-            this.Text = "NuevoRolForm";
+            this.Text = "Nuevo Rol";
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -56,7 +56,8 @@ namespace ME.Data
 
                 SqlCommand command = new SqlCommand("[DE_UNA].[GetRoles]", connection);
                 command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.Add("@activeOnly", SqlDbType.Bit).Value = activeOnly ?? false;
+                SqlParameter param_cod_rol = command.Parameters.AddWithValue("@activeOnly", activeOnly);
+                param_cod_rol.SqlDbType = SqlDbType.Bit;
 
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
@@ -81,17 +82,61 @@ namespace ME.Data
             using (SqlConnection connection = MEEntity.GetConnection())
             {
 
-                SqlCommand command = new SqlCommand("[DE_UNA].[CrearRol]", connection);
+                SqlCommand command = new SqlCommand("[DE_UNA].[NuevoRol]", connection);
                 command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.Add("@nombre", SqlDbType.NVarChar).Value = nombre;
-                command.Parameters.Add("@activo", SqlDbType.Bit).Value = true;
-                command.Parameters.Add("@funcionalidades", SqlDbType.Structured).Value = funcionalidades;
+
+                DataTable _dt;
+                // create data table to insert items
+                _dt = new DataTable();
+                _dt.Columns.Add("cod_funcionalidad", typeof(decimal));
+
+                for (var i = 0; i < funcionalidades.Count(); i++)
+                {
+                    _dt.Rows.Add(new Object[] { funcionalidades[i] });
+                }
+
+                SqlParameter param_cod_rol = command.Parameters.AddWithValue("@nombre", nombre);
+                param_cod_rol.SqlDbType = SqlDbType.NVarChar;
+
+                SqlParameter param_func = command.Parameters.AddWithValue("@funcionalidades", _dt);
+                param_func.SqlDbType = SqlDbType.Structured;
+                param_func.TypeName = "dbo.FuncionalidadesList";
 
                 connection.Open();
-                result = int.Parse(command.ExecuteScalar().ToString());
+                command.ExecuteScalar();
             }
 
             return result;
+        }
+    
+        public static void Actualizar(decimal cod_rol, decimal[] funcionalidades)
+        {
+            using (SqlConnection connection = MEEntity.GetConnection())
+            {
+                SqlCommand command = new SqlCommand("[DE_UNA].[ActualizarRol]", connection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                DataTable _dt;
+                // create data table to insert items
+                _dt = new DataTable();
+                _dt.Columns.Add("cod_funcionalidad", typeof(decimal));
+
+                for (var i = 0; i < funcionalidades.Count(); i++)
+                {
+                    _dt.Rows.Add(new Object[] { funcionalidades[i] });
+                }
+                    
+                SqlParameter param_cod_rol = command.Parameters.AddWithValue("@cod_rol", cod_rol);
+                param_cod_rol.SqlDbType = SqlDbType.Decimal;
+
+                SqlParameter param_func = command.Parameters.AddWithValue("@funcionalidades", _dt);
+                param_func.SqlDbType = SqlDbType.Structured;
+                param_func.TypeName = "[DE_UNA].FuncionalidadesList";
+
+                
+                connection.Open();
+                command.ExecuteScalar();
+            }
         }
     }
 }
