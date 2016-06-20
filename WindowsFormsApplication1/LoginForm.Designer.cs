@@ -79,7 +79,6 @@
             this.lblTitle.Size = new System.Drawing.Size(187, 31);
             this.lblTitle.TabIndex = 3;
             this.lblTitle.Text = "MercadoEnvío";
-            this.lblTitle.Click += new System.EventHandler(this.label1_Click);
             // 
             // btnLogin
             // 
@@ -98,6 +97,7 @@
             this.txtPassword.Size = new System.Drawing.Size(271, 20);
             this.txtPassword.TabIndex = 1;
             this.txtPassword.UseSystemPasswordChar = true;
+            this.txtPassword.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtPassword_KeyUp);
             // 
             // errLogin
             // 

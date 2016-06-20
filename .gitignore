@@ -1,6 +1,7 @@
 #BIN Y OBJ Generados por VS
-/WindowsFormsApplication1/obj/*
-/WindowsFormsApplication1/bin/*
-/ME.Business/obj/*
-/ME.Data/obj/*
-/WindowsFormsApplication1/*\303\263n/*
+WindowsFormsApplication1/obj/*
+WindowsFormsApplication1/bin/*
+ME.Business/obj/*
+ME.Business/bin/*
+ME.Data/obj/*
+ME.Data/bin/*

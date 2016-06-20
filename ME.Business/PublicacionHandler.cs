@@ -26,5 +26,14 @@ namespace ME.Business
         {
             return Publicacion.GetPublicaciones(estado, rubros, descripcion);
         }
+
+        public static Publicacion Guardar(string descripcion, int cod_tipo_publi, DateTime fechaInicio, DateTime fechaVenc, decimal stock,
+                                  decimal precio, int cod_visibilidad, int cod_estado, int cod_rubro, int con_envio, int con_preguntas)
+        {
+            decimal usuarioLogueado = 1; // Usar Variable global
+            
+            return Publicacion.Save(descripcion, stock, fechaInicio, fechaVenc, precio, cod_visibilidad,
+                                    cod_estado, cod_rubro, usuarioLogueado, cod_tipo_publi, false, false);
+        }
     }
 }

@@ -20,15 +20,16 @@ namespace ME.UI
         public ComprarOfertarUserControl()
         {
             InitializeComponent();
-            listaPublicaciones = PublicacionHandler.ListarPublicaciones(1, null, null);
+
+            listaPublicaciones = PublicacionHandler.ListarPublicaciones(1, null, String.Empty);
             gvPublicaciones.DataSource = listaPublicaciones;
             gvPublicaciones.Columns.Remove("cod_publi");
             bindNav1.BindingSource = bindSourcePublicaciones;
-            bindSourcePublicaciones.CurrentChanged += new System.EventHandler(bindingSource1_CurrentChanged);
+            bindSourcePublicaciones.CurrentChanged += new System.EventHandler(bindSourcePublicaciones_CurrentChanged);
             bindSourcePublicaciones.DataSource = new PageOffsetList(gvPublicaciones.RowCount);
         }
 
-        private void bindingSource1_CurrentChanged(object sender, EventArgs e)
+        private void bindSourcePublicaciones_CurrentChanged(object sender, EventArgs e)
         {
             // The desired page has changed, so fetch the page of records using the "Current" offset 
             int offset = (int)bindSourcePublicaciones.Current;
@@ -41,6 +42,7 @@ namespace ME.UI
         class PageOffsetList : System.ComponentModel.IListSource
         {
             private int totalRecords { get; set; }
+
             public PageOffsetList(int totalRecords)
             {
                 this.totalRecords = totalRecords;
@@ -60,39 +62,55 @@ namespace ME.UI
 
         private void PublicacionesUserControl_Load(object sender, EventArgs e)
         {
+            txtDescripcion.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            txtDescripcion.Text = "Ingrese Búsqueda";
+            cmbBoxRubros.Text = "(Ninguno)";
+
             this.cmbBoxRubros.DataSource = RubroHandler.ListarRubros();
-            this.gvPublicaciones.DataSource = PublicacionHandler.ListarPublicaciones(1, null, null);
+            this.cmbBoxRubros.ValueMember = "cod_rubro";
+            this.cmbBoxRubros.DisplayMember = "desc_larga";
+
+            this.gvPublicaciones.DataSource = PublicacionHandler.ListarPublicaciones(1, null, String.Empty);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnComprar_Click(object sender, EventArgs e)
         {
-            Form PublicacionForm = new PublicacionForm();
+            Form PublicacionForm = new PublicacionForm(null, false);
             PublicacionForm.ShowDialog(this);
         }
 
-        private void gvClientes_RowEnter(object sender, DataGridViewCellEventArgs e)
+        private void gvPublicaciones_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            btnEditPublicacion.Visible = true;
-            btnRemovePublicacion.Visible = true;
+            bool esAdmin = false; // SACAR esto va a estar en la variable global de usuario logueado.
+
+            if (esAdmin) {
+                btnEditPublicacion.Visible = true;
+                btnRemovePublicacion.Visible = true;
+            }
         }
 
-        private void btnEditUser_Click(object sender, EventArgs e)
+        private void btnEditPublicacion_Click(object sender, EventArgs e)
         {
             Publicacion publicacion = (Publicacion)gvPublicaciones.SelectedRows[0].DataBoundItem;
-            Form nuevaPublicacionForm = new PublicacionForm(publicacion);
+            Form nuevaPublicacionForm = new PublicacionForm(publicacion, true);
             nuevaPublicacionForm.ShowDialog(this);
         }
 
         private void txtDescripcion_Click(object sender, EventArgs e)
         {
-            txtDescripcion.Text = "";
             this.ForeColor = System.Drawing.SystemColors.WindowText;
+
+            if (txtDescripcion.Text == "Ingrese Búsqueda") {
+                txtDescripcion.Text = String.Empty;
+            }
         }
 
         private void txtDescripcion_Leave(object sender, EventArgs e)
         {
-            this.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            txtDescripcion.Text = "Ingrese Búsqueda";
+            if (txtDescripcion.Text == String.Empty) {
+                this.ForeColor = System.Drawing.SystemColors.WindowFrame;
+                txtDescripcion.Text = "Ingrese Búsqueda";
+            }
         }
 
         private void cmbBoxRubros_SelectedIndexChanged(object sender, EventArgs e)
@@ -107,7 +125,7 @@ namespace ME.UI
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            this.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            txtDescripcion.ForeColor = System.Drawing.SystemColors.WindowFrame;
             txtDescripcion.Text = "Ingrese Búsqueda";
             cmbBoxRubros.Text = "(Ninguno)";
 
@@ -115,9 +133,24 @@ namespace ME.UI
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            List<decimal> rubros = new List<decimal>;
-            rubros.Add(cmbBoxRubros.SelectedValue);
+            List<decimal> rubros = null;
+
+            if (cmbBoxRubros.SelectedValue != null) {
+                rubros = new List<decimal>();
+                rubros.Add(decimal.Parse(cmbBoxRubros.SelectedValue.ToString()));
+            }
+
             gvPublicaciones.DataSource = PublicacionHandler.ListarPublicaciones(1, rubros, txtDescripcion.Text);
+        }
+
+        private void btnVer_Click(object sender, EventArgs e)
+        {
+            Publicacion publicacion = (Publicacion)gvPublicaciones.SelectedRows[0].DataBoundItem;
+
+            if (publicacion != null) {
+                Form nuevaPublicacionForm = new PublicacionForm(publicacion, false);
+                nuevaPublicacionForm.ShowDialog(this);
+            }
         }
 
 
