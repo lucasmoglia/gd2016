@@ -62,8 +62,15 @@ namespace ME.UI
 
         private void PublicacionesUserControl_Load(object sender, EventArgs e)
         {
-            //this.cmbBoxRubros.DataSource = RubroHandler.ListarRubros();
-            //this.gvPublicaciones.DataSource = PublicacionHandler.ListarPublicaciones(1, null, null);
+            txtDescripcion.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            txtDescripcion.Text = "Ingrese Búsqueda";
+            cmbBoxRubros.Text = "(Ninguno)";
+
+            this.cmbBoxRubros.DataSource = RubroHandler.ListarRubros();
+            this.cmbBoxRubros.ValueMember = "cod_rubro";
+            this.cmbBoxRubros.DisplayMember = "desc_larga";
+
+            this.gvPublicaciones.DataSource = PublicacionHandler.ListarPublicaciones(1, null, String.Empty);
         }
 
         private void btnComprar_Click(object sender, EventArgs e)
@@ -91,14 +98,19 @@ namespace ME.UI
 
         private void txtDescripcion_Click(object sender, EventArgs e)
         {
-            txtDescripcion.Text = "";
             this.ForeColor = System.Drawing.SystemColors.WindowText;
+
+            if (txtDescripcion.Text == "Ingrese Búsqueda") {
+                txtDescripcion.Text = String.Empty;
+            }
         }
 
         private void txtDescripcion_Leave(object sender, EventArgs e)
         {
-            this.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            txtDescripcion.Text = "Ingrese Búsqueda";
+            if (txtDescripcion.Text == String.Empty) {
+                this.ForeColor = System.Drawing.SystemColors.WindowFrame;
+                txtDescripcion.Text = "Ingrese Búsqueda";
+            }
         }
 
         private void cmbBoxRubros_SelectedIndexChanged(object sender, EventArgs e)
@@ -113,7 +125,7 @@ namespace ME.UI
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            this.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            txtDescripcion.ForeColor = System.Drawing.SystemColors.WindowFrame;
             txtDescripcion.Text = "Ingrese Búsqueda";
             cmbBoxRubros.Text = "(Ninguno)";
 
@@ -121,16 +133,24 @@ namespace ME.UI
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            List<decimal> rubros = new List<decimal>();
-            rubros.Add(decimal.Parse(cmbBoxRubros.SelectedValue.ToString()));
+            List<decimal> rubros = null;
+
+            if (cmbBoxRubros.SelectedValue != null) {
+                rubros = new List<decimal>();
+                rubros.Add(decimal.Parse(cmbBoxRubros.SelectedValue.ToString()));
+            }
+
             gvPublicaciones.DataSource = PublicacionHandler.ListarPublicaciones(1, rubros, txtDescripcion.Text);
         }
 
         private void btnVer_Click(object sender, EventArgs e)
         {
             Publicacion publicacion = (Publicacion)gvPublicaciones.SelectedRows[0].DataBoundItem;
-            Form nuevaPublicacionForm = new PublicacionForm(publicacion, false);
-            nuevaPublicacionForm.ShowDialog(this);
+
+            if (publicacion != null) {
+                Form nuevaPublicacionForm = new PublicacionForm(publicacion, false);
+                nuevaPublicacionForm.ShowDialog(this);
+            }
         }
 
 

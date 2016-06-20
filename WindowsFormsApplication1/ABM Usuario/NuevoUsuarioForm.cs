@@ -82,7 +82,7 @@ namespace ME.UI
         {
             ddlRol.ValueMember = "cod_rol";
             ddlRol.DisplayMember = "nombre";
-            ddlRol.DataSource = RolHandler.ListarRoles();
+            ddlRol.DataSource = RolHandler.ListarRoles(true);
 
             ddlRubro.ValueMember = "cod_rubro";
             ddlRubro.DisplayMember = "desc_larga";
