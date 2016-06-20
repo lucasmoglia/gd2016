@@ -99,3 +99,15 @@ order by 2
 )as tablaUnida
 
 -- Practica SQL Ej. 11
+select p.prod_familia, f.fami_detalle, count(i.item_producto) as "Cant Prod Vendidos", sum(i.item_precio) as "Monto Ventas sin Impuestos"
+from Producto P, Familia F, Factura C, Item_Factura I
+where p.prod_familia = f.fami_id and p.prod_codigo = I.item_producto
+and c.fact_tipo = I.item_tipo and c.fact_sucursal = i.item_sucursal and c.fact_numero = i.item_numero
+group by p.prod_familia, f.fami_detalle
+--having ('select de la familia y sus ventas del año 2012 > 20000')
+having (select sum(it.item_precio) from Item_Factura it, Producto pr, Familia fa, Factura ct
+		where pr.prod_familia = fa.fami_id and pr.prod_codigo = It.item_producto
+		and ct.fact_tipo = It.item_tipo and ct.fact_sucursal = it.item_sucursal and ct.fact_numero = it.item_numero
+		and pr.prod_familia = p.prod_familia
+		) > 2000
+order by 3 desc
