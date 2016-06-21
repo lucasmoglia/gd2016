@@ -128,12 +128,33 @@ group by p.prod_codigo, p.prod_detalle
 order by (select sum(I.item_cantidad * I.item_precio) from Item_Factura I where I.item_producto = P.prod_codigo) desc
 
 -- Practica SQL Ej. 13
-select P.prod_codigo, P.prod_detalle, P.prod_precio
-		,sum(C.comp_cantidad * (select PR.prod_precio  
+select X.prod_codigo, X.prod_detalle, X.prod_precio, sum(X.Precio_Calculado) as "Precio Total"
+from 
+		(select P.prod_codigo, P.prod_detalle, P.prod_precio
+				,(C.comp_cantidad * (select PR.prod_precio  
 								from Producto PR 
 								where PR.prod_codigo = C.comp_componente
 								)
-			) as "Precio Calculado"
-from Producto P, Composicion C
-where p.prod_codigo = c.comp_producto
-group by P.prod_codigo, P.prod_detalle, P.prod_precio
+				) as "Precio_Calculado"
+		from Producto P, Composicion C
+		where p.prod_codigo = c.comp_producto
+		) X
+group by X.prod_codigo, X.prod_detalle, X.prod_precio
+
+
+-- Practica SQL Ej. 14
+select
+C.clie_codigo
+,(select count(*)          from Factura F 
+		where F.fact_cliente = C.clie_codigo and cast(F.fact_fecha as date) > cast(dateadd(day,-2365,getdate()) As Date)) as "Cant_Compras_Ult_Año"
+,(select isnull(avg(F.fact_total),0) from Factura F 
+		where F.fact_cliente = C.clie_codigo and cast(F.fact_fecha as date) > cast(dateadd(day,-2365,getdate()) As Date)) as "Promedio_por_Compra_Ult_Año"
+,(select isnull(count(distinct I.item_producto),0) from Factura F, Item_Factura I
+		where F.fact_tipo = I.item_tipo and F.fact_sucursal = I.item_sucursal and F.fact_numero = I.item_numero
+		and F.fact_cliente = C.clie_codigo and cast(F.fact_fecha as date) > cast(dateadd(day,-2365,getdate()) As Date)) as "Cant_Prod_Dif_Ult_Año"
+,(select isnull(max(F.fact_total),0) from Factura F 
+		where F.fact_cliente = C.clie_codigo and cast(F.fact_fecha as date) > cast(dateadd(day,-2365,getdate()) As Date)) as "Mayor_Compra_Ult_Año"
+from Cliente C
+order by 2 desc
+
+-- Practica SQL Ej. 15
