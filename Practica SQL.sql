@@ -111,3 +111,29 @@ having (select sum(it.item_precio) from Item_Factura it, Producto pr, Familia fa
 		and pr.prod_familia = p.prod_familia
 		) > 2000
 order by 3 desc
+
+-- Practica SQL Ej. 12
+select p.prod_codigo, p.prod_detalle, count(distinct C.clie_codigo) as "Clientes Distintos q lo compraron",
+		avg(I.item_precio) as "importe promedio"
+		,(select count(*) from STOCK S where s.stoc_producto = p.prod_codigo and s.stoc_cantidad > 0 ) as "Depositos con stock"
+		,(select sum(s.stoc_cantidad) from STOCK S where s.stoc_producto = p.prod_codigo) as "Stock Actual"
+--		,(select sum(I.item_precio) from Item_Factura I where I.item_producto = P.prod_codigo) as "Importe vendido"
+from Producto P, Cliente C, Factura F, Item_Factura I
+where f.fact_tipo = I.item_tipo and f.fact_sucursal = I.item_sucursal and F.fact_numero = i.item_numero
+	and p.prod_codigo = I.item_producto
+	and c.clie_codigo = F.fact_cliente
+	and year(F.fact_fecha) = 2012
+group by p.prod_codigo, p.prod_detalle
+
+order by (select sum(I.item_cantidad * I.item_precio) from Item_Factura I where I.item_producto = P.prod_codigo) desc
+
+-- Practica SQL Ej. 13
+select P.prod_codigo, P.prod_detalle, P.prod_precio
+		,sum(C.comp_cantidad * (select PR.prod_precio  
+								from Producto PR 
+								where PR.prod_codigo = C.comp_componente
+								)
+			) as "Precio Calculado"
+from Producto P, Composicion C
+where p.prod_codigo = c.comp_producto
+group by P.prod_codigo, P.prod_detalle, P.prod_precio
