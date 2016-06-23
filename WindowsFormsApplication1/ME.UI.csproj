@@ -58,6 +58,14 @@
     <Compile Include="ABM Rol\RolUserControl.Designer.cs">
       <DependentUpon>RolUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="ABM Usuario\ClienteUserControl.cs" />
+    <Compile Include="ABM Usuario\ClienteUserControl.Designer.cs">
+      <DependentUpon>ClienteUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ABM Usuario\NuevoClienteForm.cs" />
+    <Compile Include="ABM Usuario\NuevoClienteForm.Designer.cs">
+      <DependentUpon>NuevoClienteForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ABM Usuario\UsuarioUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -137,6 +145,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ABM Rol\RolUserControl.resx">
       <DependentUpon>RolUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABM Usuario\ClienteUserControl.resx">
+      <DependentUpon>ClienteUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABM Usuario\NuevoClienteForm.resx">
+      <DependentUpon>NuevoClienteForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ABM Usuario\UsuarioUserControl.resx">
       <DependentUpon>UsuarioUserControl.cs</DependentUpon>
