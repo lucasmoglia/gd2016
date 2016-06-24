@@ -158,3 +158,23 @@ from Cliente C
 order by 2 desc
 
 -- Practica SQL Ej. 15
+
+
+
+-- Ej 13 de otro 
+select 
+	p.prod_detalle,
+	p.prod_precio,
+	(
+	select sum(compuesto.prod_precio * c.comp_cantidad) from Producto p1 
+	inner join Composicion c on p1.prod_codigo = c.comp_producto
+	inner join Producto compuesto on compuesto.prod_codigo = c.comp_componente
+	where
+		p1.prod_codigo = p.prod_codigo
+	) as sumatoria   -- Entiendo que el enunciado pide la sumatoria de los precios de los componentes multiplicados por la cantidad de componentes necesarios
+	
+from Producto p 
+inner join Composicion c on p.prod_codigo = c.comp_producto
+group by p.prod_codigo,prod_detalle,p.prod_precio
+having count(c.comp_producto) > 2
+order by count(c.comp_producto)  desc
