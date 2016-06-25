@@ -106,8 +106,21 @@ namespace ME.Data
             {
                 SqlCommand command = new SqlCommand("[DE_UNA].[GetPublicaciones]", connection);
                 command.CommandType = CommandType.StoredProcedure;
+
+                DataTable rubrosTable = new DataTable(); // Crea el Tipo Tabla Rubros, para pasar por parámetro.
+                rubrosTable.Columns.Add("cod_rubro", typeof(decimal));
+
+                for (var i = 0; i < rubros.Count(); i++)
+                {
+                    rubrosTable.Rows.Add(new Object[] { rubros[i] });
+                }
+
                 command.Parameters.Add("@estado", SqlDbType.Decimal).Value = estado;
-                command.Parameters.Add("@rubros", SqlDbType.Structured).Value = rubros;
+
+                SqlParameter param_Rubros = command.Parameters.AddWithValue("@rubros", rubrosTable);
+                param_Rubros.SqlDbType = SqlDbType.Structured;
+                param_Rubros.TypeName = "[DE_UNA].Rubros";
+
                 command.Parameters.Add("@descripcion", SqlDbType.NVarChar).Value = descripcion;
 
                 connection.Open();
@@ -154,8 +167,8 @@ namespace ME.Data
             return publicacionList;
         }
 
-        public static Publicacion Save(string descripcion, decimal stock, DateTime fechaInicio, DateTime fechaVenc, decimal precio, int cod_visibilidad,
-                                  int cod_estado, int cod_rubro, decimal cod_usuario, int cod_tipo_publi, bool con_envio, bool con_preguntas)
+        public static decimal Save(string descripcion, decimal stock, DateTime fechaInicio, DateTime fechaVenc, decimal precio, decimal cod_visibilidad,
+                                  decimal cod_estado, decimal cod_rubro, decimal cod_usuario, decimal cod_tipo_publi, bool con_envio, bool con_preguntas)
         {
             using (SqlConnection connection = MEEntity.GetConnection())
             {
@@ -180,9 +193,9 @@ namespace ME.Data
 
                 if (reader.Read())
                 {
-                    return GetPublicacion(decimal.Parse(reader["cod_publi"].ToString()));
+                    return decimal.Parse(reader["cod_publi"].ToString());
                 } else {
-                    return null;
+                    return 0;
                 }
             }
         }

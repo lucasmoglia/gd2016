@@ -36,17 +36,20 @@ namespace ME.Data
 
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
-                reader.Read();
 
-                Visibilidad unaVisibilidad = new Visibilidad(
-                      decimal.Parse(reader["cod_visibilidad"].ToString())
-                    , reader["descripcion"].ToString()
-                    , decimal.Parse(reader["costo_publicar"].ToString())
-                    , decimal.Parse(reader["porcentaje_venta"].ToString())
-                    , decimal.Parse(reader["costo_envio"].ToString())
-                );
+                if (reader.Read()) {
+                    Visibilidad unaVisibilidad = new Visibilidad(
+                          decimal.Parse(reader["cod_visibilidad"].ToString())
+                        , reader["descripcion"].ToString()
+                        , decimal.Parse(reader["costo_publicar"].ToString())
+                        , decimal.Parse(reader["porcentaje_venta"].ToString())
+                        , decimal.Parse(reader["costo_envio"].ToString())
+                    );
 
-                return unaVisibilidad;
+                    return unaVisibilidad;
+                } else {
+                    return null;
+                }
             }
         }
 
@@ -58,8 +61,6 @@ namespace ME.Data
             {
 
                 SqlCommand command = new SqlCommand("[DE_UNA].[GetVisibilidades]", connection);
-                //command.CommandType = CommandType.StoredProcedure;
-                //command.Parameters.Add("@activeOnly", SqlDbType.Bit).Value = activeOnly ?? false;
 
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();

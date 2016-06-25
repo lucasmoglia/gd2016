@@ -70,6 +70,6 @@ BEGIN
 	WHERE (E.cod_estado    IN (@estado, @publicada)   OR @estado IS NULL)
 	  AND (p.cod_rubro     IN (SELECT cod_Rubro FROM @rubros) OR (SELECT cod_Rubro FROM @rubros) IS NULL)
 --	  AND (p.cod_rubro     IN (@rubros) OR @rubros IS NULL)
-	  AND (P.descripcion LIKE '%@descripcion%'        OR @descripcion IS NULL)
+	  AND (P.descripcion LIKE ('%' + @descripcion + '%')      OR @descripcion IS NULL)
 	ORDER BY P.cod_visibilidad
 END

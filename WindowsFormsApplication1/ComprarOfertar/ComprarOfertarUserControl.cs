@@ -15,7 +15,7 @@ namespace ME.UI
     public partial class ComprarOfertarUserControl : UserControl
     {
         private const int pageSize = 10;
-        private List<Publicacion> listaPublicaciones = new List<Publicacion>();
+        private List<Publicacion> listaPublicaciones;
         
         public ComprarOfertarUserControl()
         {
@@ -60,23 +60,28 @@ namespace ME.UI
             }
         }
 
-        private void PublicacionesUserControl_Load(object sender, EventArgs e)
+        private void ComprarOfertarUserControl_Load(object sender, EventArgs e)
         {
             txtDescripcion.ForeColor = System.Drawing.SystemColors.WindowFrame;
             txtDescripcion.Text = "Ingrese Búsqueda";
+
+            cmbBoxRubros.DataSource = RubroHandler.ListarRubros();
+            cmbBoxRubros.ValueMember = "cod_rubro";
+            cmbBoxRubros.DisplayMember = "desc_larga";
+            cmbBoxRubros.SelectedItem = null;
             cmbBoxRubros.Text = "(Ninguno)";
 
-            this.cmbBoxRubros.DataSource = RubroHandler.ListarRubros();
-            this.cmbBoxRubros.ValueMember = "cod_rubro";
-            this.cmbBoxRubros.DisplayMember = "desc_larga";
-
-            this.gvPublicaciones.DataSource = PublicacionHandler.ListarPublicaciones(1, null, String.Empty);
+            gvPublicaciones.DataSource = PublicacionHandler.ListarPublicaciones(1, null, String.Empty);
         }
 
         private void btnComprar_Click(object sender, EventArgs e)
         {
-            Form PublicacionForm = new PublicacionForm(null, false);
-            PublicacionForm.ShowDialog(this);
+            Publicacion publicacion = (Publicacion)gvPublicaciones.SelectedRows[0].DataBoundItem;
+
+            if (publicacion != null) {
+                PublicacionForm publicacionForm = new PublicacionForm(publicacion, false);
+                publicacionForm.ShowDialog(this);
+            }
         }
 
         private void gvPublicaciones_RowEnter(object sender, DataGridViewCellEventArgs e)
@@ -92,13 +97,16 @@ namespace ME.UI
         private void btnEditPublicacion_Click(object sender, EventArgs e)
         {
             Publicacion publicacion = (Publicacion)gvPublicaciones.SelectedRows[0].DataBoundItem;
-            Form nuevaPublicacionForm = new PublicacionForm(publicacion, true);
-            nuevaPublicacionForm.ShowDialog(this);
+
+            if (publicacion != null) {
+                Form nuevaPublicacionForm = new PublicacionForm(publicacion, true);
+                nuevaPublicacionForm.ShowDialog(this);
+            }
         }
 
         private void txtDescripcion_Click(object sender, EventArgs e)
         {
-            this.ForeColor = System.Drawing.SystemColors.WindowText;
+            txtDescripcion.ForeColor = System.Drawing.SystemColors.WindowText;
 
             if (txtDescripcion.Text == "Ingrese Búsqueda") {
                 txtDescripcion.Text = String.Empty;
@@ -108,7 +116,7 @@ namespace ME.UI
         private void txtDescripcion_Leave(object sender, EventArgs e)
         {
             if (txtDescripcion.Text == String.Empty) {
-                this.ForeColor = System.Drawing.SystemColors.WindowFrame;
+                txtDescripcion.ForeColor = System.Drawing.SystemColors.WindowFrame;
                 txtDescripcion.Text = "Ingrese Búsqueda";
             }
         }
@@ -120,13 +128,15 @@ namespace ME.UI
 
         private void cmbBoxRubros_Click(object sender, EventArgs e)
         {
-            this.ForeColor = System.Drawing.SystemColors.WindowText;
+            cmbBoxRubros.ForeColor = System.Drawing.SystemColors.WindowText;
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             txtDescripcion.ForeColor = System.Drawing.SystemColors.WindowFrame;
             txtDescripcion.Text = "Ingrese Búsqueda";
+
+            cmbBoxRubros.SelectedValue = null;
             cmbBoxRubros.Text = "(Ninguno)";
 
         }
@@ -148,8 +158,8 @@ namespace ME.UI
             Publicacion publicacion = (Publicacion)gvPublicaciones.SelectedRows[0].DataBoundItem;
 
             if (publicacion != null) {
-                Form nuevaPublicacionForm = new PublicacionForm(publicacion, false);
-                nuevaPublicacionForm.ShowDialog(this);
+                PublicacionForm publicacionForm = new PublicacionForm(publicacion, false);
+                publicacionForm.ShowDialog(this);
             }
         }
 

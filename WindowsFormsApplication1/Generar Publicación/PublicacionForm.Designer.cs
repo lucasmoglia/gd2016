@@ -44,6 +44,10 @@
             this.lblDescripción = new System.Windows.Forms.Label();
             this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.groupCaracteristicas = new System.Windows.Forms.GroupBox();
+            this.cmbBoxPreguntas = new System.Windows.Forms.ComboBox();
+            this.cmbBoxEnvio = new System.Windows.Forms.ComboBox();
+            this.lblPreguntas = new System.Windows.Forms.Label();
+            this.lblEnvio = new System.Windows.Forms.Label();
             this.lblRubro = new System.Windows.Forms.Label();
             this.cmbBoxRubro = new System.Windows.Forms.ComboBox();
             this.lblEstado = new System.Windows.Forms.Label();
@@ -54,10 +58,9 @@
             this.groupTipoPublicacion = new System.Windows.Forms.GroupBox();
             this.groupVigencia = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lblEnvio = new System.Windows.Forms.Label();
-            this.lblPreguntas = new System.Windows.Forms.Label();
-            this.cmbBoxEnvio = new System.Windows.Forms.ComboBox();
-            this.cmbBoxPreguntas = new System.Windows.Forms.ComboBox();
+            this.groupPropietario = new System.Windows.Forms.GroupBox();
+            this.lblIdUsuario = new System.Windows.Forms.Label();
+            this.lblUsername = new System.Windows.Forms.Label();
             this.groupMonto.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numStock)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numPrecio)).BeginInit();
@@ -66,13 +69,14 @@
             this.groupTipoPublicacion.SuspendLayout();
             this.groupVigencia.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.groupPropietario.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblVisibilidad
             // 
             this.lblVisibilidad.AutoSize = true;
             this.lblVisibilidad.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblVisibilidad.Location = new System.Drawing.Point(12, 15);
+            this.lblVisibilidad.Location = new System.Drawing.Point(12, 17);
             this.lblVisibilidad.Name = "lblVisibilidad";
             this.lblVisibilidad.Size = new System.Drawing.Size(53, 13);
             this.lblVisibilidad.TabIndex = 1;
@@ -102,10 +106,11 @@
             // cmbBoxVisibilidad
             // 
             this.cmbBoxVisibilidad.FormattingEnabled = true;
-            this.cmbBoxVisibilidad.Location = new System.Drawing.Point(15, 31);
+            this.cmbBoxVisibilidad.Location = new System.Drawing.Point(15, 33);
             this.cmbBoxVisibilidad.Name = "cmbBoxVisibilidad";
             this.cmbBoxVisibilidad.Size = new System.Drawing.Size(139, 21);
             this.cmbBoxVisibilidad.TabIndex = 0;
+            this.cmbBoxVisibilidad.SelectedIndexChanged += new System.EventHandler(this.cmbBoxVisibilidad_SelectedIndexChanged);
             // 
             // groupMonto
             // 
@@ -113,7 +118,7 @@
             this.groupMonto.Controls.Add(this.numPrecio);
             this.groupMonto.Controls.Add(this.lblStock);
             this.groupMonto.Controls.Add(this.lblPrecio);
-            this.groupMonto.Location = new System.Drawing.Point(333, 7);
+            this.groupMonto.Location = new System.Drawing.Point(352, 7);
             this.groupMonto.Name = "groupMonto";
             this.groupMonto.Size = new System.Drawing.Size(302, 55);
             this.groupMonto.TabIndex = 20;
@@ -123,13 +128,29 @@
             // numStock
             // 
             this.numStock.Location = new System.Drawing.Point(16, 30);
+            this.numStock.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
             this.numStock.Name = "numStock";
             this.numStock.Size = new System.Drawing.Size(109, 20);
             this.numStock.TabIndex = 19;
+            this.numStock.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // numPrecio
             // 
+            this.numPrecio.DecimalPlaces = 2;
             this.numPrecio.Location = new System.Drawing.Point(163, 30);
+            this.numPrecio.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
             this.numPrecio.Name = "numPrecio";
             this.numPrecio.Size = new System.Drawing.Size(120, 20);
             this.numPrecio.TabIndex = 18;
@@ -158,7 +179,7 @@
             // 
             this.lblFechaVencimiento.AutoSize = true;
             this.lblFechaVencimiento.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFechaVencimiento.Location = new System.Drawing.Point(17, 69);
+            this.lblFechaVencimiento.Location = new System.Drawing.Point(23, 69);
             this.lblFechaVencimiento.Name = "lblFechaVencimiento";
             this.lblFechaVencimiento.Size = new System.Drawing.Size(113, 13);
             this.lblFechaVencimiento.TabIndex = 17;
@@ -166,9 +187,9 @@
             // 
             // DTFechaVencimiento
             // 
-            this.DTFechaVencimiento.Location = new System.Drawing.Point(17, 85);
+            this.DTFechaVencimiento.Location = new System.Drawing.Point(23, 85);
             this.DTFechaVencimiento.Name = "DTFechaVencimiento";
-            this.DTFechaVencimiento.Size = new System.Drawing.Size(251, 20);
+            this.DTFechaVencimiento.Size = new System.Drawing.Size(236, 20);
             this.DTFechaVencimiento.TabIndex = 16;
             this.DTFechaVencimiento.Value = new System.DateTime(2016, 6, 6, 3, 16, 27, 0);
             // 
@@ -176,7 +197,7 @@
             // 
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.Location = new System.Drawing.Point(17, 29);
+            this.label21.Location = new System.Drawing.Point(23, 29);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(80, 13);
             this.label21.TabIndex = 15;
@@ -184,11 +205,12 @@
             // 
             // DTFechaInicio
             // 
-            this.DTFechaInicio.Location = new System.Drawing.Point(17, 45);
+            this.DTFechaInicio.Location = new System.Drawing.Point(23, 45);
             this.DTFechaInicio.Name = "DTFechaInicio";
-            this.DTFechaInicio.Size = new System.Drawing.Size(251, 20);
+            this.DTFechaInicio.Size = new System.Drawing.Size(236, 20);
             this.DTFechaInicio.TabIndex = 14;
             this.DTFechaInicio.Value = new System.DateTime(2016, 6, 6, 3, 16, 27, 0);
+            this.DTFechaInicio.ValueChanged += new System.EventHandler(this.DTFechaInicio_ValueChanged);
             // 
             // lblDescripción
             // 
@@ -208,6 +230,8 @@
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(666, 60);
             this.txtDescripcion.TabIndex = 3;
+            this.txtDescripcion.Enter += new System.EventHandler(this.txtDescripcion_Enter);
+            this.txtDescripcion.Leave += new System.EventHandler(this.txtDescripcion_Leave);
             // 
             // groupCaracteristicas
             // 
@@ -221,18 +245,54 @@
             this.groupCaracteristicas.Controls.Add(this.cmbBoxEstado);
             this.groupCaracteristicas.Controls.Add(this.lblVisibilidad);
             this.groupCaracteristicas.Controls.Add(this.cmbBoxVisibilidad);
-            this.groupCaracteristicas.Location = new System.Drawing.Point(333, 63);
+            this.groupCaracteristicas.Location = new System.Drawing.Point(352, 68);
             this.groupCaracteristicas.Name = "groupCaracteristicas";
-            this.groupCaracteristicas.Size = new System.Drawing.Size(342, 161);
+            this.groupCaracteristicas.Size = new System.Drawing.Size(342, 156);
             this.groupCaracteristicas.TabIndex = 21;
             this.groupCaracteristicas.TabStop = false;
             this.groupCaracteristicas.Text = "Características";
+            // 
+            // cmbBoxPreguntas
+            // 
+            this.cmbBoxPreguntas.FormattingEnabled = true;
+            this.cmbBoxPreguntas.Location = new System.Drawing.Point(179, 124);
+            this.cmbBoxPreguntas.Name = "cmbBoxPreguntas";
+            this.cmbBoxPreguntas.Size = new System.Drawing.Size(71, 21);
+            this.cmbBoxPreguntas.TabIndex = 37;
+            // 
+            // cmbBoxEnvio
+            // 
+            this.cmbBoxEnvio.FormattingEnabled = true;
+            this.cmbBoxEnvio.Location = new System.Drawing.Point(52, 124);
+            this.cmbBoxEnvio.Name = "cmbBoxEnvio";
+            this.cmbBoxEnvio.Size = new System.Drawing.Size(71, 21);
+            this.cmbBoxEnvio.TabIndex = 36;
+            // 
+            // lblPreguntas
+            // 
+            this.lblPreguntas.AutoSize = true;
+            this.lblPreguntas.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPreguntas.Location = new System.Drawing.Point(176, 108);
+            this.lblPreguntas.Name = "lblPreguntas";
+            this.lblPreguntas.Size = new System.Drawing.Size(92, 13);
+            this.lblPreguntas.TabIndex = 35;
+            this.lblPreguntas.Text = "Permitir Preguntas";
+            // 
+            // lblEnvio
+            // 
+            this.lblEnvio.AutoSize = true;
+            this.lblEnvio.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEnvio.Location = new System.Drawing.Point(49, 108);
+            this.lblEnvio.Name = "lblEnvio";
+            this.lblEnvio.Size = new System.Drawing.Size(67, 13);
+            this.lblEnvio.TabIndex = 34;
+            this.lblEnvio.Text = "Incluir Envío";
             // 
             // lblRubro
             // 
             this.lblRubro.AutoSize = true;
             this.lblRubro.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRubro.Location = new System.Drawing.Point(12, 57);
+            this.lblRubro.Location = new System.Drawing.Point(12, 59);
             this.lblRubro.Name = "lblRubro";
             this.lblRubro.Size = new System.Drawing.Size(36, 13);
             this.lblRubro.TabIndex = 33;
@@ -241,16 +301,16 @@
             // cmbBoxRubro
             // 
             this.cmbBoxRubro.FormattingEnabled = true;
-            this.cmbBoxRubro.Location = new System.Drawing.Point(15, 73);
+            this.cmbBoxRubro.Location = new System.Drawing.Point(15, 75);
             this.cmbBoxRubro.Name = "cmbBoxRubro";
-            this.cmbBoxRubro.Size = new System.Drawing.Size(320, 21);
+            this.cmbBoxRubro.Size = new System.Drawing.Size(316, 21);
             this.cmbBoxRubro.TabIndex = 32;
             // 
             // lblEstado
             // 
             this.lblEstado.AutoSize = true;
             this.lblEstado.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEstado.Location = new System.Drawing.Point(175, 15);
+            this.lblEstado.Location = new System.Drawing.Point(188, 17);
             this.lblEstado.Name = "lblEstado";
             this.lblEstado.Size = new System.Drawing.Size(40, 13);
             this.lblEstado.TabIndex = 31;
@@ -259,10 +319,11 @@
             // cmbBoxEstado
             // 
             this.cmbBoxEstado.FormattingEnabled = true;
-            this.cmbBoxEstado.Location = new System.Drawing.Point(178, 31);
+            this.cmbBoxEstado.Location = new System.Drawing.Point(191, 33);
             this.cmbBoxEstado.Name = "cmbBoxEstado";
             this.cmbBoxEstado.Size = new System.Drawing.Size(122, 21);
             this.cmbBoxEstado.TabIndex = 30;
+            this.cmbBoxEstado.SelectedIndexChanged += new System.EventHandler(this.cmbBoxEstado_SelectedIndexChanged);
             // 
             // lblItemPubli
             // 
@@ -279,19 +340,20 @@
             this.cmbBoxTipoPubli.FormattingEnabled = true;
             this.cmbBoxTipoPubli.Location = new System.Drawing.Point(15, 41);
             this.cmbBoxTipoPubli.Name = "cmbBoxTipoPubli";
-            this.cmbBoxTipoPubli.Size = new System.Drawing.Size(139, 21);
+            this.cmbBoxTipoPubli.Size = new System.Drawing.Size(125, 21);
             this.cmbBoxTipoPubli.TabIndex = 34;
             this.cmbBoxTipoPubli.SelectedIndexChanged += new System.EventHandler(this.cmbBoxTipoPubli_SelectedIndexChanged);
             // 
             // pnlPublicacion
             // 
+            this.pnlPublicacion.Controls.Add(this.groupPropietario);
             this.pnlPublicacion.Controls.Add(this.groupTipoPublicacion);
             this.pnlPublicacion.Controls.Add(this.groupVigencia);
             this.pnlPublicacion.Controls.Add(this.groupCaracteristicas);
             this.pnlPublicacion.Controls.Add(this.groupMonto);
-            this.pnlPublicacion.Location = new System.Drawing.Point(38, 127);
+            this.pnlPublicacion.Location = new System.Drawing.Point(30, 127);
             this.pnlPublicacion.Name = "pnlPublicacion";
-            this.pnlPublicacion.Size = new System.Drawing.Size(687, 239);
+            this.pnlPublicacion.Size = new System.Drawing.Size(703, 239);
             this.pnlPublicacion.TabIndex = 18;
             // 
             // groupTipoPublicacion
@@ -300,7 +362,7 @@
             this.groupTipoPublicacion.Controls.Add(this.cmbBoxTipoPubli);
             this.groupTipoPublicacion.Location = new System.Drawing.Point(9, 7);
             this.groupTipoPublicacion.Name = "groupTipoPublicacion";
-            this.groupTipoPublicacion.Size = new System.Drawing.Size(290, 85);
+            this.groupTipoPublicacion.Size = new System.Drawing.Size(155, 85);
             this.groupTipoPublicacion.TabIndex = 23;
             this.groupTipoPublicacion.TabStop = false;
             this.groupTipoPublicacion.Text = "Tipo";
@@ -313,7 +375,7 @@
             this.groupVigencia.Controls.Add(this.DTFechaVencimiento);
             this.groupVigencia.Location = new System.Drawing.Point(9, 102);
             this.groupVigencia.Name = "groupVigencia";
-            this.groupVigencia.Size = new System.Drawing.Size(290, 122);
+            this.groupVigencia.Size = new System.Drawing.Size(309, 122);
             this.groupVigencia.TabIndex = 22;
             this.groupVigencia.TabStop = false;
             this.groupVigencia.Text = "Vigencia";
@@ -329,41 +391,36 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Publicación";
             // 
-            // lblEnvio
+            // groupPropietario
             // 
-            this.lblEnvio.AutoSize = true;
-            this.lblEnvio.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEnvio.Location = new System.Drawing.Point(49, 108);
-            this.lblEnvio.Name = "lblEnvio";
-            this.lblEnvio.Size = new System.Drawing.Size(67, 13);
-            this.lblEnvio.TabIndex = 34;
-            this.lblEnvio.Text = "Incluir Envío";
+            this.groupPropietario.Controls.Add(this.lblUsername);
+            this.groupPropietario.Controls.Add(this.lblIdUsuario);
+            this.groupPropietario.Location = new System.Drawing.Point(172, 7);
+            this.groupPropietario.Name = "groupPropietario";
+            this.groupPropietario.Size = new System.Drawing.Size(146, 85);
+            this.groupPropietario.TabIndex = 24;
+            this.groupPropietario.TabStop = false;
+            this.groupPropietario.Text = "Propietario";
             // 
-            // lblPreguntas
+            // lblIdUsuario
             // 
-            this.lblPreguntas.AutoSize = true;
-            this.lblPreguntas.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPreguntas.Location = new System.Drawing.Point(176, 108);
-            this.lblPreguntas.Name = "lblPreguntas";
-            this.lblPreguntas.Size = new System.Drawing.Size(92, 13);
-            this.lblPreguntas.TabIndex = 35;
-            this.lblPreguntas.Text = "Permitir Preguntas";
+            this.lblIdUsuario.AutoSize = true;
+            this.lblIdUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblIdUsuario.Location = new System.Drawing.Point(6, 25);
+            this.lblIdUsuario.Name = "lblIdUsuario";
+            this.lblIdUsuario.Size = new System.Drawing.Size(61, 13);
+            this.lblIdUsuario.TabIndex = 35;
+            this.lblIdUsuario.Text = "Id. Usuario:";
             // 
-            // cmbBoxEnvio
+            // lblUsername
             // 
-            this.cmbBoxEnvio.FormattingEnabled = true;
-            this.cmbBoxEnvio.Location = new System.Drawing.Point(52, 124);
-            this.cmbBoxEnvio.Name = "cmbBoxEnvio";
-            this.cmbBoxEnvio.Size = new System.Drawing.Size(71, 21);
-            this.cmbBoxEnvio.TabIndex = 36;
-            // 
-            // cmbBoxPreguntas
-            // 
-            this.cmbBoxPreguntas.FormattingEnabled = true;
-            this.cmbBoxPreguntas.Location = new System.Drawing.Point(179, 124);
-            this.cmbBoxPreguntas.Name = "cmbBoxPreguntas";
-            this.cmbBoxPreguntas.Size = new System.Drawing.Size(71, 21);
-            this.cmbBoxPreguntas.TabIndex = 37;
+            this.lblUsername.AutoSize = true;
+            this.lblUsername.Enabled = false;
+            this.lblUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUsername.Location = new System.Drawing.Point(6, 49);
+            this.lblUsername.Name = "lblUsername";
+            this.lblUsername.Size = new System.Drawing.Size(0, 13);
+            this.lblUsername.TabIndex = 36;
             // 
             // PublicacionForm
             // 
@@ -390,6 +447,8 @@
             this.groupVigencia.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupPropietario.ResumeLayout(false);
+            this.groupPropietario.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -426,5 +485,8 @@
         private System.Windows.Forms.ComboBox cmbBoxEnvio;
         private System.Windows.Forms.Label lblPreguntas;
         private System.Windows.Forms.Label lblEnvio;
+        private System.Windows.Forms.GroupBox groupPropietario;
+        private System.Windows.Forms.Label lblUsername;
+        private System.Windows.Forms.Label lblIdUsuario;
     }
 }

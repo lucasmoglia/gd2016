@@ -58,11 +58,15 @@
     <Compile Include="ABM Rol\RolUserControl.Designer.cs">
       <DependentUpon>RolUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="ABM Usuario\ClienteUserControl.cs" />
+    <Compile Include="ABM Usuario\ClienteUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ABM Usuario\ClienteUserControl.Designer.cs">
       <DependentUpon>ClienteUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="ABM Usuario\NuevoClienteForm.cs" />
+    <Compile Include="ABM Usuario\NuevoClienteForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ABM Usuario\NuevoClienteForm.Designer.cs">
       <DependentUpon>NuevoClienteForm.cs</DependentUpon>
     </Compile>

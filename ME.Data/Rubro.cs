@@ -27,7 +27,7 @@ namespace ME.Data
             {
                 SqlCommand command = new SqlCommand("[DE_UNA].[GetRubro]", connection);
                 command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.Add("@rubro", SqlDbType.NVarChar).Value = rubro;
+                command.Parameters.Add("@descripcion", SqlDbType.NVarChar).Value = rubro;
 
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();

@@ -29,47 +29,51 @@ namespace ME.UI
                 administracionToolStripMenuItem.Enabled = false;
                 administracionToolStripMenuItem.Visible = false;
             }
-            //this.pnlMaster.Clear();
-            //this.pnlMaster.Controls.Add(new PublicacionUserControl());
+            //pnlMaster.Clear();
+            //pnlMaster.Controls.Add(new PublicacionUserControl());
         }
 
         private void inicioToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //this.pnlMaster.Controls.Clear();
-            //this.pnlMaster.Controls.Add(new ComprarOfertarUserControl());
+            //pnlMaster.Controls.Clear();
+            //pnlMaster.Controls.Add(new ComprarOfertarUserControl());
         }
 
         private void misFacturasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.pnlMaster.Controls.Clear();
-            this.pnlMaster.Controls.Add(new FacturaUserControl());
+            pnlMaster.Controls.Clear();
+            pnlMaster.Controls.Add(new FacturaUserControl());
 
         }
 
         private void usuariosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //Cuando hago click en una opción del menu, cambio el controlador.
-            this.pnlMaster.Controls.Clear();
-            this.pnlMaster.Controls.Add(new UsuarioUserControl());
+            pnlMaster.Controls.Clear();
+            pnlMaster.Controls.Add(new UsuarioUserControl());
         }
 
         private void rolesToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             //Cuando hago click en una opción del menu, cambio el controlador.
-            this.pnlMaster.Controls.Clear();
-            this.pnlMaster.Controls.Add(new RolUserControl());
+            pnlMaster.Controls.Clear();
+            pnlMaster.Controls.Add(new RolUserControl());
         }
 
         private void comprarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.pnlMaster.Controls.Clear();
-            this.pnlMaster.Controls.Add(new ComprarOfertarUserControl());
+            pnlMaster.Controls.Clear();
+            pnlMaster.Controls.Add(new ComprarOfertarUserControl());
         }
 
         private void venderToolStripMenuItem_Click(object sender, EventArgs e)
         {
+//            pnlMaster.Controls.Clear();
+//            pnlMaster.Controls.Add(new ComprarOfertarUserControl());
+
             PublicacionForm nuevaPublicacion = new PublicacionForm(null, false);
-            nuevaPublicacion.Show();
+
+            nuevaPublicacion.ShowDialog(this);
         }
     }
 }

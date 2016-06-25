@@ -326,7 +326,7 @@
             this.Controls.Add(this.gvPublicaciones);
             this.Name = "ComprarOfertarUserControl";
             this.Size = new System.Drawing.Size(838, 437);
-            this.Load += new System.EventHandler(this.PublicacionesUserControl_Load);
+            this.Load += new System.EventHandler(this.ComprarOfertarUserControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gvPublicaciones)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindNav1)).EndInit();
             this.bindNav1.ResumeLayout(false);
