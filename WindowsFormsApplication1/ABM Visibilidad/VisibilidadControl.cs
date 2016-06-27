@@ -92,5 +92,11 @@ namespace ME.UI
 
         }
 
+        private void btnRemoveVisibilidad_Click(object sender, EventArgs e)
+        {
+    //        Visibilidad visibilidad = (Visibilidad)gvVisibilidades.SelectedRows[0].DataBoundItem;
+    //        VisibilidadHandler.Eliminar(visibilidad.cod_visibilidad);
+        }
+
     }
 }

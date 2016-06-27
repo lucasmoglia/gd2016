@@ -11,18 +11,18 @@ namespace ME.Data
     public class Visibilidad
     {
         public decimal cod_visibilidad  { get; set; }
-        public string  nombre           { get; set; }
+        public string  descripcion      { get; set; }
         public decimal costo_publicar   { get; set; }
         public decimal porcentaje_venta { get; set; }
         public decimal costo_envio      { get; set; }
 
-        public Visibilidad(decimal cod_visibilidad, string nombre, decimal costo_publicar, decimal porcentaje_venta, decimal costo_envio)
+        public Visibilidad(decimal cod_visibilidad, string descripcion, decimal costo_publicar, decimal porcentaje_venta, decimal costo_envio)
         {
-            this.cod_visibilidad = cod_visibilidad;
-            this.nombre = nombre;
-            this.costo_publicar = costo_publicar;
-            this.porcentaje_venta = porcentaje_venta;
-            this.costo_envio = costo_envio;
+            this.cod_visibilidad    = cod_visibilidad;
+            this.descripcion        = descripcion;
+            this.costo_publicar     = costo_publicar;
+            this.porcentaje_venta   = porcentaje_venta;
+            this.costo_envio        = costo_envio;
         }
 
         public static Visibilidad GetVisibilidad(decimal cod_visibilidad)

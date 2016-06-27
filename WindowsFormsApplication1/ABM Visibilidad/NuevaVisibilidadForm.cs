@@ -20,18 +20,17 @@ namespace ME.UI
 
             if (visibilidad != null)
             {
-/*                if (visibilidad.cod_visibilidad != null)
-                {
-                    txtDescripcionV.Text    = visibilidad.descripcion;
-                    txtCostoPublicar.Text   = visibilidad.costo_publicar;
-                    txtPorcVenta.Text       = visibilidad.porcentaje_venta;
-                    txtCostoEnvio.Text      = visibilidad.costo_envio;
-                }
-  */          } else {
+                numCodVisibilidad.Value = visibilidad.cod_visibilidad;
+                txtDescripcionV.Text    = visibilidad.descripcion;
+                numCostoPublicar.Value  = visibilidad.costo_publicar;
+                numPorcVenta.Value      = visibilidad.porcentaje_venta;
+                numCostoEnvio.Value     = visibilidad.costo_envio;
+            } else {
+                numCodVisibilidad.Value = 0;
                 txtDescripcionV.Text    = String.Empty;
-                txtCostoPublicar.Text   = String.Empty;
-                txtPorcVenta.Text       = String.Empty;
-                txtCostoEnvio.Text      = String.Empty;
+                numCostoPublicar.Value  = 0;
+                numPorcVenta.Value      = 0;
+                numCostoEnvio.Value     = 0;
             }
         }
 
@@ -45,8 +44,12 @@ namespace ME.UI
         }
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            VisibilidadHandler.Nuevo(txtDescripcionV.Text, decimal.Parse(txtCostoPublicar.Text), decimal.Parse(txtPorcVenta.Text), decimal.Parse(txtCostoEnvio.Text));
-//            VisibilidadHandler.Actualizar(decimal.Parse(txtCodVisibilidad.Text), txtDescripcionV.Text, decimal.Parse(txtCostoPublicar.Text), decimal.Parse(txtPorcVenta.Text), decimal.Parse(txtCostoEnvio.Text));
+            if (numCodVisibilidad.Value == 0)
+            {
+            VisibilidadHandler.Nuevo(txtDescripcionV.Text, numCostoPublicar.Value, numPorcVenta.Value, numCostoEnvio.Value);
+            } else {
+            VisibilidadHandler.Actualizar(numCodVisibilidad.Value, txtDescripcionV.Text, numCostoPublicar.Value, numPorcVenta.Value, numCostoEnvio.Value);
+            }
             this.Close();
         }
     }

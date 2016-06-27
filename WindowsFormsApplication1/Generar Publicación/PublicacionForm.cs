@@ -153,7 +153,7 @@ namespace ME.UI
 
                 cmbBoxVisibilidad.DataSource = VisibilidadHandler.ListarVisibilidades();
                 cmbBoxVisibilidad.ValueMember = "cod_visibilidad";
-                cmbBoxVisibilidad.DisplayMember = "nombre";
+                cmbBoxVisibilidad.DisplayMember = "descripcion";
 
                 List<Estado> estados = EstadoHandler.ListarEstados();
                 estados.Remove(estados.Find(est => est.nombre == "Publicada"));
@@ -244,7 +244,7 @@ namespace ME.UI
         private void cmbBoxVisibilidad_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (esNuevaPubli || EsModificable) {
-                if (((Visibilidad)cmbBoxVisibilidad.SelectedItem).nombre == "Gratis") {
+                if (((Visibilidad)cmbBoxVisibilidad.SelectedItem).descripcion == "Gratis") {
                     cmbBoxEnvio.SelectedValue = true;
                     cmbBoxEnvio.Enabled = false;
                 } else {

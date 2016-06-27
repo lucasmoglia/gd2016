@@ -101,6 +101,7 @@
             this.btnRemoveVisibilidad.Text = "Borrar";
             this.btnRemoveVisibilidad.UseVisualStyleBackColor = false;
             this.btnRemoveVisibilidad.Visible = false;
+            this.btnRemoveVisibilidad.Click += new System.EventHandler(this.btnRemoveVisibilidad_Click);
             // 
             // bindingNavigator1
             // 
@@ -132,8 +133,8 @@
             // bindingNavigatorCountItem
             // 
             this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
-            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(37, 22);
-            this.bindingNavigatorCountItem.Text = "de {0}";
+            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(35, 22);
+            this.bindingNavigatorCountItem.Text = "of {0}";
             this.bindingNavigatorCountItem.ToolTipText = "Total number of items";
             // 
             // bindingNavigatorMoveFirstItem
@@ -196,7 +197,7 @@
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
-            // VisibilidadesControl
+            // VisibilidadControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -206,7 +207,7 @@
             this.Controls.Add(this.btnEditVisibilidad);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.gvVisibilidades);
-            this.Name = "VisibilidadesControl";
+            this.Name = "VisibilidadControl";
             this.Size = new System.Drawing.Size(803, 500);
             this.Load += new System.EventHandler(this.VisibilidadesControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gvVisibilidades)).EndInit();

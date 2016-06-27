@@ -32,16 +32,22 @@
             this.btnCancelar = new System.Windows.Forms.Button();
             this.pnlVisibilidad = new System.Windows.Forms.Panel();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.txtPorcVenta = new System.Windows.Forms.TextBox();
+            this.numCostoEnvio = new System.Windows.Forms.NumericUpDown();
+            this.numPorcVenta = new System.Windows.Forms.NumericUpDown();
+            this.numCostoPublicar = new System.Windows.Forms.NumericUpDown();
             this.label22 = new System.Windows.Forms.Label();
             this.txtDescripcionV = new System.Windows.Forms.TextBox();
             this.label24 = new System.Windows.Forms.Label();
-            this.txtCostoPublicar = new System.Windows.Forms.TextBox();
-            this.txtCostoEnvio = new System.Windows.Forms.TextBox();
             this.label26 = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
+            this.numCodVisibilidad = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
             this.pnlVisibilidad.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numCostoEnvio)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numPorcVenta)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCostoPublicar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCodVisibilidad)).BeginInit();
             this.SuspendLayout();
             // 
             // btnGuardar
@@ -74,12 +80,14 @@
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.txtPorcVenta);
+            this.groupBox4.Controls.Add(this.label1);
+            this.groupBox4.Controls.Add(this.numCodVisibilidad);
+            this.groupBox4.Controls.Add(this.numCostoEnvio);
+            this.groupBox4.Controls.Add(this.numPorcVenta);
+            this.groupBox4.Controls.Add(this.numCostoPublicar);
             this.groupBox4.Controls.Add(this.label22);
             this.groupBox4.Controls.Add(this.txtDescripcionV);
             this.groupBox4.Controls.Add(this.label24);
-            this.groupBox4.Controls.Add(this.txtCostoPublicar);
-            this.groupBox4.Controls.Add(this.txtCostoEnvio);
             this.groupBox4.Controls.Add(this.label26);
             this.groupBox4.Controls.Add(this.label27);
             this.groupBox4.Location = new System.Drawing.Point(25, 7);
@@ -89,12 +97,44 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Datos De la Nueva Visibilidad";
             // 
-            // txtPorcVenta
+            // numCostoEnvio
             // 
-            this.txtPorcVenta.Location = new System.Drawing.Point(156, 126);
-            this.txtPorcVenta.Name = "txtPorcVenta";
-            this.txtPorcVenta.Size = new System.Drawing.Size(334, 20);
-            this.txtPorcVenta.TabIndex = 7;
+            this.numCostoEnvio.DecimalPlaces = 2;
+            this.numCostoEnvio.Location = new System.Drawing.Point(156, 176);
+            this.numCostoEnvio.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            this.numCostoEnvio.Name = "numCostoEnvio";
+            this.numCostoEnvio.Size = new System.Drawing.Size(334, 20);
+            this.numCostoEnvio.TabIndex = 21;
+            // 
+            // numPorcVenta
+            // 
+            this.numPorcVenta.DecimalPlaces = 2;
+            this.numPorcVenta.Location = new System.Drawing.Point(156, 126);
+            this.numPorcVenta.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            this.numPorcVenta.Name = "numPorcVenta";
+            this.numPorcVenta.Size = new System.Drawing.Size(334, 20);
+            this.numPorcVenta.TabIndex = 20;
+            // 
+            // numCostoPublicar
+            // 
+            this.numCostoPublicar.DecimalPlaces = 2;
+            this.numCostoPublicar.Location = new System.Drawing.Point(156, 85);
+            this.numCostoPublicar.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            this.numCostoPublicar.Name = "numCostoPublicar";
+            this.numCostoPublicar.Size = new System.Drawing.Size(334, 20);
+            this.numCostoPublicar.TabIndex = 19;
             // 
             // label22
             // 
@@ -123,20 +163,6 @@
             this.label24.TabIndex = 4;
             this.label24.Text = "Costo Publicar";
             // 
-            // txtCostoPublicar
-            // 
-            this.txtCostoPublicar.Location = new System.Drawing.Point(156, 85);
-            this.txtCostoPublicar.Name = "txtCostoPublicar";
-            this.txtCostoPublicar.Size = new System.Drawing.Size(334, 20);
-            this.txtCostoPublicar.TabIndex = 5;
-            // 
-            // txtCostoEnvio
-            // 
-            this.txtCostoEnvio.Location = new System.Drawing.Point(156, 176);
-            this.txtCostoEnvio.Name = "txtCostoEnvio";
-            this.txtCostoEnvio.Size = new System.Drawing.Size(334, 20);
-            this.txtCostoEnvio.TabIndex = 9;
-            // 
             // label26
             // 
             this.label26.AutoSize = true;
@@ -157,6 +183,31 @@
             this.label27.TabIndex = 8;
             this.label27.Text = "Costo Envío";
             // 
+            // numCodVisibilidad
+            // 
+            this.numCodVisibilidad.DecimalPlaces = 2;
+            this.numCodVisibilidad.Location = new System.Drawing.Point(495, 17);
+            this.numCodVisibilidad.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            this.numCodVisibilidad.Name = "numCodVisibilidad";
+            this.numCodVisibilidad.Size = new System.Drawing.Size(146, 20);
+            this.numCodVisibilidad.TabIndex = 22;
+            this.numCodVisibilidad.Visible = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(379, 17);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(93, 13);
+            this.label1.TabIndex = 23;
+            this.label1.Text = "Cod_Visibilidad";
+            this.label1.Visible = false;
+            // 
             // NuevaVisibilidadForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -171,6 +222,10 @@
             this.pnlVisibilidad.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numCostoEnvio)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numPorcVenta)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCostoPublicar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCodVisibilidad)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -181,13 +236,15 @@
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Panel pnlVisibilidad;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.TextBox txtPorcVenta;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.TextBox txtDescripcionV;
         private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.TextBox txtCostoPublicar;
-        private System.Windows.Forms.TextBox txtCostoEnvio;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.NumericUpDown numCostoEnvio;
+        private System.Windows.Forms.NumericUpDown numPorcVenta;
+        private System.Windows.Forms.NumericUpDown numCostoPublicar;
+        private System.Windows.Forms.NumericUpDown numCodVisibilidad;
+        private System.Windows.Forms.Label label1;
     }
 }
