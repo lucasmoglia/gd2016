@@ -82,32 +82,32 @@
             // comprarToolStripMenuItem
             // 
             this.comprarToolStripMenuItem.Name = "comprarToolStripMenuItem";
-            this.comprarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.comprarToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.comprarToolStripMenuItem.Text = "Comprar";
             this.comprarToolStripMenuItem.Click += new System.EventHandler(this.comprarToolStripMenuItem_Click);
             // 
             // calificarToolStripMenuItem
             // 
             this.calificarToolStripMenuItem.Name = "calificarToolStripMenuItem";
-            this.calificarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.calificarToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.calificarToolStripMenuItem.Text = "Calificar";
             // 
             // venderToolStripMenuItem
             // 
             this.venderToolStripMenuItem.Name = "venderToolStripMenuItem";
-            this.venderToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.venderToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.venderToolStripMenuItem.Text = "Vender";
             this.venderToolStripMenuItem.Click += new System.EventHandler(this.venderToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(148, 6);
             // 
             // misFacturasToolStripMenuItem
             // 
             this.misFacturasToolStripMenuItem.Name = "misFacturasToolStripMenuItem";
-            this.misFacturasToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.misFacturasToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.misFacturasToolStripMenuItem.Text = "Mi facturación";
             this.misFacturasToolStripMenuItem.Click += new System.EventHandler(this.misFacturasToolStripMenuItem_Click);
             // 
@@ -147,6 +147,7 @@
             this.visibilidadesToolStripMenuItem.Name = "visibilidadesToolStripMenuItem";
             this.visibilidadesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.visibilidadesToolStripMenuItem.Text = "Visibilidades";
+            this.visibilidadesToolStripMenuItem.Click += new System.EventHandler(this.visibilidadesToolStripMenuItem_Click);
             // 
             // reportesToolStripMenuItem
             // 
