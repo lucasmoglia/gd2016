@@ -82,11 +82,17 @@
     <Compile Include="ABM Usuario\NuevoUsuarioForm.Designer.cs">
       <DependentUpon>NuevoUsuarioForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ABM Visibilidad\Form1.cs">
+    <Compile Include="ABM Visibilidad\NuevaVisibilidadForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ABM Visibilidad\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="ABM Visibilidad\NuevaVisibilidadForm.Designer.cs">
+      <DependentUpon>NuevaVisibilidadForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ABM Visibilidad\VisibilidadControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ABM Visibilidad\VisibilidadControl.Designer.cs">
+      <DependentUpon>VisibilidadControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Calificar\Form1.cs">
       <SubType>Form</SubType>
@@ -162,6 +168,12 @@
     <EmbeddedResource Include="ABM Usuario\NuevoUsuarioForm.resx">
       <DependentUpon>NuevoUsuarioForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ABM Visibilidad\NuevaVisibilidadForm.resx">
+      <DependentUpon>NuevaVisibilidadForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABM Visibilidad\VisibilidadControl.resx">
+      <DependentUpon>VisibilidadControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Facturas\FacturaUserControl.resx">
       <DependentUpon>FacturaUserControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -215,6 +227,7 @@
       <Name>ME.Data</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
