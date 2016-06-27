@@ -32,8 +32,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VisibilidadControl));
             this.gvVisibilidades = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
-            this.btnEditUser = new System.Windows.Forms.Button();
-            this.btnRemoveUser = new System.Windows.Forms.Button();
+            this.btnEditVisibilidad = new System.Windows.Forms.Button();
+            this.btnRemoveVisibilidad = new System.Windows.Forms.Button();
             this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
@@ -51,7 +51,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
-            // gvClientes
+            // gvVisibilidades
             // 
             this.gvVisibilidades.AllowUserToAddRows = false;
             this.gvVisibilidades.AllowUserToDeleteRows = false;
@@ -60,12 +60,12 @@
             this.gvVisibilidades.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvVisibilidades.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.gvVisibilidades.Location = new System.Drawing.Point(3, 28);
-            this.gvVisibilidades.Name = "gvClientes";
+            this.gvVisibilidades.Name = "gvVisibilidades";
             this.gvVisibilidades.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gvVisibilidades.Size = new System.Drawing.Size(797, 286);
             this.gvVisibilidades.TabIndex = 0;
-            this.gvVisibilidades.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvClientes_RowEnter);
-            this.gvVisibilidades.SelectionChanged += new System.EventHandler(this.gvClientes_SelectionChanged);
+            this.gvVisibilidades.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvVisibilidades_RowEnter);
+            this.gvVisibilidades.SelectionChanged += new System.EventHandler(this.gvVisibilidades_SelectionChanged);
             // 
             // button1
             // 
@@ -73,34 +73,34 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(137, 23);
             this.button1.TabIndex = 1;
-            this.button1.Text = "Nuevo Usuario";
+            this.button1.Text = "Nueva Visibilidad";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // btnEditUser
+            // btnEditVisibilidad
             // 
-            this.btnEditUser.BackColor = System.Drawing.Color.LimeGreen;
-            this.btnEditUser.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnEditUser.Location = new System.Drawing.Point(12, 320);
-            this.btnEditUser.Name = "btnEditUser";
-            this.btnEditUser.Size = new System.Drawing.Size(63, 23);
-            this.btnEditUser.TabIndex = 2;
-            this.btnEditUser.Text = "Editar";
-            this.btnEditUser.UseVisualStyleBackColor = false;
-            this.btnEditUser.Visible = false;
-            this.btnEditUser.Click += new System.EventHandler(this.btnEditUser_Click);
+            this.btnEditVisibilidad.BackColor = System.Drawing.Color.LimeGreen;
+            this.btnEditVisibilidad.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnEditVisibilidad.Location = new System.Drawing.Point(12, 320);
+            this.btnEditVisibilidad.Name = "btnEditVisibilidad";
+            this.btnEditVisibilidad.Size = new System.Drawing.Size(63, 23);
+            this.btnEditVisibilidad.TabIndex = 2;
+            this.btnEditVisibilidad.Text = "Editar";
+            this.btnEditVisibilidad.UseVisualStyleBackColor = false;
+            this.btnEditVisibilidad.Visible = false;
+            this.btnEditVisibilidad.Click += new System.EventHandler(this.btnEditVisibilidad_Click);
             // 
-            // btnRemoveUser
+            // btnRemoveVisibilidad
             // 
-            this.btnRemoveUser.BackColor = System.Drawing.Color.DarkRed;
-            this.btnRemoveUser.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnRemoveUser.Location = new System.Drawing.Point(81, 320);
-            this.btnRemoveUser.Name = "btnRemoveUser";
-            this.btnRemoveUser.Size = new System.Drawing.Size(63, 23);
-            this.btnRemoveUser.TabIndex = 3;
-            this.btnRemoveUser.Text = "Borrar";
-            this.btnRemoveUser.UseVisualStyleBackColor = false;
-            this.btnRemoveUser.Visible = false;
+            this.btnRemoveVisibilidad.BackColor = System.Drawing.Color.DarkRed;
+            this.btnRemoveVisibilidad.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnRemoveVisibilidad.Location = new System.Drawing.Point(81, 320);
+            this.btnRemoveVisibilidad.Name = "btnRemoveVisibilidad";
+            this.btnRemoveVisibilidad.Size = new System.Drawing.Size(63, 23);
+            this.btnRemoveVisibilidad.TabIndex = 3;
+            this.btnRemoveVisibilidad.Text = "Borrar";
+            this.btnRemoveVisibilidad.UseVisualStyleBackColor = false;
+            this.btnRemoveVisibilidad.Visible = false;
             // 
             // bindingNavigator1
             // 
@@ -196,19 +196,19 @@
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
-            // UsuarioUserControl
+            // VisibilidadesControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.Controls.Add(this.bindingNavigator1);
-            this.Controls.Add(this.btnRemoveUser);
-            this.Controls.Add(this.btnEditUser);
+            this.Controls.Add(this.btnRemoveVisibilidad);
+            this.Controls.Add(this.btnEditVisibilidad);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.gvVisibilidades);
-            this.Name = "UsuarioUserControl";
+            this.Name = "VisibilidadesControl";
             this.Size = new System.Drawing.Size(803, 500);
-            this.Load += new System.EventHandler(this.UsuariosUserControl_Load);
+            this.Load += new System.EventHandler(this.VisibilidadesControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gvVisibilidades)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
             this.bindingNavigator1.ResumeLayout(false);

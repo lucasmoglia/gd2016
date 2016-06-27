@@ -15,12 +15,12 @@ namespace ME.UI
     public partial class VisibilidadControl : UserControl
     {
         private const int pageSize = 10;
-        private List<VisibilidadModel> listaVisibilidades = new List<VisibilidadModel>();
+        private List<Visibilidad> listaVisibilidades = new List<Visibilidad>();
         
         public VisibilidadControl()
         {
             InitializeComponent();
-            listaVisibilidades = VisibilidadHandler.ListarVisibilidades(true);
+            listaVisibilidades = VisibilidadHandler.ListarVisibilidades();
             gvVisibilidades.DataSource = listaVisibilidades;
             gvVisibilidades.Columns.Remove("cod_visibilidad");
             bindingNavigator1.BindingSource = bindingSource1;
@@ -32,7 +32,7 @@ namespace ME.UI
         {
             // The desired page has changed, so fetch the page of records using the "Current" offset 
             int offset = (int)bindingSource1.Current;
-            var records = new List<VisibilidadModel>();
+            var records = new List<Visibilidad>();
             for (int i = offset; i < offset + pageSize && i < listaVisibilidades.Count; i++)
                 records.Add(listaVisibilidades.ElementAt(i));
             gvVisibilidades.DataSource = records;
@@ -82,9 +82,9 @@ namespace ME.UI
 
         private void btnEditVisibilidad_Click(object sender, EventArgs e)
         {
-            VisibilidadModel visibilidad = (VisibilidadModel)gvVisibilidades.SelectedRows[0].DataBoundItem;
+            Visibilidad visibilidad = (Visibilidad)gvVisibilidades.SelectedRows[0].DataBoundItem;
             Form nuevaVisibilidadForm = new NuevaVisibilidadForm(visibilidad);
-            nuevoUsuarioForm.ShowDialog(this);
+            nuevaVisibilidadForm.ShowDialog(this);
         }
 
         private void bindingNavigator1_RefreshItems(object sender, EventArgs e)

@@ -14,20 +14,20 @@ namespace ME.UI
 {
     public partial class NuevaVisibilidadForm : Form
     {
-        public NuevaVisibilidadForm(VisibilidadModel visibilidad)
+        public NuevaVisibilidadForm(Visibilidad visibilidad)
         {
             InitializeComponent();
 
             if (visibilidad != null)
             {
-                if (visibilidad.cod_visibilidad != null)
+/*                if (visibilidad.cod_visibilidad != null)
                 {
                     txtDescripcionV.Text    = visibilidad.descripcion;
                     txtCostoPublicar.Text   = visibilidad.costo_publicar;
                     txtPorcVenta.Text       = visibilidad.porcentaje_venta;
                     txtCostoEnvio.Text      = visibilidad.costo_envio;
                 }
-            } else {
+  */          } else {
                 txtDescripcionV.Text    = String.Empty;
                 txtCostoPublicar.Text   = String.Empty;
                 txtPorcVenta.Text       = String.Empty;
