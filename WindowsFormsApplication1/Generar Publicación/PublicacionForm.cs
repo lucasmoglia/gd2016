@@ -15,6 +15,7 @@ namespace ME.UI
     public partial class PublicacionForm : Form
     {
         bool esNuevaPubli = false, EsModificable = false;
+        Publicacion PublicacionExistente = null;
 
         public PublicacionForm(Publicacion publicacion, bool modificable)
         {
@@ -96,20 +97,7 @@ namespace ME.UI
                 }
 
                 this.esNuevaPubli = false;
-                lblUsername.Text = publicacion.username;
-                txtDescripcion.Text = publicacion.descripcion;
-                cmbBoxTipoPubli.SelectedItem = publicacion.tipo_publi;
-                DTFechaInicio.Value = publicacion.fecha_inicio;
-                DTFechaInicio.MinDate = publicacion.fecha_inicio;
-                DTFechaVencimiento.Value = publicacion.fecha_vencimiento;
-                DTFechaVencimiento.MinDate = publicacion.fecha_vencimiento;
-                numStock.Value = publicacion.stock;
-                numPrecio.Value = publicacion.precio_producto;
-                cmbBoxVisibilidad.SelectedItem = publicacion.visibilidad;
-                cmbBoxEstado.SelectedItem = publicacion.estado;
-                cmbBoxRubro.SelectedItem = publicacion.rubro;
-                cmbBoxEnvio.SelectedItem = publicacion.con_envio;
-                cmbBoxPreguntas.SelectedItem = publicacion.con_preguntas;
+                PublicacionExistente = publicacion;
             }
         }
 
@@ -129,61 +117,74 @@ namespace ME.UI
         {
 //            txtDescripcion.Focus();
 
-            bool esEmpresa = true; //SACAR. Esto representa a un usuario Empresa.
+            bool esEmpresa = false; //SACAR. Esto representa a un usuario Empresa.
 
-            if (esNuevaPubli || EsModificable) {
+            numStock.Enabled = (esNuevaPubli || EsModificable);
 
-                numStock.Enabled = true;
+            if ((esNuevaPubli || EsModificable) && esEmpresa) {
+                List<Rubro> listaRubros = new List<Rubro>();
+                listaRubros.Add(RubroHandler.ObtenerRubro("Electrónicos"));
 
-                if (esEmpresa) {
-                    List<Rubro> listaRubros = new List<Rubro>();
-                    listaRubros.Add(RubroHandler.ObtenerRubro("Electrónicos"));
+                cmbBoxRubro.DataSource = listaRubros;
+            } else {
+                cmbBoxRubro.DataSource = RubroHandler.ListarRubros();
+            }
 
-                    cmbBoxRubro.DataSource = listaRubros;
-                } else {
-                    cmbBoxRubro.DataSource = RubroHandler.ListarRubros();
-                }
+            cmbBoxRubro.ValueMember = "cod_rubro";
+            cmbBoxRubro.DisplayMember = "desc_larga";
 
-                cmbBoxRubro.ValueMember = "cod_rubro";
-                cmbBoxRubro.DisplayMember = "desc_larga";
+            cmbBoxTipoPubli.DataSource = TipoPublicacionHandler.ListarTiposPublicacion();
+            cmbBoxTipoPubli.ValueMember = "cod_tipo_publi";
+            cmbBoxTipoPubli.DisplayMember = "nombre";
 
-                cmbBoxTipoPubli.DataSource = TipoPublicacionHandler.ListarTiposPublicacion();
-                cmbBoxTipoPubli.ValueMember = "cod_tipo_publi";
-                cmbBoxTipoPubli.DisplayMember = "nombre";
+            cmbBoxVisibilidad.DataSource = VisibilidadHandler.ListarVisibilidades();
+            cmbBoxVisibilidad.ValueMember = "cod_visibilidad";
+            cmbBoxVisibilidad.DisplayMember = "descripcion";
 
-                cmbBoxVisibilidad.DataSource = VisibilidadHandler.ListarVisibilidades();
-                cmbBoxVisibilidad.ValueMember = "cod_visibilidad";
-                cmbBoxVisibilidad.DisplayMember = "descripcion";
-
-                List<Estado> estados = EstadoHandler.ListarEstados();
+            List<Estado> estados = EstadoHandler.ListarEstados();
+            if (esNuevaPubli)
                 estados.Remove(estados.Find(est => est.nombre == "Publicada"));
 
-                cmbBoxEstado.DataSource = estados;
-                cmbBoxEstado.ValueMember = "cod_estado";
-                cmbBoxEstado.DisplayMember = "nombre";
+            cmbBoxEstado.DataSource = estados;
+            cmbBoxEstado.ValueMember = "cod_estado";
+            cmbBoxEstado.DisplayMember = "nombre";
 
-                VoF si = new VoF(true, "Si");
-                VoF no = new VoF(false, "No");
+            VoF si = new VoF(true, "Si");
+            VoF no = new VoF(false, "No");
 
-                List<VoF> si_No_Envio = new List<VoF>();
-                si_No_Envio.Add(si);
-                si_No_Envio.Add(no);
-                List<VoF> si_No_Preg = new List<VoF>();
-                si_No_Preg.Add(si);
-                si_No_Preg.Add(no);
+            List<VoF> si_No_Envio = new List<VoF>();
+            si_No_Envio.Add(si);
+            si_No_Envio.Add(no);
+            List<VoF> si_No_Preg = new List<VoF>();
+            si_No_Preg.Add(si);
+            si_No_Preg.Add(no);
 
-                cmbBoxEnvio.DataSource = si_No_Envio;
-                cmbBoxEnvio.ValueMember = "cod_valor";
-                cmbBoxEnvio.DisplayMember = "valor";
+            cmbBoxEnvio.DataSource = si_No_Envio;
+            cmbBoxEnvio.ValueMember = "cod_valor";
+            cmbBoxEnvio.DisplayMember = "valor";
 
-                cmbBoxPreguntas.DataSource = si_No_Preg;
-                cmbBoxPreguntas.ValueMember = "cod_valor";
-                cmbBoxPreguntas.DisplayMember = "valor";
-            }
+            cmbBoxPreguntas.DataSource = si_No_Preg;
+            cmbBoxPreguntas.ValueMember = "cod_valor";
+            cmbBoxPreguntas.DisplayMember = "valor";
 
             if (esNuevaPubli) {
                 cmbBoxEnvio.SelectedValue = false;
                 cmbBoxPreguntas.SelectedValue = false;
+            } else {
+                lblUsername.Text = PublicacionExistente.username;
+                txtDescripcion.Text = PublicacionExistente.descripcion;
+                cmbBoxTipoPubli.SelectedValue = PublicacionExistente.tipo_publi.cod_tipo_publi;
+                DTFechaInicio.Value = PublicacionExistente.fecha_inicio;
+                DTFechaInicio.MinDate = PublicacionExistente.fecha_inicio;
+                DTFechaVencimiento.Value = PublicacionExistente.fecha_vencimiento;
+                DTFechaVencimiento.MinDate = PublicacionExistente.fecha_vencimiento;
+                numStock.Value = PublicacionExistente.stock;
+                numPrecio.Value = PublicacionExistente.precio_producto;
+                cmbBoxVisibilidad.SelectedValue = PublicacionExistente.visibilidad.cod_visibilidad;
+                cmbBoxEstado.SelectedValue = PublicacionExistente.estado.cod_estado;
+                cmbBoxRubro.SelectedValue = PublicacionExistente.rubro.cod_rubro;
+                cmbBoxEnvio.SelectedValue = PublicacionExistente.con_envio;
+                cmbBoxPreguntas.SelectedValue = PublicacionExistente.con_preguntas;
             }
         }
 
@@ -264,11 +265,13 @@ namespace ME.UI
         {
             if (esNuevaPubli || EsModificable)
             {
-                if (((Estado)cmbBoxEstado.SelectedItem).nombre == "Activa") {
-                    btnGuardar.Text = "Publicar";
-                } else {
-                    btnGuardar.Text = "Guardar";
-                }
+                btnGuardar.Text = ((Estado)cmbBoxEstado.SelectedItem).nombre == "Activa" ? "Publicar" : "Guardar";
+
+                //if (((Estado)cmbBoxEstado.SelectedItem).nombre == "Activa") {
+                //    btnGuardar.Text = "Publicar";
+                //} else {
+                //    btnGuardar.Text = "Guardar";
+                //}
             }
 
         }

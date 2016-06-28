@@ -21,9 +21,9 @@ namespace ME.UI
         {
             InitializeComponent();
 
-            listaPublicaciones = PublicacionHandler.ListarPublicaciones(1, null, String.Empty);
-            gvPublicaciones.DataSource = listaPublicaciones;
-            gvPublicaciones.Columns.Remove("cod_publi");
+            //listaPublicaciones = PublicacionHandler.ListarPublicaciones(1, null, String.Empty);
+            //gvPublicaciones.DataSource = listaPublicaciones;
+            //gvPublicaciones.Columns.Remove("cod_publi");
             bindNav1.BindingSource = bindSourcePublicaciones;
             bindSourcePublicaciones.CurrentChanged += new System.EventHandler(bindSourcePublicaciones_CurrentChanged);
             bindSourcePublicaciones.DataSource = new PageOffsetList(gvPublicaciones.RowCount);
@@ -71,7 +71,11 @@ namespace ME.UI
             cmbBoxRubros.SelectedItem = null;
             cmbBoxRubros.Text = "(Ninguno)";
 
-            gvPublicaciones.DataSource = PublicacionHandler.ListarPublicaciones(1, null, String.Empty);
+            //gvPublicaciones.DataSource = PublicacionHandler.ListarPublicaciones(1, null, String.Empty);
+            listaPublicaciones = PublicacionHandler.ListarPublicaciones(1, null, String.Empty);
+            gvPublicaciones.DataSource = listaPublicaciones;
+            gvPublicaciones.Columns.Remove("cod_publi");
+
         }
 
         private void btnComprar_Click(object sender, EventArgs e)

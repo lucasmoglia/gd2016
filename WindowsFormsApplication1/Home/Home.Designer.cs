@@ -125,27 +125,27 @@
             // usuariosToolStripMenuItem
             // 
             this.usuariosToolStripMenuItem.Name = "usuariosToolStripMenuItem";
-            this.usuariosToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.usuariosToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.usuariosToolStripMenuItem.Text = "Usuarios";
             this.usuariosToolStripMenuItem.Click += new System.EventHandler(this.usuariosToolStripMenuItem_Click);
             // 
             // rolesToolStripMenuItem1
             // 
             this.rolesToolStripMenuItem1.Name = "rolesToolStripMenuItem1";
-            this.rolesToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.rolesToolStripMenuItem1.Size = new System.Drawing.Size(139, 22);
             this.rolesToolStripMenuItem1.Text = "Roles";
             this.rolesToolStripMenuItem1.Click += new System.EventHandler(this.rolesToolStripMenuItem1_Click);
             // 
             // rubrosToolStripMenuItem
             // 
             this.rubrosToolStripMenuItem.Name = "rubrosToolStripMenuItem";
-            this.rubrosToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rubrosToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.rubrosToolStripMenuItem.Text = "Rubros";
             // 
             // visibilidadesToolStripMenuItem
             // 
             this.visibilidadesToolStripMenuItem.Name = "visibilidadesToolStripMenuItem";
-            this.visibilidadesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.visibilidadesToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.visibilidadesToolStripMenuItem.Text = "Visibilidades";
             this.visibilidadesToolStripMenuItem.Click += new System.EventHandler(this.visibilidadesToolStripMenuItem_Click);
             // 
@@ -178,6 +178,7 @@
             this.Controls.Add(this.pnlMaster);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
             this.Name = "Home";
             this.Text = "Home";
             this.Load += new System.EventHandler(this.Home_Load);
