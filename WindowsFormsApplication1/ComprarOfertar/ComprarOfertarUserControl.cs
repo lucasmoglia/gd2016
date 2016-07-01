@@ -16,6 +16,7 @@ namespace ME.UI
     {
         private const int pageSize = 10;
         private List<Publicacion> listaPublicaciones;
+        public UsuarioModel usuarioLogueado = null; // SACAR esto va a estar en la variable global de usuario logueado.
         
         public ComprarOfertarUserControl()
         {
@@ -65,11 +66,11 @@ namespace ME.UI
             txtDescripcion.ForeColor = System.Drawing.SystemColors.WindowFrame;
             txtDescripcion.Text = "Ingrese Búsqueda";
 
-            cmbBoxRubros.DataSource = RubroHandler.ListarRubros();
-            cmbBoxRubros.ValueMember = "cod_rubro";
-            cmbBoxRubros.DisplayMember = "desc_larga";
-            cmbBoxRubros.SelectedItem = null;
-            cmbBoxRubros.Text = "(Ninguno)";
+            lstRubros.DataSource = RubroHandler.ListarRubros();
+            lstRubros.ValueMember = "cod_rubro";
+            lstRubros.DisplayMember = "desc_larga";
+            lstRubros.SelectedItem = null;
+            lstRubros.Text = "(Ninguno)";
 
             //gvPublicaciones.DataSource = PublicacionHandler.ListarPublicaciones(1, null, String.Empty);
             listaPublicaciones = PublicacionHandler.ListarPublicaciones(1, null, String.Empty);
@@ -102,9 +103,11 @@ namespace ME.UI
         {
             Publicacion publicacion = (Publicacion)gvPublicaciones.SelectedRows[0].DataBoundItem;
 
-            if (publicacion != null) {
+            if (publicacion != null && publicacion.username == usuarioLogueado.username && publicacion.estado.nombre == "Borrador") {
                 Form nuevaPublicacionForm = new PublicacionForm(publicacion, true);
                 nuevaPublicacionForm.ShowDialog(this);
+
+                gvPublicaciones.Refresh();
             }
         }
 
@@ -125,14 +128,14 @@ namespace ME.UI
             }
         }
 
-        private void cmbBoxRubros_SelectedIndexChanged(object sender, EventArgs e)
+        private void lstRubros_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void cmbBoxRubros_Click(object sender, EventArgs e)
+        private void lstRubros_Click(object sender, EventArgs e)
         {
-            cmbBoxRubros.ForeColor = System.Drawing.SystemColors.WindowText;
+            lstRubros.ForeColor = System.Drawing.SystemColors.WindowText;
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
@@ -140,21 +143,25 @@ namespace ME.UI
             txtDescripcion.ForeColor = System.Drawing.SystemColors.WindowFrame;
             txtDescripcion.Text = "Ingrese Búsqueda";
 
-            cmbBoxRubros.SelectedValue = null;
-            cmbBoxRubros.Text = "(Ninguno)";
+            //lstRubros.SelectedValue = null;
+            lstRubros.ClearSelected();
+            lstRubros.Text = "(Ninguno)";
 
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            List<decimal> rubros = null;
+            List<Rubro> rubros = null;
+            List<decimal> cod_rubros = null;
 
-            if (cmbBoxRubros.SelectedValue != null) {
-                rubros = new List<decimal>();
-                rubros.Add(decimal.Parse(cmbBoxRubros.SelectedValue.ToString()));
+            if (lstRubros.SelectedIndex > -1 && lstRubros.SelectedItems != null) {
+                //rubros = lstRubros.SelectedItems.GetEnumerator();
+                //cod_rubros = new List<decimal>();
+                //rubros.AddRange(/*decimal.Parse */((lstRubros.SelectedItems.Cast<List<Rubro>>().ToList()) /*.ToString())*/);
+                cod_rubros = rubros.ConvertAll(rubro => rubro.cod_rubro);
             }
 
-            gvPublicaciones.DataSource = PublicacionHandler.ListarPublicaciones(1, rubros, txtDescripcion.Text);
+            gvPublicaciones.DataSource = PublicacionHandler.ListarPublicaciones(1, cod_rubros, txtDescripcion.Text);
         }
 
         private void btnVer_Click(object sender, EventArgs e)

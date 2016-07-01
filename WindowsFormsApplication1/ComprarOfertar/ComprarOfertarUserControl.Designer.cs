@@ -54,6 +54,7 @@
             this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.lblDescripcion = new System.Windows.Forms.Label();
             this.btnVer = new System.Windows.Forms.Button();
+            this.lstRubros = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.gvPublicaciones)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindNav1)).BeginInit();
             this.bindNav1.SuspendLayout();
@@ -267,7 +268,6 @@
             // 
             // cmbBoxRubros
             // 
-            this.cmbBoxRubros.DataSource = this.bindSourcePublicaciones;
             this.cmbBoxRubros.ForeColor = System.Drawing.SystemColors.WindowFrame;
             this.cmbBoxRubros.FormattingEnabled = true;
             this.cmbBoxRubros.Location = new System.Drawing.Point(504, 15);
@@ -275,8 +275,6 @@
             this.cmbBoxRubros.Name = "cmbBoxRubros";
             this.cmbBoxRubros.Size = new System.Drawing.Size(318, 21);
             this.cmbBoxRubros.TabIndex = 2;
-            this.cmbBoxRubros.SelectedIndexChanged += new System.EventHandler(this.cmbBoxRubros_SelectedIndexChanged);
-            this.cmbBoxRubros.Click += new System.EventHandler(this.cmbBoxRubros_Click);
             // 
             // txtDescripcion
             // 
@@ -310,11 +308,22 @@
             this.btnVer.UseVisualStyleBackColor = true;
             this.btnVer.Click += new System.EventHandler(this.btnVer_Click);
             // 
+            // lstRubros
+            // 
+            this.lstRubros.FormattingEnabled = true;
+            this.lstRubros.Location = new System.Drawing.Point(507, 116);
+            this.lstRubros.MultiColumn = true;
+            this.lstRubros.Name = "lstRubros";
+            this.lstRubros.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.lstRubros.Size = new System.Drawing.Size(318, 95);
+            this.lstRubros.TabIndex = 9;
+            // 
             // ComprarOfertarUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
+            this.Controls.Add(this.lstRubros);
             this.Controls.Add(this.btnVer);
             this.Controls.Add(this.gBoxFiltros);
             this.Controls.Add(this.btnBuscar);
@@ -365,5 +374,6 @@
         private System.Windows.Forms.Label lblRubros;
         private System.Windows.Forms.ComboBox cmbBoxRubros;
         private System.Windows.Forms.Button btnVer;
+        private System.Windows.Forms.ListBox lstRubros;
     }
 }
