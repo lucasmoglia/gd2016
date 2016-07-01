@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ME.Business;
+using System.Configuration;
+using ME.UI.Properties;
 
 namespace ME.UI
 {
@@ -39,6 +41,20 @@ namespace ME.UI
             {
                 label1.Visible = false;
                 errLogin.Clear();
+                
+                // Open App.Config of executable
+                System.Configuration.Configuration config =
+                  ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+                // Add an Application Setting.
+                config.AppSettings.Settings.Add("user", txtUser.Text);
+                config.AppSettings.Settings.Add("password", txtPassword.Text);
+                
+                // Save the configuration file.
+                config.Save(ConfigurationSaveMode.Modified);
+
+                // Force a reload of a changed section.
+                ConfigurationManager.RefreshSection("appSettings");
 
                 var frm = new Home();
                 frm.Location = this.Location;

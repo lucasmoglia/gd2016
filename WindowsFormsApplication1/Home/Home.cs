@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ME.UI;
+using System.Configuration;
 
 namespace ME.UI
 {
@@ -22,6 +23,8 @@ namespace ME.UI
 
         private void Home_Load(object sender, EventArgs e)
         {
+            this.Text = string.Concat("Bienvenido ", System.Configuration.ConfigurationManager.AppSettings["user"].ToString(), "!");
+
             if (esAdmin) {
                 administracionToolStripMenuItem.Enabled = true;
                 administracionToolStripMenuItem.Visible = true;
@@ -81,6 +84,23 @@ namespace ME.UI
             //Cuando hago click en una opción del menu, cambio el controlador.
             pnlMaster.Controls.Clear();
             pnlMaster.Controls.Add(new VisibilidadControl());
+        }
+
+        private void Home_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            // Open App.Config of executable
+            System.Configuration.Configuration config =
+              ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            // Add an Application Setting.
+            config.AppSettings.Settings.Remove("user");
+            config.AppSettings.Settings.Remove("password");
+
+            // Save the configuration file.
+            config.Save(ConfigurationSaveMode.Modified);
+
+            // Force a reload of a changed section.
+            ConfigurationManager.RefreshSection("appSettings");
         }
     }
 }
