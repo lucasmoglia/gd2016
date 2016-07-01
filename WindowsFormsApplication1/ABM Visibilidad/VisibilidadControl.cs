@@ -85,6 +85,7 @@ namespace ME.UI
             Visibilidad visibilidad = (Visibilidad)gvVisibilidades.SelectedRows[0].DataBoundItem;
             Form nuevaVisibilidadForm = new NuevaVisibilidadForm(visibilidad);
             nuevaVisibilidadForm.ShowDialog(this);
+            gvVisibilidades.Refresh();
         }
 
         private void bindingNavigator1_RefreshItems(object sender, EventArgs e)
@@ -96,6 +97,7 @@ namespace ME.UI
         {
             Visibilidad visibilidad = (Visibilidad)gvVisibilidades.SelectedRows[0].DataBoundItem;
             VisibilidadHandler.Eliminar(visibilidad.cod_visibilidad);
+            gvVisibilidades.Refresh();
         }
 
     }
