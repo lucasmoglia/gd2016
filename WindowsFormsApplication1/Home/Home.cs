@@ -75,5 +75,12 @@ namespace ME.UI
 
             nuevaPublicacion.ShowDialog(this);
         }
+
+        private void visibilidadesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Cuando hago click en una opción del menu, cambio el controlador.
+            pnlMaster.Controls.Clear();
+            pnlMaster.Controls.Add(new VisibilidadControl());
+        }
     }
 }

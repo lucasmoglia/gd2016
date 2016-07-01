@@ -107,16 +107,19 @@ namespace ME.Data
                 SqlCommand command = new SqlCommand("[DE_UNA].[GetPublicaciones]", connection);
                 command.CommandType = CommandType.StoredProcedure;
 
-                DataTable rubrosTable = new DataTable(); // Crea el Tipo Tabla Rubros, para pasar por parámetro.
-                rubrosTable.Columns.Add("cod_rubro", typeof(decimal));
-
-                for (var i = 0; i < rubros.Count(); i++)
-                {
-                    rubrosTable.Rows.Add(new Object[] { rubros[i] });
-                }
-
                 command.Parameters.Add("@estado", SqlDbType.Decimal).Value = estado;
 
+                DataTable rubrosTable = null;
+
+                if (rubros != null) {
+                    rubrosTable = new DataTable(); // Crea el Tipo Tabla Rubros, para pasar por parámetro.
+                    rubrosTable.Columns.Add("cod_rubro", typeof(decimal));
+
+                    for (var i = 0; i < rubros.Count(); i++) {
+                        rubrosTable.Rows.Add(new Object[] { rubros[i] });
+                    }
+                }
+                
                 SqlParameter param_Rubros = command.Parameters.AddWithValue("@rubros", rubrosTable);
                 param_Rubros.SqlDbType = SqlDbType.Structured;
                 param_Rubros.TypeName = "[DE_UNA].Rubros";

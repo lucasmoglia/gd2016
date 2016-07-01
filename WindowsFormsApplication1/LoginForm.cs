@@ -34,7 +34,8 @@ namespace ME.UI
                 label1.Text = "La contraseña es requerida";
                 label1.Visible = true;
             }
-            else if (_usuarioHandler.Login(txtUser.Text, txtPassword.Text) > 0)
+ //           else if (_usuarioHandler.Login(txtUser.Text, txtPassword.Text) > 0)
+            else if (_usuarioHandler.Login(txtUser.Text, txtPassword.Text) == 0)
             {
                 label1.Visible = false;
                 errLogin.Clear();
