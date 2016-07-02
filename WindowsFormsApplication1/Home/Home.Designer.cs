@@ -36,7 +36,7 @@
             this.venderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.misFacturasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.administraciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.administracionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.usuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rolesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.rubrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,7 +52,7 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.inicioToolStripMenuItem,
             this.miCuentaToolStripMenuItem,
-            this.administraciónToolStripMenuItem,
+            this.administracionToolStripMenuItem,
             this.reportesToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -84,6 +84,7 @@
             this.comprarToolStripMenuItem.Name = "comprarToolStripMenuItem";
             this.comprarToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.comprarToolStripMenuItem.Text = "Comprar";
+            this.comprarToolStripMenuItem.Click += new System.EventHandler(this.comprarToolStripMenuItem_Click);
             // 
             // calificarToolStripMenuItem
             // 
@@ -96,6 +97,7 @@
             this.venderToolStripMenuItem.Name = "venderToolStripMenuItem";
             this.venderToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.venderToolStripMenuItem.Text = "Vender";
+            this.venderToolStripMenuItem.Click += new System.EventHandler(this.venderToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -109,42 +111,43 @@
             this.misFacturasToolStripMenuItem.Text = "Mi facturación";
             this.misFacturasToolStripMenuItem.Click += new System.EventHandler(this.misFacturasToolStripMenuItem_Click);
             // 
-            // administraciónToolStripMenuItem
+            // administracionToolStripMenuItem
             // 
-            this.administraciónToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.administracionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.usuariosToolStripMenuItem,
             this.rolesToolStripMenuItem1,
             this.rubrosToolStripMenuItem,
             this.visibilidadesToolStripMenuItem});
-            this.administraciónToolStripMenuItem.Name = "administraciónToolStripMenuItem";
-            this.administraciónToolStripMenuItem.Size = new System.Drawing.Size(100, 20);
-            this.administraciónToolStripMenuItem.Text = "Administración";
+            this.administracionToolStripMenuItem.Name = "administracionToolStripMenuItem";
+            this.administracionToolStripMenuItem.Size = new System.Drawing.Size(100, 20);
+            this.administracionToolStripMenuItem.Text = "Administración";
             // 
             // usuariosToolStripMenuItem
             // 
             this.usuariosToolStripMenuItem.Name = "usuariosToolStripMenuItem";
-            this.usuariosToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.usuariosToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.usuariosToolStripMenuItem.Text = "Usuarios";
             this.usuariosToolStripMenuItem.Click += new System.EventHandler(this.usuariosToolStripMenuItem_Click);
             // 
             // rolesToolStripMenuItem1
             // 
             this.rolesToolStripMenuItem1.Name = "rolesToolStripMenuItem1";
-            this.rolesToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.rolesToolStripMenuItem1.Size = new System.Drawing.Size(139, 22);
             this.rolesToolStripMenuItem1.Text = "Roles";
             this.rolesToolStripMenuItem1.Click += new System.EventHandler(this.rolesToolStripMenuItem1_Click);
             // 
             // rubrosToolStripMenuItem
             // 
             this.rubrosToolStripMenuItem.Name = "rubrosToolStripMenuItem";
-            this.rubrosToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rubrosToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.rubrosToolStripMenuItem.Text = "Rubros";
             // 
             // visibilidadesToolStripMenuItem
             // 
             this.visibilidadesToolStripMenuItem.Name = "visibilidadesToolStripMenuItem";
-            this.visibilidadesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.visibilidadesToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.visibilidadesToolStripMenuItem.Text = "Visibilidades";
+            this.visibilidadesToolStripMenuItem.Click += new System.EventHandler(this.visibilidadesToolStripMenuItem_Click);
             // 
             // reportesToolStripMenuItem
             // 
@@ -175,8 +178,10 @@
             this.Controls.Add(this.pnlMaster);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
             this.Name = "Home";
             this.Text = "Home";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Home_FormClosed);
             this.Load += new System.EventHandler(this.Home_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -190,7 +195,7 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem inicioToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem miCuentaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem administraciónToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem administracionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem usuariosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rolesToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem rubrosToolStripMenuItem;

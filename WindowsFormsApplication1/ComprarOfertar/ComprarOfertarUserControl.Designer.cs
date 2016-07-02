@@ -53,13 +53,13 @@
             this.cmbBoxRubros = new System.Windows.Forms.ComboBox();
             this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.lblDescripcion = new System.Windows.Forms.Label();
-            this.bindSourceRubros = new System.Windows.Forms.BindingSource(this.components);
+            this.btnVer = new System.Windows.Forms.Button();
+            this.lstRubros = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.gvPublicaciones)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindNav1)).BeginInit();
             this.bindNav1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindSourcePublicaciones)).BeginInit();
             this.gBoxFiltros.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindSourceRubros)).BeginInit();
             this.SuspendLayout();
             // 
             // gvPublicaciones
@@ -70,44 +70,44 @@
             this.gvPublicaciones.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.gvPublicaciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvPublicaciones.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.gvPublicaciones.Location = new System.Drawing.Point(3, 157);
+            this.gvPublicaciones.Location = new System.Drawing.Point(3, 106);
             this.gvPublicaciones.Name = "gvPublicaciones";
             this.gvPublicaciones.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gvPublicaciones.Size = new System.Drawing.Size(800, 300);
+            this.gvPublicaciones.Size = new System.Drawing.Size(828, 300);
             this.gvPublicaciones.TabIndex = 0;
-            this.gvPublicaciones.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvClientes_RowEnter);
+            this.gvPublicaciones.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvPublicaciones_RowEnter);
             // 
             // btnComprar
             // 
             this.btnComprar.FlatAppearance.BorderColor = System.Drawing.Color.Blue;
             this.btnComprar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnComprar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnComprar.Location = new System.Drawing.Point(663, 467);
+            this.btnComprar.Location = new System.Drawing.Point(694, 411);
             this.btnComprar.Name = "btnComprar";
             this.btnComprar.Size = new System.Drawing.Size(137, 23);
             this.btnComprar.TabIndex = 1;
             this.btnComprar.Text = "Comprar / Ofertar";
             this.btnComprar.UseVisualStyleBackColor = true;
-            this.btnComprar.Click += new System.EventHandler(this.button1_Click);
+            this.btnComprar.Click += new System.EventHandler(this.btnComprar_Click);
             // 
             // btnEditPublicacion
             // 
             this.btnEditPublicacion.BackColor = System.Drawing.Color.LimeGreen;
             this.btnEditPublicacion.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnEditPublicacion.Location = new System.Drawing.Point(12, 467);
+            this.btnEditPublicacion.Location = new System.Drawing.Point(12, 411);
             this.btnEditPublicacion.Name = "btnEditPublicacion";
             this.btnEditPublicacion.Size = new System.Drawing.Size(63, 23);
             this.btnEditPublicacion.TabIndex = 2;
             this.btnEditPublicacion.Text = "Editar";
             this.btnEditPublicacion.UseVisualStyleBackColor = false;
             this.btnEditPublicacion.Visible = false;
-            this.btnEditPublicacion.Click += new System.EventHandler(this.btnEditUser_Click);
+            this.btnEditPublicacion.Click += new System.EventHandler(this.btnEditPublicacion_Click);
             // 
             // btnRemovePublicacion
             // 
             this.btnRemovePublicacion.BackColor = System.Drawing.Color.DarkRed;
             this.btnRemovePublicacion.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnRemovePublicacion.Location = new System.Drawing.Point(81, 467);
+            this.btnRemovePublicacion.Location = new System.Drawing.Point(81, 411);
             this.btnRemovePublicacion.Name = "btnRemovePublicacion";
             this.btnRemovePublicacion.Size = new System.Drawing.Size(63, 23);
             this.btnRemovePublicacion.TabIndex = 3;
@@ -140,7 +140,7 @@
             this.bindNav1.MovePreviousItem = this.bindNavPreviousItem;
             this.bindNav1.Name = "bindNav1";
             this.bindNav1.PositionItem = this.bindNavPositionItem;
-            this.bindNav1.Size = new System.Drawing.Size(806, 25);
+            this.bindNav1.Size = new System.Drawing.Size(838, 25);
             this.bindNav1.TabIndex = 4;
             this.bindNav1.Text = "Barra de Navegación";
             // 
@@ -223,7 +223,7 @@
             // 
             // btnLimpiar
             // 
-            this.btnLimpiar.Location = new System.Drawing.Point(3, 124);
+            this.btnLimpiar.Location = new System.Drawing.Point(3, 76);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(97, 24);
             this.btnLimpiar.TabIndex = 5;
@@ -234,7 +234,7 @@
             // btnBuscar
             // 
             this.btnBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBuscar.Location = new System.Drawing.Point(686, 124);
+            this.btnBuscar.Location = new System.Drawing.Point(714, 76);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(117, 24);
             this.btnBuscar.TabIndex = 6;
@@ -249,9 +249,9 @@
             this.gBoxFiltros.Controls.Add(this.txtDescripcion);
             this.gBoxFiltros.Controls.Add(this.lblDescripcion);
             this.gBoxFiltros.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.gBoxFiltros.Location = new System.Drawing.Point(3, 37);
+            this.gBoxFiltros.Location = new System.Drawing.Point(3, 27);
             this.gBoxFiltros.Name = "gBoxFiltros";
-            this.gBoxFiltros.Size = new System.Drawing.Size(800, 70);
+            this.gBoxFiltros.Size = new System.Drawing.Size(828, 47);
             this.gBoxFiltros.TabIndex = 7;
             this.gBoxFiltros.TabStop = false;
             this.gBoxFiltros.Text = "Filtros de Búsqueda";
@@ -260,7 +260,7 @@
             // 
             this.lblRubros.AutoSize = true;
             this.lblRubros.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblRubros.Location = new System.Drawing.Point(458, 24);
+            this.lblRubros.Location = new System.Drawing.Point(459, 19);
             this.lblRubros.Name = "lblRubros";
             this.lblRubros.Size = new System.Drawing.Size(41, 13);
             this.lblRubros.TabIndex = 3;
@@ -268,22 +268,18 @@
             // 
             // cmbBoxRubros
             // 
-            this.cmbBoxRubros.DataSource = this.bindSourcePublicaciones;
             this.cmbBoxRubros.ForeColor = System.Drawing.SystemColors.WindowFrame;
             this.cmbBoxRubros.FormattingEnabled = true;
-            this.cmbBoxRubros.Location = new System.Drawing.Point(503, 20);
+            this.cmbBoxRubros.Location = new System.Drawing.Point(504, 15);
             this.cmbBoxRubros.MaxDropDownItems = 10;
             this.cmbBoxRubros.Name = "cmbBoxRubros";
-            this.cmbBoxRubros.Size = new System.Drawing.Size(291, 21);
+            this.cmbBoxRubros.Size = new System.Drawing.Size(318, 21);
             this.cmbBoxRubros.TabIndex = 2;
-            this.cmbBoxRubros.Text = "(Ninguno)";
-            this.cmbBoxRubros.SelectedIndexChanged += new System.EventHandler(this.cmbBoxRubros_SelectedIndexChanged);
-            this.cmbBoxRubros.Click += new System.EventHandler(this.cmbBoxRubros_Click);
             // 
             // txtDescripcion
             // 
             this.txtDescripcion.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.txtDescripcion.Location = new System.Drawing.Point(77, 21);
+            this.txtDescripcion.Location = new System.Drawing.Point(78, 16);
             this.txtDescripcion.Multiline = true;
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(326, 20);
@@ -296,17 +292,39 @@
             // 
             this.lblDescripcion.AutoSize = true;
             this.lblDescripcion.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblDescripcion.Location = new System.Drawing.Point(11, 24);
+            this.lblDescripcion.Location = new System.Drawing.Point(12, 19);
             this.lblDescripcion.Name = "lblDescripcion";
             this.lblDescripcion.Size = new System.Drawing.Size(63, 13);
             this.lblDescripcion.TabIndex = 0;
             this.lblDescripcion.Text = "Descripción";
+            // 
+            // btnVer
+            // 
+            this.btnVer.Location = new System.Drawing.Point(547, 411);
+            this.btnVer.Name = "btnVer";
+            this.btnVer.Size = new System.Drawing.Size(76, 23);
+            this.btnVer.TabIndex = 8;
+            this.btnVer.Text = "Ver";
+            this.btnVer.UseVisualStyleBackColor = true;
+            this.btnVer.Click += new System.EventHandler(this.btnVer_Click);
+            // 
+            // lstRubros
+            // 
+            this.lstRubros.FormattingEnabled = true;
+            this.lstRubros.Location = new System.Drawing.Point(507, 116);
+            this.lstRubros.MultiColumn = true;
+            this.lstRubros.Name = "lstRubros";
+            this.lstRubros.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.lstRubros.Size = new System.Drawing.Size(318, 95);
+            this.lstRubros.TabIndex = 9;
             // 
             // ComprarOfertarUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
+            this.Controls.Add(this.lstRubros);
+            this.Controls.Add(this.btnVer);
             this.Controls.Add(this.gBoxFiltros);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.btnLimpiar);
@@ -316,8 +334,8 @@
             this.Controls.Add(this.btnComprar);
             this.Controls.Add(this.gvPublicaciones);
             this.Name = "ComprarOfertarUserControl";
-            this.Size = new System.Drawing.Size(806, 500);
-            this.Load += new System.EventHandler(this.PublicacionesUserControl_Load);
+            this.Size = new System.Drawing.Size(838, 437);
+            this.Load += new System.EventHandler(this.ComprarOfertarUserControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gvPublicaciones)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindNav1)).EndInit();
             this.bindNav1.ResumeLayout(false);
@@ -325,7 +343,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.bindSourcePublicaciones)).EndInit();
             this.gBoxFiltros.ResumeLayout(false);
             this.gBoxFiltros.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindSourceRubros)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -356,6 +373,7 @@
         private System.Windows.Forms.TextBox txtDescripcion;
         private System.Windows.Forms.Label lblRubros;
         private System.Windows.Forms.ComboBox cmbBoxRubros;
-        private System.Windows.Forms.BindingSource bindSourceRubros;
+        private System.Windows.Forms.Button btnVer;
+        private System.Windows.Forms.ListBox lstRubros;
     }
 }

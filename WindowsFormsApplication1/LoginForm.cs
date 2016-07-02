@@ -8,12 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ME.Business;
+using System.Configuration;
+using ME.UI.Properties;
 
 namespace ME.UI
 {
     public partial class LoginForm : Form
     {
         UsuarioHandler _usuarioHandler = new UsuarioHandler();
+        ObjectUserLogged logueado = null;
 
         public LoginForm()
         {
@@ -35,9 +38,39 @@ namespace ME.UI
                 label1.Visible = true;
             }
             else if (_usuarioHandler.Login(txtUser.Text, txtPassword.Text) > 0)
+ //           else if (_usuarioHandler.Login(txtUser.Text, txtPassword.Text) == 0)
             {
                 label1.Visible = false;
                 errLogin.Clear();
+
+                logueado = ObjectUserLogged.DatosUsuarioLogueado(txtUser.Text);
+
+                if (logueado != null) {
+                    UserLogged.cod_usuario    = logueado.cod_usuario;
+                    UserLogged.username       = logueado.username;
+                    UserLogged.activo         = logueado.activo;
+                    UserLogged.esAdmin        = logueado.esAdmin;
+                    UserLogged.esEmpresa      = logueado.esEmpresa;
+                    UserLogged.publ_sin_cargo = logueado.publ_sin_cargo;
+                    UserLogged.roles          = logueado.roles;
+
+                    //Dispose(logueado); Hacer que libere o "elimine" el objeto.
+                }
+
+
+                //// Open App.Config of executable
+                //System.Configuration.Configuration config =
+                //  ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+                //// Add an Application Setting.
+                //config.AppSettings.Settings.Add("user", txtUser.Text);
+                //config.AppSettings.Settings.Add("password", txtPassword.Text);
+                
+                //// Save the configuration file.
+                //config.Save(ConfigurationSaveMode.Modified);
+
+                //// Force a reload of a changed section.
+                //ConfigurationManager.RefreshSection("appSettings");
 
                 var frm = new Home();
                 frm.Location = this.Location;
@@ -58,15 +91,23 @@ namespace ME.UI
 
         private void LoginForm_Load(object sender, EventArgs e)
         {
+            UserLogged.cod_usuario = 0;
+            UserLogged.esAdmin = false;
+            UserLogged.esEmpresa = false;
+            UserLogged.username = String.Empty;
+
             List<string> funcionalidades = new List<string>();
             funcionalidades.Add("Login");
 
             btnLogin.Visible = funcionalidades.Any(f => f == "Login");
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void txtPassword_KeyUp(object sender, KeyEventArgs e)
         {
-
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.btnLogin_Click(sender, e);
+            }
         }
 
     }

@@ -65,7 +65,7 @@ namespace ME.UI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Form nuevoUsuarioForm = new NuevoUsuarioForm();
+            Form nuevoUsuarioForm = new NuevoUsuarioForm(null);
             nuevoUsuarioForm.ShowDialog(this);
         }
 
@@ -85,6 +85,11 @@ namespace ME.UI
             UsuarioModel usuario = (UsuarioModel)gvClientes.SelectedRows[0].DataBoundItem;
             Form nuevoUsuarioForm = new NuevoUsuarioForm(usuario);
             nuevoUsuarioForm.ShowDialog(this);
+        }
+
+        private void bindingNavigator1_RefreshItems(object sender, EventArgs e)
+        {
+
         }
 
     }

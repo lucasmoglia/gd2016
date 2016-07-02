@@ -32,7 +32,7 @@ namespace ME.UI
         {
             ddlRol.ValueMember = "cod_rol";
             ddlRol.DisplayMember = "nombre";
-            ddlRol.DataSource = RolesHandler.GetRoles();
+            ddlRol.DataSource = RolHandler.ListarRoles(true);
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)

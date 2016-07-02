@@ -10,7 +10,7 @@ GO
 -- Description:	SP para llenar la grilla de Publicaciones y permitir filtrar.
 -- =============================================
 /* Creo un Tipo Tabla que va a ser un parametro. */  
-CREATE TYPE [DE_UNA].Rubros AS TABLE   
+CREATE TYPE [DE_UNA].Rubros AS TABLE
 ( cod_rubro decimal(10) );  
 GO  
 
@@ -70,6 +70,6 @@ BEGIN
 	WHERE (E.cod_estado    IN (@estado, @publicada)   OR @estado IS NULL)
 	  AND (p.cod_rubro     IN (SELECT cod_Rubro FROM @rubros) OR (SELECT cod_Rubro FROM @rubros) IS NULL)
 --	  AND (p.cod_rubro     IN (@rubros) OR @rubros IS NULL)
-	  AND (P.descripcion LIKE '%@descripcion%'        OR @descripcion IS NULL)
+	  AND (P.descripcion LIKE ('%' + @descripcion + '%')      OR @descripcion IS NULL)
 	ORDER BY P.cod_visibilidad
 END

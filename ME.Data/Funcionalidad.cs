@@ -50,7 +50,7 @@ namespace ME.Data
             {
                 SqlCommand command = new SqlCommand("[DE_UNA].[GetFuncionalidadesByRol]", connection);
                 command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.Add("@cod_rol", SqlDbType.Bit).Value = cod_rol;
+                command.Parameters.Add("@cod_rol", SqlDbType.Decimal).Value = cod_rol;
 
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();

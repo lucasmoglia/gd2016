@@ -53,14 +53,50 @@ namespace ME.Data
             this.con_preguntas = con_preguntas;
         }
 
-        //public static int Login(string username, string password)
-        //{
-        //    List<SqlParameter> parameters = new List<SqlParameter>();
-        //    parameters.Add(new SqlParameter("@username", username));
-        //    parameters.Add(new SqlParameter("@password", password));
-            
-        //    return MEEntity.ExecuteSP("[DE_UNA].[Login]", parameters);
-        //}
+        public static Publicacion GetPublicacion(decimal cod_publi)
+        {
+            using (SqlConnection connection = MEEntity.GetConnection())
+            {
+                SqlCommand command = new SqlCommand("[DE_UNA].[GetPublicacion]", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add("@cod_publi", SqlDbType.Decimal).Value = cod_publi;
+
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    Publicacion publicacion = new Publicacion(
+                          decimal.Parse(reader["cod_publi"].ToString())
+                        , reader["descripcion"].ToString()
+                        , ulong.Parse(reader["stock"].ToString())
+                        , DateTime.Parse(reader["fecha_inicio"].ToString())
+                        , DateTime.Parse(reader["fecha_vencimiento"].ToString())
+                        , decimal.Parse(reader["precio_producto"].ToString())
+                        , decimal.Parse(reader["cod_visibilidad"].ToString())
+                        , reader["visibilidad"].ToString()
+                        , decimal.Parse(reader["costo_publicar"].ToString())
+                        , decimal.Parse(reader["costo_publicar"].ToString())
+                        , decimal.Parse(reader["porcentaje_venta"].ToString())
+                        , decimal.Parse(reader["cod_estado"].ToString())
+                        , reader["estado"].ToString()
+                        , decimal.Parse(reader["cod_rubro"].ToString())
+                        , reader["desc_corta"].ToString()
+                        , reader["desc_larga"].ToString()
+                        , decimal.Parse(reader["cod_usuario"].ToString())
+                        , reader["username"].ToString()
+                        , decimal.Parse(reader["cod_tipo_publi"].ToString())
+                        , reader["tipo_publi"].ToString()
+                        , bool.Parse(reader["con_envio"].ToString())
+                        , bool.Parse(reader["con_preguntas"].ToString())
+                    );
+
+                    return publicacion;
+                } else {
+                    return null;
+                }
+            }
+        }
 
         public static List<Publicacion> GetPublicaciones(byte estado, List<decimal> rubros, string descripcion)
         {
@@ -70,8 +106,24 @@ namespace ME.Data
             {
                 SqlCommand command = new SqlCommand("[DE_UNA].[GetPublicaciones]", connection);
                 command.CommandType = CommandType.StoredProcedure;
+
                 command.Parameters.Add("@estado", SqlDbType.Decimal).Value = estado;
-                command.Parameters.Add("@rubros", SqlDbType.Structured).Value = rubros;
+
+                DataTable rubrosTable = null;
+
+                if (rubros != null) {
+                    rubrosTable = new DataTable(); // Crea el Tipo Tabla Rubros, para pasar por parámetro.
+                    rubrosTable.Columns.Add("cod_rubro", typeof(decimal));
+
+                    for (var i = 0; i < rubros.Count(); i++) {
+                        rubrosTable.Rows.Add(new Object[] { rubros[i] });
+                    }
+                }
+                
+                SqlParameter param_Rubros = command.Parameters.AddWithValue("@rubros", rubrosTable);
+                param_Rubros.SqlDbType = SqlDbType.Structured;
+                param_Rubros.TypeName = "[DE_UNA].Rubros";
+
                 command.Parameters.Add("@descripcion", SqlDbType.NVarChar).Value = descripcion;
 
                 connection.Open();
@@ -116,6 +168,39 @@ namespace ME.Data
             }
 
             return publicacionList;
+        }
+
+        public static decimal Save(string descripcion, decimal stock, DateTime fechaInicio, DateTime fechaVenc, decimal precio, decimal cod_visibilidad,
+                                  decimal cod_estado, decimal cod_rubro, decimal cod_usuario, decimal cod_tipo_publi, bool con_envio, bool con_preguntas)
+        {
+            using (SqlConnection connection = MEEntity.GetConnection())
+            {
+                SqlCommand command = new SqlCommand("[DE_UNA].[CrearPublicacion]", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add("@descripcion", SqlDbType.NVarChar).Value = descripcion;
+                command.Parameters.Add("@stock", SqlDbType.Decimal).Value = stock;
+                command.Parameters.Add("@fecha_inicio", SqlDbType.DateTime).Value = fechaInicio;
+                command.Parameters.Add("@fecha_venc", SqlDbType.DateTime).Value = fechaVenc;
+                command.Parameters.Add("@precio", SqlDbType.Decimal).Value = precio;
+                command.Parameters.Add("@cod_visibilidad", SqlDbType.Decimal).Value = cod_visibilidad;
+                command.Parameters.Add("@cod_estado", SqlDbType.Decimal).Value = cod_estado;
+                command.Parameters.Add("@cod_rubro", SqlDbType.Decimal).Value = cod_rubro;
+                command.Parameters.Add("@cod_usuario", SqlDbType.Decimal).Value = cod_usuario;
+                command.Parameters.Add("@cod_tipo_publi", SqlDbType.Decimal).Value = cod_tipo_publi;
+                command.Parameters.Add("@con_envio", SqlDbType.Bit).Value = con_envio;
+                command.Parameters.Add("@con_preguntas", SqlDbType.Bit).Value = con_preguntas;
+                //command.Parameters.Add("@cod_publi", SqlDbType.Decimal).Value = null;
+
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    return decimal.Parse(reader["cod_publi"].ToString());
+                } else {
+                    return 0;
+                }
+            }
         }
     }
 }

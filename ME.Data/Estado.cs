@@ -47,7 +47,7 @@ namespace ME.Data
 
             using (SqlConnection connection = MEEntity.GetConnection())
             {
-                SqlCommand command = new SqlCommand("[DE_UNA].[GetEstados]", connection);
+                SqlCommand command = new SqlCommand("[DE_UNA].[GetEstadosPublicacion]", connection);
                 command.CommandType = CommandType.StoredProcedure;
 
                 connection.Open();
