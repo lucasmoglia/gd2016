@@ -58,11 +58,15 @@
     <Compile Include="ABM Rol\RolUserControl.Designer.cs">
       <DependentUpon>RolUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="ABM Usuario\ClienteUserControl.cs" />
+    <Compile Include="ABM Usuario\ClienteUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ABM Usuario\ClienteUserControl.Designer.cs">
       <DependentUpon>ClienteUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="ABM Usuario\NuevoClienteForm.cs" />
+    <Compile Include="ABM Usuario\NuevoClienteForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ABM Usuario\NuevoClienteForm.Designer.cs">
       <DependentUpon>NuevoClienteForm.cs</DependentUpon>
     </Compile>
@@ -78,11 +82,15 @@
     <Compile Include="ABM Usuario\NuevoUsuarioForm.Designer.cs">
       <DependentUpon>NuevoUsuarioForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ABM Visibilidad\NuevaVisibilidadForm.cs" />
+    <Compile Include="ABM Visibilidad\NuevaVisibilidadForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ABM Visibilidad\NuevaVisibilidadForm.Designer.cs">
       <DependentUpon>NuevaVisibilidadForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ABM Visibilidad\VisibilidadControl.cs" />
+    <Compile Include="ABM Visibilidad\VisibilidadControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ABM Visibilidad\VisibilidadControl.Designer.cs">
       <DependentUpon>VisibilidadControl.cs</DependentUpon>
     </Compile>
@@ -98,17 +106,17 @@
     <Compile Include="Facturas\FacturaUserControl.Designer.cs">
       <DependentUpon>FacturaUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Generar Publicación\PublicacionForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Generar Publicación\PublicacionForm.Designer.cs">
-      <DependentUpon>PublicacionForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="ComprarOfertar\ComprarOfertarUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ComprarOfertar\ComprarOfertarUserControl.Designer.cs">
       <DependentUpon>ComprarOfertarUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Generar Publicacion\PublicacionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Generar Publicacion\PublicacionForm.Designer.cs">
+      <DependentUpon>PublicacionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Home\Home.cs">
       <SubType>Form</SubType>
@@ -163,11 +171,11 @@
     <EmbeddedResource Include="Facturas\FacturaUserControl.resx">
       <DependentUpon>FacturaUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Generar Publicación\PublicacionForm.resx">
-      <DependentUpon>PublicacionForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ComprarOfertar\ComprarOfertarUserControl.resx">
       <DependentUpon>ComprarOfertarUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Generar Publicacion\PublicacionForm.resx">
+      <DependentUpon>PublicacionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Home\Home.resx">
       <DependentUpon>Home.cs</DependentUpon>
