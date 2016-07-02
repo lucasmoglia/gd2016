@@ -8,14 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ME.UI;
+using ME.Business;
 using System.Configuration;
 
 namespace ME.UI
 {
     public partial class Home : Form
     {
-        bool esAdmin = true; // SACAR, esto va a estar en la variable global de usuario logueado.
-
         public Home()
         {
             InitializeComponent();
@@ -23,9 +22,10 @@ namespace ME.UI
 
         private void Home_Load(object sender, EventArgs e)
         {
-            this.Text = string.Concat("Bienvenido ", System.Configuration.ConfigurationManager.AppSettings["user"].ToString(), "!");
+            //this.Text = string.Concat("Bienvenido ", System.Configuration.ConfigurationManager.AppSettings["user"].ToString(), "!");
+            this.Text = string.Concat("Bienvenido ", UserLogged.username, "!");
 
-            if (esAdmin) {
+            if (UserLogged.esAdmin) {
                 administracionToolStripMenuItem.Enabled = true;
                 administracionToolStripMenuItem.Visible = true;
             } else {
@@ -89,18 +89,18 @@ namespace ME.UI
         private void Home_FormClosed(object sender, FormClosedEventArgs e)
         {
             // Open App.Config of executable
-            System.Configuration.Configuration config =
-              ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            //System.Configuration.Configuration config =
+            //  ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
 
-            // Add an Application Setting.
-            config.AppSettings.Settings.Remove("user");
-            config.AppSettings.Settings.Remove("password");
+            //// Add an Application Setting.
+            //config.AppSettings.Settings.Remove("user");
+            //config.AppSettings.Settings.Remove("password");
 
-            // Save the configuration file.
-            config.Save(ConfigurationSaveMode.Modified);
+            //// Save the configuration file.
+            //config.Save(ConfigurationSaveMode.Modified);
 
-            // Force a reload of a changed section.
-            ConfigurationManager.RefreshSection("appSettings");
+            //// Force a reload of a changed section.
+            //ConfigurationManager.RefreshSection("appSettings");
         }
     }
 }

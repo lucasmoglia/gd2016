@@ -12,11 +12,13 @@ namespace ME.Data
     {
         public decimal cod_rol { get; set; }
         public string nombre { get; set; }
+        public List<FuncionalidadModel> funcionalidades { get; set; }
 
         public Rol(decimal cod_rol, string nombre)
         {
             this.cod_rol = cod_rol;
             this.nombre = nombre;
+            this.funcionalidades = null;
         }
 
         public static Rol GetRol(decimal cod_rol)
@@ -70,6 +72,34 @@ namespace ME.Data
                     );
 
                     rolesList.Add(rol);
+                }
+            }
+
+            return rolesList;
+        }
+
+        public static List<Rol> GetRolesDeUsuario(decimal cod_usuario)
+        {
+            List<Rol> rolesList = new List<Rol>();
+
+            using (SqlConnection connection = MEEntity.GetConnection())
+            {
+
+                SqlCommand command = new SqlCommand("[DE_UNA].[GetRolesDeUsuario]", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add("@cod_usuario", SqlDbType.Decimal).Value = cod_usuario;
+
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Rol unRol = new Rol(
+                          int.Parse(reader["cod_rol"].ToString())
+                        , reader["nombre"].ToString()
+                    );
+
+                    rolesList.Add(unRol);
                 }
             }
 

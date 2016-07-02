@@ -28,7 +28,7 @@ namespace ME.UI
 
                 txtDescripcion.ForeColor = System.Drawing.SystemColors.WindowFrame;
                 txtDescripcion.Text = "Ingrese aquí la descripción";
-                //lblUsername.Text = UsuarioLogueado.username
+                lblUsername.Text = UserLogged.username;
 
                 cmbBoxTipoPubli.SelectedItem = null;
                 DTFechaInicio.Value = System.DateTime.Today; // Poner la fecha del archivo de configuración.
@@ -117,15 +117,13 @@ namespace ME.UI
         {
 //            txtDescripcion.Focus();
 
-            bool esEmpresa = false; //SACAR. Esto representa a un usuario Empresa.
-
             numStock.Enabled = (esNuevaPubli || EsModificable);
 
-            if ((esNuevaPubli || EsModificable) && esEmpresa) {
-                List<Rubro> listaRubros = new List<Rubro>();
-                listaRubros.Add(RubroHandler.ObtenerRubro("Electrónicos"));
+            if ((esNuevaPubli || EsModificable) && UserLogged.esEmpresa) {
+                List<Rubro> listaRubro = new List<Rubro>();
+                listaRubro.Add(RubroHandler.ObtenerRubro("Electrónicos"));
 
-                cmbBoxRubro.DataSource = listaRubros;
+                cmbBoxRubro.DataSource = listaRubro;
             } else {
                 cmbBoxRubro.DataSource = RubroHandler.ListarRubros();
             }
@@ -195,12 +193,10 @@ namespace ME.UI
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            decimal usuarioLogueado = 1; // Usar Variable global
-
             if (txtDescripcion.Text != String.Empty)
             {
                 Publicacion nuevaPublicacion = PublicacionHandler.Guardar(txtDescripcion.Text, numStock.Value, DTFechaInicio.Value, DTFechaVencimiento.Value, numPrecio.Value, decimal.Parse(cmbBoxVisibilidad.SelectedValue.ToString()),
-                                               decimal.Parse(cmbBoxEstado.SelectedValue.ToString()), decimal.Parse(cmbBoxRubro.SelectedValue.ToString()), usuarioLogueado, decimal.Parse(cmbBoxTipoPubli.SelectedValue.ToString()),
+                                               decimal.Parse(cmbBoxEstado.SelectedValue.ToString()), decimal.Parse(cmbBoxRubro.SelectedValue.ToString()), UserLogged.cod_usuario, decimal.Parse(cmbBoxTipoPubli.SelectedValue.ToString()),
                                                bool.Parse(cmbBoxEnvio.SelectedValue.ToString()), bool.Parse(cmbBoxPreguntas.SelectedValue.ToString()));
 
                 PublicacionForm muestraDeNuevaPubli = new PublicacionForm(nuevaPublicacion, false);
@@ -267,11 +263,6 @@ namespace ME.UI
             {
                 btnGuardar.Text = ((Estado)cmbBoxEstado.SelectedItem).nombre == "Activa" ? "Publicar" : "Guardar";
 
-                //if (((Estado)cmbBoxEstado.SelectedItem).nombre == "Activa") {
-                //    btnGuardar.Text = "Publicar";
-                //} else {
-                //    btnGuardar.Text = "Guardar";
-                //}
             }
 
         }
