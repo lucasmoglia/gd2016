@@ -19,14 +19,14 @@ namespace ME.Data
 
         public Item(decimal id_item, decimal num_factura, decimal cod_item, string descripcion_item, decimal item_cantidad, decimal item_monto)
         {
-            this.id_item          = id_item;
-            this.num_factura      = num_factura;
-            this.cod_item         = cod_item;
+            this.id_item = id_item;
+            this.num_factura = num_factura;
+            this.cod_item = cod_item;
             this.descripcion_item = descripcion_item;
-            this.item_cantidad    = item_cantidad;
-            this.item_monto       = item_monto;
+            this.item_cantidad = item_cantidad;
+            this.item_monto = item_monto;
         }
-        
+
         public static List<Item> GetItems(decimal num_factura, string descripcion_item)
         {
             List<Item> facturaList = new List<Item>();
@@ -36,8 +36,8 @@ namespace ME.Data
 
                 SqlCommand command = new SqlCommand("[DE_UNA].[GetItems]", connection);
                 command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.Add("@Num_factura", SqlDbType.Decimal).Value = num_factura;
-                command.Parameters.Add("@Descripcion_item", SqlDbType.NVarChar).Value = descripcion_item;
+                command.Parameters.Add("@numFactura", SqlDbType.Decimal).Value = num_factura;
+                command.Parameters.Add("@descripcionItem", SqlDbType.VarChar).Value = descripcion_item;
 
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
@@ -69,17 +69,17 @@ namespace ME.Data
 
                 SqlCommand command = new SqlCommand("[DE_UNA].[BuscarXDetalle]", connection);
                 command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.Add("@Cod_usuario", SqlDbType.Decimal).Value = cod_usuario;
-                command.Parameters.Add("@Detalle_facturado", SqlDbType.NVarChar).Value = detalle_facturado;
+                command.Parameters.Add("@cod_usuario", SqlDbType.Decimal).Value = cod_usuario;
+                command.Parameters.Add("@descripcion", SqlDbType.VarChar).Value = detalle_facturado;
 
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
 
                 while (reader.Read())
                 {
-                         numsFactura.Add(decimal.Parse(reader["num_factura"].ToString()));
+                    numsFactura.Add(decimal.Parse(reader["num_factura"].ToString()));
                 }
-            } 
+            }
             return numsFactura;
         }
     }
