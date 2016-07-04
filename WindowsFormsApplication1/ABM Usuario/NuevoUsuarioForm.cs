@@ -116,10 +116,16 @@ namespace ME.UI
             }
             else
             {
-                ClienteHandler.Guardar(txtNombreC.Text, txtApellido.Text, decimal.Parse(txtNumeroDocC.Text), txtTipoDocC.Text, txtMailC.Text, txtUserNameC.Text, txtPasswordC.Text, true, txtTelefonoC.Text, txtDirCalleC.Text, decimal.Parse(txtDirNumeroC.Text), decimal.Parse(txtDirPisoC.Text), txtDirDeptoC.Text, txtDirLocalidadC.Text, txtDirCPC.Text, DateTime.Parse(txtFechaNacC.Text));
+                try
+                {
+                    ClienteHandler.Guardar(txtNombreC.Text, txtApellido.Text, decimal.Parse(txtNumeroDocC.Text), txtTipoDocC.Text, txtMailC.Text, txtUserNameC.Text, txtPasswordC.Text, true, txtTelefonoC.Text, txtDirCalleC.Text, decimal.Parse(txtDirNumeroC.Text), decimal.Parse(txtDirPisoC.Text), txtDirDeptoC.Text, txtDirLocalidadC.Text, txtDirCPC.Text, DateTime.Parse(txtFechaNacC.Text));
+                    this.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ocurrió un error al intentar guardar el usuario! \n\n" + ex.Message + "\n\n Todos los campos son obligatorios. Verifíquelos e intente nuevamente!", "Nuevo Usuario", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-
-            this.Close();
         }
 
         private void pnlEmpresa_Paint(object sender, PaintEventArgs e)

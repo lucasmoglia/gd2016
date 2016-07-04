@@ -16,16 +16,22 @@ namespace ME.UI
     {
         private const int pageSize = 10;
         private List<UsuarioModel> listaUsuarios = new List<UsuarioModel>();
-        
-        public UsuarioUserControl()
+
+        private void FillGrid()
         {
-            InitializeComponent();
             listaUsuarios = UsuarioHandler.GetUsuarios(true);
             gvClientes.DataSource = listaUsuarios;
             gvClientes.Columns.Remove("cod_usuario");
             bindingNavigator1.BindingSource = bindingSource1;
             bindingSource1.CurrentChanged += new System.EventHandler(bindingSource1_CurrentChanged);
             bindingSource1.DataSource = new PageOffsetList(gvClientes.RowCount);
+        }
+        
+        public UsuarioUserControl()
+        {
+            InitializeComponent();
+            btnResetPass.Visible = false;
+            FillGrid();
         }
 
         private void bindingSource1_CurrentChanged(object sender, EventArgs e)
@@ -71,7 +77,9 @@ namespace ME.UI
 
         private void gvClientes_SelectionChanged(object sender, EventArgs e)
         {
-            
+            bool activo = bool.Parse(((DataGridView)sender).CurrentRow.Cells["Activo"].Value.ToString());
+            btnDesbloquear.Visible = !activo;
+            btnResetPass.Visible = true;
         }
 
         private void gvClientes_RowEnter(object sender, DataGridViewCellEventArgs e)
@@ -90,6 +98,68 @@ namespace ME.UI
         private void bindingNavigator1_RefreshItems(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnResetPass_Click(object sender, EventArgs e)
+        {
+            Form resetPassForm = new ResetPasswordForm();
+            resetPassForm.ShowDialog(this);
+        }
+
+        private void btnDesbloquear_Click(object sender, EventArgs e)
+        {
+            var confirmResult = MessageBox.Show("Se va a desbloquear el usuario, continuar?", "Desbloquear Usuarios", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (confirmResult == DialogResult.Yes)
+            {
+                try
+                {
+                    UsuarioHandler.Desbloquear(decimal.Parse(gvClientes.SelectedRows[0].Cells["cod_usuario"].Value.ToString()));
+                    MessageBox.Show("Se ha desbloqueado el usuario con éxito!", "Desbloquear Usuarios", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    FillGrid();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ocurrió un error al intentar desbloquear un usuario: \n\n" + ex.InnerException, "Desbloquear Usuarios", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            }
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs ev)
+        {
+
+            gvClientes.DataSource = listaUsuarios.Where(e => 
+            (string.IsNullOrEmpty(txtFiltroNombre.Text) || (!string.IsNullOrEmpty(txtFiltroNombre.Text) &&
+                e.nombre.Trim().ToUpper().Contains(txtFiltroNombre.Text.Trim().ToUpper())))
+                &&
+            (string.IsNullOrEmpty(txtFiltroApellido.Text) || (!string.IsNullOrEmpty(txtFiltroApellido.Text) &&
+                e.apellido.Trim().ToUpper().Contains(txtFiltroApellido.Text.Trim().ToUpper())))
+                &&
+            (string.IsNullOrEmpty(txtFiltroDNI.Text) || (!string.IsNullOrEmpty(txtFiltroDNI.Text) && 
+                e.dni.Trim().ToUpper().Contains(txtFiltroDNI.Text.Trim().ToUpper())))
+                &&
+            (string.IsNullOrEmpty(txtFiltroMail.Text) || (!string.IsNullOrEmpty(txtFiltroMail.Text) &&
+                e.mail.Trim().ToUpper().Contains(txtFiltroMail.Text.Trim().ToUpper())))).ToList();
+        }
+
+        private void btnRestablecer_Click(object sender, EventArgs e)
+        {
+            gvClientes.DataSource = listaUsuarios;
+        }
+
+        private void btnRemoveUser_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                UsuarioHandler.Eliminar(decimal.Parse(gvClientes.SelectedRows[0].Cells["cod_usuario"].Value.ToString()));
+                MessageBox.Show("El usuario ha sido eliminado correctamente!", "Eliminar Usuario", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                FillGrid();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrió un error al intentar eliminar el usuario: \n\n" + ex.Message, "Desbloquear Usuarios", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
     }

@@ -68,6 +68,14 @@ namespace ME.Data
             return MEEntity.ExecuteSP("[DE_UNA].[Login]", parameters);
         }
 
+        public static int Eliminar(decimal cod_usuario)
+        {
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@cod_usuario", cod_usuario));
+
+            return MEEntity.ExecuteSP("[DE_UNA].[EliminarUsuario]", parameters);
+        }
+
         public static UsuarioModel GetUsuario(decimal cod_usuario)
         {
             using (SqlConnection connection = MEEntity.GetConnection())
@@ -152,6 +160,24 @@ namespace ME.Data
             }
 
             return usuarioList;
+        }
+
+        public static int ResetPassword(decimal cod_usuario, string password)
+        {
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@cod_usuario", cod_usuario));
+            parameters.Add(new SqlParameter("@password", password));
+
+            return MEEntity.ExecuteSP("[DE_UNA].[ResetPassword]", parameters);
+        }
+
+        public static int Desbloquear(decimal cod_usurio)
+        {
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@cod_usuario", cod_usurio));
+
+            return MEEntity.ExecuteSP("[DE_UNA].[DesbloquearUsuario]", parameters);
+
         }
     }
 }

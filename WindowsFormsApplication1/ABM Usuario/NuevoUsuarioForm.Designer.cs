@@ -803,8 +803,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(767, 407);
-            this.Controls.Add(this.pnlEmpresa);
             this.Controls.Add(this.pnlCliente);
+            this.Controls.Add(this.pnlEmpresa);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.label1);

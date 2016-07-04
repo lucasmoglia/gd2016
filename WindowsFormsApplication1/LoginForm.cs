@@ -38,7 +38,6 @@ namespace ME.UI
                 label1.Visible = true;
             }
             else if (_usuarioHandler.Login(txtUser.Text, txtPassword.Text) > 0)
- //           else if (_usuarioHandler.Login(txtUser.Text, txtPassword.Text) == 0)
             {
                 label1.Visible = false;
                 errLogin.Clear();
@@ -53,24 +52,7 @@ namespace ME.UI
                     UserLogged.esEmpresa      = logueado.esEmpresa;
                     UserLogged.publ_sin_cargo = logueado.publ_sin_cargo;
                     UserLogged.roles          = logueado.roles;
-
-                    //Dispose(logueado); Hacer que libere o "elimine" el objeto.
                 }
-
-
-                //// Open App.Config of executable
-                //System.Configuration.Configuration config =
-                //  ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-
-                //// Add an Application Setting.
-                //config.AppSettings.Settings.Add("user", txtUser.Text);
-                //config.AppSettings.Settings.Add("password", txtPassword.Text);
-                
-                //// Save the configuration file.
-                //config.Save(ConfigurationSaveMode.Modified);
-
-                //// Force a reload of a changed section.
-                //ConfigurationManager.RefreshSection("appSettings");
 
                 var frm = new Home();
                 frm.Location = this.Location;
