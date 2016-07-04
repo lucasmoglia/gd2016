@@ -18,5 +18,20 @@ namespace ME.Business
         {
             return Usuario.GetUsuarios(activeOnly);
         }
+
+        public static void ResetPassword(decimal cod_usuario, string password)
+        {
+            Usuario.ResetPassword(cod_usuario, password);
+        }
+
+        public static void Desbloquear(decimal cod_usuario)
+        {
+            Usuario.Desbloquear(cod_usuario);
+        }
+
+        public static void Eliminar(decimal cod_usuario)
+        {
+            Usuario.Eliminar(cod_usuario);
+        }
     }
 }

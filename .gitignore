@@ -5,3 +5,6 @@ ME.Business/obj/*
 ME.Business/bin/*
 ME.Data/obj/*
 ME.Data/bin/*
+#Archivos de opciones de usuarios
+MercadoEnvio.v11.suo
+MercadoEnvio.v12.suo

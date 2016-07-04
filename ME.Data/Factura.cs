@@ -60,7 +60,7 @@ namespace ME.Data
             }
         }
 
-        public static List<Factura> GetFacturas(decimal num_factura, DateTime fecha_desde, DateTime fecha_hasta, decimal monto_minimo, decimal monto_maximo)
+        public static List<Factura> GetFacturas(decimal cod_usuario, List<decimal> nros_facturas, DateTime ? fecha_desde, DateTime ? fecha_hasta, decimal ? monto_minimo, decimal ? monto_maximo)
         {
             List<Factura> facturaList = new List<Factura>();
 
@@ -69,11 +69,35 @@ namespace ME.Data
 
                 SqlCommand command = new SqlCommand("[DE_UNA].[GetFacturas]", connection);
                 command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.Add("@Num_factura", SqlDbType.Decimal).Value = num_factura;
-                command.Parameters.Add("@Fecha_desde", SqlDbType.DateTime).Value = fecha_desde;
-                command.Parameters.Add("@Fecha_hasta", SqlDbType.DateTime).Value = fecha_hasta;
-                command.Parameters.Add("@Monto_minimo", SqlDbType.Decimal).Value = monto_minimo;
-                command.Parameters.Add("@Monto_maximo", SqlDbType.Decimal).Value = monto_maximo;
+
+                DataTable nrosFacturasTable = null;
+                nrosFacturasTable = new DataTable(); // Crea el Tipo Tabla Rubros, para pasar por parámetro.
+                nrosFacturasTable.Columns.Add("nro_factura", typeof(decimal));
+
+                if (nros_facturas != null)
+                {
+
+                    for (var i = 0; i < nros_facturas.Count(); i++)
+                    {
+                        nrosFacturasTable.Rows.Add(new Object[] { nros_facturas[i] });
+                    }
+                }
+                else
+                {
+                    nros_facturas = new List<decimal>();
+                    nros_facturas.Add(0);
+                    nrosFacturasTable.Rows.Add(nros_facturas[0]);
+                }
+
+                SqlParameter param_lista_facturas = command.Parameters.AddWithValue("@TablaNrosFacturas", nrosFacturasTable);
+                param_lista_facturas.SqlDbType = SqlDbType.Structured;
+                param_lista_facturas.TypeName = "[DE_UNA].ListaNrosFacturas";
+
+                command.Parameters.Add("@usuario", SqlDbType.Decimal).Value = cod_usuario;
+                command.Parameters.Add("@fechaDesde", SqlDbType.DateTime).Value = fecha_desde;
+                command.Parameters.Add("@fechaHasta", SqlDbType.DateTime).Value = fecha_hasta;
+                command.Parameters.Add("@montoMinimo", SqlDbType.Decimal).Value = monto_minimo;
+                command.Parameters.Add("@montoMaximo", SqlDbType.Decimal).Value = monto_maximo;
 
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
@@ -96,5 +120,7 @@ namespace ME.Data
 
             return facturaList;
         }
+
+
     }
 }

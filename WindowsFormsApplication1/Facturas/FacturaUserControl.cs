@@ -14,21 +14,20 @@ namespace ME.UI
 {
     public partial class FacturaUserControl : UserControl
     {
-        decimal cod_usuario = 1; // SACAR esto va a estar en la variable global usuario logueado.
-
+        
         public FacturaUserControl()
         {
             InitializeComponent();
 
-            gvFacturas.DataSource = FacturaHandler.ListarFacturas(cod_usuario, null, null, 0, Decimal.MaxValue, null);
+            gvFacturas.DataSource = FacturaHandler.ListarFacturas(UserLogged.cod_usuario, System.DateTime.Today, DateTime.MaxValue, 0, int.MaxValue, null); // verificar el parametro de fechaDesde, no deberia ir el TODAY
             numMontoMax.Value = 0;
             numMontoMin.Value = 0;
         }
 
         private void FacturaUserControl_Load(object sender, EventArgs e)
         {
-            DTPFechaDesde.Value = System.DateTime.Today;
-            DTPFechaHasta.Value = System.DateTime.Today;
+            DTPFechaDesde.Value = System.DateTime.Today; // poner fecha de archivo de configuracion
+            DTPFechaHasta.Value = System.DateTime.Today; // poner fecha de archivo de configuracion
             numMontoMax.Value = 0;
             numMontoMin.Value = 0;
         }
@@ -40,7 +39,7 @@ namespace ME.UI
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            gvFacturas.DataSource = FacturaHandler.ListarFacturas(cod_usuario, null, null, 0, decimal.MaxValue, null);
+            gvFacturas.DataSource = FacturaHandler.ListarFacturas(UserLogged.cod_usuario, System.DateTime.Today, DateTime.MaxValue, 0, int.MaxValue, null);
             DTPFechaDesde.Value = System.DateTime.Today;
             DTPFechaHasta.Value = System.DateTime.Today;
             numMontoMax.Value = 0;
@@ -49,7 +48,7 @@ namespace ME.UI
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            gvFacturas.DataSource = FacturaHandler.ListarFacturas(cod_usuario, DTPFechaDesde.Value, DTPFechaHasta.Value, numMontoMin.Value, numMontoMax.Value, TxtDetalleFactura.Text);
+            gvFacturas.DataSource = FacturaHandler.ListarFacturas(UserLogged.cod_usuario, DTPFechaDesde.Value, DTPFechaHasta.Value, numMontoMin.Value, numMontoMax.Value, TxtDetalleFactura.Text);
         }
     }
 }

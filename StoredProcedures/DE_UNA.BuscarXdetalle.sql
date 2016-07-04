@@ -13,7 +13,7 @@ GO
 CREATE PROCEDURE [DE_UNA].BuscarXdetalle
 	-- Parámetros para los filtros.
 	@cod_usuario decimal(10),
-	@descripcion nvarchar(255)
+	@descripcion nvarchar(30)
 AS
 BEGIN
 
@@ -21,7 +21,7 @@ BEGIN
 	SELECT I.num_factura
 	  FROM [DE_UNA].Items I
 	   JOIN [DE_UNA].Facturas F ON I.num_factura = F.num_factura
-	   WHERE I.descripcion_item = @descripcion
-	     AND F.cod_usuario = @cod_usuario
+	   WHERE F.cod_usuario = @cod_usuario AND
+			 (I.descripcion_item = @descripcion OR @descripcion IS NULL)
 
 END

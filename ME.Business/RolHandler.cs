@@ -20,6 +20,16 @@ namespace ME.Business
             return Rol.GetRoles(activeOnly);
         }
 
+        public static List<Rol> RolesDeUsuario(decimal cod_usuario)
+        {
+            List<Rol> rolesUsuario = Rol.GetRolesDeUsuario(cod_usuario);
+
+            rolesUsuario.ForEach(rol => rol.funcionalidades = new List<FuncionalidadModel>());
+            rolesUsuario.ForEach(rol => rol.funcionalidades.AddRange(FuncionalidadHandler.GetFuncionalidadesByRol(rol.cod_rol)));
+
+            return rolesUsuario;
+        }
+
         public static int Nuevo(string nombre, List<FuncionalidadModel> funcionalidades)
         {
             decimal[] funcionalidades_id = new decimal[funcionalidades.Count];
