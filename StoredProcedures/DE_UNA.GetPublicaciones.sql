@@ -14,7 +14,7 @@ CREATE TYPE [DE_UNA].Rubros AS TABLE
 ( cod_rubro decimal(10) );  
 GO  
 */
-CREATE PROCEDURE [DE_UNA].GetPublicaciones
+ALTER PROCEDURE [DE_UNA].GetPublicaciones
 	-- Parámetros para los filtros.
 	@estado numeric(1),
 	@rubros [DE_UNA].Rubros READONLY,
@@ -27,7 +27,7 @@ BEGIN
 
     DECLARE @publicada numeric(1) = (SELECT cod_estado FROM [DE_UNA].EstadosPublicacion WHERE descripcion = 'Publicada');
 
-	SELECT P.cod_publi
+	SELECT TOP 1000 P.cod_publi
 		  ,P.descripcion
 		  ,P.stock
 		  ,P.fecha_inicio
