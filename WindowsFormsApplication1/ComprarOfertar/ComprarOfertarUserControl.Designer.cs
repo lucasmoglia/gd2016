@@ -34,8 +34,8 @@
             this.btnComprar = new System.Windows.Forms.Button();
             this.btnEditPublicacion = new System.Windows.Forms.Button();
             this.btnRemovePublicacion = new System.Windows.Forms.Button();
-            this.bindNav1 = new System.Windows.Forms.BindingNavigator(this.components);
-            this.bindSourcePublicaciones = new System.Windows.Forms.BindingSource(this.components);
+            this.bindNavPubli = new System.Windows.Forms.BindingNavigator(this.components);
+            this.bindSourcePubli = new System.Windows.Forms.BindingSource(this.components);
             this.bindNavCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindNavFirstItem = new System.Windows.Forms.ToolStripButton();
             this.bindNavPreviousItem = new System.Windows.Forms.ToolStripButton();
@@ -45,20 +45,18 @@
             this.bindNavNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindNavLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindNavSep2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.gBoxFiltros = new System.Windows.Forms.GroupBox();
             this.lblRubros = new System.Windows.Forms.Label();
-            this.cmbBoxRubros = new System.Windows.Forms.ComboBox();
             this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.lblDescripcion = new System.Windows.Forms.Label();
             this.btnVer = new System.Windows.Forms.Button();
             this.lstRubros = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.gvPublicaciones)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindNav1)).BeginInit();
-            this.bindNav1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindSourcePublicaciones)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindNavPubli)).BeginInit();
+            this.bindNavPubli.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindSourcePubli)).BeginInit();
             this.gBoxFiltros.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -70,10 +68,10 @@
             this.gvPublicaciones.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.gvPublicaciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvPublicaciones.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.gvPublicaciones.Location = new System.Drawing.Point(3, 106);
+            this.gvPublicaciones.Location = new System.Drawing.Point(3, 145);
             this.gvPublicaciones.Name = "gvPublicaciones";
             this.gvPublicaciones.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gvPublicaciones.Size = new System.Drawing.Size(828, 300);
+            this.gvPublicaciones.Size = new System.Drawing.Size(835, 261);
             this.gvPublicaciones.TabIndex = 0;
             this.gvPublicaciones.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvPublicaciones_RowEnter);
             // 
@@ -115,14 +113,14 @@
             this.btnRemovePublicacion.UseVisualStyleBackColor = false;
             this.btnRemovePublicacion.Visible = false;
             // 
-            // bindNav1
+            // bindNavPubli
             // 
-            this.bindNav1.AddNewItem = null;
-            this.bindNav1.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.bindNav1.BindingSource = this.bindSourcePublicaciones;
-            this.bindNav1.CountItem = this.bindNavCountItem;
-            this.bindNav1.DeleteItem = null;
-            this.bindNav1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.bindNavPubli.AddNewItem = null;
+            this.bindNavPubli.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.bindNavPubli.BindingSource = this.bindSourcePubli;
+            this.bindNavPubli.CountItem = this.bindNavCountItem;
+            this.bindNavPubli.DeleteItem = null;
+            this.bindNavPubli.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.bindNavFirstItem,
             this.bindNavPreviousItem,
             this.bindNavSep,
@@ -131,18 +129,17 @@
             this.bindingNavigatorSeparator1,
             this.bindNavNextItem,
             this.bindNavLastItem,
-            this.bindNavSep2,
-            this.toolStripButton1});
-            this.bindNav1.Location = new System.Drawing.Point(0, 0);
-            this.bindNav1.MoveFirstItem = this.bindNavFirstItem;
-            this.bindNav1.MoveLastItem = this.bindNavLastItem;
-            this.bindNav1.MoveNextItem = this.bindNavNextItem;
-            this.bindNav1.MovePreviousItem = this.bindNavPreviousItem;
-            this.bindNav1.Name = "bindNav1";
-            this.bindNav1.PositionItem = this.bindNavPositionItem;
-            this.bindNav1.Size = new System.Drawing.Size(838, 25);
-            this.bindNav1.TabIndex = 4;
-            this.bindNav1.Text = "Barra de Navegación";
+            this.bindNavSep2});
+            this.bindNavPubli.Location = new System.Drawing.Point(0, 0);
+            this.bindNavPubli.MoveFirstItem = this.bindNavFirstItem;
+            this.bindNavPubli.MoveLastItem = this.bindNavLastItem;
+            this.bindNavPubli.MoveNextItem = this.bindNavNextItem;
+            this.bindNavPubli.MovePreviousItem = this.bindNavPreviousItem;
+            this.bindNavPubli.Name = "bindNavPubli";
+            this.bindNavPubli.PositionItem = this.bindNavPositionItem;
+            this.bindNavPubli.Size = new System.Drawing.Size(841, 25);
+            this.bindNavPubli.TabIndex = 4;
+            this.bindNavPubli.Text = "Barra de Navegación";
             // 
             // bindNavCountItem
             // 
@@ -196,6 +193,7 @@
             this.bindNavNextItem.RightToLeftAutoMirrorImage = true;
             this.bindNavNextItem.Size = new System.Drawing.Size(23, 22);
             this.bindNavNextItem.Text = "Move next";
+            this.bindNavNextItem.Click += new System.EventHandler(this.bindNavNextItem_Click);
             // 
             // bindNavLastItem
             // 
@@ -211,19 +209,9 @@
             this.bindNavSep2.Name = "bindNavSep2";
             this.bindNavSep2.Size = new System.Drawing.Size(6, 25);
             // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Enabled = false;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton1.Text = "toolStripButton1";
-            // 
             // btnLimpiar
             // 
-            this.btnLimpiar.Location = new System.Drawing.Point(3, 76);
+            this.btnLimpiar.Location = new System.Drawing.Point(3, 117);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(97, 24);
             this.btnLimpiar.TabIndex = 5;
@@ -234,7 +222,7 @@
             // btnBuscar
             // 
             this.btnBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBuscar.Location = new System.Drawing.Point(714, 76);
+            this.btnBuscar.Location = new System.Drawing.Point(721, 117);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(117, 24);
             this.btnBuscar.TabIndex = 6;
@@ -245,13 +233,12 @@
             // gBoxFiltros
             // 
             this.gBoxFiltros.Controls.Add(this.lblRubros);
-            this.gBoxFiltros.Controls.Add(this.cmbBoxRubros);
             this.gBoxFiltros.Controls.Add(this.txtDescripcion);
             this.gBoxFiltros.Controls.Add(this.lblDescripcion);
             this.gBoxFiltros.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.gBoxFiltros.Location = new System.Drawing.Point(3, 27);
             this.gBoxFiltros.Name = "gBoxFiltros";
-            this.gBoxFiltros.Size = new System.Drawing.Size(828, 47);
+            this.gBoxFiltros.Size = new System.Drawing.Size(835, 84);
             this.gBoxFiltros.TabIndex = 7;
             this.gBoxFiltros.TabStop = false;
             this.gBoxFiltros.Text = "Filtros de Búsqueda";
@@ -260,21 +247,11 @@
             // 
             this.lblRubros.AutoSize = true;
             this.lblRubros.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblRubros.Location = new System.Drawing.Point(459, 19);
+            this.lblRubros.Location = new System.Drawing.Point(431, 19);
             this.lblRubros.Name = "lblRubros";
             this.lblRubros.Size = new System.Drawing.Size(41, 13);
             this.lblRubros.TabIndex = 3;
             this.lblRubros.Text = "Rubros";
-            // 
-            // cmbBoxRubros
-            // 
-            this.cmbBoxRubros.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.cmbBoxRubros.FormattingEnabled = true;
-            this.cmbBoxRubros.Location = new System.Drawing.Point(504, 15);
-            this.cmbBoxRubros.MaxDropDownItems = 10;
-            this.cmbBoxRubros.Name = "cmbBoxRubros";
-            this.cmbBoxRubros.Size = new System.Drawing.Size(318, 21);
-            this.cmbBoxRubros.TabIndex = 2;
             // 
             // txtDescripcion
             // 
@@ -311,11 +288,10 @@
             // lstRubros
             // 
             this.lstRubros.FormattingEnabled = true;
-            this.lstRubros.Location = new System.Drawing.Point(507, 116);
-            this.lstRubros.MultiColumn = true;
+            this.lstRubros.Location = new System.Drawing.Point(481, 36);
             this.lstRubros.Name = "lstRubros";
             this.lstRubros.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.lstRubros.Size = new System.Drawing.Size(318, 95);
+            this.lstRubros.Size = new System.Drawing.Size(351, 69);
             this.lstRubros.TabIndex = 9;
             // 
             // ComprarOfertarUserControl
@@ -328,19 +304,19 @@
             this.Controls.Add(this.gBoxFiltros);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.btnLimpiar);
-            this.Controls.Add(this.bindNav1);
+            this.Controls.Add(this.bindNavPubli);
             this.Controls.Add(this.btnRemovePublicacion);
             this.Controls.Add(this.btnEditPublicacion);
             this.Controls.Add(this.btnComprar);
             this.Controls.Add(this.gvPublicaciones);
             this.Name = "ComprarOfertarUserControl";
-            this.Size = new System.Drawing.Size(838, 437);
+            this.Size = new System.Drawing.Size(841, 437);
             this.Load += new System.EventHandler(this.ComprarOfertarUserControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gvPublicaciones)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindNav1)).EndInit();
-            this.bindNav1.ResumeLayout(false);
-            this.bindNav1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindSourcePublicaciones)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindNavPubli)).EndInit();
+            this.bindNavPubli.ResumeLayout(false);
+            this.bindNavPubli.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindSourcePubli)).EndInit();
             this.gBoxFiltros.ResumeLayout(false);
             this.gBoxFiltros.PerformLayout();
             this.ResumeLayout(false);
@@ -354,7 +330,7 @@
         private System.Windows.Forms.Button btnComprar;
         private System.Windows.Forms.Button btnEditPublicacion;
         private System.Windows.Forms.Button btnRemovePublicacion;
-        private System.Windows.Forms.BindingNavigator bindNav1;
+        private System.Windows.Forms.BindingNavigator bindNavPubli;
         private System.Windows.Forms.ToolStripLabel bindNavCountItem;
         private System.Windows.Forms.ToolStripButton bindNavFirstItem;
         private System.Windows.Forms.ToolStripButton bindNavPreviousItem;
@@ -364,15 +340,13 @@
         private System.Windows.Forms.ToolStripButton bindNavNextItem;
         private System.Windows.Forms.ToolStripButton bindNavLastItem;
         private System.Windows.Forms.ToolStripSeparator bindNavSep2;
-        private System.Windows.Forms.BindingSource bindSourcePublicaciones;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.BindingSource bindSourcePubli;
         private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.GroupBox gBoxFiltros;
         private System.Windows.Forms.Label lblDescripcion;
         private System.Windows.Forms.TextBox txtDescripcion;
         private System.Windows.Forms.Label lblRubros;
-        private System.Windows.Forms.ComboBox cmbBoxRubros;
         private System.Windows.Forms.Button btnVer;
         private System.Windows.Forms.ListBox lstRubros;
     }
