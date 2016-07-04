@@ -126,8 +126,26 @@ namespace ME.Data
 
                 command.Parameters.Add("@descripcion", SqlDbType.NVarChar).Value = descripcion;
 
+                // parámetros para la paginación.
+                command.Parameters.Add("@PageSize", SqlDbType.Int).Value = Globales.TamanioPag_Publi;
+                command.Parameters.Add("@PageNumber", SqlDbType.Int).Value = Globales.NumPag_Publi += 1;
+
+                SqlParameter param_TotalPags = new SqlParameter("@TotalPags", SqlDbType.Int);
+                param_TotalPags.Direction = ParameterDirection.Output;
+                command.Parameters.Add(param_TotalPags);
+
+
+                SqlParameter param_BloquePags = new SqlParameter("@bloqueDePaginas", SqlDbType.Int);
+                param_BloquePags.Direction = ParameterDirection.Output;
+                command.Parameters.Add(param_BloquePags);
+
+                //command.Parameters.Add("@TotalPags", SqlDbType.Int).Value = Globales.TotalPags_Publi;
+
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
+
+                Globales.TotalPags_Publi = Convert.ToInt32(command.Parameters["@TotalPags"].Value);
+                Globales.PagsEnCache_Publi += Convert.ToInt32(command.Parameters["@bloqueDePaginas"].Value);
 
                 while (reader.Read())
                 {
@@ -148,7 +166,6 @@ namespace ME.Data
                         , decimal.Parse(reader["cod_rubro"].ToString())
                         , reader["desc_corta"].ToString()
                         , reader["desc_larga"].ToString()
-                        //, Usuario.GetUsuario(decimal.Parse(reader["cod_usuario"].ToString()))
                         , decimal.Parse(reader["cod_usuario"].ToString())
                         , reader["username"].ToString()
                         , decimal.Parse(reader["cod_tipo_publi"].ToString())
@@ -156,6 +173,7 @@ namespace ME.Data
                         , bool.Parse(reader["con_envio"].ToString())
                         , bool.Parse(reader["con_preguntas"].ToString())
 
+                        //, Usuario.GetUsuario(decimal.Parse(reader["cod_usuario"].ToString()))
                         //, Visibilidad.GetVisibilidad(decimal.Parse(reader["cod_visibilidad"].ToString()))
                         //, Estado.GetEstado(decimal.Parse(reader["cod_estado"].ToString()))
                         //, Rubro.GetRubro(decimal.Parse(reader["cod_rubro"].ToString()))
@@ -194,8 +212,7 @@ namespace ME.Data
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
 
-                if (reader.Read())
-                {
+                if (reader.Read()) {
                     return decimal.Parse(reader["cod_publi"].ToString());
                 } else {
                     return 0;

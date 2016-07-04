@@ -9,7 +9,8 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE [DE_UNA].[GetFacturas]
+ALTER PROCEDURE [DE_UNA].[GetFacturas]
+	@usuario DECIMAL(20),
 	@TablaNrosFacturas [DE_UNA].[ListaNrosFacturas] READONLY,
 	@fechaDesde DATETIME,
 	@fechaHasta DATETIME,
@@ -21,7 +22,7 @@ BEGIN
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
 
-	IF (SELECT 1 FROM @TablaNrosFacturas) IS NOT NULL
+	IF (SELECT 1 FROM @TablaNrosFacturas WHERE [nro_factura] = 0) IS NULL
 		SELECT [num_factura],
 				[cod_publi],
 				[fecha_factura],
@@ -30,8 +31,9 @@ BEGIN
 				[cod_usuario]
 		FROM [DE_UNA].[Facturas]
 		WHERE [num_factura] IN (SELECT num_factura FROM @TablaNrosFacturas) AND
-			  (([fecha_factura] <= @fechaHasta AND [fecha_factura] >= @fechaDesde) OR @fechaHasta IS NULL OR  @fechaDesde IS NULL) AND
-			  (([total] <= @montoMaximo AND [total] >= @montoMinimo) OR @montoMinimo IS NULL OR @montoMaximo IS NULL)
+			  ([fecha_factura] >= @fechaDesde AND [fecha_factura] <= @fechaHasta) AND
+			  ([total] >= @montoMinimo AND [total] <= @montoMaximo) AND
+			    @usuario = [cod_usuario]
 	ELSE
 		SELECT [num_factura],
 				[cod_publi],
@@ -40,8 +42,9 @@ BEGIN
 				[forma_pago],
 				[cod_usuario]
 		FROM [DE_UNA].[Facturas]
-		WHERE (([fecha_factura] BETWEEN @fechaDesde AND @fechaHasta) OR @fechaDesde IS NULL OR @fechaHasta IS NULL) AND
-				(([total] BETWEEN @montoMinimo AND @montoMaximo) OR @montoMinimo IS NULL OR @montoMaximo IS NULL)
+		WHERE ([fecha_factura] >= @fechaDesde AND [fecha_factura] <= @fechaHasta) AND
+			  ([total] >= @montoMinimo AND [total] <= @montoMaximo) AND
+			    @usuario = [cod_usuario]
 
 END
 GO

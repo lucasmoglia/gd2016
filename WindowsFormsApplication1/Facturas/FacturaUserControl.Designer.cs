@@ -58,7 +58,7 @@
             this.gvFacturas.Location = new System.Drawing.Point(23, 154);
             this.gvFacturas.Name = "gvFacturas";
             this.gvFacturas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gvFacturas.Size = new System.Drawing.Size(746, 343);
+            this.gvFacturas.Size = new System.Drawing.Size(800, 280);
             this.gvFacturas.TabIndex = 1;
             // 
             // DTPFechaHasta
@@ -211,7 +211,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.gvFacturas);
             this.Name = "FacturaUserControl";
-            this.Size = new System.Drawing.Size(800, 500);
+            this.Size = new System.Drawing.Size(838, 437);
             this.Load += new System.EventHandler(this.FacturaUserControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gvFacturas)).EndInit();
             this.groupBox1.ResumeLayout(false);

@@ -2,14 +2,16 @@
 using System.Data.SqlClient;
 using System.Data;
 using System;
-using ME.Data;
 
-
-namespace ME.Business
+namespace ME.Data
 {
-
-    // Esta clase está en ME.Business sólo porque considero que el usuario logueado 
-    // se utiliza para validaciones de reglas de Negocio/de operación de la aplicación. 
+    public static class Globales
+    {
+        public static Int32 TamanioPag_Publi { get; set; }
+        public static Int32 NumPag_Publi { get; set; }
+        public static Int32 TotalPags_Publi { get; set; }
+        public static Int32 PagsEnCache_Publi { get; set; }
+    }
 
     public static class UserLogged
     {
@@ -66,7 +68,12 @@ namespace ME.Business
 
                 if (reader.Read()){
                     decimal cod_usuario = decimal.Parse(reader["cod_usuario"].ToString());
-                    List<Rol> rolesUsuario = RolHandler.RolesDeUsuario(cod_usuario);
+                    //List<Rol> rolesUsuario = RolHandler.RolesDeUsuario(cod_usuario);
+                    List<Rol> rolesUsuario = Rol.GetRolesDeUsuario(cod_usuario);
+
+                    rolesUsuario.ForEach(rol => rol.funcionalidades = new List<FuncionalidadModel>());
+                    rolesUsuario.ForEach(rol => rol.funcionalidades.AddRange(Funcionalidad.GetFuncionalidadesByRol(rol.cod_rol)));
+
 
                     bool activo = bool.Parse(reader["activo"].ToString());// == 0 ? false : true;
                     bool esEmpresa = int.Parse(reader["esEmpresa"].ToString()) == 0 ? false : true;
@@ -92,5 +99,4 @@ namespace ME.Business
         }
 
     }
-
 }

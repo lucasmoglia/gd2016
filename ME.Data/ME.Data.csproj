@@ -45,6 +45,7 @@
     <Compile Include="Item.cs" />
     <Compile Include="TipoPublicacion.cs" />
     <Compile Include="Estado.cs" />
+    <Compile Include="Globales.cs" />
     <Compile Include="Visibilidad.cs" />
     <Compile Include="Publicacion.cs" />
     <Compile Include="Empresa.cs" />
