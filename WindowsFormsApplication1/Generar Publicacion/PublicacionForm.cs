@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Configuration;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -14,10 +15,26 @@ namespace ME.UI
 {
     public partial class PublicacionForm : Form
     {
-        bool esNuevaPubli = false, EsModificable = false;
+        bool esNuevaPubli = false, esModificable = false, esCompra = false;
         Publicacion PublicacionExistente = null;
+        private string descrVacia = "Ingrese aquí la descripción";
 
-        public PublicacionForm(Publicacion publicacion, bool modificable)
+        private void habilitarTodo(bool valor)
+        {
+            txtDescripcion.Enabled = valor;
+            cmbBoxTipoPubli.Enabled = valor;
+            DTFechaInicio.Enabled = valor;
+            DTFechaVencimiento.Enabled = valor;
+            numStock.Enabled = valor;
+            numPrecio.Enabled = valor;
+            cmbBoxVisibilidad.Enabled = valor;
+            cmbBoxEstado.Enabled = valor;
+            cmbBoxRubro.Enabled = valor;
+            cmbBoxEnvio.Enabled = valor;
+            cmbBoxPreguntas.Enabled = valor;
+        }
+
+        public PublicacionForm(Publicacion publicacion, TipoAccion accion)
         {
             InitializeComponent();
 
@@ -27,11 +44,11 @@ namespace ME.UI
                 this.esNuevaPubli = true;
 
                 txtDescripcion.ForeColor = System.Drawing.SystemColors.WindowFrame;
-                txtDescripcion.Text = "Ingrese aquí la descripción";
+                txtDescripcion.Text = descrVacia;
                 lblUsername.Text = UserLogged.username;
 
                 cmbBoxTipoPubli.SelectedItem = null;
-                DTFechaInicio.Value = System.DateTime.Today; // Poner la fecha del archivo de configuración.
+                DTFechaInicio.Value = System.DateTime.Today; // No anda con: DateTime.Parse(ConfigurationManager.AppSettings["fecha"].ToString()); 
                 DTFechaInicio.MinDate = System.DateTime.Today; // Poner la fecha del archivo de configuración.
                 DTFechaVencimiento.Value = System.DateTime.Today; // Poner la fecha del archivo de configuración.
                 DTFechaVencimiento.MinDate = System.DateTime.Today; // Poner la fecha del archivo de configuración.
@@ -44,56 +61,46 @@ namespace ME.UI
                 //cmbBoxPreguntas.SelectedItem = null;
                 btnCancelar.Text = "Cancelar";
 
-                txtDescripcion.Enabled = true;
-                cmbBoxTipoPubli.Enabled = true;
-                DTFechaInicio.Enabled = true;
-                DTFechaVencimiento.Enabled = true;
-                numStock.Enabled = true;
-                numPrecio.Enabled = true;
-                cmbBoxVisibilidad.Enabled = true;
-                cmbBoxEstado.Enabled = true;
-                cmbBoxRubro.Enabled = true;
-                cmbBoxEnvio.Enabled = true;
-                cmbBoxPreguntas.Enabled = true;
+                habilitarTodo(true);
+
                 btnGuardar.Enabled = true;
                 btnGuardar.Visible = true;
+            }
+            else { // publicacion != null
+                switch (accion) {
+                    case TipoAccion.Mod:
+                        this.Text = "Modificar Publicación " + publicacion.cod_publi.ToString();
+                        this.esModificable = true;
+                        btnCancelar.Text = "Cancelar";
+                        btnGuardar.Text = "Guardar";
 
-            } else {
-                if (modificable) {
-                    this.Text = "Modificar Publicación " + publicacion.cod_publi.ToString();
-                    this.EsModificable = true;
-                    btnCancelar.Text = "Cancelar";
+                        habilitarTodo(true);
 
-                    txtDescripcion.Enabled = true;
-                    cmbBoxTipoPubli.Enabled = true;
-                    DTFechaInicio.Enabled = true;
-                    DTFechaVencimiento.Enabled = true;
-                    numStock.Enabled = true;
-                    numPrecio.Enabled = true;
-                    cmbBoxVisibilidad.Enabled = true;
-                    cmbBoxEstado.Enabled = true;
-                    cmbBoxRubro.Enabled = true;
-                    cmbBoxEnvio.Enabled = true;
-                    cmbBoxPreguntas.Enabled = true;
-                    btnGuardar.Enabled = true;
-                    btnGuardar.Visible = true;
-                } else {
-                    this.Text = "Publicación " + publicacion.cod_publi.ToString();
-                    btnCancelar.Text = "OK";
+                        btnGuardar.Enabled = true;
+                        btnGuardar.Visible = true;
+                    break;
 
-                    txtDescripcion.Enabled = false;
-                    cmbBoxTipoPubli.Enabled = false;
-                    DTFechaInicio.Enabled = false;
-                    DTFechaVencimiento.Enabled = false;
-                    numStock.Enabled = false;
-                    numPrecio.Enabled = false;
-                    cmbBoxVisibilidad.Enabled = false;
-                    cmbBoxEstado.Enabled = false;
-                    cmbBoxRubro.Enabled = false;
-                    cmbBoxEnvio.Enabled = false;
-                    cmbBoxPreguntas.Enabled = false;
-                    btnGuardar.Enabled = false;
-                    btnGuardar.Visible = false;
+                    case TipoAccion.Buy:
+                        this.Text = (publicacion.tipo_publi.cod_tipo_publi == 1 /* Compra Inmediata */? "Comprar" : "Ofertar") + " Publicación " + publicacion.cod_publi.ToString();
+                        this.esCompra = true;
+                        btnCancelar.Text = "Cancelar";
+                        btnGuardar.Text = (publicacion.tipo_publi.cod_tipo_publi == 1 /* Compra Inmediata */? "Comprar" : "Ofertar");
+
+                        habilitarTodo(false);
+
+                        btnGuardar.Enabled = true;
+                        btnGuardar.Visible = true;
+                    break;
+
+                    default: // TipoAccion.View: 
+                        this.Text = "Publicación " + publicacion.cod_publi.ToString();
+                        btnCancelar.Text = "OK";
+
+                        habilitarTodo(false);
+
+                        btnGuardar.Enabled = false;
+                        btnGuardar.Visible = false;
+                    break;
                 }
 
                 this.esNuevaPubli = false;
@@ -117,9 +124,9 @@ namespace ME.UI
         {
 //            txtDescripcion.Focus();
 
-            numStock.Enabled = (esNuevaPubli || EsModificable);
+            numStock.Enabled = (esNuevaPubli || esModificable);
 
-            if ((esNuevaPubli || EsModificable) && UserLogged.esEmpresa) {
+            if ((esNuevaPubli || esModificable) && UserLogged.esEmpresa) {
                 List<Rubro> listaRubro = new List<Rubro>();
                 listaRubro.Add(RubroHandler.ObtenerRubro("Electrónicos"));
 
@@ -193,15 +200,19 @@ namespace ME.UI
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (txtDescripcion.Text != String.Empty)
-            {
-                Publicacion nuevaPublicacion = PublicacionHandler.Guardar(txtDescripcion.Text, numStock.Value, DTFechaInicio.Value, DTFechaVencimiento.Value, numPrecio.Value, decimal.Parse(cmbBoxVisibilidad.SelectedValue.ToString()),
-                                               decimal.Parse(cmbBoxEstado.SelectedValue.ToString()), decimal.Parse(cmbBoxRubro.SelectedValue.ToString()), UserLogged.cod_usuario, decimal.Parse(cmbBoxTipoPubli.SelectedValue.ToString()),
-                                               bool.Parse(cmbBoxEnvio.SelectedValue.ToString()), bool.Parse(cmbBoxPreguntas.SelectedValue.ToString()));
+            if (txtDescripcion.Text != descrVacia && txtDescripcion.Text != String.Empty) {
+                Publicacion nuevaPublicacion = PublicacionHandler.Guardar(
+                    txtDescripcion.Text, numStock.Value, DTFechaInicio.Value, DTFechaVencimiento.Value, numPrecio.Value,
+                    decimal.Parse(cmbBoxVisibilidad.SelectedValue.ToString()), decimal.Parse(cmbBoxEstado.SelectedValue.ToString()),
+                    decimal.Parse(cmbBoxRubro.SelectedValue.ToString()), UserLogged.cod_usuario, decimal.Parse(cmbBoxTipoPubli.SelectedValue.ToString()),
+                    bool.Parse(cmbBoxEnvio.SelectedValue.ToString()), bool.Parse(cmbBoxPreguntas.SelectedValue.ToString())
+                );
 
-                PublicacionForm muestraDeNuevaPubli = new PublicacionForm(nuevaPublicacion, false);
+                PublicacionForm muestraDeNuevaPubli = new PublicacionForm(nuevaPublicacion, TipoAccion.View);
 
                 muestraDeNuevaPubli.Show();
+
+                // También mostrar la factura por pantalla.
 
                 this.Close();
             }
@@ -211,25 +222,23 @@ namespace ME.UI
         {
             txtDescripcion.ForeColor = System.Drawing.SystemColors.WindowText;
 
-            if (txtDescripcion.Text == "Ingrese aquí la descripción")
-            {
+            if (txtDescripcion.Text == descrVacia) {
                 txtDescripcion.Text = String.Empty;
             }
         }
 
         private void txtDescripcion_Leave(object sender, EventArgs e)
         {
-            if (txtDescripcion.Text == String.Empty)
-            {
+            if (txtDescripcion.Text == String.Empty || txtDescripcion.Text == descrVacia) {
                 txtDescripcion.ForeColor = System.Drawing.SystemColors.WindowFrame;
-                txtDescripcion.Text = "Ingrese aquí la descripción";
+                txtDescripcion.Text = descrVacia;
             }
         }
 
         private void cmbBoxTipoPubli_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (esNuevaPubli) {
-                if (((TipoPublicacion)cmbBoxTipoPubli.SelectedItem).nombre == "Subasta") {
+                if (((TipoPublicacion)cmbBoxTipoPubli.SelectedItem).cod_tipo_publi == 2 /* Subasta */) {
                     numStock.Value = 1;
                     numStock.Enabled = false;
                 } else {
@@ -240,8 +249,8 @@ namespace ME.UI
 
         private void cmbBoxVisibilidad_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (esNuevaPubli || EsModificable) {
-                if (((Visibilidad)cmbBoxVisibilidad.SelectedItem).descripcion == "Gratis") {
+            if (esNuevaPubli || esModificable) {
+                if (((Visibilidad)cmbBoxVisibilidad.SelectedItem).cod_visibilidad == 10006 /* Gratis */) {
                     cmbBoxEnvio.SelectedValue = true;
                     cmbBoxEnvio.Enabled = false;
                 } else {
@@ -259,10 +268,8 @@ namespace ME.UI
 
         private void cmbBoxEstado_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (esNuevaPubli || EsModificable)
-            {
-                btnGuardar.Text = ((Estado)cmbBoxEstado.SelectedItem).nombre == "Activa" ? "Publicar" : "Guardar";
-
+            if (esNuevaPubli || esModificable) {
+                btnGuardar.Text = ((Estado)cmbBoxEstado.SelectedItem).cod_estado == 3 /* "Activa" */ ? "Publicar" : "Guardar";
             }
 
         }

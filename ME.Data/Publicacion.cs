@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 
 namespace ME.Data
 {
+    public enum TipoAccion { Mod, View, New, Buy }
+
     public class Publicacion
     {
         public decimal  cod_publi          { get; set; }
