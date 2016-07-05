@@ -87,12 +87,6 @@
     <Compile Include="ABM Visibilidad\VisibilidadControl.Designer.cs">
       <DependentUpon>VisibilidadControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Calificar\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Calificar\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Calificar\CalificarControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
