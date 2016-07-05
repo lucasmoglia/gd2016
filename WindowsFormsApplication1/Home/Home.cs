@@ -75,7 +75,7 @@ namespace ME.UI
 //            pnlMaster.Controls.Clear();
 //            pnlMaster.Controls.Add(new ComprarOfertarUserControl());
 
-            PublicacionForm nuevaPublicacion = new PublicacionForm(null, false);
+            PublicacionForm nuevaPublicacion = new PublicacionForm(null, TipoAccion.New);
 
             nuevaPublicacion.ShowDialog(this);
         }
@@ -102,6 +102,13 @@ namespace ME.UI
 
             //// Force a reload of a changed section.
             //ConfigurationManager.RefreshSection("appSettings");
+        }
+
+        private void misPublicacionesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            pnlMaster.Controls.Clear();
+            //pnlMaster.Controls.Add(new ComprarOfertarUserControl(UserLogged.cod_usuario));
+
         }
     }
 }

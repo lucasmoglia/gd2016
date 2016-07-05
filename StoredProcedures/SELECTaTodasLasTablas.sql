@@ -14,3 +14,9 @@ SELECT *, 'Roles_Usuario' FROM [DE_UNA].[Roles_Usuario];
 SELECT *, 'Rubros' FROM [DE_UNA].[Rubros];
 SELECT *, 'Tipos_Publicacion' FROM [DE_UNA].[Tipos_Publicacion];
 SELECT *, 'Visibilidades' FROM [DE_UNA].[Visibilidades];
+
+-- Para desbloquear el usuario.
+UPDATE [DE_UNA].Usuarios
+   SET login_fallidos = 0,
+	   activo = 1
+ WHERE username = 'admin';

@@ -18,7 +18,8 @@ ALTER PROCEDURE [DE_UNA].GetPublicaciones
 	-- Parámetros para los filtros.
 	@estado numeric(1),
 	@rubros [DE_UNA].Rubros READONLY,
-	@descripcion nvarchar(255)
+	@descripcion nvarchar(255),
+	@usuario decimal(20,0)
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -55,7 +56,8 @@ BEGIN
 	 LEFT JOIN [DE_UNA].Rubros             R ON P.cod_rubro = R.cod_rubro
 	 LEFT JOIN [DE_UNA].Tipos_Publicacion  T ON P.cod_tipo_publi = T.cod_tipo_publi
 	 LEFT JOIN [DE_UNA].Usuarios           U ON P.cod_usuario = U.cod_usuario
-	WHERE (E.cod_estado    IN (@estado, @publicada)   OR @estado IS NULL)
+	WHERE (U.cod_usuario     = @usuario               OR @usuario IS NULL)
+	  AND (E.cod_estado    IN (@estado, @publicada)   OR @estado IS NULL)
 	  AND (p.cod_rubro     IN (SELECT cod_Rubro FROM @rubros) OR (SELECT cod_Rubro FROM @rubros) IS NULL)
 	  AND (P.descripcion LIKE ('%' + @descripcion + '%')      OR @descripcion IS NULL)
 	ORDER BY P.cod_visibilidad

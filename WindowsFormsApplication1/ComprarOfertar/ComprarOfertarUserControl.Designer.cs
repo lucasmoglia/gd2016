@@ -73,6 +73,7 @@
             this.gvPublicaciones.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gvPublicaciones.Size = new System.Drawing.Size(835, 261);
             this.gvPublicaciones.TabIndex = 0;
+            this.gvPublicaciones.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvPublicaciones_CellContentClick);
             this.gvPublicaciones.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvPublicaciones_RowEnter);
             // 
             // btnComprar
