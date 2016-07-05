@@ -11,6 +11,7 @@ using System.Configuration;
 using ME.UI;
 using ME.Business;
 using ME.Data;
+using ME.UI.Calificar;
 
 namespace ME.UI
 {
@@ -87,13 +88,6 @@ namespace ME.UI
             pnlMaster.Controls.Add(new VisibilidadControl());
         }
 
-        private void calificarToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //Cuando hago click en una opción del menu, cambio el controlador.
-            pnlMaster.Controls.Clear();
-            pnlMaster.Controls.Add(new CalificarControl());
-        }
-
         private void Home_FormClosed(object sender, FormClosedEventArgs e)
         {
             // Open App.Config of executable
@@ -117,5 +111,15 @@ namespace ME.UI
             //pnlMaster.Controls.Add(new ComprarOfertarUserControl(UserLogged.cod_usuario));
 
         }
+
+        private void calificarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Cuando hago click en una opción del menu, cambio el controlador.
+            pnlMaster.Controls.Clear();
+            pnlMaster.Controls.Add(new CalificarControl());
+
+        }
+
+
     }
 }
