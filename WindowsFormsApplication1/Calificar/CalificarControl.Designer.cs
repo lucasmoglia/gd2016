@@ -89,8 +89,10 @@
             this.gvComprasSinCalificar.Name = "gvComprasSinCalificar";
             this.gvComprasSinCalificar.ReadOnly = true;
             this.gvComprasSinCalificar.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.gvComprasSinCalificar.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gvComprasSinCalificar.Size = new System.Drawing.Size(806, 109);
             this.gvComprasSinCalificar.TabIndex = 2;
+            this.gvComprasSinCalificar.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvComprasSinCalificar_RowEnter);
             // 
             // btnCalificar
             // 
@@ -101,6 +103,7 @@
             this.btnCalificar.TabIndex = 3;
             this.btnCalificar.Text = "Calificar";
             this.btnCalificar.UseVisualStyleBackColor = true;
+            this.btnCalificar.Click += new System.EventHandler(this.btnCalificar_Click);
             // 
             // gbComprasPorUsuario
             // 

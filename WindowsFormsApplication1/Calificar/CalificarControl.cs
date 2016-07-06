@@ -38,11 +38,24 @@ namespace ME.UI.Calificar
 
         }
 
+
+
+        private void gvComprasSinCalificar_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            btnCalificar.Visible = true;
+            btnCalificar.Enabled = true;
+            
+        }
+
         private void btnCalificar_Click(object sender, EventArgs e)
         {
             Compra compra = (Compra)gvComprasSinCalificar.SelectedRows[0].DataBoundItem;
             Form nuevaCalificacionForm = new NuevaCalificacionForm(compra);
             nuevaCalificacionForm.ShowDialog(this);
         }
+
+
+
+
     }
 }

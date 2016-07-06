@@ -167,6 +167,9 @@
     <EmbeddedResource Include="Calificar\CalificarControl.resx">
       <DependentUpon>CalificarControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Calificar\NuevaCalificacionForm.resx">
+      <DependentUpon>NuevaCalificacionForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Facturas\FacturaUserControl.resx">
       <DependentUpon>FacturaUserControl.cs</DependentUpon>
     </EmbeddedResource>
