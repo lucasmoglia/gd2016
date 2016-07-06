@@ -29,29 +29,44 @@
         private void InitializeComponent()
         {
             this.gbUltimas5Calificaciones = new System.Windows.Forms.GroupBox();
+            this.gvComprasCalificadas = new System.Windows.Forms.DataGridView();
             this.gbComprasSinCalificar = new System.Windows.Forms.GroupBox();
+            this.gvComprasSinCalificar = new System.Windows.Forms.DataGridView();
             this.btnCalificar = new System.Windows.Forms.Button();
             this.gbComprasPorUsuario = new System.Windows.Forms.GroupBox();
             this.gvComprasUsuario = new System.Windows.Forms.DataGridView();
-            this.gvComprasCalificadas = new System.Windows.Forms.DataGridView();
-            this.gvComprasSinCalificar = new System.Windows.Forms.DataGridView();
             this.gbUltimas5Calificaciones.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gvComprasCalificadas)).BeginInit();
             this.gbComprasSinCalificar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gvComprasSinCalificar)).BeginInit();
             this.gbComprasPorUsuario.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvComprasUsuario)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvComprasCalificadas)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvComprasSinCalificar)).BeginInit();
             this.SuspendLayout();
             // 
             // gbUltimas5Calificaciones
             // 
             this.gbUltimas5Calificaciones.Controls.Add(this.gvComprasCalificadas);
-            this.gbUltimas5Calificaciones.Location = new System.Drawing.Point(8, 193);
+            this.gbUltimas5Calificaciones.Location = new System.Drawing.Point(8, 170);
             this.gbUltimas5Calificaciones.Name = "gbUltimas5Calificaciones";
-            this.gbUltimas5Calificaciones.Size = new System.Drawing.Size(817, 151);
+            this.gbUltimas5Calificaciones.Size = new System.Drawing.Size(817, 174);
             this.gbUltimas5Calificaciones.TabIndex = 1;
             this.gbUltimas5Calificaciones.TabStop = false;
             this.gbUltimas5Calificaciones.Text = "Ultimas 5 Compras Calificadas Por El Usuario";
+            // 
+            // gvComprasCalificadas
+            // 
+            this.gvComprasCalificadas.AllowUserToAddRows = false;
+            this.gvComprasCalificadas.AllowUserToDeleteRows = false;
+            this.gvComprasCalificadas.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
+            this.gvComprasCalificadas.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.gvComprasCalificadas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gvComprasCalificadas.GridColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.gvComprasCalificadas.Location = new System.Drawing.Point(6, 19);
+            this.gvComprasCalificadas.Name = "gvComprasCalificadas";
+            this.gvComprasCalificadas.ReadOnly = true;
+            this.gvComprasCalificadas.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.gvComprasCalificadas.Size = new System.Drawing.Size(806, 149);
+            this.gvComprasCalificadas.TabIndex = 1;
             // 
             // gbComprasSinCalificar
             // 
@@ -62,6 +77,20 @@
             this.gbComprasSinCalificar.TabIndex = 2;
             this.gbComprasSinCalificar.TabStop = false;
             this.gbComprasSinCalificar.Text = "Compras Sin Calificar";
+            // 
+            // gvComprasSinCalificar
+            // 
+            this.gvComprasSinCalificar.AllowUserToAddRows = false;
+            this.gvComprasSinCalificar.AllowUserToDeleteRows = false;
+            this.gvComprasSinCalificar.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
+            this.gvComprasSinCalificar.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.gvComprasSinCalificar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gvComprasSinCalificar.Location = new System.Drawing.Point(5, 16);
+            this.gvComprasSinCalificar.Name = "gvComprasSinCalificar";
+            this.gvComprasSinCalificar.ReadOnly = true;
+            this.gvComprasSinCalificar.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.gvComprasSinCalificar.Size = new System.Drawing.Size(806, 109);
+            this.gvComprasSinCalificar.TabIndex = 2;
             // 
             // btnCalificar
             // 
@@ -97,35 +126,6 @@
             this.gvComprasUsuario.Size = new System.Drawing.Size(806, 44);
             this.gvComprasUsuario.TabIndex = 0;
             // 
-            // gvComprasCalificadas
-            // 
-            this.gvComprasCalificadas.AllowUserToAddRows = false;
-            this.gvComprasCalificadas.AllowUserToDeleteRows = false;
-            this.gvComprasCalificadas.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
-            this.gvComprasCalificadas.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.gvComprasCalificadas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gvComprasCalificadas.GridColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.gvComprasCalificadas.Location = new System.Drawing.Point(6, 19);
-            this.gvComprasCalificadas.Name = "gvComprasCalificadas";
-            this.gvComprasCalificadas.ReadOnly = true;
-            this.gvComprasCalificadas.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.gvComprasCalificadas.Size = new System.Drawing.Size(806, 126);
-            this.gvComprasCalificadas.TabIndex = 1;
-            // 
-            // gvComprasSinCalificar
-            // 
-            this.gvComprasSinCalificar.AllowUserToAddRows = false;
-            this.gvComprasSinCalificar.AllowUserToDeleteRows = false;
-            this.gvComprasSinCalificar.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
-            this.gvComprasSinCalificar.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.gvComprasSinCalificar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gvComprasSinCalificar.Location = new System.Drawing.Point(5, 16);
-            this.gvComprasSinCalificar.Name = "gvComprasSinCalificar";
-            this.gvComprasSinCalificar.ReadOnly = true;
-            this.gvComprasSinCalificar.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.gvComprasSinCalificar.Size = new System.Drawing.Size(806, 109);
-            this.gvComprasSinCalificar.TabIndex = 2;
-            // 
             // CalificarControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -137,11 +137,11 @@
             this.Name = "CalificarControl";
             this.Size = new System.Drawing.Size(838, 437);
             this.gbUltimas5Calificaciones.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gvComprasCalificadas)).EndInit();
             this.gbComprasSinCalificar.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gvComprasSinCalificar)).EndInit();
             this.gbComprasPorUsuario.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gvComprasUsuario)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvComprasCalificadas)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvComprasSinCalificar)).EndInit();
             this.ResumeLayout(false);
 
         }

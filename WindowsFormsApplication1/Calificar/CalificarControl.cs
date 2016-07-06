@@ -20,13 +20,13 @@ namespace ME.UI.Calificar
         public CalificarControl()
         {
             InitializeComponent();
-//            listaCompras = CompraHandler.ListarComprasSinCalificar(UserLogged.cod_usuario);
-            listaComprasSinCalificar = CompraHandler.ListarComprasSinCalificar(81);
+            listaComprasSinCalificar = CompraHandler.ListarComprasSinCalificar(UserLogged.cod_usuario);
+//            listaComprasSinCalificar = CompraHandler.ListarComprasSinCalificar(81);
             gvComprasSinCalificar.DataSource = listaComprasSinCalificar;
 //            gvComprasSinCalificar.Columns.Remove("id_compra");
 
             listaComprasCalificadas = CompraHandler.Listar5ComprasCalificadas(81);
-//            listaCompras = CompraHandler.Listar5ComprasCalificadas(UserLogged.cod_usuario);
+//            listaComprasCalificadas = CompraHandler.Listar5ComprasCalificadas(UserLogged.cod_usuario);
             gvComprasCalificadas.DataSource = listaComprasCalificadas;
 //            gvComprasCalificadas.Columns.Remove("id_compra");
 
