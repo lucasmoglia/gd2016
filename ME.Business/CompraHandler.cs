@@ -22,6 +22,15 @@ namespace ME.Business
             return Compra.Get5ComprasCalificadas(cod_usuario);
         }
 
+        public static List<Calificaciones> ListarComprasPorUsuario(decimal cod_usuario)
+        {
+            return Compra.GetComprasPorUsuario(cod_usuario);
+        }
+
+        public static void Calificar(decimal id_compra, decimal estrellas, string desc_Calif)
+        {
+            Compra.Calificar(id_compra, estrellas, desc_Calif);
+        }
 
 
     }

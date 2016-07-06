@@ -70,7 +70,7 @@ namespace ME.Data
 
                 if (reader.Read())
                 {
-                    while (reader.Read())
+                    do
                     {
                         Visibilidad unaVisibilidad = new Visibilidad(
                               decimal.Parse(reader["cod_visibilidad"].ToString())
@@ -81,7 +81,7 @@ namespace ME.Data
                             );
 
                         visibilidadList.Add(unaVisibilidad);
-                    }
+                    } while (reader.Read());
                     return visibilidadList;
                 }
                 else return null;

@@ -93,6 +93,12 @@
     <Compile Include="Calificar\CalificarControl.Designer.cs">
       <DependentUpon>CalificarControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Calificar\NuevaCalificacionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Calificar\NuevaCalificacionForm.Designer.cs">
+      <DependentUpon>NuevaCalificacionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Facturas\FacturaUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

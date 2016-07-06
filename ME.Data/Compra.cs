@@ -43,18 +43,16 @@ namespace ME.Data
             using (SqlConnection connection = MEEntity.GetConnection())
             {
                 SqlCommand command = new SqlCommand("SELECT * from DE_UNA.fn_Compras_Sin_Calificar(@cod_usuario)", connection);
-//                command.CommandType = CommandType.StoredProcedure;
                 command.CommandType = CommandType.Text;
                 command.Parameters.Add("@cod_usuario", SqlDbType.Decimal).Value = cod_usuario;
                 command.CommandTimeout = 0;
 
                 connection.Open();
-//                SqlDataReader reader = command.ExecuteReader();
                 SqlDataReader reader = command.ExecuteReader();
 
                 if (reader.Read())
                 {
-                    while (reader.Read())
+                    do
                     {
                         Compra unaCompra = new Compra(
                               decimal.Parse(reader["id_compra"].ToString())
@@ -68,7 +66,7 @@ namespace ME.Data
                             , reader["desc_calificacion"].ToString()
                             );
                         compraList.Add(unaCompra);
-                    }
+                    } while (reader.Read());
                     return compraList;
                 }
                 else return null;
@@ -82,9 +80,7 @@ namespace ME.Data
             List<Compra> compraList = new List<Compra>();
             using (SqlConnection connection = MEEntity.GetConnection())
             {
-//                SqlCommand command = new SqlCommand("[DE_UNA].[fn_Ultimas_5_Compras_Calificadas]", connection);
                 SqlCommand command = new SqlCommand("select * from DE_UNA.fn_Ultimas_5_Compras_Calificadas(@cod_usuario)", connection);
-//                command.CommandType = CommandType.StoredProcedure;
                 command.CommandType = CommandType.Text;
                 command.Parameters.Add("@cod_usuario", SqlDbType.Decimal).Value = cod_usuario;
                 command.CommandTimeout = 0;
@@ -94,7 +90,7 @@ namespace ME.Data
 
                 if (reader.Read())
                 {
-                    while (reader.Read())
+                    do
                     {
                         Compra unaCompra = new Compra(
                               decimal.Parse(reader["id_compra"].ToString())
@@ -108,7 +104,7 @@ namespace ME.Data
                             , reader["desc_calificacion"].ToString()
                             );
                         compraList.Add(unaCompra);
-                    }
+                    } while (reader.Read());
                     return compraList;
                 }
                 else return null;
@@ -116,17 +112,91 @@ namespace ME.Data
         }
 
 
+        //intento de funcion que traiga la cantidad total de calificaciones otorgadas por el usuario mas un desglose por su cantidad de estrellas
+        public static List<Calificaciones> GetComprasPorUsuario(decimal cod_usuario)
+        {
+            List<Calificaciones> califList = new List<Calificaciones>();
+            using (SqlConnection connection = MEEntity.GetConnection())
+            {
+                SqlCommand command = new SqlCommand("select * from DE_UNA.fn_Cant_Compras_Por_Cliente(@cod_usuario)", connection);
+                command.CommandType = CommandType.Text;
+                command.Parameters.Add("@cod_usuario", SqlDbType.Decimal).Value = cod_usuario;
+                command.CommandTimeout = 0;
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    do
+                    {
+                        Calificaciones unaLinea = new Calificaciones(
+                                decimal.Parse(reader["Cant_Compras_Cliente"].ToString())
+                              , decimal.Parse(reader["Compras_Con_5_Estrellas"].ToString())
+                              , decimal.Parse(reader["Compras_Con_4_Estrellas"].ToString())
+                              , decimal.Parse(reader["Compras_Con_3_Estrellas"].ToString())
+                              , decimal.Parse(reader["Compras_Con_2_Estrellas"].ToString())
+                              , decimal.Parse(reader["Compras_Con_1_Estrella"].ToString())
+                            );
+                        califList.Add(unaLinea);
+                    } while (reader.Read());
+                    return califList;
+                }
+                else return null;
+            }
+        }
+
+
+
+        //Procedimiento que Califica una Compra 
+        public static void Calificar(decimal id_compra, decimal estrellas, string desc_Calif)
+        {
+            using (SqlConnection connection = MEEntity.GetConnection())
+            {
+                SqlCommand command = new SqlCommand("[DE_UNA].[CalificarCompra]", connection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter param_id_compra = command.Parameters.AddWithValue("@id_compra", id_compra);
+                param_id_compra.SqlDbType = SqlDbType.Decimal;
+
+                SqlParameter param_estrellas = command.Parameters.AddWithValue("@estrellas", estrellas);
+                param_estrellas.SqlDbType = SqlDbType.NVarChar;
+
+                SqlParameter param_desc_Calif = command.Parameters.AddWithValue("@desc_Calif", desc_Calif);
+                param_desc_Calif.SqlDbType = SqlDbType.Decimal;
+
+                connection.Open();
+                command.ExecuteScalar();
+            }
+        }
+ 
 
 
 
 
+    }
 
+    //Defino la clase Calificaciones para poder devolver la lista de GetComprasPorUsuario
+    public class Calificaciones
+    {
+        // Atributos de la Clase Calificaciones
+        public decimal  Total_Compras          { get; set; }
+        public decimal  Estrellas_5            { get; set; }
+        public decimal  Estrellas_4            { get; set; }
+        public decimal  Estrellas_3            { get; set; }
+        public decimal  Estrellas_2            { get; set; }
+        public decimal  Estrellas_1            { get; set; }
 
+        //constructor de la clase Compra
+        public Calificaciones(decimal Cant_Compras_Cliente, decimal Compras_Con_5_Estrellas, decimal Compras_Con_4_Estrellas, decimal Compras_Con_3_Estrellas, decimal Compras_Con_2_Estrellas, decimal Compras_Con_1_Estrella)
+        {
+            this.Total_Compras       = Cant_Compras_Cliente;
+            this.Estrellas_5         = Compras_Con_5_Estrellas;
+            this.Estrellas_4         = Compras_Con_4_Estrellas;
+            this.Estrellas_3         = Compras_Con_3_Estrellas;
+            this.Estrellas_2         = Compras_Con_2_Estrellas;
+            this.Estrellas_1         = Compras_Con_1_Estrella;
+        }
 
-
-
-
-
-
+    
     }
 }
