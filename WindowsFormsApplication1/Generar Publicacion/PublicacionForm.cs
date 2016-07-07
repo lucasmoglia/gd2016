@@ -15,7 +15,7 @@ namespace ME.UI
 {
     public partial class PublicacionForm : Form
     {
-        bool esNuevaPubli = false, esModificable = false, esCompra = false;
+        bool esNuevaPubli = false, esModificable = false, esCompra = false, esView = false;
         Publicacion PublicacionExistente = null;
         private string descrVacia = "Ingrese aquí la descripción";
 
@@ -94,6 +94,7 @@ namespace ME.UI
 
                     default: // TipoAccion.View: 
                         this.Text = "Publicación " + publicacion.cod_publi.ToString();
+                        this.esView = true;
                         btnCancelar.Text = "OK";
 
                         habilitarTodo(false);
@@ -126,11 +127,12 @@ namespace ME.UI
 
             numStock.Enabled = (esNuevaPubli || esModificable);
 
-            if ((esNuevaPubli || esModificable) && UserLogged.esEmpresa) {
+            if (UserLogged.esEmpresa && (esNuevaPubli || esModificable)) {
                 List<Rubro> listaRubro = new List<Rubro>();
                 listaRubro.Add(RubroHandler.ObtenerRubro("Electrónicos"));
 
                 cmbBoxRubro.DataSource = listaRubro;
+                cmbBoxRubro.SelectedItem = listaRubro[0].cod_rubro;
             } else {
                 cmbBoxRubro.DataSource = RubroHandler.ListarRubros();
             }
@@ -153,6 +155,7 @@ namespace ME.UI
             cmbBoxEstado.DataSource = estados;
             cmbBoxEstado.ValueMember = "cod_estado";
             cmbBoxEstado.DisplayMember = "nombre";
+            cmbBoxEstado.SelectedItem = estados[0];
 
             VoF si = new VoF(true, "Si");
             VoF no = new VoF(false, "No");
@@ -200,22 +203,63 @@ namespace ME.UI
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (txtDescripcion.Text != descrVacia && txtDescripcion.Text != String.Empty) {
-                Publicacion nuevaPublicacion = PublicacionHandler.Guardar(
-                    txtDescripcion.Text, numStock.Value, DTFechaInicio.Value, DTFechaVencimiento.Value, numPrecio.Value,
-                    decimal.Parse(cmbBoxVisibilidad.SelectedValue.ToString()), decimal.Parse(cmbBoxEstado.SelectedValue.ToString()),
-                    decimal.Parse(cmbBoxRubro.SelectedValue.ToString()), UserLogged.cod_usuario, decimal.Parse(cmbBoxTipoPubli.SelectedValue.ToString()),
-                    bool.Parse(cmbBoxEnvio.SelectedValue.ToString()), bool.Parse(cmbBoxPreguntas.SelectedValue.ToString())
-                );
+            if (esNuevaPubli || esModificable)
+            {
+                if (txtDescripcion.Text != descrVacia && txtDescripcion.Text != String.Empty)
+                {
+                    Publicacion nuevaPublicacion = PublicacionHandler.Guardar(
+                        txtDescripcion.Text, numStock.Value, DTFechaInicio.Value, DTFechaVencimiento.Value, numPrecio.Value,
+                        decimal.Parse(cmbBoxVisibilidad.SelectedValue.ToString()), decimal.Parse(cmbBoxEstado.SelectedValue.ToString()),
+                        decimal.Parse(cmbBoxRubro.SelectedValue.ToString()), UserLogged.cod_usuario, decimal.Parse(cmbBoxTipoPubli.SelectedValue.ToString()),
+                        bool.Parse(cmbBoxEnvio.SelectedValue.ToString()), bool.Parse(cmbBoxPreguntas.SelectedValue.ToString())
+                    );
 
-                PublicacionForm muestraDeNuevaPubli = new PublicacionForm(nuevaPublicacion, TipoAccion.View);
+                    PublicacionForm muestraDeNuevaPubli = new PublicacionForm(nuevaPublicacion, TipoAccion.View);
 
-                muestraDeNuevaPubli.Show();
+                    muestraDeNuevaPubli.Show();
 
-                // También mostrar la factura por pantalla.
+                    this.Hide();
+                }
+            } else if (esCompra) {
+                if (PublicacionExistente.stock > 0) {
+                    // ACA CONTROLAR QUE NO TENGA MAS DE 3 COMPRAS SIN CALIFICACIONES.
+                    List<Compra> comprasSinCalificar = CompraHandler.ListarComprasSinCalificar(UserLogged.cod_usuario);
+
+                    if (comprasSinCalificar != null && comprasSinCalificar.Count < 3)
+                    {
+                        ComprarForm formDeCompra = new ComprarForm(PublicacionExistente.tipo_publi.cod_tipo_publi == 1 /* Compra Inmediata */, PublicacionExistente.stock);
+
+                        formDeCompra.ShowDialog(this); // Ver como recuperar el valor que setea en ese form.
+                    } else {
+                        string msjErrorCalif = "Usted tiene " + comprasSinCalificar.Count.ToString() + " compras pendientes de calificación.\n" +
+                                               "No podrá comprar/ofertar con 3 o más calificaciones pendientes.";
+                        MessageBox.Show(msjErrorCalif, "Comprar/Ofertar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                        //Home.cargarPanel(new CalificarControl()); // Hace que se cargue en el panel del Home el User Control de Calificar.
+
+                        this.Close();
+                    }
+                } else {
+                    MessageBox.Show("No puede Comprar/Ofertar, No hay Stock disponible.", "Comprar/Ofertar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            }
+
+            if (PublicacionExistente.estado.cod_estado == 1 /* Publicada */ ||
+                PublicacionExistente.estado.cod_estado == 3 /* Activa */  && !esView)
+            {
+                // Mostrar la factura por pantalla.
+
+                //Factura nuevaFactura = FacturaHandler.nuevaFactura()
+                //FacturaForm muestraDeFactura = new FacturaForm(nuevaFactura);
+
+                //muestraDeFactura.Show();
+
 
                 this.Close();
             }
+
+
         }
 
         private void txtDescripcion_Enter(object sender, EventArgs e)

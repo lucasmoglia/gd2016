@@ -120,6 +120,9 @@ namespace ME.UI
 
         }
 
-
+        public void cargarPanel(UserControl unControl) {
+            pnlMaster.Controls.Clear();
+            pnlMaster.Controls.Add(unControl);
+        }
     }
 }

@@ -117,6 +117,12 @@
     <Compile Include="Generar Publicacion\PublicacionForm.Designer.cs">
       <DependentUpon>PublicacionForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ComprarOfertar\ComprarForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ComprarOfertar\ComprarForm.Designer.cs">
+      <DependentUpon>ComprarForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Home\Home.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -179,6 +185,9 @@
     <EmbeddedResource Include="Generar Publicacion\PublicacionForm.resx">
       <DependentUpon>PublicacionForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ComprarOfertar\ComprarForm.resx">
+      <DependentUpon>ComprarForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Home\Home.resx">
       <DependentUpon>Home.cs</DependentUpon>
     </EmbeddedResource>
@@ -198,7 +207,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

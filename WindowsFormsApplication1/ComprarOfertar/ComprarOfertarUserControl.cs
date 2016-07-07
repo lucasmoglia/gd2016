@@ -80,6 +80,10 @@ namespace ME.UI
             lstRubros.SelectedItem = null;
             lstRubros.Text = "(Ninguno)";
 
+            //gvPublicaciones.Columns["visibilidad"].DataPropertyName = descripcion;
+            //gvPublicaciones.Columns["estado"].DataPropertyName = nombre;
+            //gvPublicaciones.Columns["rubro"].DataPropertyName = desc_larga;
+
         }
 
         private void btnComprar_Click(object sender, EventArgs e)
@@ -113,6 +117,7 @@ namespace ME.UI
                 nuevaPublicacionForm.ShowDialog(this);
 
                 gvPublicaciones.Refresh();
+                this.Refresh();
             }
         }
 
