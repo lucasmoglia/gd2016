@@ -35,7 +35,7 @@ namespace ME.UI.Calificar
 //            listaComprasCalificadas = CompraHandler.Listar5ComprasCalificadas(UserLogged.cod_usuario);
             gvComprasUsuario.DataSource = listaComprasPorUsuario;
 //            gvComprasCalificadas.Columns.Remove("id_compra");
-
+ 
         }
 
 
