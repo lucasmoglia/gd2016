@@ -32,9 +32,7 @@ namespace ME.Business
 
         public static void Eliminar(decimal cod_visibilidad)
         {
-            List<SqlParameter> parameters = new List<SqlParameter>();
-            parameters.Add(new SqlParameter("@cod_visibilidad", cod_visibilidad));
-            MEEntity.ExecuteSP("[DE_UNA].[EliminarVisibilidad]", parameters);
+            Visibilidad.Eliminar(cod_visibilidad);
         }
     }
 }

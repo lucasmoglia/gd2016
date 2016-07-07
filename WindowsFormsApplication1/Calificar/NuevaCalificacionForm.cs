@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ME.Business;
 using ME.Data;
-using ME.UI;
+using ME.UI.Calificar;
 
 namespace ME.UI.Calificar
 {
@@ -39,9 +39,6 @@ namespace ME.UI.Calificar
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             CompraHandler.Calificar(decimal.Parse(lbl_IdCompra.Text), numEstrellas.Value, txtDescCalificacion.Text);
-            //actualizo las dataGridViews del CalificarControl
-            
-
             this.Close();
         }
 
