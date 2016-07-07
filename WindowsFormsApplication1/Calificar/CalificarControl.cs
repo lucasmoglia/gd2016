@@ -21,23 +21,20 @@ namespace ME.UI.Calificar
         public CalificarControl()
         {
             InitializeComponent();
-//            listaComprasSinCalificar = CompraHandler.ListarComprasSinCalificar(UserLogged.cod_usuario);
-            listaComprasSinCalificar = CompraHandler.ListarComprasSinCalificar(81);
-            gvComprasSinCalificar.DataSource = listaComprasSinCalificar;
-//            gvComprasSinCalificar.Columns.Remove("id_compra");
-
-            listaComprasCalificadas = CompraHandler.Listar5ComprasCalificadas(81);
-//            listaComprasCalificadas = CompraHandler.Listar5ComprasCalificadas(UserLogged.cod_usuario);
-            gvComprasCalificadas.DataSource = listaComprasCalificadas;
-//            gvComprasCalificadas.Columns.Remove("id_compra");
-
-            listaComprasPorUsuario = CompraHandler.ListarComprasPorUsuario(81);
-//            listaComprasCalificadas = CompraHandler.Listar5ComprasCalificadas(UserLogged.cod_usuario);
-            gvComprasUsuario.DataSource = listaComprasPorUsuario;
-//            gvComprasCalificadas.Columns.Remove("id_compra");
-
+            this.CalificarControlLoad();
         }
+        private void CalificarControlLoad()
+        {
+            // Este Procedimiento carga las Data Grid Views del form Calificar Control
+            listaComprasSinCalificar = CompraHandler.ListarComprasSinCalificar(UserLogged.cod_usuario);
+            gvComprasSinCalificar.DataSource = listaComprasSinCalificar;
 
+            listaComprasCalificadas = CompraHandler.Listar5ComprasCalificadas(UserLogged.cod_usuario);
+            gvComprasCalificadas.DataSource = listaComprasCalificadas;
+
+            listaComprasPorUsuario = CompraHandler.ListarComprasPorUsuario(UserLogged.cod_usuario);
+            gvComprasUsuario.DataSource = listaComprasPorUsuario;
+        }
 
 
         private void gvComprasSinCalificar_RowEnter(object sender, DataGridViewCellEventArgs e)
@@ -52,6 +49,7 @@ namespace ME.UI.Calificar
             Compra compra = (Compra)gvComprasSinCalificar.SelectedRows[0].DataBoundItem;
             Form nuevaCalificacionForm = new NuevaCalificacionForm(compra);
             nuevaCalificacionForm.ShowDialog(this);
+            this.CalificarControlLoad();
         }
 
 

@@ -65,7 +65,6 @@
             this.gvVisibilidades.Size = new System.Drawing.Size(797, 286);
             this.gvVisibilidades.TabIndex = 0;
             this.gvVisibilidades.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvVisibilidades_RowEnter);
-            this.gvVisibilidades.SelectionChanged += new System.EventHandler(this.gvVisibilidades_SelectionChanged);
             // 
             // button1
             // 
@@ -128,7 +127,6 @@
             this.bindingNavigator1.Size = new System.Drawing.Size(803, 25);
             this.bindingNavigator1.TabIndex = 4;
             this.bindingNavigator1.Text = "bindingNavigator1";
-            this.bindingNavigator1.RefreshItems += new System.EventHandler(this.bindingNavigator1_RefreshItems);
             // 
             // bindingNavigatorCountItem
             // 
@@ -209,7 +207,6 @@
             this.Controls.Add(this.gvVisibilidades);
             this.Name = "VisibilidadControl";
             this.Size = new System.Drawing.Size(803, 500);
-            this.Load += new System.EventHandler(this.VisibilidadesControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gvVisibilidades)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
             this.bindingNavigator1.ResumeLayout(false);

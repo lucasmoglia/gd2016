@@ -58,7 +58,7 @@
             this.gvComprasCalificadas.AllowUserToAddRows = false;
             this.gvComprasCalificadas.AllowUserToDeleteRows = false;
             this.gvComprasCalificadas.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
-            this.gvComprasCalificadas.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.gvComprasCalificadas.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.gvComprasCalificadas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvComprasCalificadas.GridColor = System.Drawing.SystemColors.ControlDarkDark;
             this.gvComprasCalificadas.Location = new System.Drawing.Point(6, 19);
@@ -83,7 +83,7 @@
             this.gvComprasSinCalificar.AllowUserToAddRows = false;
             this.gvComprasSinCalificar.AllowUserToDeleteRows = false;
             this.gvComprasSinCalificar.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
-            this.gvComprasSinCalificar.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.gvComprasSinCalificar.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.gvComprasSinCalificar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvComprasSinCalificar.Location = new System.Drawing.Point(5, 16);
             this.gvComprasSinCalificar.Name = "gvComprasSinCalificar";
@@ -120,7 +120,7 @@
             this.gvComprasUsuario.AllowUserToAddRows = false;
             this.gvComprasUsuario.AllowUserToDeleteRows = false;
             this.gvComprasUsuario.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
-            this.gvComprasUsuario.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.gvComprasUsuario.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.gvComprasUsuario.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvComprasUsuario.Location = new System.Drawing.Point(5, 19);
             this.gvComprasUsuario.Name = "gvComprasUsuario";

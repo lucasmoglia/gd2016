@@ -20,6 +20,11 @@ namespace ME.UI
         public VisibilidadControl()
         {
             InitializeComponent();
+            VisibilidadControlLoad();
+        }
+
+        private void VisibilidadControlLoad()
+        {
             listaVisibilidades = VisibilidadHandler.ListarVisibilidades();
             gvVisibilidades.DataSource = listaVisibilidades;
             gvVisibilidades.Columns.Remove("cod_visibilidad");
@@ -58,21 +63,13 @@ namespace ME.UI
             }
         }
 
-        private void VisibilidadesControl_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             Form nuevaVisibilidadForm = new NuevaVisibilidadForm(null);
             nuevaVisibilidadForm.ShowDialog(this);
+            VisibilidadControlLoad();
         }
 
-        private void gvVisibilidades_SelectionChanged(object sender, EventArgs e)
-        {
-            
-        }
 
         private void gvVisibilidades_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
@@ -85,19 +82,15 @@ namespace ME.UI
             Visibilidad visibilidad = (Visibilidad)gvVisibilidades.SelectedRows[0].DataBoundItem;
             Form nuevaVisibilidadForm = new NuevaVisibilidadForm(visibilidad);
             nuevaVisibilidadForm.ShowDialog(this);
-            gvVisibilidades.Refresh();
+            VisibilidadControlLoad();
         }
 
-        private void bindingNavigator1_RefreshItems(object sender, EventArgs e)
-        {
-
-        }
 
         private void btnRemoveVisibilidad_Click(object sender, EventArgs e)
         {
             Visibilidad visibilidad = (Visibilidad)gvVisibilidades.SelectedRows[0].DataBoundItem;
             VisibilidadHandler.Eliminar(visibilidad.cod_visibilidad);
-            gvVisibilidades.Refresh();
+            VisibilidadControlLoad();
         }
 
     }

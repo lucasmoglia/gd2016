@@ -147,5 +147,18 @@ namespace ME.Data
             }
         }
  
+
+        public static void Eliminar(decimal cod_visibilidad)
+        {
+            using (SqlConnection connection = MEEntity.GetConnection())
+            {
+                SqlCommand command = new SqlCommand("[DE_UNA].[EliminarVisibilidad]", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                SqlParameter param_cod_visibilidad = command.Parameters.AddWithValue("@cod_visibilidad", cod_visibilidad);
+                param_cod_visibilidad.SqlDbType = SqlDbType.Decimal;
+                connection.Open();
+                command.ExecuteScalar();
+            }
+        }
     }
 }

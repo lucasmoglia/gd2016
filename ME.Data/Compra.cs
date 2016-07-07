@@ -145,34 +145,30 @@ namespace ME.Data
             }
         }
 
-
-
+        
         //Procedimiento que Califica una Compra 
         public static void Calificar(decimal id_compra, decimal estrellas, string desc_Calif)
         {
             using (SqlConnection connection = MEEntity.GetConnection())
             {
-                SqlCommand command = new SqlCommand("[DE_UNA].[CalificarCompra]", connection);
+                SqlCommand command = new SqlCommand("[DE_UNA].[Calificar_Compra]", connection);
                 command.CommandType = CommandType.StoredProcedure;
 
                 SqlParameter param_id_compra = command.Parameters.AddWithValue("@id_compra", id_compra);
                 param_id_compra.SqlDbType = SqlDbType.Decimal;
 
                 SqlParameter param_estrellas = command.Parameters.AddWithValue("@estrellas", estrellas);
-                param_estrellas.SqlDbType = SqlDbType.NVarChar;
+                param_estrellas.SqlDbType = SqlDbType.Decimal;
 
                 SqlParameter param_desc_Calif = command.Parameters.AddWithValue("@desc_Calif", desc_Calif);
-                param_desc_Calif.SqlDbType = SqlDbType.Decimal;
+                param_desc_Calif.SqlDbType = SqlDbType.NVarChar;
 
                 connection.Open();
                 command.ExecuteScalar();
             }
         }
  
-
-
-
-
+        
     }
 
     //Defino la clase Calificaciones para poder devolver la lista de GetComprasPorUsuario
