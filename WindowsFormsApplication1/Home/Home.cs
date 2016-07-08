@@ -24,7 +24,7 @@ namespace ME.UI
         private void Home_Load(object sender, EventArgs e)
         {
             //this.Text = string.Concat("Bienvenido ", System.Configuration.ConfigurationManager.AppSettings["user"].ToString(), "!");
-            this.Text = string.Concat("Bienvenido ", UserLogged.username, "!");
+            this.Text = string.Concat(DateTime.Parse(ConfigurationManager.AppSettings["fecha"].ToString()), "Bienvenido ", UserLogged.username, "!");
 
             if (UserLogged.esAdmin) {
                 administracionToolStripMenuItem.Enabled = true;
