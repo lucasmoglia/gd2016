@@ -19,6 +19,7 @@ ALTER PROCEDURE [DE_UNA].GetPublicaciones
 	  @estado numeric(1)				-- filtro por estado de publicación
 	, @rubros [DE_UNA].Rubros READONLY  -- filtro por rubros
 	, @descripcion nvarchar(255)		-- filtro por descripción de publicación
+	, @usuario decimal(20,0)            -- filtro pot usuario (para la opción "Mis Publicaciones")
 	-- Parámetros para la paginación.
 	, @PageSize int					-- Tamaño de página
 	, @PageNumber int				-- Número de página
@@ -89,7 +90,8 @@ BEGIN
 	 LEFT JOIN [DE_UNA].Rubros             R ON P.cod_rubro       = R.cod_rubro
 	 LEFT JOIN [DE_UNA].Tipos_Publicacion  T ON P.cod_tipo_publi  = T.cod_tipo_publi
 	 LEFT JOIN [DE_UNA].Usuarios           U ON P.cod_usuario     = U.cod_usuario
-	WHERE (E.cod_estado    IN (@estado, @publicada)   OR @estado IS NULL)
+	WHERE (U.cod_usuario     = @usuario               OR @usuario IS NULL)
+	  AND (E.cod_estado    IN (@estado, @publicada)   OR @estado IS NULL)
 	  AND (p.cod_rubro     IN (SELECT cod_Rubro FROM @rubros) OR (SELECT cod_Rubro FROM @rubros) IS NULL)
 	  AND (P.descripcion LIKE ('%' + @descripcion + '%')      OR @descripcion IS NULL)
 	ORDER BY P.cod_visibilidad

@@ -15,7 +15,7 @@ namespace ME.UI
     public partial class ComprarOfertarUserControl : UserControl
     {
         private const int pageSize = 10;
-        private string descripcion = String.Empty;
+        private string descripcion = String.Empty, descrVacia = "Ingrese Búsqueda";
         private List<Publicacion> listaPublicaciones;
         private List<Rubro> rubros = new List<Rubro>();
         private List<decimal> cod_rubros = new List<decimal>();
@@ -42,6 +42,7 @@ namespace ME.UI
             // The desired page has changed, so fetch the page of records using the "Current" offset 
             int offset = (int)bindSourcePubli.Current;
             var records = new List<Publicacion>();
+
             for (int i = offset; i < offset + pageSize && i < listaPublicaciones.Count; i++)
                 records.Add(listaPublicaciones.ElementAt(i));
             gvPublicaciones.DataSource = records;
@@ -71,7 +72,7 @@ namespace ME.UI
         private void ComprarOfertarUserControl_Load(object sender, EventArgs e)
         {
             txtDescripcion.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            txtDescripcion.Text = "Ingrese Búsqueda";
+            txtDescripcion.Text = descrVacia;
 
             lstRubros.DataSource = RubroHandler.ListarRubros();
             lstRubros.ValueMember = "cod_rubro";
@@ -79,10 +80,9 @@ namespace ME.UI
             lstRubros.SelectedItem = null;
             lstRubros.Text = "(Ninguno)";
 
-            //gvPublicaciones.DataSource = PublicacionHandler.ListarPublicaciones(1, null, String.Empty);
-            //listaPublicaciones = PublicacionHandler.ListarPublicaciones(1, null, String.Empty);
-            //gvPublicaciones.DataSource = listaPublicaciones;
-            //gvPublicaciones.Columns.Remove("cod_publi");
+            //gvPublicaciones.Columns["visibilidad"].DataPropertyName = descripcion;
+            //gvPublicaciones.Columns["estado"].DataPropertyName = nombre;
+            //gvPublicaciones.Columns["rubro"].DataPropertyName = desc_larga;
 
         }
 
@@ -91,9 +91,11 @@ namespace ME.UI
             if (gvPublicaciones.SelectedRows != null) {
                 Publicacion publicacion = (Publicacion)gvPublicaciones.SelectedRows[0].DataBoundItem;
 
-                if (publicacion.cod_publi != UserLogged.cod_usuario){
-                    PublicacionForm publicacionForm = new PublicacionForm(publicacion, false);
+                if (publicacion.cod_usuario != UserLogged.cod_usuario) {
+                    PublicacionForm publicacionForm = new PublicacionForm(publicacion, TipoAccion.Buy);
                     publicacionForm.ShowDialog(this);
+                } else {
+                     MessageBox.Show("No puede Comprar/Ofertar a sí mismo", "Comprar/Ofertar", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -110,18 +112,19 @@ namespace ME.UI
         {
             Publicacion publicacion = (Publicacion)gvPublicaciones.SelectedRows[0].DataBoundItem;
 
-            if (publicacion != null && publicacion.username == UserLogged.username && publicacion.estado.nombre == "Borrador") {
-                Form nuevaPublicacionForm = new PublicacionForm(publicacion, true);
+            if (publicacion != null && publicacion.username == UserLogged.username && publicacion.estado.cod_estado == 2 /* "Borrador" */) {
+                Form nuevaPublicacionForm = new PublicacionForm(publicacion, TipoAccion.Mod);
                 nuevaPublicacionForm.ShowDialog(this);
 
                 gvPublicaciones.Refresh();
+                this.Refresh();
             }
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             txtDescripcion.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            txtDescripcion.Text = "Ingrese Búsqueda";
+            txtDescripcion.Text = descrVacia;
 
             //lstRubros.SelectedValue = null;
             lstRubros.ClearSelected();
@@ -133,10 +136,14 @@ namespace ME.UI
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
+            descripcion = (txtDescripcion.Text != descrVacia && txtDescripcion.Text != String.Empty)?
+                            txtDescripcion.Text
+                            :
+                            String.Empty;
+
             if (lstRubros.SelectedIndex > -1 && lstRubros.SelectedItems != null) {
                 rubros.Clear();
                 cod_rubros.Clear();
-                descripcion = txtDescripcion.Text;
                 listaPublicaciones.Clear();
 
                 foreach (Rubro item in lstRubros.SelectedItems.Cast<Rubro>())
@@ -145,6 +152,7 @@ namespace ME.UI
                 }
 
                 cod_rubros.AddRange(rubros.ConvertAll(rubro => rubro.cod_rubro));
+                
                 listaPublicaciones = PublicacionHandler.ListarPublicaciones(1, cod_rubros, descripcion);
                 bindSourcePubli.DataSource = listaPublicaciones;
             }
@@ -157,7 +165,8 @@ namespace ME.UI
             if (gvPublicaciones.SelectedRows != null){
                 Publicacion publicacion = (Publicacion)gvPublicaciones.SelectedRows[0].DataBoundItem;
 
-                PublicacionForm publicacionForm = new PublicacionForm(publicacion, false);
+                PublicacionForm publicacionForm = new PublicacionForm(publicacion, TipoAccion.View);
+                
                 publicacionForm.ShowDialog(this);
             }
         }
@@ -167,8 +176,9 @@ namespace ME.UI
             if (Globales.NumPag_Publi + 1 > Globales.PagsEnCache_Publi){
                 listaPublicaciones.AddRange(PublicacionHandler.ListarPublicaciones(1, cod_rubros, descripcion));
                 bindSourcePubli.DataSource = listaPublicaciones;
+
+                gvPublicaciones.Refresh();
             }
-            gvPublicaciones.Refresh();
         }
 
 
@@ -176,18 +186,16 @@ namespace ME.UI
         {
             txtDescripcion.ForeColor = System.Drawing.SystemColors.WindowText;
 
-            if (txtDescripcion.Text == "Ingrese Búsqueda")
-            {
+            if (txtDescripcion.Text == descrVacia) {
                 txtDescripcion.Text = String.Empty;
             }
         }
 
         private void txtDescripcion_Leave(object sender, EventArgs e)
         {
-            if (txtDescripcion.Text == String.Empty)
-            {
+            if (txtDescripcion.Text == String.Empty) {
                 txtDescripcion.ForeColor = System.Drawing.SystemColors.WindowFrame;
-                txtDescripcion.Text = "Ingrese Búsqueda";
+                txtDescripcion.Text = descrVacia;
             }
         }
 
@@ -199,6 +207,11 @@ namespace ME.UI
         private void lstRubros_Click(object sender, EventArgs e)
         {
             lstRubros.ForeColor = System.Drawing.SystemColors.WindowText;
+        }
+
+        private void gvPublicaciones_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            this.btnComprar_Click(sender, e);
         }
     }
 }

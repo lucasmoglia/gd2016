@@ -33,7 +33,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -58,17 +57,11 @@
     <Compile Include="ABM Rol\RolUserControl.Designer.cs">
       <DependentUpon>RolUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="ABM Usuario\ClienteUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ABM Usuario\ClienteUserControl.Designer.cs">
-      <DependentUpon>ClienteUserControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ABM Usuario\NuevoClienteForm.cs">
+    <Compile Include="ABM Usuario\ResetPasswordForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ABM Usuario\NuevoClienteForm.Designer.cs">
-      <DependentUpon>NuevoClienteForm.cs</DependentUpon>
+    <Compile Include="ABM Usuario\ResetPasswordForm.Designer.cs">
+      <DependentUpon>ResetPasswordForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ABM Usuario\UsuarioUserControl.cs">
       <SubType>UserControl</SubType>
@@ -94,11 +87,17 @@
     <Compile Include="ABM Visibilidad\VisibilidadControl.Designer.cs">
       <DependentUpon>VisibilidadControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Calificar\Form1.cs">
+    <Compile Include="Calificar\CalificarControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Calificar\CalificarControl.Designer.cs">
+      <DependentUpon>CalificarControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Calificar\NuevaCalificacionForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Calificar\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Calificar\NuevaCalificacionForm.Designer.cs">
+      <DependentUpon>NuevaCalificacionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Facturas\FacturaUserControl.cs">
       <SubType>UserControl</SubType>
@@ -117,6 +116,12 @@
     </Compile>
     <Compile Include="Generar Publicacion\PublicacionForm.Designer.cs">
       <DependentUpon>PublicacionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ComprarOfertar\ComprarForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ComprarOfertar\ComprarForm.Designer.cs">
+      <DependentUpon>ComprarForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Home\Home.cs">
       <SubType>Form</SubType>
@@ -150,11 +155,8 @@
     <EmbeddedResource Include="ABM Rol\RolUserControl.resx">
       <DependentUpon>RolUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ABM Usuario\ClienteUserControl.resx">
-      <DependentUpon>ClienteUserControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ABM Usuario\NuevoClienteForm.resx">
-      <DependentUpon>NuevoClienteForm.cs</DependentUpon>
+    <EmbeddedResource Include="ABM Usuario\ResetPasswordForm.resx">
+      <DependentUpon>ResetPasswordForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ABM Usuario\UsuarioUserControl.resx">
       <DependentUpon>UsuarioUserControl.cs</DependentUpon>
@@ -168,6 +170,12 @@
     <EmbeddedResource Include="ABM Visibilidad\VisibilidadControl.resx">
       <DependentUpon>VisibilidadControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Calificar\CalificarControl.resx">
+      <DependentUpon>CalificarControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Calificar\NuevaCalificacionForm.resx">
+      <DependentUpon>NuevaCalificacionForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Facturas\FacturaUserControl.resx">
       <DependentUpon>FacturaUserControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -176,6 +184,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Generar Publicacion\PublicacionForm.resx">
       <DependentUpon>PublicacionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ComprarOfertar\ComprarForm.resx">
+      <DependentUpon>ComprarForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Home\Home.resx">
       <DependentUpon>Home.cs</DependentUpon>

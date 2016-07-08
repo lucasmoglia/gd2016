@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 
 namespace ME.Data
 {
+    public enum TipoAccion { Mod, View, New, Buy }
+
     public class Publicacion
     {
         public decimal  cod_publi          { get; set; }
@@ -18,6 +20,8 @@ namespace ME.Data
         public decimal  precio_producto    { get; set; }
 
         public Visibilidad     visibilidad { get; set; }
+//        public string descr_visibilidad { get { this.visibilidad.descripcion; } set; }
+
         public Estado          estado      { get; set; }
         public Rubro           rubro       { get; set; }
 //        public UsuarioModel    usuario     { get; set; }
@@ -53,6 +57,10 @@ namespace ME.Data
             this.con_preguntas = con_preguntas;
         }
 
+        public string Descr_visibilidad() {
+            return this.visibilidad.descripcion;
+        }
+        
         public static Publicacion GetPublicacion(decimal cod_publi)
         {
             using (SqlConnection connection = MEEntity.GetConnection())
@@ -127,8 +135,8 @@ namespace ME.Data
                 command.Parameters.Add("@descripcion", SqlDbType.NVarChar).Value = descripcion;
 
                 // parámetros para la paginación.
-                command.Parameters.Add("@PageSize", SqlDbType.Int).Value = Globales.TamanioPag_Publi;
-                command.Parameters.Add("@PageNumber", SqlDbType.Int).Value = Globales.NumPag_Publi += 1;
+                command.Parameters.Add("@PageSize", SqlDbType.Int).Value = Globales.TamanioPag_Publi;  // sacar variables gobales.
+                command.Parameters.Add("@PageNumber", SqlDbType.Int).Value = Globales.NumPag_Publi += 1;  // sacar variables gobales.
 
                 SqlParameter param_TotalPags = new SqlParameter("@TotalPags", SqlDbType.Int);
                 param_TotalPags.Direction = ParameterDirection.Output;
@@ -212,11 +220,7 @@ namespace ME.Data
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
 
-                if (reader.Read()) {
-                    return decimal.Parse(reader["cod_publi"].ToString());
-                } else {
-                    return 0;
-                }
+                return reader.Read() ? decimal.Parse(reader["cod_publi"].ToString()) : 0;
             }
         }
     }

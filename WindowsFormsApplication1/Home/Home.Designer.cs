@@ -36,6 +36,7 @@
             this.venderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.misFacturasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.misPublicacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.administracionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.usuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rolesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -74,7 +75,8 @@
             this.calificarToolStripMenuItem,
             this.venderToolStripMenuItem,
             this.toolStripSeparator1,
-            this.misFacturasToolStripMenuItem});
+            this.misFacturasToolStripMenuItem,
+            this.misPublicacionesToolStripMenuItem});
             this.miCuentaToolStripMenuItem.Name = "miCuentaToolStripMenuItem";
             this.miCuentaToolStripMenuItem.Size = new System.Drawing.Size(74, 20);
             this.miCuentaToolStripMenuItem.Text = "Mi Cuenta";
@@ -82,34 +84,42 @@
             // comprarToolStripMenuItem
             // 
             this.comprarToolStripMenuItem.Name = "comprarToolStripMenuItem";
-            this.comprarToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.comprarToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.comprarToolStripMenuItem.Text = "Comprar";
             this.comprarToolStripMenuItem.Click += new System.EventHandler(this.comprarToolStripMenuItem_Click);
             // 
             // calificarToolStripMenuItem
             // 
             this.calificarToolStripMenuItem.Name = "calificarToolStripMenuItem";
-            this.calificarToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.calificarToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.calificarToolStripMenuItem.Text = "Calificar";
+            this.calificarToolStripMenuItem.Click += new System.EventHandler(this.calificarToolStripMenuItem_Click);
             // 
             // venderToolStripMenuItem
             // 
             this.venderToolStripMenuItem.Name = "venderToolStripMenuItem";
-            this.venderToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.venderToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.venderToolStripMenuItem.Text = "Vender";
             this.venderToolStripMenuItem.Click += new System.EventHandler(this.venderToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(148, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(166, 6);
             // 
             // misFacturasToolStripMenuItem
             // 
             this.misFacturasToolStripMenuItem.Name = "misFacturasToolStripMenuItem";
-            this.misFacturasToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.misFacturasToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.misFacturasToolStripMenuItem.Text = "Mi facturación";
             this.misFacturasToolStripMenuItem.Click += new System.EventHandler(this.misFacturasToolStripMenuItem_Click);
+            // 
+            // misPublicacionesToolStripMenuItem
+            // 
+            this.misPublicacionesToolStripMenuItem.Name = "misPublicacionesToolStripMenuItem";
+            this.misPublicacionesToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.misPublicacionesToolStripMenuItem.Text = "Mis Publicaciones";
+            this.misPublicacionesToolStripMenuItem.Click += new System.EventHandler(this.misPublicacionesToolStripMenuItem_Click);
             // 
             // administracionToolStripMenuItem
             // 
@@ -208,5 +218,6 @@
         private System.Windows.Forms.ToolStripMenuItem misFacturasToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.Panel pnlMaster;
+        private System.Windows.Forms.ToolStripMenuItem misPublicacionesToolStripMenuItem;
     }
 }

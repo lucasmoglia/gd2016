@@ -11,6 +11,7 @@ using System.Configuration;
 using ME.UI;
 using ME.Business;
 using ME.Data;
+using ME.UI.Calificar;
 
 namespace ME.UI
 {
@@ -75,7 +76,7 @@ namespace ME.UI
 //            pnlMaster.Controls.Clear();
 //            pnlMaster.Controls.Add(new ComprarOfertarUserControl());
 
-            PublicacionForm nuevaPublicacion = new PublicacionForm(null, false);
+            PublicacionForm nuevaPublicacion = new PublicacionForm(null, TipoAccion.New);
 
             nuevaPublicacion.ShowDialog(this);
         }
@@ -102,6 +103,26 @@ namespace ME.UI
 
             //// Force a reload of a changed section.
             //ConfigurationManager.RefreshSection("appSettings");
+        }
+
+        private void misPublicacionesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            pnlMaster.Controls.Clear();
+            //pnlMaster.Controls.Add(new ComprarOfertarUserControl(UserLogged.cod_usuario));
+
+        }
+
+        private void calificarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Cuando hago click en una opción del menu, cambio el controlador.
+            pnlMaster.Controls.Clear();
+            pnlMaster.Controls.Add(new CalificarControl());
+
+        }
+
+        public void cargarPanel(UserControl unControl) {
+            pnlMaster.Controls.Clear();
+            pnlMaster.Controls.Add(unControl);
         }
     }
 }

@@ -9,13 +9,14 @@ using System.Threading.Tasks;
 namespace ME.Data
 {
     public class Visibilidad
-    {
+    {   //Variables de la clase Visibilidad
         public decimal cod_visibilidad  { get; set; }
         public string  descripcion      { get; set; }
         public decimal costo_publicar   { get; set; }
         public decimal porcentaje_venta { get; set; }
         public decimal costo_envio      { get; set; }
 
+        //Constructor de la clase Visibilidad
         public Visibilidad(decimal cod_visibilidad, string descripcion, decimal costo_publicar, decimal porcentaje_venta, decimal costo_envio)
         {
             this.cod_visibilidad    = cod_visibilidad;
@@ -25,6 +26,7 @@ namespace ME.Data
             this.costo_envio        = costo_envio;
         }
 
+        //Funcion que devuelve la visibilidad pedida
         public static Visibilidad GetVisibilidad(decimal cod_visibilidad)
         {
             using (SqlConnection connection = MEEntity.GetConnection())
@@ -53,6 +55,7 @@ namespace ME.Data
             }
         }
 
+        //Funcion que lista todas las visibilidades
         public static List<Visibilidad> GetVisibilidades()
         {
             List<Visibilidad> visibilidadList = new List<Visibilidad>();
@@ -67,7 +70,7 @@ namespace ME.Data
 
                 if (reader.Read())
                 {
-                    while (reader.Read())
+                    do
                     {
                         Visibilidad unaVisibilidad = new Visibilidad(
                               decimal.Parse(reader["cod_visibilidad"].ToString())
@@ -78,7 +81,7 @@ namespace ME.Data
                             );
 
                         visibilidadList.Add(unaVisibilidad);
-                    }
+                    } while (reader.Read());
                     return visibilidadList;
                 }
                 else return null;
@@ -86,6 +89,7 @@ namespace ME.Data
 
         }
 
+        //Procedimiento que Inserta un nuevo registro en la Tabla Visibilidades
         public static int Nuevo(string descripcion, decimal costo_publicar, decimal porcentaje_venta, decimal costo_envio)
         {
             int result = 0;
@@ -114,6 +118,7 @@ namespace ME.Data
             return result;
         }
 
+        //Procedimiento que actualiza un registro existente en la Tabla Visibilidades
         public static void Actualizar(decimal cod_visibilidad, string descripcion, decimal costo_publicar, decimal porcentaje_venta, decimal costo_envio)
         {
             using (SqlConnection connection = MEEntity.GetConnection())
@@ -142,5 +147,18 @@ namespace ME.Data
             }
         }
  
+
+        public static void Eliminar(decimal cod_visibilidad)
+        {
+            using (SqlConnection connection = MEEntity.GetConnection())
+            {
+                SqlCommand command = new SqlCommand("[DE_UNA].[EliminarVisibilidad]", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                SqlParameter param_cod_visibilidad = command.Parameters.AddWithValue("@cod_visibilidad", cod_visibilidad);
+                param_cod_visibilidad.SqlDbType = SqlDbType.Decimal;
+                connection.Open();
+                command.ExecuteScalar();
+            }
+        }
     }
 }

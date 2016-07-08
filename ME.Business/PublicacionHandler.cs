@@ -35,7 +35,10 @@ namespace ME.Business
 
             if (cod_publi > 0)
             {
-                return Publicacion.GetPublicacion(cod_publi);
+                // Hacer que facture la publicación.
+                // Factura factura = FacturaHandler.facturar(cod_publi, "Comision por publicar"); // o algo asi...
+                
+                return Publicacion.GetPublicacion(cod_publi); // Ver como se le puede pasar a la vista la publicación y la factura.
             }
             else {
                 return null;
