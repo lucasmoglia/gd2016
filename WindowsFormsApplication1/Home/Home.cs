@@ -24,8 +24,7 @@ namespace ME.UI
 
         private void Home_Load(object sender, EventArgs e)
         {
-            //this.Text = string.Concat("Bienvenido ", System.Configuration.ConfigurationManager.AppSettings["user"].ToString(), "!");
-            this.Text = string.Concat(DateTime.Parse(ConfigurationManager.AppSettings["fecha"].ToString()), "Bienvenido ", UserLogged.username, "!");
+            this.Text = string.Concat(DateTime.Parse(ConfigurationManager.AppSettings["fecha"].ToString()).Date.ToShortDateString(), "  - Bienvenido ", UserLogged.username, "!");
 
             if (UserLogged.esAdmin) {
                 administracionToolStripMenuItem.Enabled = true;
@@ -34,8 +33,6 @@ namespace ME.UI
                 administracionToolStripMenuItem.Enabled = false;
                 administracionToolStripMenuItem.Visible = false;
             }
-            //pnlMaster.Clear();
-            //pnlMaster.Controls.Add(new PublicacionUserControl());
         }
 
         private void inicioToolStripMenuItem_Click(object sender, EventArgs e)
