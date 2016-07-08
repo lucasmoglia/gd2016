@@ -9,6 +9,8 @@ namespace ME.Business
 {
     public class UsuarioHandler
     {
+        public static string mensaje { get; set; }
+
         public int Login(string username, string password)
         {
             return Usuario.Login(username, password);
