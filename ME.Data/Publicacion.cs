@@ -109,7 +109,7 @@ namespace ME.Data
             }
         }
 
-        public static List<Publicacion> GetPublicaciones(byte estado, List<decimal> rubros, string descripcion)
+        public static List<Publicacion> GetPublicaciones(byte estado, List<decimal> rubros, string descripcion, decimal cod_usuario)
         {
             List<Publicacion> publicacionList = new List<Publicacion>();
 
@@ -137,7 +137,7 @@ namespace ME.Data
                 param_Rubros.TypeName = "[DE_UNA].Rubros";
 
                 command.Parameters.Add("@descripcion", SqlDbType.NVarChar).Value = descripcion;
-                command.Parameters.Add("@usuario", SqlDbType.Decimal).Value = DBNull.Value;
+                command.Parameters.Add("@usuario", SqlDbType.Decimal).Value = cod_usuario;
                 
                 // parámetros para la paginación.
                 command.Parameters.Add("@PageSize", SqlDbType.Int).Value = Globales.TamanioPag_Publi;  // sacar variables gobales.
@@ -151,8 +151,6 @@ namespace ME.Data
                 SqlParameter param_BloquePags = new SqlParameter("@bloqueDePaginas", SqlDbType.Int);
                 param_BloquePags.Direction = ParameterDirection.Output;
                 command.Parameters.Add(param_BloquePags);
-                command.Parameters.Add("@usuario", SqlDbType.Decimal).Value = UserLogged.cod_usuario;
-                //command.Parameters.Add("@TotalPags", SqlDbType.Int).Value = Globales.TotalPags_Publi;
 
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
@@ -228,5 +226,21 @@ namespace ME.Data
                 return reader.Read() ? decimal.Parse(reader["cod_publi"].ToString()) : 0;
             }
         }
+        
+        // función que finaliza las subastas que vencen hoy generando la compra asociada a la subasta ganadora.
+        public static void finalizarSubastas()
+        {
+            using (SqlConnection connection = MEEntity.GetConnection())
+            {
+                SqlCommand command = new SqlCommand("[DE_UNA].[FinalizaSubastas]", connection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+            }
+        }    
+    
+    
     }
 }

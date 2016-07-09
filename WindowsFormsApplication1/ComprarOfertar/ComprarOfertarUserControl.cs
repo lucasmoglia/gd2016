@@ -32,6 +32,8 @@ namespace ME.UI
             listaPublicaciones = PublicacionHandler.ListarPublicaciones(1, null, String.Empty);
             //Init Grid
             gvPublicaciones.DataSource = listaPublicaciones;
+            gvPublicaciones.Columns["visibilidad"].DataPropertyName = "descripcion";
+
             gvPublicaciones.Columns["visibilidad"].Visible = false;
             gvPublicaciones.Columns["estado"].Visible = false;
             gvPublicaciones.Columns["rubro"].Visible = false;
