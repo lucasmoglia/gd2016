@@ -49,5 +49,12 @@ namespace ME.Business
                 return null;
             }
         }
+
+
+        public static void FinalizarPublicaciones()
+        {
+            Publicacion.finalizarPublicaciones();
+        }    
+    
     }
 }

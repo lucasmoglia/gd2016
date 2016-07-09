@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Configuration;
 
 namespace ME.Data
 {
@@ -226,5 +227,22 @@ namespace ME.Data
                 return reader.Read() ? decimal.Parse(reader["cod_publi"].ToString()) : 0;
             }
         }
+        
+        // función que finaliza las subastas que vencen hoy generando la compra asociada a la subasta ganadora.
+        // asimismo finaliza las publicaciones de Compra Inmediata que vencen hoy.
+        public static void finalizarPublicaciones()
+        {
+            using (SqlConnection connection = MEEntity.GetConnection())
+            {
+                SqlCommand command = new SqlCommand("[DE_UNA].[FinalizaPublicaciones]", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add("@hoy", SqlDbType.DateTime).Value = DateTime.Parse(ConfigurationManager.AppSettings["fecha"].ToString());
+
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+            }
+        }    
+    
+    
     }
 }

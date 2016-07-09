@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ME.Business;
 using ME.Data;
+using ME.UI.Facturas;
 
 namespace ME.UI
 {
@@ -66,6 +67,11 @@ namespace ME.UI
         }
 
         private void gvFacturas_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
         {
 
         }
