@@ -99,6 +99,12 @@
     <Compile Include="Calificar\NuevaCalificacionForm.Designer.cs">
       <DependentUpon>NuevaCalificacionForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Facturas\FacturaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Facturas\FacturaForm.Designer.cs">
+      <DependentUpon>FacturaForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Facturas\FacturaUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -175,6 +181,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Calificar\NuevaCalificacionForm.resx">
       <DependentUpon>NuevaCalificacionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Facturas\FacturaForm.resx">
+      <DependentUpon>FacturaForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Facturas\FacturaUserControl.resx">
       <DependentUpon>FacturaUserControl.cs</DependentUpon>

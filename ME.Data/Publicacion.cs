@@ -146,7 +146,7 @@ namespace ME.Data
                 SqlParameter param_BloquePags = new SqlParameter("@bloqueDePaginas", SqlDbType.Int);
                 param_BloquePags.Direction = ParameterDirection.Output;
                 command.Parameters.Add(param_BloquePags);
-
+                command.Parameters.Add("@usuario", SqlDbType.Decimal).Value = UserLogged.cod_usuario;
                 //command.Parameters.Add("@TotalPags", SqlDbType.Int).Value = Globales.TotalPags_Publi;
 
                 connection.Open();
