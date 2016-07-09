@@ -22,6 +22,14 @@ namespace ME.UI
             InitializeComponent();
         }
 
+        #region home Members
+        public void cargarPanel(UserControl unControl)
+        {
+            pnlMaster.Controls.Clear();
+            pnlMaster.Controls.Add(unControl);
+        }
+        #endregion
+
         private void Home_Load(object sender, EventArgs e)
         {
             this.Text = string.Concat(DateTime.Parse(ConfigurationManager.AppSettings["fecha"].ToString()).Date.ToShortDateString(), "  - Bienvenido ", UserLogged.username, "!");

@@ -10,8 +10,8 @@ GO
 -- Description:	<Description,,>
 -- =============================================
 ALTER PROCEDURE [DE_UNA].[GetFacturas]
-	@usuario DECIMAL(20),
 	@TablaNrosFacturas [DE_UNA].[ListaNrosFacturas] READONLY,
+	@usuario DECIMAL(20),
 	@fechaDesde DATETIME,
 	@fechaHasta DATETIME,
 	@montoMinimo NUMERIC (18,2),

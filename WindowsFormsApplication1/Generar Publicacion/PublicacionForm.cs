@@ -1,5 +1,6 @@
 ﻿using ME.Business;
 using ME.Data;
+using ME.UI.Calificar;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,6 +19,10 @@ namespace ME.UI
         bool esNuevaPubli = false, esModificable = false, esCompra = false, esView = false;
         Publicacion PublicacionExistente = null;
         private string descrVacia = "Ingrese aquí la descripción";
+
+        #region publi Members
+        public decimal valor = 0;
+        #endregion
 
         private void habilitarTodo(bool valor)
         {
@@ -201,11 +206,53 @@ namespace ME.UI
             this.Close();
         }
 
+        private string validarForm()
+        {
+            if (txtDescripcion.Text == descrVacia || txtDescripcion.Text == String.Empty || txtDescripcion.Text == ".") {
+                return "Debe Ingresar una Descripción para la publicación.";
+            } else if (cmbBoxTipoPubli.SelectedIndex == -1)
+                {
+                return "Debe seleccionar un tipo de publicación";
+            } else if (numStock.Value <= 1)
+                {
+                return "Stock debe ser mayor a 1 (uno)";
+            } else if (numPrecio.Value <= 0)
+                {
+                return "El Precio debe ser mayor a 0 (cero)";
+            } else if (cmbBoxVisibilidad.SelectedIndex == -1)
+                {
+                return "Debe seleccionar una Visibilidad";
+            } else if (cmbBoxEstado.SelectedIndex == -1)
+                {
+                return "Debe seleccionar un Estado";
+            } else if (cmbBoxRubro.SelectedIndex == -1)
+                {
+                return "Debe seleccionar un Rubro";
+            } else if (DTFechaInicio.Value >= DTFechaVencimiento.Value)
+                {
+                return "La fecha de inicio no puede superar a la fecha de vencimiento";
+            } else if (DTFechaVencimiento.Value <= DTFechaInicio.Value)
+                {
+                return "La fecha de vencimiento no puede superar a la fecha de inicio";
+            } else if (cmbBoxEnvio.SelectedIndex == -1)
+                {
+                return "Debe indicar si incluye Envío";
+            } else if (cmbBoxPreguntas.SelectedIndex == -1)
+                {
+                return "Debe indicar si se pueden hacer preguntas";
+            } else
+                return String.Empty;
+        }
+
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+            string descrError = String.Empty;
+
             if (esNuevaPubli || esModificable)
             {
-                if (txtDescripcion.Text != descrVacia && txtDescripcion.Text != String.Empty)
+                descrError = this.validarForm();
+
+                if (descrError != String.Empty)
                 {
                     Publicacion nuevaPublicacion = PublicacionHandler.Guardar(
                         txtDescripcion.Text, numStock.Value, DTFechaInicio.Value, DTFechaVencimiento.Value, numPrecio.Value,
@@ -218,24 +265,33 @@ namespace ME.UI
 
                     muestraDeNuevaPubli.Show();
 
-                    this.Hide();
+                    this.Close();
+                } else {
+                    MessageBox.Show(descrError, "Publicación", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             } else if (esCompra) {
                 if (PublicacionExistente.stock > 0) {
-                    // ACA CONTROLAR QUE NO TENGA MAS DE 3 COMPRAS SIN CALIFICACIONES.
+                    // PARA CONTROLAR QUE NO TENGA MAS DE 3 COMPRAS SIN CALIFICACIONES.
                     List<Compra> comprasSinCalificar = CompraHandler.ListarComprasSinCalificar(UserLogged.cod_usuario);
 
-                    if (comprasSinCalificar != null && comprasSinCalificar.Count < 3)
+                    if (comprasSinCalificar != null && comprasSinCalificar.Count <= 3)
                     {
                         ComprarForm formDeCompra = new ComprarForm(PublicacionExistente.tipo_publi.cod_tipo_publi == 1 /* Compra Inmediata */, PublicacionExistente.stock);
 
                         formDeCompra.ShowDialog(this); // Ver como recuperar el valor que setea en ese form.
+
+                        Factura factura = PublicacionHandler.Comprar(PublicacionExistente.cod_publi, 2);
+
+                        FacturaForm formFactura = new FacturaForm(factura);
+                        
                     } else {
                         string msjErrorCalif = "Usted tiene " + comprasSinCalificar.Count.ToString() + " compras pendientes de calificación.\n" +
                                                "No podrá comprar/ofertar con 3 o más calificaciones pendientes.";
                         MessageBox.Show(msjErrorCalif, "Comprar/Ofertar", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                        //Home.cargarPanel(new CalificarControl()); // Hace que se cargue en el panel del Home el User Control de Calificar.
+                        Home home = (Home)this.Owner; // Setea el Formulario Home en una variable.
+                        
+                        home.cargarPanel(new CalificarControl()); // llama al método del form Home y hace que se cargue en el panel del Home el User Control de Calificar.
 
                         this.Close();
                     }
