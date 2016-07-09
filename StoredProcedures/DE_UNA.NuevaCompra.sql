@@ -10,7 +10,7 @@ GO
 -- RETORNA: 0 --> No hay Stock.
 --          1 --> Ejecución OK.
 -- =============================================
-CREATE PROCEDURE [DE_UNA].NuevaCompra
+ALTER PROCEDURE [DE_UNA].NuevaCompra
 	-- PARAMETROS:
 	@cod_publi numeric(18, 0),
 	@cod_usuario decimal(20, 0),
@@ -33,9 +33,13 @@ BEGIN
 	BEGIN TRAN COMPRA
 		INSERT INTO [DE_UNA].Compras
 			VALUES(@cod_publi, @cod_usuario, @fecha_compra, @monto, @cantidad, @cod_calificacion, @estrellas, @desc_calificacion);
+		
+		--Actualizo la cantidad en la publicación
+		UPDATE [DE_UNA].Publicaciones SET stock = (stock - @cantidad) WHERE cod_publi = @cod_publi
 
 		--Cambia estado de una publicacion a finalizada LMoglia 08072016
-		UPDATE [DE_UNA].Publicaciones SET cod_estado = 5 WHERE cod_publi = @cod_publi;
+		IF((@stock - @cantidad) = 0)
+			UPDATE [DE_UNA].Publicaciones SET cod_estado = 5 WHERE cod_publi = @cod_publi;
 	COMMIT TRAN COMPRA
 	RETURN 1;
 END
