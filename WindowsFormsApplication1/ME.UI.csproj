@@ -34,6 +34,7 @@
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -56,6 +57,12 @@
     </Compile>
     <Compile Include="ABM Rol\RolUserControl.Designer.cs">
       <DependentUpon>RolUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ABM Usuario\ComboUsuarioRolForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABM Usuario\ComboUsuarioRolForm.Designer.cs">
+      <DependentUpon>ComboUsuarioRolForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ABM Usuario\ResetPasswordForm.cs">
       <SubType>Form</SubType>
@@ -98,6 +105,12 @@
     </Compile>
     <Compile Include="Calificar\NuevaCalificacionForm.Designer.cs">
       <DependentUpon>NuevaCalificacionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Facturas\FacturaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Facturas\FacturaForm.Designer.cs">
+      <DependentUpon>FacturaForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Facturas\FacturaUserControl.cs">
       <SubType>UserControl</SubType>
@@ -155,6 +168,9 @@
     <EmbeddedResource Include="ABM Rol\RolUserControl.resx">
       <DependentUpon>RolUserControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ABM Usuario\ComboUsuarioRolForm.resx">
+      <DependentUpon>ComboUsuarioRolForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ABM Usuario\ResetPasswordForm.resx">
       <DependentUpon>ResetPasswordForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -175,6 +191,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Calificar\NuevaCalificacionForm.resx">
       <DependentUpon>NuevaCalificacionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Facturas\FacturaForm.resx">
+      <DependentUpon>FacturaForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Facturas\FacturaUserControl.resx">
       <DependentUpon>FacturaUserControl.cs</DependentUpon>
