@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Configuration;
 
 namespace ME.Data
 {
@@ -228,16 +229,17 @@ namespace ME.Data
         }
         
         // función que finaliza las subastas que vencen hoy generando la compra asociada a la subasta ganadora.
-        public static void finalizarSubastas()
+        // asimismo finaliza las publicaciones de Compra Inmediata que vencen hoy.
+        public static void finalizarPublicaciones()
         {
             using (SqlConnection connection = MEEntity.GetConnection())
             {
-                SqlCommand command = new SqlCommand("[DE_UNA].[FinalizaSubastas]", connection);
+                SqlCommand command = new SqlCommand("[DE_UNA].[FinalizaPublicaciones]", connection);
                 command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add("@hoy", SqlDbType.DateTime).Value = DateTime.Parse(ConfigurationManager.AppSettings["fecha"].ToString());
 
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
-
             }
         }    
     

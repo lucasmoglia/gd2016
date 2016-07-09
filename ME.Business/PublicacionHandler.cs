@@ -52,8 +52,7 @@ namespace ME.Business
 
         public static void FinalizarPublicaciones()
         {
-            Publicacion.finalizarSubastas();
-            // pudiendo agregar la llamada a otro proc para finalizar aquellas compras inmediatas que se vence la publicación.
+            Publicacion.finalizarPublicaciones();
         }    
     
     }
