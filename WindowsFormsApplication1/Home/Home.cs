@@ -121,5 +121,11 @@ namespace ME.UI
             pnlMaster.Controls.Clear();
             pnlMaster.Controls.Add(unControl);
         }
+
+        private void miHistorialToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            pnlMaster.Controls.Clear();
+            pnlMaster.Controls.Add(new HistorialControl());
+        }
     }
 }

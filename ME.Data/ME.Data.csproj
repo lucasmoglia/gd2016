@@ -47,6 +47,7 @@
     <Compile Include="TipoPublicacion.cs" />
     <Compile Include="Estado.cs" />
     <Compile Include="Globales.cs" />
+    <Compile Include="Historial.cs" />
     <Compile Include="Visibilidad.cs" />
     <Compile Include="Publicacion.cs" />
     <Compile Include="Empresa.cs" />
