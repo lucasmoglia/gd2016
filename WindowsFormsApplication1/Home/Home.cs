@@ -20,6 +20,7 @@ namespace ME.UI
         public Home()
         {
             InitializeComponent();
+            PublicacionHandler.FinalizarPublicaciones();
         }
 
         #region home Members
@@ -125,10 +126,14 @@ namespace ME.UI
 
         }
 
+
+        /*
         public void cargarPanel(UserControl unControl) {
             pnlMaster.Controls.Clear();
             pnlMaster.Controls.Add(unControl);
         }
+        */
+
 
         private void miHistorialToolStripMenuItem_Click(object sender, EventArgs e)
         {

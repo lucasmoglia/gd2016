@@ -226,5 +226,21 @@ namespace ME.Data
                 return reader.Read() ? decimal.Parse(reader["cod_publi"].ToString()) : 0;
             }
         }
+        
+        // función que finaliza las subastas que vencen hoy generando la compra asociada a la subasta ganadora.
+        public static void finalizarSubastas()
+        {
+            using (SqlConnection connection = MEEntity.GetConnection())
+            {
+                SqlCommand command = new SqlCommand("[DE_UNA].[FinalizaSubastas]", connection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+            }
+        }    
+    
+    
     }
 }
