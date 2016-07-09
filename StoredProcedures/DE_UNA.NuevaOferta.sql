@@ -21,15 +21,17 @@ BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
+	BEGIN TRAN OFERTA
+		DECLARE @stock numeric(18,0) = (SELECT stock FROM [DE_UNA].Publicaciones WHERE cod_publi = @cod_publi);
 
-	DECLARE @stock numeric(18,0) = (SELECT stock FROM [DE_UNA].Publicaciones WHERE cod_publi = @cod_publi);
-
-	--IF (!([DE_UNA].esMayorAUltimaOferta(@monto, @cod_publi))
-	--	RETURN 0;
-
-	INSERT INTO [DE_UNA].Ofertas
-	VALUES(@cod_publi, @cod_usuario, @fecha_oferta, @monto);
-
+		--IF (!([DE_UNA].esMayorAUltimaOferta(@monto, @cod_publi))
+		--	RETURN 0;
+		--Inserta una oferta
+		INSERT INTO [DE_UNA].Ofertas
+			VALUES(@cod_publi, @cod_usuario, @fecha_oferta, @monto);
+		--Actualiza el valor del producto
+		UPDATE Publicaciones SET precio_producto = precio_producto + @monto WHERE cod_publi = @cod_publi
+	COMMIT TRAN OFERTA
 	RETURN 1;
 END
 GO
