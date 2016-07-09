@@ -22,6 +22,7 @@ namespace ME.Data
         public static bool esEmpresa { get; set; }
         public static bool publ_sin_cargo { get; set; }
         public static List<Rol> roles = new List<Rol>();
+        public static decimal cod_rol_seleccionado { get; set; }
 
         //static UserLogged(decimal unCod_usuario, string unUsername, bool unEsAdmin, bool unEsEmpresa, List<FuncionalidadModel> unasFuncionalidades)
         //{

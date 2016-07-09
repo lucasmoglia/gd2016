@@ -30,8 +30,13 @@ namespace ME.UI
             Globales.PagsEnCache_Publi = 0;
             
             listaPublicaciones = PublicacionHandler.ListarPublicaciones(1, null, String.Empty);
+            //Init Grid
             gvPublicaciones.DataSource = listaPublicaciones;
-            //gvPublicaciones.Columns.Remove("cod_publi");
+            gvPublicaciones.Columns["visibilidad"].Visible = false;
+            gvPublicaciones.Columns["estado"].Visible = false;
+            gvPublicaciones.Columns["rubro"].Visible = false;
+            gvPublicaciones.Columns["tipo_publi"].Visible = false;
+            
             bindNavPubli.BindingSource = bindSourcePubli;
             bindSourcePubli.CurrentChanged += new System.EventHandler(bindSourcePubli_CurrentChanged);
             bindSourcePubli.DataSource = new PageOffsetList(gvPublicaciones.RowCount);
@@ -212,6 +217,11 @@ namespace ME.UI
         private void gvPublicaciones_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             this.btnComprar_Click(sender, e);
+        }
+
+        private void FillGrid()
+        {
+            gvPublicaciones.DataSource = listaPublicaciones;
         }
     }
 }

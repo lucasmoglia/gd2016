@@ -22,6 +22,7 @@ namespace ME.UI
         public LoginForm()
         {
             InitializeComponent();
+            this.CenterToScreen();
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -55,12 +56,25 @@ namespace ME.UI
                     UserLogged.roles          = logueado.roles;
                 }
 
+                //Blanquea contraseña
+                txtPassword.Text = string.Empty;
+
                 var frm = new Home();
                 frm.Location = this.Location;
                 frm.StartPosition = FormStartPosition.Manual;
                 frm.FormClosing += delegate { this.Show(); };
-                frm.Show();
-                this.Hide();
+               
+                if (logueado.roles.Count > 1)
+                {
+                    /*Instancia de Form para seleccion de rol*/
+                    var comboURForm = new ComboUsuarioRolForm(frm, logueado.roles);
+                    comboURForm.FormClosing += delegate { this.Hide(); };
+                    comboURForm.ShowDialog();
+                }
+                else
+                {
+                    frm.Show();
+                }
             }
             else
             {

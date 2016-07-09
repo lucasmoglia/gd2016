@@ -20,15 +20,18 @@ namespace ME.Data
         public decimal  precio_producto    { get; set; }
 
         public Visibilidad     visibilidad { get; set; }
-//        public string descr_visibilidad { get { this.visibilidad.descripcion; } set; }
+        public string descr_visibilidad { get { return this.visibilidad.descripcion; }  }
 
         public Estado          estado      { get; set; }
+        public string descr_estado { get { return this.estado.nombre; } }
         public Rubro           rubro       { get; set; }
+        public string descr_rubro { get { return this.rubro.desc_larga; } }
 //        public UsuarioModel    usuario     { get; set; }
         public decimal  cod_usuario        { get; set; }
         public string   username           { get; set; }
 
         public TipoPublicacion tipo_publi { get; set; }
+        public string descr_tipo_publi { get { return this.tipo_publi.nombre; } }
 
         public bool con_envio              { get; set; }
         public bool con_preguntas          { get; set; }
@@ -117,6 +120,7 @@ namespace ME.Data
 
                 command.Parameters.Add("@estado", SqlDbType.Decimal).Value = estado;
 
+
                 DataTable rubrosTable = null;
 
                 if (rubros != null) {
@@ -133,7 +137,8 @@ namespace ME.Data
                 param_Rubros.TypeName = "[DE_UNA].Rubros";
 
                 command.Parameters.Add("@descripcion", SqlDbType.NVarChar).Value = descripcion;
-
+                command.Parameters.Add("@usuario", SqlDbType.Decimal).Value = DBNull.Value;
+                
                 // parámetros para la paginación.
                 command.Parameters.Add("@PageSize", SqlDbType.Int).Value = Globales.TamanioPag_Publi;  // sacar variables gobales.
                 command.Parameters.Add("@PageNumber", SqlDbType.Int).Value = Globales.NumPag_Publi += 1;  // sacar variables gobales.
