@@ -48,6 +48,7 @@
             this.gvFacturas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gvFacturas.Size = new System.Drawing.Size(627, 155);
             this.gvFacturas.TabIndex = 2;
+            this.gvFacturas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvFacturas_CellContentClick);
             // 
             // label1
             // 

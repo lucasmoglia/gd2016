@@ -17,7 +17,8 @@ namespace ME.UI.Facturas
         public FacturaForm(Factura factura)
         {
             InitializeComponent();
-
+            List<Item> itemsFactura = new List<Item>();
+            gvFacturas.DataSource = Item.GetItems(factura.num_factura, string.Empty);
 
         }
 
@@ -27,6 +28,11 @@ namespace ME.UI.Facturas
         }
 
         private void FacturaForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void gvFacturas_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
