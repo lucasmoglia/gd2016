@@ -31,6 +31,8 @@ namespace ME.UI
             
             listaPublicaciones = PublicacionHandler.ListarPublicaciones(1, null, String.Empty);
             gvPublicaciones.DataSource = listaPublicaciones;
+            //gvPublicaciones.Columns["visibilidad"].ValueType = class();
+            gvPublicaciones.Columns["visibilidad"].DataPropertyName = "descripcion";
             //gvPublicaciones.Columns.Remove("cod_publi");
             bindNavPubli.BindingSource = bindSourcePubli;
             bindSourcePubli.CurrentChanged += new System.EventHandler(bindSourcePubli_CurrentChanged);

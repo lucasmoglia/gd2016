@@ -106,7 +106,7 @@ namespace ME.Data
             }
         }
 
-        public static List<Publicacion> GetPublicaciones(byte estado, List<decimal> rubros, string descripcion)
+        public static List<Publicacion> GetPublicaciones(byte estado, List<decimal> rubros, string descripcion, decimal cod_usuario)
         {
             List<Publicacion> publicacionList = new List<Publicacion>();
 
@@ -147,7 +147,7 @@ namespace ME.Data
                 param_BloquePags.Direction = ParameterDirection.Output;
                 command.Parameters.Add(param_BloquePags);
 
-                //command.Parameters.Add("@TotalPags", SqlDbType.Int).Value = Globales.TotalPags_Publi;
+                command.Parameters.Add("@usuario", SqlDbType.Decimal).Value = cod_usuario;
 
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
