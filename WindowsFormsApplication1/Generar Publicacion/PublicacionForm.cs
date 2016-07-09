@@ -265,7 +265,7 @@ namespace ME.UI
 
                     muestraDeNuevaPubli.Show();
 
-                    Factura factura = FacturaHandler.NuevaFactura(nuevaPublicacion.cod_publi, 1); // Comisión por Publicación
+                    Factura factura = FacturaHandler.NuevaFactura(nuevaPublicacion.cod_publi, valor, 1); // Comisión por Publicación
 
                     FacturaForm facturaForm = new FacturaForm(factura);
 
@@ -287,6 +287,8 @@ namespace ME.UI
                         Factura factura = PublicacionHandler.Comprar(PublicacionExistente.cod_publi, valor, 2); // Comisión por Venta.
 
                         FacturaForm formFactura = new FacturaForm(factura);
+
+                        formFactura.Show();
                         
                     } else {
                         string msjErrorCalif = "Usted tiene " + comprasSinCalificar.Count.ToString() + " compras pendientes de calificación.\n" +
