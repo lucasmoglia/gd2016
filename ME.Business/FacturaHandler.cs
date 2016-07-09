@@ -9,6 +9,10 @@ namespace ME.Business
 {
     public class FacturaHandler
     {
+        public static Factura NuevaFactura(decimal cod_publi, int motivo){
+            Factura factura = null;
+            return factura;
+        }
         public static List<Factura> ListarFacturas(decimal cod_usuario, DateTime? fecha_desde, DateTime? fecha_hasta, decimal monto_minimo, decimal monto_maximo, string detalle_facturado)
         {
             List<Factura> facturas = new List<Factura>();
@@ -20,6 +24,7 @@ namespace ME.Business
 
                 for (int i = 0; i < facturas.Count; i++) 
                 {
+                    facturas.ElementAt(i).items = new List<Item>();
                     facturas.ElementAt(i).items.AddRange(Item.GetItems(facturas.ElementAt(i).num_factura, string.Empty));
                 }
                 nrosfactura.Clear();
@@ -33,7 +38,6 @@ namespace ME.Business
                     facturas.ElementAt(i).items = new List<Item>();
                     facturas.ElementAt(i).items.AddRange(Item.GetItems(facturas.ElementAt(i).num_factura, string.Empty));
                 }
-            
              }
 
         return facturas;

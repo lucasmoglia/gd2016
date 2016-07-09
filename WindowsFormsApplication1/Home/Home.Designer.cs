@@ -45,6 +45,7 @@
             this.reportesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listadoEstadísticoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlMaster = new System.Windows.Forms.Panel();
+            this.miHistorialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -76,6 +77,7 @@
             this.venderToolStripMenuItem,
             this.toolStripSeparator1,
             this.misFacturasToolStripMenuItem,
+            this.miHistorialToolStripMenuItem,
             this.misPublicacionesToolStripMenuItem});
             this.miCuentaToolStripMenuItem.Name = "miCuentaToolStripMenuItem";
             this.miCuentaToolStripMenuItem.Size = new System.Drawing.Size(74, 20);
@@ -180,6 +182,13 @@
             this.pnlMaster.Size = new System.Drawing.Size(838, 437);
             this.pnlMaster.TabIndex = 1;
             // 
+            // miHistorialToolStripMenuItem
+            // 
+            this.miHistorialToolStripMenuItem.Name = "miHistorialToolStripMenuItem";
+            this.miHistorialToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.miHistorialToolStripMenuItem.Text = "Mi Historial";
+            this.miHistorialToolStripMenuItem.Click += new System.EventHandler(this.miHistorialToolStripMenuItem_Click);
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -219,5 +228,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.Panel pnlMaster;
         private System.Windows.Forms.ToolStripMenuItem misPublicacionesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem miHistorialToolStripMenuItem;
     }
 }

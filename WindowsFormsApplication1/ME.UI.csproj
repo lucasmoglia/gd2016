@@ -106,6 +106,12 @@
     <Compile Include="Calificar\NuevaCalificacionForm.Designer.cs">
       <DependentUpon>NuevaCalificacionForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Facturas\FacturaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Facturas\FacturaForm.Designer.cs">
+      <DependentUpon>FacturaForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Facturas\FacturaUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -130,6 +136,12 @@
     <Compile Include="ComprarOfertar\ComprarForm.Designer.cs">
       <DependentUpon>ComprarForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Historial Cliente\HistorialControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Historial Cliente\HistorialControl.Designer.cs">
+      <DependentUpon>HistorialControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Home\Home.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -141,12 +153,6 @@
     </Compile>
     <Compile Include="LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Historial Cliente\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Historial Cliente\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Listado Estadistico\Form1.cs">
       <SubType>Form</SubType>
@@ -186,6 +192,9 @@
     <EmbeddedResource Include="Calificar\NuevaCalificacionForm.resx">
       <DependentUpon>NuevaCalificacionForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Facturas\FacturaForm.resx">
+      <DependentUpon>FacturaForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Facturas\FacturaUserControl.resx">
       <DependentUpon>FacturaUserControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -197,6 +206,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ComprarOfertar\ComprarForm.resx">
       <DependentUpon>ComprarForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Historial Cliente\HistorialControl.resx">
+      <DependentUpon>HistorialControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Home\Home.resx">
       <DependentUpon>Home.cs</DependentUpon>

@@ -48,6 +48,9 @@ BEGIN
 			   AND (descripcion LIKE ('%' + @descripcion + '%')      OR @descripcion IS NULL)
 		  );
 
+	IF @usuario = 0
+		SET @usuario = null
+
 	IF @TotalRegistros = 0
 	    SET @TotalPags = 0
 	ELSE IF @TotalRegistros % @PageSize = 0

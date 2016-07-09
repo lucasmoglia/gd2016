@@ -42,6 +42,7 @@
     <Compile Include="ClienteHandler.cs" />
     <Compile Include="EstadoHandler.cs" />
     <Compile Include="CompraHandler.cs" />
+    <Compile Include="HistorialHandler.cs" />
     <Compile Include="VisibilidadHandler.cs" />
     <Compile Include="TipoPublicacionHandler.cs" />
     <Compile Include="FacturaHandler.cs" />

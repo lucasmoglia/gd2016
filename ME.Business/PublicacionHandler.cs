@@ -24,7 +24,12 @@ namespace ME.Business
 
         public static List<Publicacion> ListarPublicaciones(byte estado, List<decimal> rubros, string descripcion)
         {
-            return Publicacion.GetPublicaciones(estado, rubros, descripcion);
+            return Publicacion.GetPublicaciones(estado, rubros, descripcion, 0);
+        }
+
+        public static Factura Comprar(decimal cod_publi, int motivo) // 1: Publicar, 2: Comprar, 3: Envío.
+        {
+            return FacturaHandler.NuevaFactura(cod_publi, motivo);
         }
 
         public static Publicacion Guardar(string descripcion, decimal stock, DateTime fechaInicio, DateTime fechaVenc, decimal precio, decimal cod_visibilidad,

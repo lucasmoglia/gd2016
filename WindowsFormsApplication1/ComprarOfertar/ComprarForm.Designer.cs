@@ -90,7 +90,7 @@
             this.groupCompra.Location = new System.Drawing.Point(13, 13);
             this.groupCompra.Name = "groupCompra";
             this.groupCompra.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.groupCompra.Size = new System.Drawing.Size(259, 135);
+            this.groupCompra.Size = new System.Drawing.Size(259, 125);
             this.groupCompra.TabIndex = 7;
             this.groupCompra.TabStop = false;
             this.groupCompra.Text = "Compra";
@@ -101,7 +101,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancelar;
-            this.ClientSize = new System.Drawing.Size(284, 160);
+            this.ClientSize = new System.Drawing.Size(284, 150);
             this.Controls.Add(this.numMontoCant);
             this.Controls.Add(this.groupCompra);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
