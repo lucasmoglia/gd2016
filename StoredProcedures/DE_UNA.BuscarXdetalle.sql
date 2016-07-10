@@ -10,7 +10,7 @@ GO
 -- Description:	SP para buscar Items por detalle de Descripcion.
 -- =============================================
 
-CREATE PROCEDURE [DE_UNA].BuscarXdetalle
+ALTER PROCEDURE [DE_UNA].BuscarXdetalle
 	-- Parámetros para los filtros.
 	@cod_usuario decimal(10),
 	@descripcion nvarchar(30)
@@ -22,6 +22,5 @@ BEGIN
 	  FROM [DE_UNA].Items I
 	   JOIN [DE_UNA].Facturas F ON I.num_factura = F.num_factura
 	   WHERE F.cod_usuario = @cod_usuario AND
-			 (I.descripcion_item = @descripcion OR @descripcion IS NULL)
-
+			 (I.descripcion_item LIKE '%' + @descripcion + '%' OR @descripcion = '')
 END

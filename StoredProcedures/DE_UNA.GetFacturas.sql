@@ -30,7 +30,7 @@ BEGIN
 				[forma_pago],
 				[cod_usuario]
 		FROM [DE_UNA].[Facturas]
-		WHERE [num_factura] IN (SELECT num_factura FROM @TablaNrosFacturas) AND
+		WHERE [num_factura] IN (SELECT nro_factura FROM @TablaNrosFacturas) AND
 			  ([fecha_factura] >= @fechaDesde AND [fecha_factura] <= @fechaHasta) AND
 			  ([total] >= @montoMinimo AND [total] <= @montoMaximo) AND
 			    @usuario = [cod_usuario]

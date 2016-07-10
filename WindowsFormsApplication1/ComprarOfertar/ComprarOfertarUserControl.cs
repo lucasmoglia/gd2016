@@ -222,5 +222,15 @@ namespace ME.UI
         {
             gvPublicaciones.DataSource = listaPublicaciones;
         }
+
+        private void bindNavPubli_RefreshItems(object sender, EventArgs e)
+        {
+
+        }
+
+        private void gBoxFiltros_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }
