@@ -17,15 +17,24 @@ namespace ME.UI
         public NuevoUsuarioForm(UsuarioModel usuario)
         {
             InitializeComponent();
+            ddlRol.ValueMember = "cod_rol";
+            ddlRol.DisplayMember = "nombre";
+            ddlRol.DataSource = RolHandler.ListarRoles(true);
+
+            ddlRubro.ValueMember = "cod_rubro";
+            ddlRubro.DisplayMember = "desc_larga";
+            ddlRubro.DataSource = RubroHandler.ListarRubros();
 
             if (usuario != null)
             {
-                if (usuario.dni != null)
+                ddlRol.Enabled = false;
+
+                if (usuario.dni != null && !string.IsNullOrEmpty((usuario.dni.ToString())))
                 {
                     txtNombreC.Text = usuario.nombre;
                     txtApellido.Text = usuario.apellido;
                     txtNumeroDocC.Text = usuario.dni;
-                    ddlRol.SelectedValue = usuario.cod_rol; //TODO bloquear campo ddlRol
+                    ddlRol.SelectedValue = usuario.cod_rol.ToString();
                     txtMailC.Text = usuario.mail;
                     txtUserNameC.Text = usuario.username;
                     txtTelefonoC.Text = usuario.telefono;
@@ -42,7 +51,7 @@ namespace ME.UI
                     txtRazonSocial.Text = usuario.razon_social;
                     txtCiudadE.Text = usuario.dir_ciudad;
                     txtNombreContacto.Text = usuario.nombre_contacto;
-                    ddlRol.SelectedValue = usuario.cod_rol;
+                    ddlRol.SelectedItem = usuario.cod_rol.ToString();
                     ddlRubro.SelectedValue = usuario.cod_rubro;
                     txtCUIT.Text = usuario.cuit;
                     txtMailEmpresa.Text = usuario.mail;
@@ -78,13 +87,7 @@ namespace ME.UI
 
         private void NuevoUsuarioForm_Load(object sender, EventArgs e)
         {
-            ddlRol.ValueMember = "cod_rol";
-            ddlRol.DisplayMember = "nombre";
-            ddlRol.DataSource = RolHandler.ListarRoles(true);
-
-            ddlRubro.ValueMember = "cod_rubro";
-            ddlRubro.DisplayMember = "desc_larga";
-            ddlRubro.DataSource = RubroHandler.ListarRubros();
+           
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
