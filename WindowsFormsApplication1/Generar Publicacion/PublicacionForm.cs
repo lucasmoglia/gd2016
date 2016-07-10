@@ -22,7 +22,7 @@ namespace ME.UI
         private string descrVacia = "Ingrese aquí la descripción";
 
         #region publi Members
-        public decimal valor = 0;
+        public int valor = 0;
         #endregion
 
         private void habilitarTodo(bool valor)
@@ -358,6 +358,54 @@ namespace ME.UI
 
         private void cmbBoxEstado_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // Se controlan las transiciones entre los estados de a publicación.
+            string estado = ((Estado)cmbBoxEstado.SelectedItem).cod_estado.ToString();
+            switch (estado) {
+                case "1" /* Publicada */:
+                    if (PublicacionExistente.estado.cod_estado == 4 /* Pausada */)
+                    {
+                        MessageBox.Show("No puede cambiar el estado de " + PublicacionExistente.estado.nombre + " a " + ((Estado)cmbBoxEstado.SelectedItem).nombre,
+                                        "Publicación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        cmbBoxEstado.SelectedItem = PublicacionExistente.estado;
+                    }
+
+                break;
+
+                case "2" /* Borrador */:
+                    if (PublicacionExistente.estado.cod_estado == 3 /* Activa */    ||
+                        PublicacionExistente.estado.cod_estado == 1 /* Publicada */ ||
+                        PublicacionExistente.estado.cod_estado == 4 /* Pausada */)
+                    {
+                        MessageBox.Show("No puede cambiar el estado de " + PublicacionExistente.estado.nombre + " a " + ((Estado)cmbBoxEstado.SelectedItem).nombre,
+                                        "Publicación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        cmbBoxEstado.SelectedItem = PublicacionExistente.estado;
+                    }
+                break;
+
+                case "3" /* Activa */:
+
+                break;
+
+                case "4" /* Pausada */:
+                    if (PublicacionExistente.estado.cod_estado == 4 /* Pausada */)
+                    {
+                        MessageBox.Show("No puede cambiar el estado de " + PublicacionExistente.estado.nombre + " a " + ((Estado)cmbBoxEstado.SelectedItem).nombre,
+                                        "Publicación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        cmbBoxEstado.SelectedItem = PublicacionExistente.estado;
+                    }
+                break;
+
+                case "5" /* Finalizada */:
+                    if (PublicacionExistente.estado.cod_estado != 3 /* Activa */ &&
+                        PublicacionExistente.estado.cod_estado != 1 /* Publicada */)
+                    {
+                        MessageBox.Show("No puede cambiar el estado de " + PublicacionExistente.estado.nombre + " a " + ((Estado)cmbBoxEstado.SelectedItem).nombre,
+                                        "Publicación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        cmbBoxEstado.SelectedItem = PublicacionExistente.estado;
+                    }
+                break;
+            }
+
             if (esNuevaPubli || esModificable) {
                 btnGuardar.Text = ((Estado)cmbBoxEstado.SelectedItem).cod_estado == 3 /* "Activa" */ ? "Publicar" : "Guardar";
             }

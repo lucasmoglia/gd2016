@@ -10,7 +10,8 @@ namespace ME.Business
     public class FacturaHandler
     {
         public static Factura NuevaFactura(decimal cod_publi, decimal valor, int motivo){
-            Factura factura = null;
+            decimal numFactura = Factura.crearFactura(cod_publi, valor, motivo);
+            Factura factura = Factura.GetFactura(numFactura);
             return factura;
         }
 

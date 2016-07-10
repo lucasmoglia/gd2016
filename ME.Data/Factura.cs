@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Data;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -28,6 +29,23 @@ namespace ME.Data
             this.forma_pago    = forma_pago;
             this.cod_usuario   = cod_usuario;
             this.items         = items;
+        }
+
+        public static decimal crearFactura(decimal cod_publi, int valor, int motivo)
+        {
+            using (SqlConnection connection = MEEntity.GetConnection())
+            {
+                SqlCommand command = new SqlCommand("[DE_UNA].[GenerarFactura]", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add("@cod_publi", SqlDbType.Decimal).Value = cod_publi;
+                command.Parameters.Add("@cantidad", SqlDbType.Int).Value = valor;
+                command.Parameters.Add("@fecha", SqlDbType.DateTime).Value = DateTime.Parse(ConfigurationManager.AppSettings["fecha"].ToString());
+
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                return reader.Read() == true ? decimal.Parse(reader["num_factura"].ToString()) : 0;
+            }
         }
 
         public static Factura GetFactura(decimal num_factura)
