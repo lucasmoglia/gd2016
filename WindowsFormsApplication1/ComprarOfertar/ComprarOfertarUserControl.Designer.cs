@@ -141,6 +141,7 @@
             this.bindNavPubli.Size = new System.Drawing.Size(841, 25);
             this.bindNavPubli.TabIndex = 4;
             this.bindNavPubli.Text = "Barra de Navegación";
+            this.bindNavPubli.RefreshItems += new System.EventHandler(this.bindNavPubli_RefreshItems);
             // 
             // bindNavCountItem
             // 
@@ -243,6 +244,7 @@
             this.gBoxFiltros.TabIndex = 7;
             this.gBoxFiltros.TabStop = false;
             this.gBoxFiltros.Text = "Filtros de Búsqueda";
+            this.gBoxFiltros.Enter += new System.EventHandler(this.gBoxFiltros_Enter);
             // 
             // lblRubros
             // 

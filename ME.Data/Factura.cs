@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Data;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -28,6 +29,23 @@ namespace ME.Data
             this.forma_pago    = forma_pago;
             this.cod_usuario   = cod_usuario;
             this.items         = items;
+        }
+
+        public static decimal crearFactura(decimal cod_publi, int valor, int motivo)
+        {
+            using (SqlConnection connection = MEEntity.GetConnection())
+            {
+                SqlCommand command = new SqlCommand("[DE_UNA].[GenerarFactura]", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add("@cod_publi", SqlDbType.Decimal).Value = cod_publi;
+                command.Parameters.Add("@cantidad", SqlDbType.Int).Value = valor;
+                command.Parameters.Add("@fecha", SqlDbType.DateTime).Value = DateTime.Parse(ConfigurationManager.AppSettings["fecha"].ToString());
+
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                return reader.Read() == true ? decimal.Parse(reader["num_factura"].ToString()) : 0;
+            }
         }
 
         public static Factura GetFactura(decimal num_factura)
@@ -122,5 +140,49 @@ namespace ME.Data
         }
 
 
+    }
+
+
+    public class CabeceraFactura
+    {
+        public string nombre_apellido { get; set; }
+        public string domicilio { get; set; }
+        public string DNI_CUIT { get; set; }
+
+        public CabeceraFactura(string nombre_apellido, string domicilio, string DNI_CUIT)
+        {
+            this.nombre_apellido = nombre_apellido;
+            this.domicilio = domicilio;
+            this.DNI_CUIT = DNI_CUIT;
+        }
+
+        public static CabeceraFactura GetDatosCabeceraFactura(decimal cod_usuario)
+        {
+            using (SqlConnection connection = MEEntity.GetConnection())
+            {
+
+                SqlCommand command = new SqlCommand("[DE_UNA].[GetDatosCabeceraFactura]", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add("@cod_usuario", SqlDbType.Decimal).Value = cod_usuario;
+
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    CabeceraFactura cabeceraFactura = new CabeceraFactura(
+                          reader["nombre_apellido"].ToString()
+                        , reader["domicilio"].ToString()
+                        , reader["DNI_CUIT"].ToString()
+                    );
+
+                    return cabeceraFactura;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
     }
 }
