@@ -167,6 +167,7 @@
             this.gvComprasUsuario.Location = new System.Drawing.Point(5, 17);
             this.gvComprasUsuario.Name = "gvComprasUsuario";
             this.gvComprasUsuario.ReadOnly = true;
+            this.gvComprasUsuario.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.gvComprasUsuario.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.gvComprasUsuario.Size = new System.Drawing.Size(806, 44);
             this.gvComprasUsuario.TabIndex = 0;
@@ -181,6 +182,8 @@
             this.gvHistorial.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.gvHistorial.Location = new System.Drawing.Point(5, 18);
             this.gvHistorial.Name = "gvHistorial";
+            this.gvHistorial.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
+            this.gvHistorial.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.gvHistorial.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gvHistorial.ShowEditingIcon = false;
             this.gvHistorial.Size = new System.Drawing.Size(809, 244);

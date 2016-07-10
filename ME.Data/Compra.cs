@@ -118,7 +118,7 @@ namespace ME.Data
             List<Calificaciones> califList = new List<Calificaciones>();
             using (SqlConnection connection = MEEntity.GetConnection())
             {
-                SqlCommand command = new SqlCommand("select * from DE_UNA.fn_Cant_Compras_Por_Cliente(@cod_usuario)", connection);
+                SqlCommand command = new SqlCommand("select * from DE_UNA.fn_Cant_Compras_Por_Usuario(@cod_usuario)", connection);
                 command.CommandType = CommandType.Text;
                 command.Parameters.Add("@cod_usuario", SqlDbType.Decimal).Value = cod_usuario;
                 command.CommandTimeout = 0;
@@ -136,6 +136,7 @@ namespace ME.Data
                               , decimal.Parse(reader["Compras_Con_3_Estrellas"].ToString())
                               , decimal.Parse(reader["Compras_Con_2_Estrellas"].ToString())
                               , decimal.Parse(reader["Compras_Con_1_Estrella"].ToString())
+                              , decimal.Parse(reader["Sin_Calificar"].ToString())
                             );
                         califList.Add(unaLinea);
                     } while (reader.Read());
@@ -181,9 +182,10 @@ namespace ME.Data
         public decimal  Estrellas_3            { get; set; }
         public decimal  Estrellas_2            { get; set; }
         public decimal  Estrellas_1            { get; set; }
+        public decimal  Sin_Calificar          { get; set; }
 
         //constructor de la clase Compra
-        public Calificaciones(decimal Cant_Compras_Cliente, decimal Compras_Con_5_Estrellas, decimal Compras_Con_4_Estrellas, decimal Compras_Con_3_Estrellas, decimal Compras_Con_2_Estrellas, decimal Compras_Con_1_Estrella)
+        public Calificaciones(decimal Cant_Compras_Cliente, decimal Compras_Con_5_Estrellas, decimal Compras_Con_4_Estrellas, decimal Compras_Con_3_Estrellas, decimal Compras_Con_2_Estrellas, decimal Compras_Con_1_Estrella, decimal Sin_Calificar)
         {
             this.Total_Compras       = Cant_Compras_Cliente;
             this.Estrellas_5         = Compras_Con_5_Estrellas;
@@ -191,6 +193,7 @@ namespace ME.Data
             this.Estrellas_3         = Compras_Con_3_Estrellas;
             this.Estrellas_2         = Compras_Con_2_Estrellas;
             this.Estrellas_1         = Compras_Con_1_Estrella;
+            this.Sin_Calificar       = Sin_Calificar;
         }
 
     

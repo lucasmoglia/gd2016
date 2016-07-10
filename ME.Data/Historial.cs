@@ -13,15 +13,17 @@ namespace ME.Data
         public decimal Publicacion  { get; set; }
         public string Detalle { get; set; }
         public string Tipo { get; set; }
+        public decimal Monto { get; set; }
         public string Calificacion { get; set; }
 
 
         //Constructor de la clase Historial
-        public Historial(decimal Publicacion, string Detalle, string Tipo, string Calificacion)
+        public Historial(decimal Publicacion, string Detalle, string Tipo, decimal Monto, string Calificacion)
         {
             this.Publicacion    = Publicacion;
             this.Detalle        = Detalle;
             this.Tipo           = Tipo;
+            this.Monto          = Monto;
             this.Calificacion   = Calificacion;
 
         }
@@ -51,6 +53,7 @@ namespace ME.Data
                               decimal.Parse(reader["Publicacion"].ToString())
                             , reader["Detalle"].ToString()
                             , reader["Tipo"].ToString()
+                            , decimal.Parse(reader["Monto"].ToString())
                             , reader["Calificacion"].ToString()
 
                             );
