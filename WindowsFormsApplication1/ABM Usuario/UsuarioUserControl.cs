@@ -37,10 +37,10 @@ namespace ME.UI
         private void bindingSource1_CurrentChanged(object sender, EventArgs e)
         {
             // The desired page has changed, so fetch the page of records using the "Current" offset 
-            int offset = (int)bindingSource1.Current;
+            int offset = (int)(bindingSource1.Current ?? 0);
             var records = new List<UsuarioModel>();
-            for (int i = offset; i < offset + pageSize && i < ((List<UsuarioModel>)gvClientes.DataSource).Count; i++)
-                records.Add(((List<UsuarioModel>)gvClientes.DataSource).ElementAt(i));
+            for (int i = offset; i < offset + pageSize && i < listaUsuarios.Count; i++)
+                records.Add(listaUsuarios.ElementAt(i));
             gvClientes.DataSource = records;
         }
 
@@ -129,7 +129,7 @@ namespace ME.UI
         private void btnBuscar_Click(object sender, EventArgs ev)
         {
 
-            gvClientes.DataSource = listaUsuarios.Where(e => 
+            listaUsuarios = listaUsuarios.Where(e => 
             (string.IsNullOrEmpty(txtFiltroNombre.Text) || (!string.IsNullOrEmpty(txtFiltroNombre.Text) &&
                 e.nombre.Trim().ToUpper().Contains(txtFiltroNombre.Text.Trim().ToUpper())))
                 &&
@@ -141,19 +141,19 @@ namespace ME.UI
                 &&
             (string.IsNullOrEmpty(txtFiltroMail.Text) || (!string.IsNullOrEmpty(txtFiltroMail.Text) &&
                 e.mail.Trim().ToUpper().Contains(txtFiltroMail.Text.Trim().ToUpper())))).ToList();
+            gvClientes.DataSource = listaUsuarios;
             gvClientes.Refresh();
             bindingSource1.DataSource = new PageOffsetList(gvClientes.RowCount);
         }
 
         private void btnRestablecer_Click(object sender, EventArgs e)
         {
-            gvClientes.DataSource = listaUsuarios;
-            gvClientes.Refresh();
-            bindingSource1.DataSource = new PageOffsetList(gvClientes.RowCount);
             txtFiltroNombre.Text = string.Empty;
             txtFiltroApellido.Text = string.Empty;
             txtFiltroDNI.Text = string.Empty;
             txtFiltroMail.Text = string.Empty;
+            
+            FillGrid();
         }
 
         private void btnRemoveUser_Click(object sender, EventArgs e)
