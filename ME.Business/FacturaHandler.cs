@@ -9,10 +9,11 @@ namespace ME.Business
 {
     public class FacturaHandler
     {
-        public static Factura NuevaFactura(decimal cod_publi, int motivo){
+        public static Factura NuevaFactura(decimal cod_publi, decimal valor, int motivo){
             Factura factura = null;
             return factura;
         }
+
         public static List<Factura> ListarFacturas(decimal cod_usuario, DateTime? fecha_desde, DateTime? fecha_hasta, decimal monto_minimo, decimal monto_maximo, string detalle_facturado)
         {
             List<Factura> facturas = new List<Factura>();

@@ -253,8 +253,7 @@ namespace ME.UI
             {
                 descrError = this.validarForm();
 
-                if (descrError != String.Empty)
-                {
+                if (descrError != String.Empty) {
                     Publicacion nuevaPublicacion = PublicacionHandler.Guardar(
                         txtDescripcion.Text, numStock.Value, DTFechaInicio.Value, DTFechaVencimiento.Value, numPrecio.Value,
                         decimal.Parse(cmbBoxVisibilidad.SelectedValue.ToString()), decimal.Parse(cmbBoxEstado.SelectedValue.ToString()),
@@ -265,6 +264,10 @@ namespace ME.UI
                     PublicacionForm muestraDeNuevaPubli = new PublicacionForm(nuevaPublicacion, TipoAccion.View);
 
                     muestraDeNuevaPubli.Show();
+
+                    Factura factura = FacturaHandler.NuevaFactura(nuevaPublicacion.cod_publi, valor, 1); // Comisión por Publicación
+
+                    FacturaForm facturaForm = new FacturaForm(factura);
 
                     this.Close();
                 } else {
@@ -281,9 +284,11 @@ namespace ME.UI
 
                         formDeCompra.ShowDialog(this); // Ver como recuperar el valor que setea en ese form.
 
-                        Factura factura = PublicacionHandler.Comprar(PublicacionExistente.cod_publi, 2);
+                        Factura factura = PublicacionHandler.Comprar(PublicacionExistente.cod_publi, valor, 2); // Comisión por Venta.
 
                         FacturaForm formFactura = new FacturaForm(factura);
+
+                        formFactura.Show();
                         
                     } else {
                         string msjErrorCalif = "Usted tiene " + comprasSinCalificar.Count.ToString() + " compras pendientes de calificación.\n" +
@@ -301,22 +306,6 @@ namespace ME.UI
                 }
 
             }
-
-            if (PublicacionExistente.estado.cod_estado == 1 /* Publicada */ ||
-                PublicacionExistente.estado.cod_estado == 3 /* Activa */  && !esView)
-            {
-                // Mostrar la factura por pantalla.
-
-                //Factura nuevaFactura = FacturaHandler.nuevaFactura()
-                //FacturaForm muestraDeFactura = new FacturaForm(nuevaFactura);
-
-                //muestraDeFactura.Show();
-
-
-                this.Close();
-            }
-
-
         }
 
         private void txtDescripcion_Enter(object sender, EventArgs e)

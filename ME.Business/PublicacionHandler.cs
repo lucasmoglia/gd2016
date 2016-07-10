@@ -27,11 +27,6 @@ namespace ME.Business
             return Publicacion.GetPublicaciones(estado, rubros, descripcion, 0);
         }
 
-        public static Factura Comprar(decimal cod_publi, int motivo) // 1: Publicar, 2: Comprar, 3: Envío.
-        {
-            return FacturaHandler.NuevaFactura(cod_publi, motivo);
-        }
-
         public static Publicacion Guardar(string descripcion, decimal stock, DateTime fechaInicio, DateTime fechaVenc, decimal precio, decimal cod_visibilidad,
                                   decimal cod_estado, decimal cod_rubro, decimal cod_usuario, decimal cod_tipo_publi, bool con_envio, bool con_preguntas)
         {
@@ -50,11 +45,14 @@ namespace ME.Business
             }
         }
 
+        public static Factura Comprar(decimal cod_publi, decimal valor, int motivo) // 1: Publicar, 2: Comprar, 3: Envío.
+        {
+            return FacturaHandler.NuevaFactura(cod_publi, valor, motivo);
+        }
 
         public static void FinalizarPublicaciones()
         {
-            Publicacion.finalizarSubastas();
-            // pudiendo agregar la llamada a otro proc para finalizar aquellas compras inmediatas que se vence la publicación.
+            Publicacion.finalizarPublicaciones();
         }    
     
     }

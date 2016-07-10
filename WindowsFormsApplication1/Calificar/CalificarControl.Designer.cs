@@ -82,10 +82,12 @@
             // 
             this.gvComprasSinCalificar.AllowUserToAddRows = false;
             this.gvComprasSinCalificar.AllowUserToDeleteRows = false;
+            this.gvComprasSinCalificar.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.gvComprasSinCalificar.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.gvComprasSinCalificar.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.gvComprasSinCalificar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvComprasSinCalificar.Location = new System.Drawing.Point(5, 16);
+            this.gvComprasSinCalificar.MultiSelect = false;
             this.gvComprasSinCalificar.Name = "gvComprasSinCalificar";
             this.gvComprasSinCalificar.ReadOnly = true;
             this.gvComprasSinCalificar.ScrollBars = System.Windows.Forms.ScrollBars.None;
