@@ -16,7 +16,7 @@ namespace ME.UI
     {
         private const int pageSize = 10;
         private string descripcion = String.Empty, descrVacia = "Ingrese Búsqueda";
-        private List<Publicacion> listaPublicaciones;
+        private List<Publicacion> listaPublicaciones = new List<Publicacion>();
         private List<Rubro> rubros = new List<Rubro>();
         private List<decimal> cod_rubros = new List<decimal>();
         
@@ -48,8 +48,8 @@ namespace ME.UI
         private void bindSourcePubli_CurrentChanged(object sender, EventArgs e)
         {
             // The desired page has changed, so fetch the page of records using the "Current" offset 
-            //int offset = (int)bindSourcePubli.Current;
-            int offset = listaPublicaciones.IndexOf((Publicacion)bindSourcePubli.Current);
+            int offset = (int)bindSourcePubli.Current;
+            //int offset = listaPublicaciones.IndexOf((Publicacion)bindSourcePubli.Current);
             var records = new List<Publicacion>();
 
             for (int i = offset; i < offset + pageSize && i < listaPublicaciones.Count; i++)
@@ -183,11 +183,12 @@ namespace ME.UI
         private void bindNavNextItem_Click(object sender, EventArgs e)
         {
             // La idea es que cuando se presiona siguiente, agregue 10 páginas a la lista de Publicaciones.
-            if (Globales.NumPag_Publi + 1 > Globales.PagsEnCache_Publi){
+            if (Globales.NumPag_Publi + 1 > Globales.PagsEnCache_Publi)
+            {
                 listaPublicaciones.AddRange(PublicacionHandler.ListarPublicaciones(1, cod_rubros, descripcion));
-                bindSourcePubli.DataSource = listaPublicaciones;
-
+                gvPublicaciones.DataSource = listaPublicaciones;
                 gvPublicaciones.Refresh();
+                bindSourcePubli.DataSource = new PageOffsetList(gvPublicaciones.RowCount);
             }
         }
 

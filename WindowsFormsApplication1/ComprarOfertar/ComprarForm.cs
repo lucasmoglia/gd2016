@@ -52,7 +52,7 @@ namespace ME.UI
                 if (numMontoCant.Value >= 1 && numMontoCant.Value <= StockBase) {
                     PublicacionForm publi = (PublicacionForm)this.Owner; // Setea el Formulario PublicacionForm en una variable.
 
-                    publi.valor = numMontoCant.Value; // Setea la variable "valor" del form PublicacionForm.
+                    publi.valor = (int)numMontoCant.Value; // Setea la variable "valor" del form PublicacionForm.
 
                     this.Close();
                 } else {

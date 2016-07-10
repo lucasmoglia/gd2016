@@ -25,11 +25,9 @@ namespace ME.UI
                     txtNombreC.Text = usuario.nombre;
                     txtApellido.Text = usuario.apellido;
                     txtNumeroDocC.Text = usuario.dni;
-                    ddlRol.SelectedValue = usuario.cod_rol;
-                    //txtTipoDocC.Text 
+                    ddlRol.SelectedValue = usuario.cod_rol; //TODO bloquear campo ddlRol
                     txtMailC.Text = usuario.mail;
                     txtUserNameC.Text = usuario.username;
-                    //txtPasswordC.Text = usuario.password;
                     txtTelefonoC.Text = usuario.telefono;
                     txtDirCalleC.Text = usuario.dir_calle;
                     txtDirNumeroC.Text = usuario.dir_nro;

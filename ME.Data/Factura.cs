@@ -31,7 +31,7 @@ namespace ME.Data
             this.items         = items;
         }
 
-        public static decimal crearFactura(decimal cod_publi, int valor, int motivo)
+        public static decimal crearFactura(decimal cod_publi, decimal valor, decimal motivo)
         {
             using (SqlConnection connection = MEEntity.GetConnection())
             {

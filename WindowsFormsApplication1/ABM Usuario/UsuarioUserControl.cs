@@ -39,8 +39,8 @@ namespace ME.UI
             // The desired page has changed, so fetch the page of records using the "Current" offset 
             int offset = (int)bindingSource1.Current;
             var records = new List<UsuarioModel>();
-            for (int i = offset; i < offset + pageSize && i < listaUsuarios.Count; i++)
-                records.Add(listaUsuarios.ElementAt(i));
+            for (int i = offset; i < offset + pageSize && i < ((List<UsuarioModel>)gvClientes.DataSource).Count; i++)
+                records.Add(((List<UsuarioModel>)gvClientes.DataSource).ElementAt(i));
             gvClientes.DataSource = records;
         }
 
@@ -141,11 +141,19 @@ namespace ME.UI
                 &&
             (string.IsNullOrEmpty(txtFiltroMail.Text) || (!string.IsNullOrEmpty(txtFiltroMail.Text) &&
                 e.mail.Trim().ToUpper().Contains(txtFiltroMail.Text.Trim().ToUpper())))).ToList();
+            gvClientes.Refresh();
+            bindingSource1.DataSource = new PageOffsetList(gvClientes.RowCount);
         }
 
         private void btnRestablecer_Click(object sender, EventArgs e)
         {
             gvClientes.DataSource = listaUsuarios;
+            gvClientes.Refresh();
+            bindingSource1.DataSource = new PageOffsetList(gvClientes.RowCount);
+            txtFiltroNombre.Text = string.Empty;
+            txtFiltroApellido.Text = string.Empty;
+            txtFiltroDNI.Text = string.Empty;
+            txtFiltroMail.Text = string.Empty;
         }
 
         private void btnRemoveUser_Click(object sender, EventArgs e)
