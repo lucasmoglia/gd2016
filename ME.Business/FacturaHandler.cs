@@ -22,22 +22,22 @@ namespace ME.Business
 
                 facturas.AddRange(Factura.GetFacturas(UserLogged.cod_usuario, nrosfactura, fecha_desde, fecha_hasta, monto_minimo, monto_maximo));
 
-                for (int i = 0; i < facturas.Count; i++) 
+                /*for (int i = 0; i < facturas.Count; i++) 
                 {
                     facturas.ElementAt(i).items = new List<Item>();
                     facturas.ElementAt(i).items.AddRange(Item.GetItems(facturas.ElementAt(i).num_factura, string.Empty));
-                }
+                }*/
                 nrosfactura.Clear();
                 return facturas;
             } else{
 
                 facturas.AddRange(Factura.GetFacturas(UserLogged.cod_usuario, null, fecha_desde, fecha_hasta, monto_minimo, monto_maximo)); //chequear si anda mandando el primer parametro (una tabla) como null
 
-                for (int i = 0; i < facturas.Count; i++) 
+                /*for (int i = 0; i < facturas.Count; i++) 
                 {
                     facturas.ElementAt(i).items = new List<Item>();
                     facturas.ElementAt(i).items.AddRange(Item.GetItems(facturas.ElementAt(i).num_factura, string.Empty));
-                }
+                }*/
              }
 
         return facturas;
