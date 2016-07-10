@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClienteHandler.cs" />
+    <Compile Include="OfertaHandler.cs" />
     <Compile Include="EstadoHandler.cs" />
     <Compile Include="CompraHandler.cs" />
     <Compile Include="HistorialHandler.cs" />
