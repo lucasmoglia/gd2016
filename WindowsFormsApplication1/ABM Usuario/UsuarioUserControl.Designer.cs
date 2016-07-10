@@ -48,6 +48,7 @@
             this.btnResetPass = new System.Windows.Forms.Button();
             this.btnDesbloquear = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnRestablecer = new System.Windows.Forms.Button();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -57,7 +58,6 @@
             this.txtFiltroDNI = new System.Windows.Forms.TextBox();
             this.txtFiltroApellido = new System.Windows.Forms.TextBox();
             this.txtFiltroNombre = new System.Windows.Forms.TextBox();
-            this.btnRestablecer = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gvClientes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
@@ -83,9 +83,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(666, 409);
+            this.button1.Location = new System.Drawing.Point(656, 61);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(137, 23);
+            this.button1.Size = new System.Drawing.Size(109, 23);
             this.button1.TabIndex = 1;
             this.button1.Text = "Nuevo Usuario";
             this.button1.UseVisualStyleBackColor = true;
@@ -95,15 +95,15 @@
             // 
             this.btnEditUser.Location = new System.Drawing.Point(15, 409);
             this.btnEditUser.Name = "btnEditUser";
-            this.btnEditUser.Size = new System.Drawing.Size(63, 23);
+            this.btnEditUser.Size = new System.Drawing.Size(103, 23);
             this.btnEditUser.TabIndex = 2;
-            this.btnEditUser.Text = "Editar";
+            this.btnEditUser.Text = "Seleccionar";
             this.btnEditUser.Visible = false;
             this.btnEditUser.Click += new System.EventHandler(this.btnEditUser_Click);
             // 
             // btnRemoveUser
             // 
-            this.btnRemoveUser.Location = new System.Drawing.Point(84, 409);
+            this.btnRemoveUser.Location = new System.Drawing.Point(352, 409);
             this.btnRemoveUser.Name = "btnRemoveUser";
             this.btnRemoveUser.Size = new System.Drawing.Size(63, 23);
             this.btnRemoveUser.TabIndex = 3;
@@ -207,9 +207,9 @@
             // 
             // btnResetPass
             // 
-            this.btnResetPass.Location = new System.Drawing.Point(153, 409);
+            this.btnResetPass.Location = new System.Drawing.Point(124, 409);
             this.btnResetPass.Name = "btnResetPass";
-            this.btnResetPass.Size = new System.Drawing.Size(157, 23);
+            this.btnResetPass.Size = new System.Drawing.Size(137, 23);
             this.btnResetPass.TabIndex = 5;
             this.btnResetPass.Text = "Reestablecer Contraseña";
             this.btnResetPass.UseVisualStyleBackColor = true;
@@ -217,9 +217,9 @@
             // 
             // btnDesbloquear
             // 
-            this.btnDesbloquear.Location = new System.Drawing.Point(317, 410);
+            this.btnDesbloquear.Location = new System.Drawing.Point(267, 409);
             this.btnDesbloquear.Name = "btnDesbloquear";
-            this.btnDesbloquear.Size = new System.Drawing.Size(75, 23);
+            this.btnDesbloquear.Size = new System.Drawing.Size(79, 23);
             this.btnDesbloquear.TabIndex = 6;
             this.btnDesbloquear.Text = "Desbloquear";
             this.btnDesbloquear.UseVisualStyleBackColor = true;
@@ -243,6 +243,16 @@
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros";
+            // 
+            // btnRestablecer
+            // 
+            this.btnRestablecer.Location = new System.Drawing.Point(517, 44);
+            this.btnRestablecer.Name = "btnRestablecer";
+            this.btnRestablecer.Size = new System.Drawing.Size(75, 23);
+            this.btnRestablecer.TabIndex = 9;
+            this.btnRestablecer.Text = "Restablecer";
+            this.btnRestablecer.UseVisualStyleBackColor = true;
+            this.btnRestablecer.Click += new System.EventHandler(this.btnRestablecer_Click);
             // 
             // btnBuscar
             // 
@@ -318,16 +328,6 @@
             this.txtFiltroNombre.Name = "txtFiltroNombre";
             this.txtFiltroNombre.Size = new System.Drawing.Size(100, 20);
             this.txtFiltroNombre.TabIndex = 0;
-            // 
-            // btnRestablecer
-            // 
-            this.btnRestablecer.Location = new System.Drawing.Point(517, 44);
-            this.btnRestablecer.Name = "btnRestablecer";
-            this.btnRestablecer.Size = new System.Drawing.Size(75, 23);
-            this.btnRestablecer.TabIndex = 9;
-            this.btnRestablecer.Text = "Restablecer";
-            this.btnRestablecer.UseVisualStyleBackColor = true;
-            this.btnRestablecer.Click += new System.EventHandler(this.btnRestablecer_Click);
             // 
             // UsuarioUserControl
             // 
