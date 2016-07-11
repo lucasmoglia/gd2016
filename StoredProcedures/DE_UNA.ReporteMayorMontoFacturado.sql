@@ -18,7 +18,7 @@ GO
 -- Create date: 10-07-2016
 -- Description:	Vendedores con mayor monto facturado dentro de un mes y año particular.
 -- ==========================================================================================
-ALTER PROCEDURE [DE_UNA].[ReporteMayorMontoFacturado]
+CREATE PROCEDURE [DE_UNA].[ReporteMayorMontoFacturado]
 	-- Add the parameters for the stored procedure here
 	@mes varchar(2),
 	@anio varchar(4)
