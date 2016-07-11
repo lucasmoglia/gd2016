@@ -4,12 +4,13 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
--- =============================================
--- Author:		<Author,,Name>
--- Create date: <Create Date,,>
--- Description:	<Description,,>
--- =============================================
-ALTER PROCEDURE [DE_UNA].[GetFacturas]
+
+CREATE TYPE [DE_UNA].[ListaNrosFacturas] AS TABLE(
+	[nro_factura] [decimal](18, 0) NULL
+)
+GO
+
+CREATE PROCEDURE [DE_UNA].[GetFacturas]
 	@TablaNrosFacturas [DE_UNA].[ListaNrosFacturas] READONLY,
 	@usuario DECIMAL(20),
 	@fechaDesde DATETIME,
