@@ -86,7 +86,7 @@ namespace ME.Data
                 command.Parameters.Add("@cod_tipo_publi", SqlDbType.Decimal).Value = cod_tipo_publi;
                 command.Parameters.Add("@con_envio", SqlDbType.Bit).Value = con_envio;
                 command.Parameters.Add("@con_preguntas", SqlDbType.Bit).Value = con_preguntas;
-                command.Parameters.Add("@fecha_finaliz", SqlDbType.DateTime).Value = (object)fecha_finaliz ?? DBNull.Value;
+              //  command.Parameters.Add("@fecha_finaliz", SqlDbType.DateTime).Value = (object)fecha_finaliz ?? DBNull.Value;
 
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
