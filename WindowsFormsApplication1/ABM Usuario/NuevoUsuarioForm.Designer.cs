@@ -90,7 +90,6 @@
             this.label24 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.txtApellido = new System.Windows.Forms.TextBox();
-            this.txtTipoDocC = new System.Windows.Forms.TextBox();
             this.label26 = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
             this.pnlEmpresa = new System.Windows.Forms.Panel();
@@ -100,6 +99,7 @@
             this.txtPasswordE = new System.Windows.Forms.TextBox();
             this.label31 = new System.Windows.Forms.Label();
             this.ddlRol = new System.Windows.Forms.ComboBox();
+            this.ddlTipoDocC = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.pnlCliente.SuspendLayout();
@@ -402,7 +402,7 @@
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.TabIndex = 31;
-            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.Text = "Cerrar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
@@ -589,6 +589,7 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.ddlTipoDocC);
             this.groupBox4.Controls.Add(this.label21);
             this.groupBox4.Controls.Add(this.txtFechaNacC);
             this.groupBox4.Controls.Add(this.txtMailC);
@@ -600,7 +601,6 @@
             this.groupBox4.Controls.Add(this.label24);
             this.groupBox4.Controls.Add(this.label25);
             this.groupBox4.Controls.Add(this.txtApellido);
-            this.groupBox4.Controls.Add(this.txtTipoDocC);
             this.groupBox4.Controls.Add(this.label26);
             this.groupBox4.Controls.Add(this.label27);
             this.groupBox4.Location = new System.Drawing.Point(25, 7);
@@ -703,13 +703,6 @@
             this.txtApellido.Size = new System.Drawing.Size(121, 20);
             this.txtApellido.TabIndex = 5;
             // 
-            // txtTipoDocC
-            // 
-            this.txtTipoDocC.Location = new System.Drawing.Point(157, 59);
-            this.txtTipoDocC.Name = "txtTipoDocC";
-            this.txtTipoDocC.Size = new System.Drawing.Size(121, 20);
-            this.txtTipoDocC.TabIndex = 9;
-            // 
             // label26
             // 
             this.label26.AutoSize = true;
@@ -797,6 +790,14 @@
             this.ddlRol.Size = new System.Drawing.Size(207, 21);
             this.ddlRol.TabIndex = 0;
             this.ddlRol.SelectedIndexChanged += new System.EventHandler(this.ddlRol_SelectedIndexChanged);
+            // 
+            // ddlTipoDocC
+            // 
+            this.ddlTipoDocC.FormattingEnabled = true;
+            this.ddlTipoDocC.Location = new System.Drawing.Point(157, 59);
+            this.ddlTipoDocC.Name = "ddlTipoDocC";
+            this.ddlTipoDocC.Size = new System.Drawing.Size(121, 21);
+            this.ddlTipoDocC.TabIndex = 16;
             // 
             // NuevoUsuarioForm
             // 
@@ -889,7 +890,6 @@
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.TextBox txtApellido;
-        private System.Windows.Forms.TextBox txtTipoDocC;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.ComboBox ddlRol;
@@ -905,5 +905,6 @@
         private System.Windows.Forms.TextBox txtUsernameE;
         private System.Windows.Forms.TextBox txtPasswordE;
         private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.ComboBox ddlTipoDocC;
     }
 }

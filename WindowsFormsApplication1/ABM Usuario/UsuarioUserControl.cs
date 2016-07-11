@@ -91,8 +91,12 @@ namespace ME.UI
         private void btnEditUser_Click(object sender, EventArgs e)
         {
             UsuarioModel usuario = (UsuarioModel)gvClientes.SelectedRows[0].DataBoundItem;
-            Form nuevoUsuarioForm = new NuevoUsuarioForm(usuario);
+            NuevoUsuarioForm nuevoUsuarioForm = new NuevoUsuarioForm(usuario);
             nuevoUsuarioForm.ShowDialog(this);
+            if (nuevoUsuarioForm.somethingSaved)
+            {
+                FillGrid();
+            }
         }
 
         private void bindingNavigator1_RefreshItems(object sender, EventArgs e)
@@ -102,7 +106,8 @@ namespace ME.UI
 
         private void btnResetPass_Click(object sender, EventArgs e)
         {
-            Form resetPassForm = new ResetPasswordForm();
+            ResetPasswordForm resetPassForm = new ResetPasswordForm();
+            resetPassForm.StartPosition = FormStartPosition.CenterScreen;
             resetPassForm.ShowDialog(this);
         }
 
