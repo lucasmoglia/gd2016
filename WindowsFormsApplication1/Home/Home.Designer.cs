@@ -36,6 +36,7 @@
             this.venderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.misFacturasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.miHistorialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.misPublicacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.administracionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.usuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -45,7 +46,6 @@
             this.reportesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listadoEstadísticoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlMaster = new System.Windows.Forms.Panel();
-            this.miHistorialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -116,6 +116,13 @@
             this.misFacturasToolStripMenuItem.Text = "Mi facturación";
             this.misFacturasToolStripMenuItem.Click += new System.EventHandler(this.misFacturasToolStripMenuItem_Click);
             // 
+            // miHistorialToolStripMenuItem
+            // 
+            this.miHistorialToolStripMenuItem.Name = "miHistorialToolStripMenuItem";
+            this.miHistorialToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.miHistorialToolStripMenuItem.Text = "Mi Historial";
+            this.miHistorialToolStripMenuItem.Click += new System.EventHandler(this.miHistorialToolStripMenuItem_Click);
+            // 
             // misPublicacionesToolStripMenuItem
             // 
             this.misPublicacionesToolStripMenuItem.Name = "misPublicacionesToolStripMenuItem";
@@ -174,6 +181,7 @@
             this.listadoEstadísticoToolStripMenuItem.Name = "listadoEstadísticoToolStripMenuItem";
             this.listadoEstadísticoToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.listadoEstadísticoToolStripMenuItem.Text = "Listado Estadístico";
+            this.listadoEstadísticoToolStripMenuItem.Click += new System.EventHandler(this.listadoEstadísticoToolStripMenuItem_Click);
             // 
             // pnlMaster
             // 
@@ -181,13 +189,6 @@
             this.pnlMaster.Name = "pnlMaster";
             this.pnlMaster.Size = new System.Drawing.Size(838, 437);
             this.pnlMaster.TabIndex = 1;
-            // 
-            // miHistorialToolStripMenuItem
-            // 
-            this.miHistorialToolStripMenuItem.Name = "miHistorialToolStripMenuItem";
-            this.miHistorialToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
-            this.miHistorialToolStripMenuItem.Text = "Mi Historial";
-            this.miHistorialToolStripMenuItem.Click += new System.EventHandler(this.miHistorialToolStripMenuItem_Click);
             // 
             // Home
             // 
