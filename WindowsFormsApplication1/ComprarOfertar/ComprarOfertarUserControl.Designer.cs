@@ -65,15 +65,18 @@
             this.gvPublicaciones.AllowUserToAddRows = false;
             this.gvPublicaciones.AllowUserToDeleteRows = false;
             this.gvPublicaciones.AllowUserToOrderColumns = true;
-            this.gvPublicaciones.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.gvPublicaciones.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCellsExceptHeader;
             this.gvPublicaciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gvPublicaciones.Cursor = System.Windows.Forms.Cursors.Hand;
             this.gvPublicaciones.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.gvPublicaciones.Location = new System.Drawing.Point(3, 145);
+            this.gvPublicaciones.MultiSelect = false;
             this.gvPublicaciones.Name = "gvPublicaciones";
+            this.gvPublicaciones.RowHeadersVisible = false;
             this.gvPublicaciones.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gvPublicaciones.Size = new System.Drawing.Size(835, 261);
             this.gvPublicaciones.TabIndex = 0;
-            this.gvPublicaciones.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvPublicaciones_CellContentClick);
+            this.gvPublicaciones.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvPublicaciones_CellContentDoubleClick);
             this.gvPublicaciones.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvPublicaciones_RowEnter);
             // 
             // btnComprar
@@ -244,7 +247,6 @@
             this.gBoxFiltros.TabIndex = 7;
             this.gBoxFiltros.TabStop = false;
             this.gBoxFiltros.Text = "Filtros de Búsqueda";
-            this.gBoxFiltros.Enter += new System.EventHandler(this.gBoxFiltros_Enter);
             // 
             // lblRubros
             // 

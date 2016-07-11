@@ -28,12 +28,11 @@ namespace ME.UI
             Globales.TamanioPag_Publi = 10;
             Globales.TotalPags_Publi = 0;
             Globales.PagsEnCache_Publi = 0;
-            int numero = 0;
             
             listaPublicaciones = PublicacionHandler.ListarPublicaciones(1, null, String.Empty);
             //Init Grid
             gvPublicaciones.DataSource = listaPublicaciones;
-            gvPublicaciones.Columns["visibilidad"].DataPropertyName = "descripcion";
+            //gvPublicaciones.Columns["visibilidad"].DataPropertyName = "descripcion";
             //gvPublicaciones.Columns["visibilidad"].ValueType = typeof(string);
             gvPublicaciones.Columns["visibilidad"].Visible = false;
             gvPublicaciones.Columns["estado"].Visible = false;
@@ -49,7 +48,7 @@ namespace ME.UI
         {
             // The desired page has changed, so fetch the page of records using the "Current" offset 
             int offset = (int)bindSourcePubli.Current;
-            //int offset = listaPublicaciones.IndexOf((Publicacion)bindSourcePubli.Current);
+
             var records = new List<Publicacion>();
 
             for (int i = offset; i < offset + pageSize && i < listaPublicaciones.Count; i++)
@@ -182,7 +181,7 @@ namespace ME.UI
 
         private void bindNavNextItem_Click(object sender, EventArgs e)
         {
-            // La idea es que cuando se presiona siguiente, agregue 10 páginas a la lista de Publicaciones.
+            // La idea es que cuando se presiona siguiente y ya se pasaron 10 páginas, agregue 10 páginas más a la lista de Publicaciones.
             if (Globales.NumPag_Publi + 1 > Globales.PagsEnCache_Publi)
             {
                 listaPublicaciones.AddRange(PublicacionHandler.ListarPublicaciones(1, cod_rubros, descripcion));
@@ -214,11 +213,6 @@ namespace ME.UI
             lstRubros.ForeColor = System.Drawing.SystemColors.WindowText;
         }
 
-        private void gvPublicaciones_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            this.btnComprar_Click(sender, e);
-        }
-
         private void FillGrid()
         {
             gvPublicaciones.DataSource = listaPublicaciones;
@@ -229,9 +223,9 @@ namespace ME.UI
 
         }
 
-        private void gBoxFiltros_Enter(object sender, EventArgs e)
+        private void gvPublicaciones_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            this.btnComprar_Click(sender, e);
         }
     }
 }

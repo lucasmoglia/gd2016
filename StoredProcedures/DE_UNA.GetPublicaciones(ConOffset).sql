@@ -14,7 +14,7 @@ CREATE TYPE [DE_UNA].Rubros AS TABLE
 ( cod_rubro decimal(10) );  
 GO  
 */
-ALTER PROCEDURE [DE_UNA].GetPublicaciones
+CREATE PROCEDURE [DE_UNA].GetPublicaciones
 	-- Parámetros para los filtros.
 	  @estado numeric(1)				-- filtro por estado de publicación
 	, @rubros [DE_UNA].Rubros READONLY  -- filtro por rubros
@@ -87,17 +87,19 @@ BEGIN
 		  ,T.descripcion AS tipo_publi
 		  ,P.con_envio
 		  ,P.con_preguntas
+		  ,P.fecha_finalizacion
 	FROM [DE_UNA].Publicaciones P
 	 LEFT JOIN [DE_UNA].Visibilidades      V ON P.cod_visibilidad = V.cod_visibilidad
 	 LEFT JOIN [DE_UNA].EstadosPublicacion E ON P.cod_estado      = E.cod_estado
 	 LEFT JOIN [DE_UNA].Rubros             R ON P.cod_rubro       = R.cod_rubro
 	 LEFT JOIN [DE_UNA].Tipos_Publicacion  T ON P.cod_tipo_publi  = T.cod_tipo_publi
 	 LEFT JOIN [DE_UNA].Usuarios           U ON P.cod_usuario     = U.cod_usuario
-	WHERE (U.cod_usuario     = @usuario               OR @usuario IS NULL)
+	WHERE (U.cod_usuario     = @usuario               OR 
+		  (@usuario IS NULL AND P.cod_estado != 2 /* Borrador */ AND @usuario IS NULL AND P.cod_estado != 5 /* Finalizada */ ))
 	  AND (E.cod_estado    IN (@estado, @publicada)   OR @estado IS NULL)
 	  AND (p.cod_rubro     IN (SELECT cod_Rubro FROM @rubros) OR (SELECT cod_Rubro FROM @rubros) IS NULL)
 	  AND (P.descripcion LIKE ('%' + @descripcion + '%')      OR @descripcion IS NULL)
-	ORDER BY P.cod_visibilidad
+	ORDER BY IIF(@usuario IS NULL, P.cod_visibilidad, P.cod_estado)
 	OFFSET @desplazamiento ROWS FETCH NEXT @bloqueDePaginas ROWS ONLY;
 
 END

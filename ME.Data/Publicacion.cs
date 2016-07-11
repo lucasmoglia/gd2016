@@ -36,13 +36,14 @@ namespace ME.Data
 
         public bool con_envio              { get; set; }
         public bool con_preguntas          { get; set; }
+        public DateTime ? fecha_finalizacion { get; set; }
 
 
         public Publicacion(decimal cod_publi, string descripcion, ulong stock, DateTime fecha_inicio, DateTime fecha_vencimiento, decimal precio_producto,
                            decimal cod_visibilidad, string  visibilidad, decimal costo_publicar, decimal porcentaje_venta, decimal costo_envio,
                            decimal cod_estado, string  estado, decimal cod_rubro, string  desc_corta, string  desc_larga,
                            //UsuarioModel usuario, 
-                           decimal cod_usuario, string username,decimal cod_tipo_publi, string tipo_publicacion, bool con_envio, bool con_preguntas)
+                           decimal cod_usuario, string username, decimal cod_tipo_publi, string tipo_publicacion, bool con_envio, bool con_preguntas, DateTime ? fecha_finalizacion)
         {
             this.cod_publi = cod_publi;
             this.descripcion = descripcion;
@@ -59,12 +60,41 @@ namespace ME.Data
             this.tipo_publi = new TipoPublicacion(cod_tipo_publi, tipo_publicacion);
             this.con_envio = con_envio;
             this.con_preguntas = con_preguntas;
+            this.fecha_finalizacion = fecha_finalizacion != DateTime.MinValue ? fecha_finalizacion : null;
         }
 
         public string Descr_visibilidad() {
             return this.visibilidad.descripcion;
         }
-        
+
+        public static decimal Crear(string descripcion, decimal stock, DateTime fechaInicio, DateTime fechaVenc, decimal precio, decimal cod_visibilidad,
+                                  decimal cod_estado, decimal cod_rubro, decimal cod_usuario, decimal cod_tipo_publi, bool con_envio, bool con_preguntas)
+        {
+            using (SqlConnection connection = MEEntity.GetConnection())
+            {
+                SqlCommand command = new SqlCommand("[DE_UNA].[CrearPublicacion]", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add("@descripcion", SqlDbType.NVarChar).Value = descripcion;
+                command.Parameters.Add("@stock", SqlDbType.Decimal).Value = stock;
+                command.Parameters.Add("@fecha_inicio", SqlDbType.DateTime).Value = fechaInicio;
+                command.Parameters.Add("@fecha_venc", SqlDbType.DateTime).Value = fechaVenc;
+                command.Parameters.Add("@precio", SqlDbType.Decimal).Value = precio;
+                command.Parameters.Add("@cod_visibilidad", SqlDbType.Decimal).Value = cod_visibilidad;
+                command.Parameters.Add("@cod_estado", SqlDbType.Decimal).Value = cod_estado;
+                command.Parameters.Add("@cod_rubro", SqlDbType.Decimal).Value = cod_rubro;
+                command.Parameters.Add("@cod_usuario", SqlDbType.Decimal).Value = cod_usuario;
+                command.Parameters.Add("@cod_tipo_publi", SqlDbType.Decimal).Value = cod_tipo_publi;
+                command.Parameters.Add("@con_envio", SqlDbType.Bit).Value = con_envio;
+                command.Parameters.Add("@con_preguntas", SqlDbType.Bit).Value = con_preguntas;
+                command.Parameters.Add("@fecha_finaliz", SqlDbType.DateTime).Value = (object)fecha_finaliz ?? DBNull.Value;
+
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                return reader.Read() ? decimal.Parse(reader["cod_publi"].ToString()) : 0;
+            }
+        }
+
         public static Publicacion GetPublicacion(decimal cod_publi)
         {
             using (SqlConnection connection = MEEntity.GetConnection())
@@ -101,7 +131,10 @@ namespace ME.Data
                         , reader["tipo_publi"].ToString()
                         , bool.Parse(reader["con_envio"].ToString())
                         , bool.Parse(reader["con_preguntas"].ToString())
+                        , reader["fecha_finalizacion"].ToString() != null ? DateTime.Parse(reader["fecha_finalizacion"].ToString()) : DateTime.MinValue 
                     );
+
+                    publicacion.fecha_finalizacion = DateTime.Parse(reader["fecha_finalizacion"].ToString());
 
                     return publicacion;
                 } else {
@@ -184,7 +217,7 @@ namespace ME.Data
                         , reader["tipo_publi"].ToString()
                         , bool.Parse(reader["con_envio"].ToString())
                         , bool.Parse(reader["con_preguntas"].ToString())
-
+                        , reader["fecha_finalizacion"].ToString() != null ? DateTime.Parse(reader["fecha_finalizacion"].ToString()) : DateTime.MinValue 
                         //, Usuario.GetUsuario(decimal.Parse(reader["cod_usuario"].ToString()))
                         //, Visibilidad.GetVisibilidad(decimal.Parse(reader["cod_visibilidad"].ToString()))
                         //, Estado.GetEstado(decimal.Parse(reader["cod_estado"].ToString()))
@@ -201,7 +234,8 @@ namespace ME.Data
         }
 
         public static decimal Save(string descripcion, decimal stock, DateTime fechaInicio, DateTime fechaVenc, decimal precio, decimal cod_visibilidad,
-                                  decimal cod_estado, decimal cod_rubro, decimal cod_usuario, decimal cod_tipo_publi, bool con_envio, bool con_preguntas)
+                                  decimal cod_estado, decimal cod_rubro, decimal cod_usuario, decimal cod_tipo_publi, bool con_envio, bool con_preguntas,
+                                  DateTime ? fecha_finaliz)
         {
             using (SqlConnection connection = MEEntity.GetConnection())
             {
@@ -219,7 +253,7 @@ namespace ME.Data
                 command.Parameters.Add("@cod_tipo_publi", SqlDbType.Decimal).Value = cod_tipo_publi;
                 command.Parameters.Add("@con_envio", SqlDbType.Bit).Value = con_envio;
                 command.Parameters.Add("@con_preguntas", SqlDbType.Bit).Value = con_preguntas;
-                //command.Parameters.Add("@cod_publi", SqlDbType.Decimal).Value = null;
+                command.Parameters.Add("@fecha_finaliz", SqlDbType.DateTime).Value = (object)fecha_finaliz ?? DBNull.Value;
 
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
