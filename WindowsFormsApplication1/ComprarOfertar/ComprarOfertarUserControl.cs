@@ -34,7 +34,6 @@ namespace ME.UI
             //Init Grid
             gvPublicaciones.DataSource = listaPublicaciones;
             gvPublicaciones.Columns["visibilidad"].DataPropertyName = "descripcion";
-            //gvPublicaciones.Columns["visibilidad"].ValueType = typeof(string);
             gvPublicaciones.Columns["visibilidad"].Visible = false;
             gvPublicaciones.Columns["estado"].Visible = false;
             gvPublicaciones.Columns["rubro"].Visible = false;
