@@ -127,16 +127,17 @@ namespace ME.Data
                 , string dir_piso
                 , string dir_depto
                 , string dir_localidad
-                , string dir_cod_post)
+                , string dir_cod_post
+                , decimal cod_usuario)
         {
             int result = 0;
 
             using (SqlConnection connection = MEEntity.GetConnection())
             {
-
                 SqlCommand command = new SqlCommand("[DE_UNA].[NuevaEmpresa]", connection);
                 command.CommandType = CommandType.StoredProcedure;
 
+                command.Parameters.Add("@cod_usuario", SqlDbType.Decimal).Value = cod_usuario;
                 command.Parameters.Add("@razon_social", SqlDbType.NVarChar).Value = razon_social;
                 command.Parameters.Add("@dir_ciudad", SqlDbType.NVarChar).Value = dir_ciudad;
                 command.Parameters.Add("@nombre_contacto", SqlDbType.NVarChar).Value = nombre_contacto;
@@ -153,7 +154,6 @@ namespace ME.Data
                 command.Parameters.Add("@dir_depto", SqlDbType.NVarChar).Value = dir_depto;
                 command.Parameters.Add("@dir_localidad", SqlDbType.NVarChar).Value = dir_localidad;
                 command.Parameters.Add("@dir_cod_post", SqlDbType.NVarChar).Value = dir_cod_post;
-
 
                 connection.Open();
                 result = int.Parse(command.ExecuteScalar().ToString());

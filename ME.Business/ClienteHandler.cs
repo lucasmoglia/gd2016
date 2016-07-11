@@ -30,7 +30,8 @@ namespace ME.Business
                         , string dir_depto
                         , string dir_localidad
                         , string dir_cod_post
-                        , DateTime fecha_nacimiento)
+                        , DateTime fecha_nacimiento
+                        , decimal cod_usuario)
         {
             return Cliente.Guardar(
                            nombre
@@ -48,7 +49,8 @@ namespace ME.Business
                         ,  dir_depto
                         ,  dir_localidad
                         ,  dir_cod_post
-                        ,  fecha_nacimiento);
+                        ,  fecha_nacimiento
+                        ,  cod_usuario);
         }
     }
 }

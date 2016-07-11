@@ -140,5 +140,11 @@ namespace ME.UI
             pnlMaster.Controls.Clear();
             pnlMaster.Controls.Add(new HistorialControl());
         }
+
+        private void listadoEstadísticoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            pnlMaster.Controls.Clear();
+            pnlMaster.Controls.Add(new ListadoEstadisticoUserControl());
+        }
     }
 }

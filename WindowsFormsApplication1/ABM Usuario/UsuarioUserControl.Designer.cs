@@ -74,6 +74,7 @@
             this.gvClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvClientes.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.gvClientes.Location = new System.Drawing.Point(6, 117);
+            this.gvClientes.MultiSelect = false;
             this.gvClientes.Name = "gvClientes";
             this.gvClientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gvClientes.Size = new System.Drawing.Size(797, 286);

@@ -29,6 +29,7 @@ namespace ME.Data
         public string nombre { get; set; }
         public string apellido { get; set; }
         public string dni { get; set; }
+        public string documento_tipo { get; set; }
 
         //Empresa
         public string cuit { get; set; }
@@ -137,6 +138,7 @@ namespace ME.Data
                         ,nombre = reader["nombre"].ToString()
                         ,apellido = reader["apellido"].ToString()
                         ,dni = reader["dni"].ToString()
+                        ,documento_tipo = reader["documento_tipo"].ToString()
                         ,razon_social = reader["razon_social"].ToString()
                         ,dir_ciudad = reader["dir_ciudad"].ToString()
                         ,nombre_contacto = reader["nombre_contacto"].ToString()

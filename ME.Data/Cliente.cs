@@ -135,16 +135,17 @@ namespace ME.Data
                         , string dir_depto
                         , string dir_localidad
                         , string dir_cod_post
-                        , DateTime fecha_nacimiento)
+                        , DateTime fecha_nacimiento
+                        , decimal cod_usuario)
         {
             int result = 0;
 
             using (SqlConnection connection = MEEntity.GetConnection())
             {
-
                 SqlCommand command = new SqlCommand("[DE_UNA].[NuevoCliente]", connection);
                 command.CommandType = CommandType.StoredProcedure;
 
+                command.Parameters.Add("@cod_usuario", SqlDbType.NVarChar).Value = cod_usuario;
                 command.Parameters.Add("@nombre", SqlDbType.NVarChar).Value = nombre;
                 command.Parameters.Add("@apellido", SqlDbType.NVarChar).Value = apellido;
                 command.Parameters.Add("@dni", SqlDbType.Decimal).Value = dni;
@@ -162,10 +163,8 @@ namespace ME.Data
                 command.Parameters.Add("@dir_cod_post", SqlDbType.NVarChar).Value = dir_cod_post;
                 command.Parameters.Add("@fecha_nacimiento", SqlDbType.DateTime).Value = fecha_nacimiento;
 
-
                 connection.Open();
                 result = int.Parse(command.ExecuteScalar().ToString());
-
             }
                 
             return result;

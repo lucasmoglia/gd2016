@@ -30,7 +30,8 @@ namespace ME.Business
                 , string dir_piso
                 , string dir_depto
                 , string dir_localidad
-                , string dir_cod_post)
+                , string dir_cod_post
+                , decimal cod_usuario)
         {
             return Empresa.Guardar(
                 razon_social
@@ -48,7 +49,8 @@ namespace ME.Business
                 ,  dir_piso
                 ,  dir_depto
                 ,  dir_localidad
-                ,  dir_cod_post);
+                ,  dir_cod_post
+                ,  cod_usuario);
         }
     }
 }
