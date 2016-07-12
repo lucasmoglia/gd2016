@@ -42,12 +42,16 @@ namespace ME.UI
                 administracionToolStripMenuItem.Enabled = false;
                 administracionToolStripMenuItem.Visible = false;
             }
+            pnlMaster.Controls.Clear();
+            pnlMaster.Controls.Add(new HomeControl());
         }
 
         private void inicioToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //pnlMaster.Controls.Clear();
             //pnlMaster.Controls.Add(new ComprarOfertarUserControl());
+            pnlMaster.Controls.Clear();
+            pnlMaster.Controls.Add(new HomeControl());
         }
 
         private void misFacturasToolStripMenuItem_Click(object sender, EventArgs e)

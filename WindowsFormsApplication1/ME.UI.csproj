@@ -146,6 +146,12 @@
     <Compile Include="Historial Cliente\HistorialControl.Designer.cs">
       <DependentUpon>HistorialControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Home\HomeControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Home\HomeControl.Designer.cs">
+      <DependentUpon>HomeControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Home\Home.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -219,6 +225,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Historial Cliente\HistorialControl.resx">
       <DependentUpon>HistorialControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Home\HomeControl.resx">
+      <DependentUpon>HomeControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Home\Home.resx">
       <DependentUpon>Home.cs</DependentUpon>
