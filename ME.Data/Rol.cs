@@ -130,7 +130,7 @@ namespace ME.Data
 
                 SqlParameter param_func = command.Parameters.AddWithValue("@funcionalidades", _dt);
                 param_func.SqlDbType = SqlDbType.Structured;
-                param_func.TypeName = "dbo.FuncionalidadesList";
+                param_func.TypeName = "DE_UNA.FuncionalidadesList";
 
                 connection.Open();
                 command.ExecuteScalar();
