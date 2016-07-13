@@ -86,7 +86,35 @@ namespace ME.Data
                 command.Parameters.Add("@cod_tipo_publi", SqlDbType.Decimal).Value = cod_tipo_publi;
                 command.Parameters.Add("@con_envio", SqlDbType.Bit).Value = con_envio;
                 command.Parameters.Add("@con_preguntas", SqlDbType.Bit).Value = con_preguntas;
-              //  command.Parameters.Add("@fecha_finaliz", SqlDbType.DateTime).Value = (object)fecha_finaliz ?? DBNull.Value;
+
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                return reader.Read() ? decimal.Parse(reader["cod_publi"].ToString()) : 0;
+            }
+        }
+
+        public static decimal Save(string descripcion, decimal stock, DateTime fechaInicio, DateTime fechaVenc, decimal precio, decimal cod_visibilidad,
+                                  decimal cod_estado, decimal cod_rubro, decimal cod_usuario, decimal cod_tipo_publi, bool con_envio, bool con_preguntas,
+                                  DateTime ? fecha_finaliz)
+        {
+            using (SqlConnection connection = MEEntity.GetConnection())
+            {
+                SqlCommand command = new SqlCommand("[DE_UNA].[ActualizarPublicacion]", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add("@descripcion", SqlDbType.NVarChar).Value = descripcion;
+                command.Parameters.Add("@stock", SqlDbType.Decimal).Value = stock;
+                command.Parameters.Add("@fecha_inicio", SqlDbType.DateTime).Value = fechaInicio;
+                command.Parameters.Add("@fecha_venc", SqlDbType.DateTime).Value = fechaVenc;
+                command.Parameters.Add("@precio", SqlDbType.Decimal).Value = precio;
+                command.Parameters.Add("@cod_visibilidad", SqlDbType.Decimal).Value = cod_visibilidad;
+                command.Parameters.Add("@cod_estado", SqlDbType.Decimal).Value = cod_estado;
+                command.Parameters.Add("@cod_rubro", SqlDbType.Decimal).Value = cod_rubro;
+                command.Parameters.Add("@cod_usuario", SqlDbType.Decimal).Value = cod_usuario;
+                command.Parameters.Add("@cod_tipo_publi", SqlDbType.Decimal).Value = cod_tipo_publi;
+                command.Parameters.Add("@con_envio", SqlDbType.Bit).Value = con_envio;
+                command.Parameters.Add("@con_preguntas", SqlDbType.Bit).Value = con_preguntas;
+                command.Parameters.Add("@fecha_finaliz", SqlDbType.DateTime).Value = (object)fecha_finaliz ?? DBNull.Value;
 
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
@@ -233,34 +261,6 @@ namespace ME.Data
             return publicacionList;
         }
 
-        public static decimal Save(string descripcion, decimal stock, DateTime fechaInicio, DateTime fechaVenc, decimal precio, decimal cod_visibilidad,
-                                  decimal cod_estado, decimal cod_rubro, decimal cod_usuario, decimal cod_tipo_publi, bool con_envio, bool con_preguntas,
-                                  DateTime ? fecha_finaliz)
-        {
-            using (SqlConnection connection = MEEntity.GetConnection())
-            {
-                SqlCommand command = new SqlCommand("[DE_UNA].[CrearPublicacion]", connection);
-                command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.Add("@descripcion", SqlDbType.NVarChar).Value = descripcion;
-                command.Parameters.Add("@stock", SqlDbType.Decimal).Value = stock;
-                command.Parameters.Add("@fecha_inicio", SqlDbType.DateTime).Value = fechaInicio;
-                command.Parameters.Add("@fecha_venc", SqlDbType.DateTime).Value = fechaVenc;
-                command.Parameters.Add("@precio", SqlDbType.Decimal).Value = precio;
-                command.Parameters.Add("@cod_visibilidad", SqlDbType.Decimal).Value = cod_visibilidad;
-                command.Parameters.Add("@cod_estado", SqlDbType.Decimal).Value = cod_estado;
-                command.Parameters.Add("@cod_rubro", SqlDbType.Decimal).Value = cod_rubro;
-                command.Parameters.Add("@cod_usuario", SqlDbType.Decimal).Value = cod_usuario;
-                command.Parameters.Add("@cod_tipo_publi", SqlDbType.Decimal).Value = cod_tipo_publi;
-                command.Parameters.Add("@con_envio", SqlDbType.Bit).Value = con_envio;
-                command.Parameters.Add("@con_preguntas", SqlDbType.Bit).Value = con_preguntas;
-                command.Parameters.Add("@fecha_finaliz", SqlDbType.DateTime).Value = (object)fecha_finaliz ?? DBNull.Value;
-
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
-
-                return reader.Read() ? decimal.Parse(reader["cod_publi"].ToString()) : 0;
-            }
-        }
         
         // función que finaliza las subastas que vencen hoy generando la compra asociada a la subasta ganadora.
         // asimismo finaliza las publicaciones de Compra Inmediata que vencen hoy.

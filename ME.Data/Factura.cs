@@ -31,7 +31,7 @@ namespace ME.Data
             this.items         = items;
         }
 
-        public static decimal crearFactura(decimal cod_publi, decimal valor)
+        public static decimal Generar(decimal cod_publi, decimal valor)
         {
             using (SqlConnection connection = MEEntity.GetConnection())
             {
@@ -44,7 +44,7 @@ namespace ME.Data
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
 
-                return reader.Read() == true ? decimal.Parse(reader["num_factura"].ToString()) : 0;
+                return reader.Read() ? decimal.Parse(reader["num_factura"].ToString()) : 0;
             }
         }
 
