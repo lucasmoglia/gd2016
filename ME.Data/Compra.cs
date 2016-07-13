@@ -36,39 +36,21 @@ namespace ME.Data
             this.desc_calificacion = desc_calificacion;
         }
 
-        public static Compra crearCompra(decimal cod_publi, decimal cantidad)
+        public static Int32 Crear(decimal cod_publi, decimal cod_usuario, decimal cantidad)
         {
-            List<Compra> compraList = new List<Compra>();
-
             using (SqlConnection connection = MEEntity.GetConnection())
             {
-                SqlCommand command = new SqlCommand("[DE_UNA].[GenerarCompra]", connection);
+                SqlCommand command = new SqlCommand("[DE_UNA].[CrearCompra]", connection);
                 command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.Add("@cod_publi", SqlDbType.Decimal).Value = cod_publi;
+                command.Parameters.Add("@cod_usuario", SqlDbType.Decimal).Value = cod_usuario;
                 command.Parameters.Add("@cantidad", SqlDbType.Int).Value = cantidad;
-                command.Parameters.Add("@fecha", SqlDbType.DateTime).Value = DateTime.Parse(ConfigurationManager.AppSettings["fecha"].ToString());
+                command.Parameters.Add("@fecha_compra", SqlDbType.DateTime).Value = DateTime.Parse(ConfigurationManager.AppSettings["fecha"].ToString());
     
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
 
-                if (reader.Read())
-                {
-                    Compra compra = new Compra(
-                          decimal.Parse(reader["id_compra"].ToString())
-                        , decimal.Parse(reader["cod_publi"].ToString())
-                        , decimal.Parse(reader["cod_usuario"].ToString())
-                        , DateTime.Parse(reader["fecha_compra"].ToString())
-                        , decimal.Parse(reader["monto"].ToString())
-                        , decimal.Parse(reader["cantidad"].ToString())
-                        , decimal.Parse(reader["cod_calificacion"].ToString())
-                        , decimal.Parse(reader["estrellas"].ToString())
-                        , reader["desc_calificacion"].ToString()
-                    );
-
-                    return compra;
-                } else {
-                    return null;
-                }
+                return reader.Read() ? Int32.Parse(reader["id_compra"].ToString()) : 0;
             }
         }
 

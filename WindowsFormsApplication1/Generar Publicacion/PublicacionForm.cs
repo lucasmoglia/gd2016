@@ -343,7 +343,7 @@ namespace ME.UI
                             if (valor > 0) {
                                 Factura factura = null;
                                 try {
-                                    factura = PublicacionHandler.Comprar(PublicacionExistente.cod_publi, valor, 2); // Comisión por Venta.
+                                    factura = PublicacionHandler.Comprar(PublicacionExistente.cod_publi, valor); // Comisión por Venta.
                                 } catch {
                                     MessageBox.Show("Error al facturar la Compra", "Comprar", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 }
@@ -359,14 +359,18 @@ namespace ME.UI
                                 }
                             }
                         } else { // Es Subasta.
-                            if (valor > PublicacionExistente.precio_producto) {
-                                if (PublicacionHandler.Ofertar(PublicacionExistente.cod_publi, valor) != 1) {
-                                    MessageBox.Show("No puede ofertar menos del valor actual de la subasta", "Ofertar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            if (valor > PublicacionExistente.precio_producto) { // Oferta válida
+                                try {
+                                    if (PublicacionHandler.Ofertar(PublicacionExistente.cod_publi, valor) > 0) {
+                                        MessageBox.Show("¡Oferta realizada con éxito!", "Ofertar", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                    } else {
+                                        MessageBox.Show("Error al ofertar sobre la subasta", "Ofertar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    }
+                                } catch {
+                                    MessageBox.Show("Error al ofertar sobre la subasta", "Ofertar", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 }
-
-                                
-                                // Ver que falta!
-
+                            } else {
+                                MessageBox.Show("No puede ofertar menos del valor actual de la subasta", "Ofertar", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             }
                         }
                     } else {

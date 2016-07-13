@@ -44,18 +44,21 @@ namespace ME.Business
             return cod_publi > 0 ? Publicacion.GetPublicacion(cod_publi) : null;
         }
 
-        public static Factura Comprar(decimal cod_publi, decimal valor, Int32 motivo) // 1: Publicar, 2: Comprar, 3: Envío.
+        public static Factura Comprar(decimal cod_publi, decimal cantidad)
         {
             // Generar la compra.
-            Compra compra = Compra.crearCompra(cod_publi, valor); // Hay que hacer algo con esta compra.
+            if (Compra.Crear(cod_publi, UserLogged.cod_usuario, cantidad) != 0) {
+                return FacturaHandler.NuevaFactura(cod_publi, cantidad);
+            } else {
+                return null;
+            }
 
-            return FacturaHandler.NuevaFactura(cod_publi, valor);
         }
 
         public static Int32 Ofertar(decimal cod_publi, decimal monto)
         {
             // Generar la oferta.
-            return 0;//Oferta.Crear(cod_publi, valor); // Hacer.  // Hay que hacer algo con esta oferta.?
+            return Oferta.Crear(cod_publi, UserLogged.cod_usuario, monto);
         }
 
         

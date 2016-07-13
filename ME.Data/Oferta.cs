@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -28,10 +29,30 @@ namespace ME.Data
         }
 
 
+        public static Int32 Crear(decimal cod_publi, decimal cod_usuario, decimal monto)
+        {
+            using (SqlConnection connection = MEEntity.GetConnection())
+            {
+                SqlCommand command = new SqlCommand("[DE_UNA].[NuevaOferta]", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add("@cod_publi", SqlDbType.Decimal).Value = cod_publi;
+                command.Parameters.Add("@cod_usuario", SqlDbType.Decimal).Value = cod_usuario;
+                command.Parameters.Add("@fecha_oferta", SqlDbType.DateTime).Value = DateTime.Parse(ConfigurationManager.AppSettings["fecha"].ToString());
+                command.Parameters.Add("@monto", SqlDbType.Decimal).Value = monto;
+
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                return (reader.Read()) ? Int32.Parse(reader["id_oferta"].ToString()) : 0;
+            }
+        }
+
+        
         //funcion que trae la lista de las ofertas del usuario que recibe como parámetro mediante un SP en la BD
         public static List<Oferta> GetOfertas(decimal cod_usuario)
         {
             List<Oferta> ofertaList = new List<Oferta>();
+
             using (SqlConnection connection = MEEntity.GetConnection())
             {
                 SqlCommand command = new SqlCommand("DE_UNA.GetOfertas", connection);
@@ -42,26 +63,24 @@ namespace ME.Data
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
 
-                if (reader.Read())
+                while (reader.Read())
                 {
-                    do
-                    {
-                        Oferta unaOferta = new Oferta(
-                              decimal.Parse(reader["id_oferta"].ToString())
-                            , decimal.Parse(reader["cod_publi"].ToString())
-                            , decimal.Parse(reader["cod_usuario"].ToString())
-                            , DateTime.Parse(reader["fecha_oferta"].ToString())
-                            , decimal.Parse(reader["monto"].ToString())
-                            );
-                        ofertaList.Add(unaOferta);
-                    } while (reader.Read());
-                    return ofertaList;
+                    Oferta unaOferta = new Oferta(
+                            decimal.Parse(reader["id_oferta"].ToString())
+                        , decimal.Parse(reader["cod_publi"].ToString())
+                        , decimal.Parse(reader["cod_usuario"].ToString())
+                        , DateTime.Parse(reader["fecha_oferta"].ToString())
+                        , decimal.Parse(reader["monto"].ToString())
+                        );
+
+                    ofertaList.Add(unaOferta);
+
                 }
-                else return null;
+
+                return ofertaList;
             }
         }
 
-        
     }
 
 }
