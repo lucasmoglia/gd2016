@@ -17,6 +17,13 @@ namespace ME.UI
         public ListadoEstadisticoUserControl()
         {
             InitializeComponent();
+            rbtMMF.Select();
+            gvResult.DataSource = ListadoEstadisticoHandler.GetReporteVMMF(ddlMes.Text, ddlAnio.Text);
+            gvResult.Refresh();
+            lblMes.Text = "Mes";
+            ddlMes.DataSource = new object[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" };
+            lblExtra.Text = string.Empty;
+            ddlExtra.Visible = false;
         }
 
         public void GetReporteVMMF(object sender, EventArgs e)
