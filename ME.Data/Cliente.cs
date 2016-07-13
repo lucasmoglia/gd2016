@@ -136,7 +136,8 @@ namespace ME.Data
                         , string dir_localidad
                         , string dir_cod_post
                         , DateTime fecha_nacimiento
-                        , decimal cod_usuario)
+                        , decimal cod_usuario
+                        , DateTime fecha_actual)
         {
             int result = 0;
 
@@ -162,6 +163,7 @@ namespace ME.Data
                 command.Parameters.Add("@dir_localidad", SqlDbType.NVarChar).Value = dir_localidad;
                 command.Parameters.Add("@dir_cod_post", SqlDbType.NVarChar).Value = dir_cod_post;
                 command.Parameters.Add("@fecha_nacimiento", SqlDbType.DateTime).Value = fecha_nacimiento;
+                command.Parameters.Add("@fecha_actual", SqlDbType.DateTime).Value = fecha_actual;
 
                 connection.Open();
                 result = int.Parse(command.ExecuteScalar().ToString());

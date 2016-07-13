@@ -31,7 +31,8 @@ namespace ME.Business
                 , string dir_depto
                 , string dir_localidad
                 , string dir_cod_post
-                , decimal cod_usuario)
+                , decimal cod_usuario
+                , DateTime fecha_actual)
         {
             return Empresa.Guardar(
                 razon_social
@@ -50,7 +51,8 @@ namespace ME.Business
                 ,  dir_depto
                 ,  dir_localidad
                 ,  dir_cod_post
-                ,  cod_usuario);
+                ,  cod_usuario
+                ,  fecha_actual);
         }
     }
 }

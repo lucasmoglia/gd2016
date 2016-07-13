@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ME.Business;
 using ME.Data;
+using System.Configuration;
 
 namespace ME.UI
 {
@@ -165,7 +166,7 @@ namespace ME.UI
         {
             try
             {
-                UsuarioHandler.Eliminar(decimal.Parse(gvClientes.SelectedRows[0].Cells["cod_usuario"].Value.ToString()));
+                UsuarioHandler.Eliminar(decimal.Parse(gvClientes.SelectedRows[0].Cells["cod_usuario"].Value.ToString()), DateTime.Parse(ConfigurationManager.AppSettings["fecha"].ToString()));
                 MessageBox.Show("El usuario ha sido eliminado correctamente!", "Eliminar Usuario", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 FillGrid();
             }

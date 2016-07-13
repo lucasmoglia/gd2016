@@ -3,6 +3,7 @@ using ME.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -151,7 +152,7 @@ namespace ME.UI
                 {
                     try
                     {
-                        EmpresaHandler.Guardar(txtRazonSocial.Text, txtCiudadE.Text, txtNombreContacto.Text, ddlRubro.SelectedValue.ToString(), txtCUIT.Text, txtMailEmpresa.Text, txtUsernameE.Text, txtPasswordE.Text, true, txtTelefonoEmpresa.Text, txtDomCalleE.Text, txtDomNumeroE.Text, txtDomPisoE.Text, txtDomDeptoE.Text, txtLocalidadE.Text, txtDomCPE.Text, cod_usuario);
+                        EmpresaHandler.Guardar(txtRazonSocial.Text, txtCiudadE.Text, txtNombreContacto.Text, ddlRubro.SelectedValue.ToString(), txtCUIT.Text, txtMailEmpresa.Text, txtUsernameE.Text, txtPasswordE.Text, true, txtTelefonoEmpresa.Text, txtDomCalleE.Text, txtDomNumeroE.Text, txtDomPisoE.Text, txtDomDeptoE.Text, txtLocalidadE.Text, txtDomCPE.Text, cod_usuario, DateTime.Parse(ConfigurationManager.AppSettings["fecha"].ToString()));
                         MessageBox.Show("Se guardaron los registros del usuario con éxito!", "Nuevo Usuario", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         saved = true;
                         this.Close();
@@ -186,7 +187,7 @@ namespace ME.UI
                 {
                     try
                     {
-                        ClienteHandler.Guardar(txtNombreC.Text, txtApellido.Text, decimal.Parse(txtNumeroDocC.Text), ddlTipoDocC.SelectedText, txtMailC.Text, txtUserNameC.Text, txtPasswordC.Text, true, txtTelefonoC.Text, txtDirCalleC.Text, decimal.Parse(txtDirNumeroC.Text), decimal.Parse(txtDirPisoC.Text), txtDirDeptoC.Text, txtDirLocalidadC.Text, txtDirCPC.Text, DateTime.Parse(txtFechaNacC.Text), cod_usuario);
+                        ClienteHandler.Guardar(txtNombreC.Text, txtApellido.Text, decimal.Parse(txtNumeroDocC.Text), ddlTipoDocC.SelectedText, txtMailC.Text, txtUserNameC.Text, txtPasswordC.Text, true, txtTelefonoC.Text, txtDirCalleC.Text, decimal.Parse(txtDirNumeroC.Text), decimal.Parse(txtDirPisoC.Text), txtDirDeptoC.Text, txtDirLocalidadC.Text, txtDirCPC.Text, DateTime.Parse(txtFechaNacC.Text), cod_usuario, DateTime.Parse(ConfigurationManager.AppSettings["fecha"].ToString()));
                         MessageBox.Show("Se guardaron los registros del usuario con éxito!", "Nuevo Usuario", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         saved = true;
                         this.Close();

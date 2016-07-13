@@ -69,10 +69,11 @@ namespace ME.Data
             return MEEntity.ExecuteSP("[DE_UNA].[Login]", parameters);
         }
 
-        public static int Eliminar(decimal cod_usuario)
+        public static int Eliminar(decimal cod_usuario, DateTime fecha_actual)
         {
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@cod_usuario", cod_usuario));
+            parameters.Add(new SqlParameter("@fecha_actual", cod_usuario));
 
             return MEEntity.ExecuteSP("[DE_UNA].[EliminarUsuario]", parameters);
         }

@@ -31,9 +31,9 @@ namespace ME.Business
             Usuario.Desbloquear(cod_usuario);
         }
 
-        public static void Eliminar(decimal cod_usuario)
+        public static void Eliminar(decimal cod_usuario, DateTime fecha_actual)
         {
-            Usuario.Eliminar(cod_usuario);
+            Usuario.Eliminar(cod_usuario, fecha_actual);
         }
     }
 }
