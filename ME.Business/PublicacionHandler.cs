@@ -27,26 +27,25 @@ namespace ME.Business
             return Publicacion.GetPublicaciones(estado, rubros, descripcion, 0);
         }
 
-        public static Publicacion Guardar(bool esNueva, string descripcion, decimal stock, DateTime fechaInicio, DateTime fechaVenc, decimal precio, decimal cod_visibilidad,
+        public static Publicacion Guardar(decimal cod_publi, bool esNueva, string descripcion, decimal stock, DateTime fechaInicio, DateTime fechaVenc, decimal precio, decimal cod_visibilidad,
                                   decimal cod_estado, decimal cod_rubro, decimal cod_usuario, decimal cod_tipo_publi, bool con_envio, bool con_preguntas, DateTime ? fecha_finalizacion)
         {
-            decimal cod_publi = 0;
+            decimal codPubliResult = 0;
             if (esNueva) {
-                cod_publi = Publicacion.Crear(descripcion, stock, fechaInicio, fechaVenc, precio, cod_visibilidad,
+                codPubliResult = Publicacion.Crear(descripcion, stock, fechaInicio, fechaVenc, precio, cod_visibilidad,
                                   cod_estado, cod_rubro, cod_usuario, cod_tipo_publi, con_envio, con_preguntas);
                 // Se invoca al método de facturación directamente desde la vista, xq es más fácil para mostrarlo.
 
             } else {
-                cod_publi = Publicacion.Save(descripcion, stock, fechaInicio, fechaVenc, precio, cod_visibilidad,
+                codPubliResult = Publicacion.Save(cod_publi, descripcion, stock, fechaInicio, fechaVenc, precio, cod_visibilidad,
                                   cod_estado, cod_rubro, cod_usuario, cod_tipo_publi, con_envio, con_preguntas, fecha_finalizacion);
             }
 
-            return cod_publi > 0 ? Publicacion.GetPublicacion(cod_publi) : null;
+            return codPubliResult > 0 ? Publicacion.GetPublicacion(codPubliResult) : null;
         }
 
         public static Factura Comprar(decimal cod_publi, decimal cantidad)
         {
-            // Generar la compra.
             if (Compra.Crear(cod_publi, UserLogged.cod_usuario, cantidad) != 0) {
                 return FacturaHandler.NuevaFactura(cod_publi, cantidad);
             } else {

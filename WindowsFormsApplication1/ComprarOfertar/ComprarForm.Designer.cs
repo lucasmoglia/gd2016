@@ -101,13 +101,18 @@
             this.AcceptButton = this.btnAceptar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.ForestGreen;
             this.CancelButton = this.btnCancelar;
             this.ClientSize = new System.Drawing.Size(284, 150);
+            this.ControlBox = false;
             this.Controls.Add(this.numMontoCant);
             this.Controls.Add(this.groupCompra);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Location = new System.Drawing.Point(15, 10);
+            this.MaximizeBox = false;
             this.Name = "ComprarForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Comprar";
             this.Load += new System.EventHandler(this.ComprarForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numMontoCant)).EndInit();

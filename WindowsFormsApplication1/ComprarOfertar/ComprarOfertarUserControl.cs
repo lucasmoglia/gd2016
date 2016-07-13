@@ -38,6 +38,7 @@ namespace ME.UI
             gvPublicaciones.Columns["estado"].Visible = false;
             gvPublicaciones.Columns["rubro"].Visible = false;
             gvPublicaciones.Columns["tipo_publi"].Visible = false;
+            gvPublicaciones.Columns["fecha_finalizacion"].Visible = false;
             
             bindNavPubli.BindingSource = bindSourcePubli;
             bindSourcePubli.CurrentChanged += new System.EventHandler(bindSourcePubli_CurrentChanged);

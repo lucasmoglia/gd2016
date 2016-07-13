@@ -55,21 +55,22 @@
             this.lblItemPubli = new System.Windows.Forms.Label();
             this.cmbBoxTipoPubli = new System.Windows.Forms.ComboBox();
             this.pnlPublicacion = new System.Windows.Forms.Panel();
+            this.groupPropietario = new System.Windows.Forms.GroupBox();
+            this.lblUsername = new System.Windows.Forms.Label();
+            this.lblIdUsuario = new System.Windows.Forms.Label();
             this.groupTipoPublicacion = new System.Windows.Forms.GroupBox();
             this.groupVigencia = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupPropietario = new System.Windows.Forms.GroupBox();
-            this.lblIdUsuario = new System.Windows.Forms.Label();
-            this.lblUsername = new System.Windows.Forms.Label();
+            this.lblFinalizada = new System.Windows.Forms.Label();
             this.groupMonto.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numStock)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numPrecio)).BeginInit();
             this.groupCaracteristicas.SuspendLayout();
             this.pnlPublicacion.SuspendLayout();
+            this.groupPropietario.SuspendLayout();
             this.groupTipoPublicacion.SuspendLayout();
             this.groupVigencia.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.groupPropietario.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblVisibilidad
@@ -235,6 +236,7 @@
             // 
             // groupCaracteristicas
             // 
+            this.groupCaracteristicas.Controls.Add(this.lblFinalizada);
             this.groupCaracteristicas.Controls.Add(this.cmbBoxPreguntas);
             this.groupCaracteristicas.Controls.Add(this.cmbBoxEnvio);
             this.groupCaracteristicas.Controls.Add(this.lblPreguntas);
@@ -356,6 +358,37 @@
             this.pnlPublicacion.Size = new System.Drawing.Size(703, 239);
             this.pnlPublicacion.TabIndex = 18;
             // 
+            // groupPropietario
+            // 
+            this.groupPropietario.Controls.Add(this.lblUsername);
+            this.groupPropietario.Controls.Add(this.lblIdUsuario);
+            this.groupPropietario.Location = new System.Drawing.Point(172, 7);
+            this.groupPropietario.Name = "groupPropietario";
+            this.groupPropietario.Size = new System.Drawing.Size(146, 85);
+            this.groupPropietario.TabIndex = 24;
+            this.groupPropietario.TabStop = false;
+            this.groupPropietario.Text = "Propietario";
+            // 
+            // lblUsername
+            // 
+            this.lblUsername.AutoSize = true;
+            this.lblUsername.Enabled = false;
+            this.lblUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUsername.Location = new System.Drawing.Point(6, 49);
+            this.lblUsername.Name = "lblUsername";
+            this.lblUsername.Size = new System.Drawing.Size(0, 13);
+            this.lblUsername.TabIndex = 36;
+            // 
+            // lblIdUsuario
+            // 
+            this.lblIdUsuario.AutoSize = true;
+            this.lblIdUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblIdUsuario.Location = new System.Drawing.Point(6, 25);
+            this.lblIdUsuario.Name = "lblIdUsuario";
+            this.lblIdUsuario.Size = new System.Drawing.Size(61, 13);
+            this.lblIdUsuario.TabIndex = 35;
+            this.lblIdUsuario.Text = "Id. Usuario:";
+            // 
             // groupTipoPublicacion
             // 
             this.groupTipoPublicacion.Controls.Add(this.lblItemPubli);
@@ -391,47 +424,30 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Publicación";
             // 
-            // groupPropietario
+            // lblFinalizada
             // 
-            this.groupPropietario.Controls.Add(this.lblUsername);
-            this.groupPropietario.Controls.Add(this.lblIdUsuario);
-            this.groupPropietario.Location = new System.Drawing.Point(172, 7);
-            this.groupPropietario.Name = "groupPropietario";
-            this.groupPropietario.Size = new System.Drawing.Size(146, 85);
-            this.groupPropietario.TabIndex = 24;
-            this.groupPropietario.TabStop = false;
-            this.groupPropietario.Text = "Propietario";
-            // 
-            // lblIdUsuario
-            // 
-            this.lblIdUsuario.AutoSize = true;
-            this.lblIdUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblIdUsuario.Location = new System.Drawing.Point(6, 25);
-            this.lblIdUsuario.Name = "lblIdUsuario";
-            this.lblIdUsuario.Size = new System.Drawing.Size(61, 13);
-            this.lblIdUsuario.TabIndex = 35;
-            this.lblIdUsuario.Text = "Id. Usuario:";
-            // 
-            // lblUsername
-            // 
-            this.lblUsername.AutoSize = true;
-            this.lblUsername.Enabled = false;
-            this.lblUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUsername.Location = new System.Drawing.Point(6, 49);
-            this.lblUsername.Name = "lblUsername";
-            this.lblUsername.Size = new System.Drawing.Size(0, 13);
-            this.lblUsername.TabIndex = 36;
+            this.lblFinalizada.AutoSize = true;
+            this.lblFinalizada.Enabled = false;
+            this.lblFinalizada.Location = new System.Drawing.Point(191, 58);
+            this.lblFinalizada.Name = "lblFinalizada";
+            this.lblFinalizada.Size = new System.Drawing.Size(57, 13);
+            this.lblFinalizada.TabIndex = 38;
+            this.lblFinalizada.Text = "Finalizada:";
+            this.lblFinalizada.Visible = false;
             // 
             // PublicacionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnCancelar;
             this.ClientSize = new System.Drawing.Size(767, 407);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.pnlPublicacion);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnGuardar);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "PublicacionForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Nueva Publicación";
             this.Load += new System.EventHandler(this.PublicacionForm_Load);
             this.groupMonto.ResumeLayout(false);
@@ -441,14 +457,14 @@
             this.groupCaracteristicas.ResumeLayout(false);
             this.groupCaracteristicas.PerformLayout();
             this.pnlPublicacion.ResumeLayout(false);
+            this.groupPropietario.ResumeLayout(false);
+            this.groupPropietario.PerformLayout();
             this.groupTipoPublicacion.ResumeLayout(false);
             this.groupTipoPublicacion.PerformLayout();
             this.groupVigencia.ResumeLayout(false);
             this.groupVigencia.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupPropietario.ResumeLayout(false);
-            this.groupPropietario.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -488,5 +504,6 @@
         private System.Windows.Forms.GroupBox groupPropietario;
         private System.Windows.Forms.Label lblUsername;
         private System.Windows.Forms.Label lblIdUsuario;
+        private System.Windows.Forms.Label lblFinalizada;
     }
 }

@@ -83,6 +83,7 @@ namespace ME.UI
                 DTFechaVencimiento.Value = fechaConfig;
                 DTFechaVencimiento.MinDate = fechaConfig;
                 numStock.Value = 1;
+                numStock.Minimum = 1;
                 numPrecio.Value = 0;
                 cmbBoxVisibilidad.SelectedItem = null;
                 cmbBoxEstado.SelectedItem = null;
@@ -168,7 +169,7 @@ namespace ME.UI
 
             estados = EstadoHandler.ListarEstados();
             if (esNuevaPubli)
-                estados.RemoveAll(est => (est.nombre == "Publicada" && est.nombre == "Finalizar"));
+                estados.RemoveAll(est => (est.nombre == "Publicada" || est.nombre == "Finalizada"));
 
             cmbBoxEstado.DataSource = estados;
             cmbBoxEstado.ValueMember = "cod_estado";
@@ -195,6 +196,7 @@ namespace ME.UI
             if (esNuevaPubli) {
                 cmbBoxEnvio.SelectedValue = false;
                 cmbBoxPreguntas.SelectedValue = false;
+                cmbBoxEstado.SelectedItem = estados.Find(est => est.nombre == "Borrador");
             } else {
                 lblUsername.Text = PublicacionExistente.username;
                 txtDescripcion.Text = PublicacionExistente.descripcion;
@@ -207,6 +209,14 @@ namespace ME.UI
                 numPrecio.Value = PublicacionExistente.precio_producto;
                 cmbBoxVisibilidad.SelectedValue = PublicacionExistente.visibilidad.cod_visibilidad;
                 cmbBoxEstado.SelectedValue = PublicacionExistente.estado.cod_estado;
+
+                if (PublicacionExistente.estado.cod_estado == 5 /* Finalizada */) {
+                    lblFinalizada.Text = "Finalizada: " + PublicacionExistente.fecha_finalizacion.ToString();
+                    lblFinalizada.Visible = true;
+                } else {
+                    lblFinalizada.Text = String.Empty;
+                    lblFinalizada.Visible = false;
+                }
                 cmbBoxRubro.SelectedValue = PublicacionExistente.rubro.cod_rubro;
                 cmbBoxEnvio.SelectedValue = PublicacionExistente.con_envio;
                 cmbBoxPreguntas.SelectedValue = PublicacionExistente.con_preguntas;
@@ -225,9 +235,9 @@ namespace ME.UI
             } else if (cmbBoxTipoPubli.SelectedIndex == -1)
                 {
                 return "Debe seleccionar un tipo de publicación";
-            } else if (numStock.Value <= 1)
+            } else if (numStock.Value < 1)
                 {
-                return "Stock debe ser mayor a 1 (uno)";
+                return "Stock debe ser mayor a 0 (cero)";
             } else if (numPrecio.Value <= 0)
                 {
                 return "El Precio debe ser mayor a 0 (cero)";
@@ -240,12 +250,12 @@ namespace ME.UI
             } else if (cmbBoxRubro.SelectedIndex == -1)
                 {
                 return "Debe seleccionar un Rubro";
-            } else if (DTFechaInicio.Value >= DTFechaVencimiento.Value)
+            } else if (DTFechaInicio.Value > DTFechaVencimiento.Value)
                 {
                 return "La fecha de inicio no puede superar a la fecha de vencimiento";
-            } else if (DTFechaVencimiento.Value <= DTFechaInicio.Value)
+            } else if (DTFechaVencimiento.Value < DTFechaInicio.Value)
                 {
-                return "La fecha de vencimiento no puede superar a la fecha de inicio";
+                return "La fecha de vencimiento no puede ser anterior a la fecha de inicio";
             } else if (cmbBoxEnvio.SelectedIndex == -1)
                 {
                 return "Debe indicar si incluye Envío";
@@ -264,39 +274,41 @@ namespace ME.UI
             {
                 descrError = this.validarForm(); // Se validan los campos del formulario.
 
-                if (descrError != String.Empty) 
+                if (descrError == String.Empty) // No hay error en el Form
                 {
-                    Publicacion nuevaPublicacion = null;
-                    if (cmbBoxEstado.SelectedItem == estados.Find(est => est.cod_estado == 5 /* Finalizada */))
-                    {
-                        nuevaPublicacion = PublicacionHandler.Guardar(false,
+                    decimal codPubli = esNuevaPubli ? 0 : PublicacionExistente.cod_publi;
+
+                    Publicacion unaPublicacion = null;
+
+                    if (cmbBoxEstado.SelectedItem == estados.Find(est => est.cod_estado == 5 /* Finalizada */)) 
+                    { // Si se seteó en estado FINALIZADA hay q enviarle la fecha de finalización.
+                        unaPublicacion = PublicacionHandler.Guardar(codPubli, false,
                             txtDescripcion.Text, numStock.Value, DTFechaInicio.Value, DTFechaVencimiento.Value, numPrecio.Value,
                             decimal.Parse(cmbBoxVisibilidad.SelectedValue.ToString()), decimal.Parse(cmbBoxEstado.SelectedValue.ToString()),
                             decimal.Parse(cmbBoxRubro.SelectedValue.ToString()), UserLogged.cod_usuario, decimal.Parse(cmbBoxTipoPubli.SelectedValue.ToString()),
                             bool.Parse(cmbBoxEnvio.SelectedValue.ToString()), bool.Parse(cmbBoxPreguntas.SelectedValue.ToString()), fechaConfig);
                     } else
-                    {
-                        nuevaPublicacion = PublicacionHandler.Guardar(esNuevaPubli,
+                    {// No se finalizó. Puede ser Nueva o Modificación.
+                        unaPublicacion = PublicacionHandler.Guardar(codPubli, esNuevaPubli,
                             txtDescripcion.Text, numStock.Value, DTFechaInicio.Value, DTFechaVencimiento.Value, numPrecio.Value,
                             decimal.Parse(cmbBoxVisibilidad.SelectedValue.ToString()), decimal.Parse(cmbBoxEstado.SelectedValue.ToString()),
                             decimal.Parse(cmbBoxRubro.SelectedValue.ToString()), UserLogged.cod_usuario, decimal.Parse(cmbBoxTipoPubli.SelectedValue.ToString()),
                             bool.Parse(cmbBoxEnvio.SelectedValue.ToString()), bool.Parse(cmbBoxPreguntas.SelectedValue.ToString()), null);
                     }
 
-                    PublicacionForm muestraDeNuevaPubli = new PublicacionForm(nuevaPublicacion, TipoAccion.View);
+                    PublicacionForm muestraDeNuevaPubli = new PublicacionForm(unaPublicacion, TipoAccion.View);
 
                     muestraDeNuevaPubli.Show();
 
                     this.Enabled = false;
 
                     // Si se generó una publicación en estado "Activa" y No es Gratuita Hay que facturarla.
-
-                    if (nuevaPublicacion.estado.cod_estado == 3 /* Activa */ && 
-                        nuevaPublicacion.visibilidad.cod_visibilidad != 10006 /* Gratis */)
+                    if (unaPublicacion.estado.cod_estado == 3 /* Activa */ && 
+                        unaPublicacion.visibilidad.cod_visibilidad != 10006 /* Gratis */)
                     {
                         Factura factura = null;
                         try {
-                            factura = FacturaHandler.NuevaFactura(nuevaPublicacion.cod_publi, 0); // Comisión por Publicación
+                            factura = FacturaHandler.NuevaFactura(unaPublicacion.cod_publi, 0); // Comisión por Publicación
                         } catch {
                             MessageBox.Show("Error al facturar la Nueva Publicación", "Publicación", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
@@ -306,7 +318,8 @@ namespace ME.UI
 
                             FacturaForm facturaForm = new FacturaForm(factura);
 
-                            this.Close();
+                            facturaForm.ShowDialog(this);
+
                         } else { // No se facturó.
                             if (esModificable) {
                                 MessageBox.Show("Publicación guardada.", "Modificación", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -317,6 +330,9 @@ namespace ME.UI
                     } else { // No es una Publicacíon con estado "Activa".
                         MessageBox.Show("Publicación guardada.", "Publicación", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
+
+                    this.Close();
+
                 } else { // Si hay error en el Form.
                     MessageBox.Show(descrError, "Publicación", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -342,11 +358,11 @@ namespace ME.UI
                         if (esDirecta) {
                             if (valor > 0) {
                                 Factura factura = null;
-                                try {
+                              //  try {
                                     factura = PublicacionHandler.Comprar(PublicacionExistente.cod_publi, valor); // Comisión por Venta.
-                                } catch {
+                              /*  } catch {
                                     MessageBox.Show("Error al facturar la Compra", "Comprar", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                }
+                                }*/
 
                                 if (factura != null) {
                                     MessageBox.Show("¡Felicidades, Usted ha realizado una nueva Compra!", "Publicación", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -366,14 +382,17 @@ namespace ME.UI
                                     } else {
                                         MessageBox.Show("Error al ofertar sobre la subasta", "Ofertar", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                     }
+
+                                    this.Close();
+
                                 } catch {
                                     MessageBox.Show("Error al ofertar sobre la subasta", "Ofertar", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 }
-                            } else {
+                            } else { // Valor es menor al precio actual
                                 MessageBox.Show("No puede ofertar menos del valor actual de la subasta", "Ofertar", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             }
                         }
-                    } else {
+                    } else { // Tiene más de 3 compras o subastas sin calificar.
                         string msjErrorCalif = "Usted tiene " + comprasSinCalificar.Count.ToString() + " compras pendientes de calificación.\n" +
                                                "No podrá comprar/ofertar con 3 o más calificaciones pendientes.";
                         MessageBox.Show(msjErrorCalif, "Comprar/Ofertar", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -441,53 +460,51 @@ namespace ME.UI
 
         private void cmbBoxEstado_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
-            if (esNuevaPubli || esModificable) {
-                btnGuardar.Text = ((Estado)cmbBoxEstado.SelectedItem).cod_estado == 3 /* "Activa" */ ? "Publicar" : "Guardar";
-            } else {
-                // Se controlan las transiciones entre los estados de la publicación.
-                string estado = ((Estado)cmbBoxEstado.SelectedItem).cod_estado.ToString();
 
-                switch (estado)
-                {
-                    case "1" /* Publicada */:
-                        if (PublicacionExistente.estado.cod_estado == 4 /* Pausada */)
-                        {
-                            mostrarErrorTransicionEstados();
-                        }
+            if (cmbBoxEstado.SelectedIndex != -1)
+            {
+                if (esNuevaPubli || esModificable) {
+                    btnGuardar.Text = ((Estado)cmbBoxEstado.SelectedItem).cod_estado == 3 /* "Activa" */ ? "Publicar" : "Guardar";
+                } else {
+                    // Se controlan las transiciones entre los estados de la publicación.
+                    string estado = ((Estado)cmbBoxEstado.SelectedItem).cod_estado.ToString();
 
-                        break;
+                    switch (estado)
+                    {
+                        case "1" /* Publicada */:
+                            if (PublicacionExistente.estado.cod_estado == 4 /* Pausada */) {
+                                mostrarErrorTransicionEstados();
+                            }
 
-                    case "2" /* Borrador */:
-                        if (PublicacionExistente.estado.cod_estado == 3 /* Activa */    ||
-                            PublicacionExistente.estado.cod_estado == 1 /* Publicada */ ||
-                            PublicacionExistente.estado.cod_estado == 4 /* Pausada */)
-                        {
-                            mostrarErrorTransicionEstados();
-                        }
-                        break;
+                            break;
 
-                    case "3" /* Activa */:
-                        if (PublicacionExistente.estado.cod_estado == 5 /* Finalizada */)
-                        {
-                            mostrarErrorTransicionEstados();
-                        }
-                        break;
+                        case "2" /* Borrador */:
+                            if (PublicacionExistente.estado.cod_estado == 3 /* Activa */    ||
+                                PublicacionExistente.estado.cod_estado == 1 /* Publicada */ ||
+                                PublicacionExistente.estado.cod_estado == 4 /* Pausada */) {
+                                mostrarErrorTransicionEstados();
+                            }
+                            break;
 
-                    case "4" /* Pausada */:
-                        if (PublicacionExistente.estado.cod_estado == 4 /* Pausada */)
-                        {
-                            mostrarErrorTransicionEstados();
-                        }
-                        break;
+                        case "3" /* Activa */:
+                            if (PublicacionExistente.estado.cod_estado == 5 /* Finalizada */) {
+                                mostrarErrorTransicionEstados();
+                            }
+                            break;
 
-                    case "5" /* Finalizada */:
-                        if (PublicacionExistente.estado.cod_estado != 3 /* Activa */ &&
-                            PublicacionExistente.estado.cod_estado != 1 /* Publicada */)
-                        {
-                            mostrarErrorTransicionEstados();
-                        }
-                        break;
+                        case "4" /* Pausada */:
+                            if (PublicacionExistente.estado.cod_estado == 4 /* Pausada */) {
+                                mostrarErrorTransicionEstados();
+                            }
+                            break;
+
+                        case "5" /* Finalizada */:
+                            if (PublicacionExistente.estado.cod_estado != 3 /* Activa */ &&
+                                PublicacionExistente.estado.cod_estado != 1 /* Publicada */) {
+                                mostrarErrorTransicionEstados();
+                            }
+                            break;
+                    }
                 }
             }
         }
