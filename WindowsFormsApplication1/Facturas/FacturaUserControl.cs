@@ -26,10 +26,9 @@ namespace ME.UI
             numMontoMin.Value = 0;
 
             listaFacturas = FacturaHandler.ListarFacturas(UserLogged.cod_usuario, Convert.ToDateTime("01/01/1800"), DateTime.MaxValue, 0, int.MaxValue, null); // verificar el parametro de fechaDesde, no deberia ir el TODAY
+            btnVerDetalle.Visible = listaFacturas.Count > 0;
             //Init Grid
             gvFacturas.DataSource = listaFacturas;
-         // gvFacturas.Columns["visibilidad"].DataPropertyName = "descripcion";
-
             bindNavFacturas.BindingSource = bindSourceFacturas;
             bindSourceFacturas.CurrentChanged += new System.EventHandler(bindSourceFacturas_CurrentChanged);
             bindSourceFacturas.DataSource = new PageOffsetList(gvFacturas.RowCount);
@@ -38,7 +37,7 @@ namespace ME.UI
         private void bindSourceFacturas_CurrentChanged(object sender, EventArgs e)
         {
             // The desired page has changed, so fetch the page of records using the "Current" offset 
-            int offset = (int)bindSourceFacturas.Current;
+            int offset = (int)(bindSourceFacturas.Current ?? 0);
             var records = new List<Factura>();
 
             for (int i = offset; i < offset + pageSize && i < listaFacturas.Count; i++)
@@ -85,8 +84,13 @@ namespace ME.UI
           //  gvFacturas.DataSource = FacturaHandler.ListarFacturas(UserLogged.cod_usuario, Convert.ToDateTime("01/01/1800"), DateTime.MaxValue, 0, int.MaxValue, null);
             listaFacturas = FacturaHandler.ListarFacturas(UserLogged.cod_usuario, Convert.ToDateTime("01/01/1800"), DateTime.MaxValue, 0, int.MaxValue, null);
             //Init Grid
-           gvFacturas.DataSource = listaFacturas;            
-            
+           btnVerDetalle.Visible = listaFacturas.Count > 0;
+           gvFacturas.DataSource = listaFacturas;
+           bindNavFacturas.BindingSource = bindSourceFacturas;
+           bindSourceFacturas.CurrentChanged += new System.EventHandler(bindSourceFacturas_CurrentChanged);
+           bindSourceFacturas.DataSource = new PageOffsetList(gvFacturas.RowCount);
+           bindSourceFacturas.Position = 0;
+
             DTPFechaDesde.Value = System.DateTime.Today;
             DTPFechaHasta.Value = System.DateTime.Today;
             numMontoMax.Value = 0;
@@ -96,14 +100,16 @@ namespace ME.UI
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-           // gvFacturas.DataSource = FacturaHandler.ListarFacturas(UserLogged.cod_usuario, DTPFechaDesde.Value, DTPFechaHasta.Value, numMontoMin.Value, numMontoMax.Value, TxtDetalleFactura.Text);
             listaFacturas = FacturaHandler.ListarFacturas(UserLogged.cod_usuario, DTPFechaDesde.Value, DTPFechaHasta.Value, numMontoMin.Value, numMontoMax.Value, TxtDetalleFactura.Text);
             //Init Grid
+            btnVerDetalle.Visible = listaFacturas.Count > 0;
             gvFacturas.DataSource = listaFacturas;
+            gvFacturas.Refresh();
+            bindSourceFacturas.DataSource = new PageOffsetList(gvFacturas.RowCount);
+            bindSourceFacturas.Position = 0;
            // bindNavFacturas.BindingSource = bindSourceFacturas;
            // bindSourceFacturas.CurrentChanged += new System.EventHandler(bindSourceFacturas_CurrentChanged);
            // bindSourceFacturas.DataSource = new PageOffsetList(gvFacturas.RowCount);
-        
         }
 
         private void btnVerDetalle_Click(object sender, EventArgs e)

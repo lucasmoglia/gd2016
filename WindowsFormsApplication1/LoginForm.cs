@@ -73,6 +73,10 @@ namespace ME.UI
                 }
                 else
                 {
+                    if (UserLogged.roles.Count > 0)
+                    {
+                        UserLogged.cod_rol_seleccionado = UserLogged.roles.First().cod_rol; //Como tiene un solo rol, es el seleccionado
+                    }
                     frm.Show();
                 }
             }

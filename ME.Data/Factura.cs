@@ -171,9 +171,9 @@ namespace ME.Data
                 if (reader.Read())
                 {
                     CabeceraFactura cabeceraFactura = new CabeceraFactura(
-                          reader["nombre_apellido"].ToString()
-                        , reader["domicilio"].ToString()
-                        , reader["DNI_CUIT"].ToString()
+                          reader[0].ToString()
+                        , reader[1].ToString()
+                        , reader[2].ToString()
                     );
 
                     return cabeceraFactura;
