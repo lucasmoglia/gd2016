@@ -83,7 +83,7 @@ namespace ME.UI
                 txtRazonSocial.Text = String.Empty;
                 txtCiudadE.Text = String.Empty;
                 txtNombreContacto.Text = String.Empty;
-                ddlRol.SelectedValue = String.Empty;
+                //ddlRol.SelectedValue = String.Empty;
                 ddlRubro.SelectedValue = String.Empty;
                 txtCUIT.Text = String.Empty;
                 txtMailEmpresa.Text = String.Empty;
