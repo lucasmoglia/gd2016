@@ -17,10 +17,12 @@ namespace ME.UI
     {
         private const int pageSize = 10;
         private List<UsuarioModel> listaUsuarios = new List<UsuarioModel>();
+        private List<UsuarioModel> safe_listaUsuarios = new List<UsuarioModel>();
 
         private void FillGrid()
         {
             listaUsuarios = UsuarioHandler.GetUsuarios(true);
+            safe_listaUsuarios = listaUsuarios; //Copia para hacer el filtrado
             gvClientes.DataSource = listaUsuarios;
             gvClientes.Columns.Remove("cod_usuario");
             bindingNavigator1.BindingSource = bindingSource1;
@@ -135,7 +137,7 @@ namespace ME.UI
         private void btnBuscar_Click(object sender, EventArgs ev)
         {
 
-            listaUsuarios = listaUsuarios.Where(e => 
+            listaUsuarios = safe_listaUsuarios.Where(e => 
             (string.IsNullOrEmpty(txtFiltroNombre.Text) || (!string.IsNullOrEmpty(txtFiltroNombre.Text) &&
                 e.nombre.Trim().ToUpper().Contains(txtFiltroNombre.Text.Trim().ToUpper())))
                 &&
