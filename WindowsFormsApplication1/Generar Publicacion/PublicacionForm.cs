@@ -319,14 +319,16 @@ namespace ME.UI
                         facturaForm.ShowDialog(this);
 
                     } else { // No se facturó.
-                        if (esModificable) {
+                        if (esModificable) { // fue reactivada y no habia q facturarla o era un usuario con promocion de 1ra facturación gratuita o hubo error al facturar.
                             MessageBox.Show("Publicación guardada.", "Modificación", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         } else {
                             MessageBox.Show("Error al facturar la Nueva Publicación", "Publicación", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
-                } else { // No es una Publicacíon con estado "Activa".
-                    MessageBox.Show("Publicación guardada.", "Publicación", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                } else { // No es una Publicación con estado "Activa".
+                    if (unaPublicacion != null) {
+                        MessageBox.Show("Publicación guardada.", "Publicación", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
 
                 this.Close();
