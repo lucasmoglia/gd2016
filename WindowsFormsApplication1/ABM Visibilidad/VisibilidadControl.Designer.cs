@@ -62,7 +62,7 @@
             this.gvVisibilidades.Location = new System.Drawing.Point(3, 28);
             this.gvVisibilidades.Name = "gvVisibilidades";
             this.gvVisibilidades.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gvVisibilidades.Size = new System.Drawing.Size(797, 286);
+            this.gvVisibilidades.Size = new System.Drawing.Size(797, 246);
             this.gvVisibilidades.TabIndex = 0;
             this.gvVisibilidades.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvVisibilidades_RowEnter);
             // 
