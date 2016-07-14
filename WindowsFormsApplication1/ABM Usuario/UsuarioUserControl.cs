@@ -110,7 +110,7 @@ namespace ME.UI
 
         private void btnResetPass_Click(object sender, EventArgs e)
         {
-            ResetPasswordForm resetPassForm = new ResetPasswordForm();
+            ResetPasswordForm resetPassForm = new ResetPasswordForm(decimal.Parse((gvClientes.SelectedRows[0].Cells["cod_usuario"].Value.ToString())));
             resetPassForm.StartPosition = FormStartPosition.CenterScreen;
             resetPassForm.ShowDialog(this);
         }

@@ -14,16 +14,19 @@ namespace ME.UI
 {
     public partial class ResetPasswordForm : Form
     {
-        public ResetPasswordForm()
+        decimal idUsuario = 0;
+
+        public ResetPasswordForm(decimal idUsuario)
         {
             InitializeComponent();
+            this.idUsuario = idUsuario;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             try
             {
-                UsuarioHandler.ResetPassword(UserLogged.cod_usuario, txtNuevaContraseña.Text);
+                UsuarioHandler.ResetPassword(idUsuario, txtNuevaContraseña.Text);
                 MessageBox.Show("La contraseña se modificó con éxito!", "Reestablecer contraseña", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch(Exception ex)
