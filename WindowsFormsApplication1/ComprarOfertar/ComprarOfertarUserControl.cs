@@ -32,8 +32,6 @@ namespace ME.UI
             listaPublicaciones = PublicacionHandler.ListarPublicaciones(1, null, String.Empty);
             //Init Grid
             gvPublicaciones.DataSource = listaPublicaciones;
-            //gvPublicaciones.Columns["visibilidad"].DataPropertyName = "descripcion";
-            //gvPublicaciones.Columns["visibilidad"].ValueType = typeof(string);
             gvPublicaciones.Columns["visibilidad"].Visible = false;
             gvPublicaciones.Columns["estado"].Visible = false;
             gvPublicaciones.Columns["rubro"].Visible = false;
@@ -89,11 +87,6 @@ namespace ME.UI
             lstRubros.DisplayMember = "desc_larga";
             lstRubros.SelectedItem = null;
             lstRubros.Text = "(Ninguno)";
-
-            //gvPublicaciones.Columns["visibilidad"].DataPropertyName = descripcion;
-            //gvPublicaciones.Columns["estado"].DataPropertyName = nombre;
-            //gvPublicaciones.Columns["rubro"].DataPropertyName = desc_larga;
-
         }
 
         private void btnComprar_Click(object sender, EventArgs e)
@@ -181,8 +174,8 @@ namespace ME.UI
 
         private void bindNavNextItem_Click(object sender, EventArgs e)
         {
-            // La idea es que cuando se presiona siguiente y ya se pasaron 10 páginas, agregue 10 páginas más a la lista de Publicaciones.
-            if (Globales.NumPag_Publi + 1 > Globales.PagsEnCache_Publi)
+            // La idea es que cuando se presiona  siguiente y ya se pasaron 10 páginas, agregue 10 páginas más a la lista de Publicaciones.
+            if ((((int)bindSourcePubli.Position + 1) % 10) == 0) //Si es múltiplo de 10 trae más páginas
             {
                 listaPublicaciones.AddRange(PublicacionHandler.ListarPublicaciones(1, cod_rubros, descripcion));
                 gvPublicaciones.DataSource = listaPublicaciones;

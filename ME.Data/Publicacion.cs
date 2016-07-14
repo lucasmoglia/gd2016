@@ -250,12 +250,6 @@ namespace ME.Data
                         , bool.Parse(reader["con_envio"].ToString())
                         , bool.Parse(reader["con_preguntas"].ToString())
                         , reader["fecha_finalizacion"] != DBNull.Value ? DateTime.Parse(reader["fecha_finalizacion"].ToString()) : DateTime.MinValue 
-                        //, Usuario.GetUsuario(decimal.Parse(reader["cod_usuario"].ToString()))
-                        //, Visibilidad.GetVisibilidad(decimal.Parse(reader["cod_visibilidad"].ToString()))
-                        //, Estado.GetEstado(decimal.Parse(reader["cod_estado"].ToString()))
-                        //, Rubro.GetRubro(decimal.Parse(reader["cod_rubro"].ToString()))
-                        //, Usuario.GetUsuario(decimal.Parse(reader["cod_usuario"].ToString()))
-                        //, TipoPubli.GetTipoPubli(decimal.Parse(reader["cod_tipo_publi"].ToString()))
                     );
 
                     publicacionList.Add(publicacion);
