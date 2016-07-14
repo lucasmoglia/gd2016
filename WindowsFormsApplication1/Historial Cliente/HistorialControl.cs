@@ -30,6 +30,8 @@ namespace ME.UI
             gvHistorial.DataSource = listaHistorial;
             listaComprasPorUsuario = CompraHandler.ListarComprasPorUsuario(UserLogged.cod_usuario);
             gvComprasUsuario.DataSource = listaComprasPorUsuario;
+//            lblUser.Text=
+//            lblRepu.Text=
 
             bindingNavigator1.BindingSource = bindingSource1;
             bindingSource1.CurrentChanged += new System.EventHandler(bindingSource1_CurrentChanged);
