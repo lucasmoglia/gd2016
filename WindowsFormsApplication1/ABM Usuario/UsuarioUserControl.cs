@@ -76,6 +76,7 @@ namespace ME.UI
         {
             Form nuevoUsuarioForm = new NuevoUsuarioForm(null);
             nuevoUsuarioForm.ShowDialog(this);
+            FillGrid();
         }
 
         private void gvClientes_SelectionChanged(object sender, EventArgs e)
