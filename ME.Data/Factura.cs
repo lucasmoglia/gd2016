@@ -146,14 +146,14 @@ namespace ME.Data
     public class CabeceraFactura
     {
         public string nombre_apellido { get; set; }
-        public string domicilio { get; set; }
         public string DNI_CUIT { get; set; }
+        public string domicilio { get; set; }
 
-        public CabeceraFactura(string nombre_apellido, string domicilio, string DNI_CUIT)
+        public CabeceraFactura(string nombre_apellido, string DNI_CUIT, string domicilio)
         {
             this.nombre_apellido = nombre_apellido;
-            this.domicilio = domicilio;
             this.DNI_CUIT = DNI_CUIT;
+            this.domicilio = domicilio;
         }
 
         public static CabeceraFactura GetDatosCabeceraFactura(decimal cod_usuario)
