@@ -266,147 +266,171 @@ namespace ME.UI
                 return String.Empty;
         }
 
-        private void btnGuardar_Click(object sender, EventArgs e)
+        private void nuevaOmodificacion()
         {
             string descrError = String.Empty;
 
-            if (esNuevaPubli || esModificable)
+            descrError = this.validarForm(); // Se validan los campos del formulario.
+
+            if (descrError == String.Empty) // No hay error en el Form
             {
-                descrError = this.validarForm(); // Se validan los campos del formulario.
+                decimal codPubli = esNuevaPubli ? 0 : PublicacionExistente.cod_publi;
 
-                if (descrError == String.Empty) // No hay error en el Form
+                Publicacion unaPublicacion = null;
+
+                if (cmbBoxEstado.SelectedItem == estados.Find(est => est.cod_estado == 5 /* Finalizada */))
+                { // Si se seteó en estado FINALIZADA hay q enviarle la fecha de finalización.
+                    unaPublicacion = PublicacionHandler.Guardar(codPubli, false,
+                        txtDescripcion.Text, numStock.Value, DTFechaInicio.Value, DTFechaVencimiento.Value, numPrecio.Value,
+                        decimal.Parse(cmbBoxVisibilidad.SelectedValue.ToString()), decimal.Parse(cmbBoxEstado.SelectedValue.ToString()),
+                        decimal.Parse(cmbBoxRubro.SelectedValue.ToString()), UserLogged.cod_usuario, decimal.Parse(cmbBoxTipoPubli.SelectedValue.ToString()),
+                        bool.Parse(cmbBoxEnvio.SelectedValue.ToString()), bool.Parse(cmbBoxPreguntas.SelectedValue.ToString()), fechaConfig);
+                }
+                else {// No se finalizó. Puede ser Nueva o Modificación.
+                    unaPublicacion = PublicacionHandler.Guardar(codPubli, esNuevaPubli,
+                        txtDescripcion.Text, numStock.Value, DTFechaInicio.Value, DTFechaVencimiento.Value, numPrecio.Value,
+                        decimal.Parse(cmbBoxVisibilidad.SelectedValue.ToString()), decimal.Parse(cmbBoxEstado.SelectedValue.ToString()),
+                        decimal.Parse(cmbBoxRubro.SelectedValue.ToString()), UserLogged.cod_usuario, decimal.Parse(cmbBoxTipoPubli.SelectedValue.ToString()),
+                        bool.Parse(cmbBoxEnvio.SelectedValue.ToString()), bool.Parse(cmbBoxPreguntas.SelectedValue.ToString()), null);
+                }
+
+                PublicacionForm muestraDeNuevaPubli = new PublicacionForm(unaPublicacion, TipoAccion.View);
+
+                muestraDeNuevaPubli.Show();
+
+                this.Enabled = false;
+
+                // Si se generó una publicación en estado "Activa" y No es Gratuita Hay que facturarla.
+                if (unaPublicacion.estado.cod_estado == 3 /* Activa */ &&
+                    unaPublicacion.visibilidad.cod_visibilidad != 10006 /* Gratis */)
                 {
-                    decimal codPubli = esNuevaPubli ? 0 : PublicacionExistente.cod_publi;
-
-                    Publicacion unaPublicacion = null;
-
-                    if (cmbBoxEstado.SelectedItem == estados.Find(est => est.cod_estado == 5 /* Finalizada */)) 
-                    { // Si se seteó en estado FINALIZADA hay q enviarle la fecha de finalización.
-                        unaPublicacion = PublicacionHandler.Guardar(codPubli, false,
-                            txtDescripcion.Text, numStock.Value, DTFechaInicio.Value, DTFechaVencimiento.Value, numPrecio.Value,
-                            decimal.Parse(cmbBoxVisibilidad.SelectedValue.ToString()), decimal.Parse(cmbBoxEstado.SelectedValue.ToString()),
-                            decimal.Parse(cmbBoxRubro.SelectedValue.ToString()), UserLogged.cod_usuario, decimal.Parse(cmbBoxTipoPubli.SelectedValue.ToString()),
-                            bool.Parse(cmbBoxEnvio.SelectedValue.ToString()), bool.Parse(cmbBoxPreguntas.SelectedValue.ToString()), fechaConfig);
-                    } else
-                    {// No se finalizó. Puede ser Nueva o Modificación.
-                        unaPublicacion = PublicacionHandler.Guardar(codPubli, esNuevaPubli,
-                            txtDescripcion.Text, numStock.Value, DTFechaInicio.Value, DTFechaVencimiento.Value, numPrecio.Value,
-                            decimal.Parse(cmbBoxVisibilidad.SelectedValue.ToString()), decimal.Parse(cmbBoxEstado.SelectedValue.ToString()),
-                            decimal.Parse(cmbBoxRubro.SelectedValue.ToString()), UserLogged.cod_usuario, decimal.Parse(cmbBoxTipoPubli.SelectedValue.ToString()),
-                            bool.Parse(cmbBoxEnvio.SelectedValue.ToString()), bool.Parse(cmbBoxPreguntas.SelectedValue.ToString()), null);
+                    Factura factura = null;
+                    try {
+                        factura = FacturaHandler.NuevaFactura(unaPublicacion.cod_publi, 0); // Comisión por Publicación
+                    } catch {
+                        MessageBox.Show("Error al facturar la Nueva Publicación", "Publicación", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
 
-                    PublicacionForm muestraDeNuevaPubli = new PublicacionForm(unaPublicacion, TipoAccion.View);
+                    if (factura != null) {
+                        MessageBox.Show("¡Felicidades, Usted ha generado una nueva Publicación!", "Publicación", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
-                    muestraDeNuevaPubli.Show();
+                        FacturaForm facturaForm = new FacturaForm(factura);
 
-                    this.Enabled = false;
+                        facturaForm.ShowDialog(this);
 
-                    // Si se generó una publicación en estado "Activa" y No es Gratuita Hay que facturarla.
-                    if (unaPublicacion.estado.cod_estado == 3 /* Activa */ && 
-                        unaPublicacion.visibilidad.cod_visibilidad != 10006 /* Gratis */)
-                    {
-                        Factura factura = null;
-                        try {
-                            factura = FacturaHandler.NuevaFactura(unaPublicacion.cod_publi, 0); // Comisión por Publicación
-                        } catch {
+                    } else { // No se facturó.
+                        if (esModificable) {
+                            MessageBox.Show("Publicación guardada.", "Modificación", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        } else {
                             MessageBox.Show("Error al facturar la Nueva Publicación", "Publicación", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
+                    }
+                } else { // No es una Publicacíon con estado "Activa".
+                    MessageBox.Show("Publicación guardada.", "Publicación", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
 
-                        if (factura != null) {
-                            MessageBox.Show("¡Felicidades, Usted ha generado una nueva Publicación!", "Publicación", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                this.Close();
 
-                            FacturaForm facturaForm = new FacturaForm(factura);
+            } else { // Si hay error en el Form.
+                MessageBox.Show(descrError, "Publicación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
-                            facturaForm.ShowDialog(this);
+        private void compraOsubasta()
+        {
+            if (PublicacionExistente.stock > 0 /*&& PublicacionExistente.fecha_vencimiento.Date >= fechaConfig.Date*/)
+            {// Tiene que haber stock y no estar vencida.
 
-                        } else { // No se facturó.
-                            if (esModificable) {
-                                MessageBox.Show("Publicación guardada.", "Modificación", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            } else {
-                                MessageBox.Show("Error al facturar la Nueva Publicación", "Publicación", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            }
-                        }
-                    } else { // No es una Publicacíon con estado "Activa".
-                        MessageBox.Show("Publicación guardada.", "Publicación", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                List<Compra> comprasSinCalificar = CompraHandler.ListarComprasSinCalificar(UserLogged.cod_usuario);
+
+                // PARA CONTROLAR QUE NO TENGA MAS DE 3 COMPRAS SIN CALIFICACIONES.
+                if (comprasSinCalificar != null && comprasSinCalificar.Count <= 3)
+                {
+                    esDirecta = PublicacionExistente.tipo_publi.cod_tipo_publi == 1; /* Compra Inmediata */
+                    ComprarForm formDeCompra = null;
+
+                    if (esDirecta) {
+                        formDeCompra = new ComprarForm(true, PublicacionExistente.stock);
+                    } else {
+                        formDeCompra = new ComprarForm(false, PublicacionExistente.precio_producto);
                     }
 
-                    this.Close();
+                    formDeCompra.ShowDialog(this); // En éste Form setea la variable "valor".
 
-                } else { // Si hay error en el Form.
-                    MessageBox.Show(descrError, "Publicación", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            } 
-            else if (esCompra) {
-                if (PublicacionExistente.stock > 0) {
-                    // PARA CONTROLAR QUE NO TENGA MAS DE 3 COMPRAS SIN CALIFICACIONES.
-                    List<Compra> comprasSinCalificar = CompraHandler.ListarComprasSinCalificar(UserLogged.cod_usuario);
+                    if (esDirecta) {
+                        if (valor > 0) {
+                            Factura factura = null;
+                            //  try {
+                                factura = PublicacionHandler.Comprar(PublicacionExistente.cod_publi, valor); // Comisión por Venta.
+                            /*  } catch {
+                                  MessageBox.Show("Error al facturar la Compra", "Comprar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                              }*/
 
-                    if (comprasSinCalificar != null && comprasSinCalificar.Count <= 3)
-                    {
-                        
-                        esDirecta = PublicacionExistente.tipo_publi.cod_tipo_publi == 1; /* Compra Inmediata */
-                        ComprarForm formDeCompra = null;
-                        if (esDirecta) {
-                            formDeCompra = new ComprarForm(true, PublicacionExistente.stock);
-                        } else {
-                            formDeCompra = new ComprarForm(false, PublicacionExistente.precio_producto);
-                        }
+                            if (factura != null)
+                            {
+                                MessageBox.Show("¡Felicidades, Usted ha realizado una nueva Compra!", "Publicación", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
-                        formDeCompra.ShowDialog(this); // En éste Form setea la variable "valor".
+                                FacturaForm formFactura = new FacturaForm(factura);
 
-                        if (esDirecta) {
-                            if (valor > 0) {
-                                Factura factura = null;
-                              //  try {
-                                    factura = PublicacionHandler.Comprar(PublicacionExistente.cod_publi, valor); // Comisión por Venta.
-                              /*  } catch {
-                                    MessageBox.Show("Error al facturar la Compra", "Comprar", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                }*/
-
-                                if (factura != null) {
-                                    MessageBox.Show("¡Felicidades, Usted ha realizado una nueva Compra!", "Publicación", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-
-                                    FacturaForm formFactura = new FacturaForm(factura);
-
-                                    formFactura.Show();
-                                } else {
-                                    MessageBox.Show("Error al facturar la Compra", "Comprar", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                }
+                                formFactura.Show();
+                            } else {
+                                MessageBox.Show("Error al facturar la Compra", "Comprar", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
-                        } else { // Es Subasta.
-                            if (valor > PublicacionExistente.precio_producto) { // Oferta válida
-                                try {
-                                    if (PublicacionHandler.Ofertar(PublicacionExistente.cod_publi, valor) > 0) {
-                                        MessageBox.Show("¡Oferta realizada con éxito!", "Ofertar", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                                    } else {
-                                        MessageBox.Show("Error al ofertar sobre la subasta", "Ofertar", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                    }
-
-                                    this.Close();
-
-                                } catch {
+                        }
+                    }
+                    else { // Es Subasta.
+                        if (valor > PublicacionExistente.precio_producto) { // Oferta válida
+                            try {
+                                if (PublicacionHandler.Ofertar(PublicacionExistente.cod_publi, valor) > 0) {
+                                    MessageBox.Show("¡Oferta realizada con éxito!", "Ofertar", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                } else {
                                     MessageBox.Show("Error al ofertar sobre la subasta", "Ofertar", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 }
-                            } else { // Valor es menor al precio actual
-                                MessageBox.Show("No puede ofertar menos del valor actual de la subasta", "Ofertar", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                                this.Close();
+
+                            } catch {
+                                MessageBox.Show("Error al ofertar sobre la subasta", "Ofertar", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
-                    } else { // Tiene más de 3 compras o subastas sin calificar.
-                        string msjErrorCalif = "Usted tiene " + comprasSinCalificar.Count.ToString() + " compras pendientes de calificación.\n" +
-                                               "No podrá comprar/ofertar con 3 o más calificaciones pendientes.";
-                        MessageBox.Show(msjErrorCalif, "Comprar/Ofertar", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                        Home home = (Home)this.Owner; // Setea el Formulario Home en una variable.
-                        
-                        home.cargarPanel(new CalificarControl()); // llama al método del form Home y hace que se cargue en el panel del Home el User Control de Calificar.
-
-                        this.Close();
+                        else { // Valor es menor o igual al precio actual
+                            MessageBox.Show("No puede ofertar menos del valor actual de la subasta", "Ofertar", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
                     }
+                }
+                else { // Tiene más de 3 compras o subastas sin calificar.
+                    string msjErrorCalif = "Usted tiene " + comprasSinCalificar.Count.ToString() + " compras pendientes de calificación.\n" +
+                                           "No podrá comprar/ofertar con 3 o más calificaciones pendientes.";
+                    MessageBox.Show(msjErrorCalif, "Comprar/Ofertar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    Home home = (Home)this.Owner; // Setea el Formulario Home en una variable.
+
+                    home.cargarPanel(new CalificarControl()); // llama al método del form Home y hace que se cargue en el panel del Home el User Control de Calificar.
+
+                    this.Close();
+                }
+            } else { // No hay stock o está vencida
+                string noPuedeComprarDescrip = String.Empty;
+
+                if (PublicacionExistente.stock == 0) {
+                    noPuedeComprarDescrip = "No hay Stock disponible.";
                 } else {
-                    MessageBox.Show("No puede Comprar/Ofertar, No hay Stock disponible.", "Comprar/Ofertar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    noPuedeComprarDescrip = "La publicación ha .";
                 }
 
+                MessageBox.Show("No puede Comprar/Ofertar. " + noPuedeComprarDescrip, "Comprar/Ofertar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            if (esNuevaPubli || esModificable)
+            {
+                nuevaOmodificacion();
+            } 
+            else if (esCompra) 
+            {
+                compraOsubasta();
             }
         }
 

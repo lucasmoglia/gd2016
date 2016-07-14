@@ -54,6 +54,7 @@ namespace ME.UI
 
             for (int i = offset; i < offset + pageSize && i < listaPublicaciones.Count; i++)
                 records.Add(listaPublicaciones.ElementAt(i));
+            
             gvPublicaciones.DataSource = records;
         }
 
@@ -146,9 +147,7 @@ namespace ME.UI
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             descripcion = (txtDescripcion.Text != descrVacia && txtDescripcion.Text != String.Empty)?
-                            txtDescripcion.Text
-                            :
-                            String.Empty;
+                            txtDescripcion.Text : String.Empty;
 
             if (lstRubros.SelectedIndex > -1 && lstRubros.SelectedItems != null) {
                 rubros.Clear();
