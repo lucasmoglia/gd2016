@@ -177,7 +177,7 @@ namespace ME.Data
             }
         }
 
-        public static List<Publicacion> GetPublicaciones(bool quiereComprar, List<decimal> rubros, string descripcion, decimal cod_usuario)
+        public static List<Publicacion> GetPublicaciones(bool quiereComprar, /*List<decimal>*/ string rubros, string descripcion, decimal cod_usuario)
         {
             List<Publicacion> publicacionList = new List<Publicacion>();
 

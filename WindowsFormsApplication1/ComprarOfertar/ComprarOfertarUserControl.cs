@@ -17,8 +17,9 @@ namespace ME.UI
         private const int pageSize = 10;
         private string descripcion = String.Empty, descrVacia = "Ingrese Búsqueda";
         private List<Publicacion> listaPublicaciones = new List<Publicacion>();
-        private List<Rubro> rubros = new List<Rubro>();
-        private List<decimal> cod_rubros = new List<decimal>();
+//        private List<Rubro> rubros = new List<Rubro>();
+//        private List<decimal> cod_rubros = new List<decimal>();
+        private string rubros = String.Empty;
         
         public ComprarOfertarUserControl()
         {
@@ -137,8 +138,9 @@ namespace ME.UI
             //lstRubros.SelectedValue = null;
             lstRubros.ClearSelected();
             lstRubros.Text = "(Ninguno)";
-            rubros.Clear();
-            cod_rubros.Clear();
+            //rubros.Clear();
+            //cod_rubros.Clear();
+            rubros = String.Empty;
 
         }
 
@@ -149,20 +151,25 @@ namespace ME.UI
                             txtDescripcion.Text : String.Empty;
             //Cargo los rubros seleccionados, si existen
             if (lstRubros.SelectedIndex > -1 && lstRubros.SelectedItems != null) {
-                rubros.Clear();
-                cod_rubros.Clear();
+                //rubros.Clear();
+                //cod_rubros.Clear();
                 listaPublicaciones.Clear();
 
-                foreach (Rubro item in lstRubros.SelectedItems.Cast<Rubro>())
-                {
-                    rubros.Add(item);
+                foreach (Rubro item in lstRubros.SelectedItems.Cast<Rubro>()) {
+                    rubros += "|" + item.cod_rubro.ToString();
+                    //rubros.Add(item); 
                 }
+                rubros += "|";
+                
+                //cod_rubros.AddRange(rubros.ConvertAll(rubro => rubro.cod_rubro));
 
-                cod_rubros.AddRange(rubros.ConvertAll(rubro => rubro.cod_rubro));
+                //for (int i = 0; i <= lstRubros.SelectedItems.Count; i++) {
+                //    rubros += "|" + (Rubro)(lstRubros.SelectedItems[i])
+                //}
             }
                 
             //Llamo a mis publicaciones por parametros de busqueda 
-            listaPublicaciones = PublicacionHandler.ListarPublicaciones(true, cod_rubros, descripcion);
+            listaPublicaciones = PublicacionHandler.ListarPublicaciones(true, /*cod_rubros*/ rubros, descripcion);
             gvPublicaciones.DataSource = listaPublicaciones;
             gvPublicaciones.Refresh();
             bindSourcePubli.DataSource = new PageOffsetList(gvPublicaciones.RowCount);
