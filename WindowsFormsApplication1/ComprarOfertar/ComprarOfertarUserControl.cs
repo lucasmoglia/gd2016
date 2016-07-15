@@ -29,7 +29,7 @@ namespace ME.UI
             Globales.TotalPags_Publi = 0;
             Globales.PagsEnCache_Publi = 0;
             
-            listaPublicaciones = PublicacionHandler.ListarPublicaciones(1, null, String.Empty);
+            listaPublicaciones = PublicacionHandler.ListarPublicaciones(true, null, String.Empty);
             //Init Grid
             gvPublicaciones.DataSource = listaPublicaciones;
             gvPublicaciones.Columns["visibilidad"].Visible = false;
@@ -154,7 +154,7 @@ namespace ME.UI
 
                 cod_rubros.AddRange(rubros.ConvertAll(rubro => rubro.cod_rubro));
                 
-                listaPublicaciones = PublicacionHandler.ListarPublicaciones(1, cod_rubros, descripcion);
+                listaPublicaciones = PublicacionHandler.ListarPublicaciones(true, cod_rubros, descripcion);
                 bindSourcePubli.DataSource = listaPublicaciones;
             }
 
@@ -174,10 +174,12 @@ namespace ME.UI
 
         private void bindNavNextItem_Click(object sender, EventArgs e)
         {
-            // La idea es que cuando se presiona  siguiente y ya se pasaron 10 páginas, agregue 10 páginas más a la lista de Publicaciones.
-            if ((((int)bindSourcePubli.Position + 1) % 10) == 0) //Si es múltiplo de 10 trae más páginas
+            // La idea es que cuando se presiona siguiente y ya se pasaron 10 páginas, agregue 10 páginas más a la lista de Publicaciones.
+//            if ((((int)bindSourcePubli.Position + 1) % 10) == 0) //Si es múltiplo de 10 trae más páginas
+            //Si es múltiplo de 10 trae más páginas? tiene q traer si ya no hay mas en la lista de publicaciones
+            if (((int)bindSourcePubli.Position + 1) > Globales.PagsEnCache_Publi) 
             {
-                listaPublicaciones.AddRange(PublicacionHandler.ListarPublicaciones(1, cod_rubros, descripcion));
+                listaPublicaciones.AddRange(PublicacionHandler.ListarPublicaciones(true, cod_rubros, descripcion));
                 gvPublicaciones.DataSource = listaPublicaciones;
                 gvPublicaciones.Refresh();
                 bindSourcePubli.DataSource = new PageOffsetList(gvPublicaciones.RowCount);
