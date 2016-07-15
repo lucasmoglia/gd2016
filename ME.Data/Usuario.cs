@@ -184,16 +184,6 @@ namespace ME.Data
         }
 
 
-/*        public static decimal reputacion(decimal cod_usuario)
-        {
-            List<SqlParameter> parameters = new List<SqlParameter>();
-            parameters.Add(new SqlParameter("@cod_usuario", cod_usuario));
-
-            return MEEntity.ExecuteSP("DE_UNA.ReputacionVendedor", parameters);
-        }
-        */
-
-
 
         public static decimal reputacion(decimal cod_usuario)
         {
@@ -212,31 +202,6 @@ namespace ME.Data
                 return unValor;
             }
         }
-
-
-
-
-        /*
-        public static decimal reputacion(decimal cod_usuario)
-        {
-            using (SqlConnection connection = MEEntity.GetConnection())
-            {
-                SqlCommand command = new SqlCommand("select * from [DE_UNA].fn_Get_Reputacion_Vendedor(@cod_usuario)", connection);
-                command.CommandType = CommandType.Text;
-                command.Parameters.Add("@cod_usuario", SqlDbType.Decimal).Value = cod_usuario;
-
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
-                reader.Read();
-                return decimal.Parse(reader[0].ToString());
-
-            }
-        }
-*/
-
-
-
-
 
     }
 }
