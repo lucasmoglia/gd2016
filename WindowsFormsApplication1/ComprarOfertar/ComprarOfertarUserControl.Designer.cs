@@ -64,7 +64,7 @@
             this.gvPublicaciones.AllowUserToDeleteRows = false;
             this.gvPublicaciones.AllowUserToOrderColumns = true;
             this.gvPublicaciones.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCellsExceptHeader;
-            this.gvPublicaciones.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.gvPublicaciones.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.gvPublicaciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvPublicaciones.Cursor = System.Windows.Forms.Cursors.Hand;
             this.gvPublicaciones.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
