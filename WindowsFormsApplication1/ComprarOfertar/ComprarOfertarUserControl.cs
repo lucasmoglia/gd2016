@@ -28,6 +28,17 @@ namespace ME.UI
 
         }
 
+        private void habilitarTodo(bool valor)
+        {
+            txtDescripcion.Enabled = valor;
+            lstRubros.Enabled = valor;
+            btnBuscar.Enabled = valor;
+            btnLimpiar.Enabled = valor;
+            gvPublicaciones.Enabled = valor;
+            btnVer.Enabled = valor;
+            btnComprar.Enabled = valor;
+        }
+
         private void ComprarOfertar_Load()
         {
             Globales.NumPag_Publi = 0;
@@ -35,6 +46,7 @@ namespace ME.UI
             Globales.TotalPags_Publi = 0;
             Globales.PagsEnCache_Publi = 0;
 
+            habilitarTodo(false);
             
             listaPublicaciones = PublicacionHandler.ListarPublicaciones(true, string.Empty, String.Empty);
             //Init Grid
@@ -48,6 +60,8 @@ namespace ME.UI
             bindNavPubli.BindingSource = bindSourcePubli;
             bindSourcePubli.CurrentChanged += new System.EventHandler(bindSourcePubli_CurrentChanged);
             bindSourcePubli.DataSource = new PageOffsetList(gvPublicaciones.RowCount);
+
+            habilitarTodo(true);
         }
 
         private void bindSourcePubli_CurrentChanged(object sender, EventArgs e)
@@ -98,7 +112,7 @@ namespace ME.UI
 
         private void btnComprar_Click(object sender, EventArgs e)
         {
-            if (gvPublicaciones.SelectedRows != null) {
+            if (gvPublicaciones.SelectedRows.Count > 0) {
                 Publicacion publicacion = (Publicacion)gvPublicaciones.SelectedRows[0].DataBoundItem;
 
                 if (publicacion.cod_usuario != UserLogged.cod_usuario) {
@@ -142,6 +156,7 @@ namespace ME.UI
             //cod_rubros.Clear();
             rubros = String.Empty;
 
+            this.ComprarOfertar_Load();
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -177,7 +192,7 @@ namespace ME.UI
 
         private void btnVer_Click(object sender, EventArgs e)
         {
-            if (gvPublicaciones.SelectedRows != null){
+            if (gvPublicaciones.SelectedRows.Count > 0){
                 Publicacion publicacion = (Publicacion)gvPublicaciones.SelectedRows[0].DataBoundItem;
 
                 PublicacionForm publicacionForm = new PublicacionForm(publicacion, TipoAccion.View);
