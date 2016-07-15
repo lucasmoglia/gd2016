@@ -19,7 +19,7 @@ namespace ME.Business
                                    cod_visibilidad, visibilidad, costo_publicar, porcentaje_venta, costo_envio,
                                    cod_estado, estado, cod_rubro, desc_corta, desc_larga,
                                    //usuario,
-                                   cod_usuario, username, cod_tipo_publi, tipo_publicacion, con_envio, con_preguntas, null);
+                                   cod_usuario, username, cod_tipo_publi, tipo_publicacion, con_envio, con_preguntas, null, 0);
         }
 
         public static List<Publicacion> ListarPublicaciones(byte estado, List<decimal> rubros, string descripcion)

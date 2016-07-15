@@ -197,6 +197,7 @@ namespace ME.UI
                 cmbBoxEnvio.SelectedValue = false;
                 cmbBoxPreguntas.SelectedValue = false;
                 cmbBoxEstado.SelectedItem = estados.Find(est => est.nombre == "Borrador");
+                lblReputacion.Text = "0";
             } else {
                 lblUsername.Text = PublicacionExistente.username;
                 txtDescripcion.Text = PublicacionExistente.descripcion;
@@ -220,6 +221,7 @@ namespace ME.UI
                 cmbBoxRubro.SelectedValue = PublicacionExistente.rubro.cod_rubro;
                 cmbBoxEnvio.SelectedValue = PublicacionExistente.con_envio;
                 cmbBoxPreguntas.SelectedValue = PublicacionExistente.con_preguntas;
+                lblReputacion.Text = PublicacionExistente.reputacion.ToString();
             }
         }
 
