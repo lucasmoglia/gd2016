@@ -53,7 +53,7 @@ namespace ME.UI
         private void bindSourcePubli_CurrentChanged(object sender, EventArgs e)
         {
             // The desired page has changed, so fetch the page of records using the "Current" offset 
-            int offset = (int)bindSourcePubli.Current;
+            int offset = bindSourcePubli.Current == null ? 0 : (int)bindSourcePubli.Current;
 
             var records = new List<Publicacion>();
 
@@ -154,7 +154,7 @@ namespace ME.UI
                 //rubros.Clear();
                 //cod_rubros.Clear();
                 listaPublicaciones.Clear();
-
+                rubros = string.Empty;
                 foreach (Rubro item in lstRubros.SelectedItems.Cast<Rubro>()) {
                     rubros += "|" + item.cod_rubro.ToString();
                     //rubros.Add(item); 
