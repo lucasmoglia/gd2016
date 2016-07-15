@@ -9,12 +9,12 @@ GO
 -- Create date: 12/06/2016
 -- Description:	
 -- =============================================
-CREATE PROCEDURE DropProcedures AS
+create PROCEDURE DropProcedures AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
-
+	exec DE_UNA.DropTables;
 	DROP PROCEDURE [DE_UNA].CrearTablas;
 	DROP PROCEDURE [DE_UNA].DropTables;
 	DROP PROCEDURE [DE_UNA].Migrar_Ofertas;
