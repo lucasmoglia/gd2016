@@ -57,14 +57,14 @@
             this.cmbBoxTipoPubli = new System.Windows.Forms.ComboBox();
             this.pnlPublicacion = new System.Windows.Forms.Panel();
             this.groupPropietario = new System.Windows.Forms.GroupBox();
+            this.lblReputacion = new System.Windows.Forms.Label();
+            this.lblEstrella = new System.Windows.Forms.Label();
+            this.lblReputacionText = new System.Windows.Forms.Label();
             this.lblUsername = new System.Windows.Forms.Label();
             this.lblIdUsuario = new System.Windows.Forms.Label();
             this.groupTipoPublicacion = new System.Windows.Forms.GroupBox();
             this.groupVigencia = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lblReputacionText = new System.Windows.Forms.Label();
-            this.lblEstrella = new System.Windows.Forms.Label();
-            this.lblReputacion = new System.Windows.Forms.Label();
             this.groupMonto.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numStock)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numPrecio)).BeginInit();
@@ -387,6 +387,34 @@
             this.groupPropietario.TabStop = false;
             this.groupPropietario.Text = "Propietario";
             // 
+            // lblReputacion
+            // 
+            this.lblReputacion.AutoSize = true;
+            this.lblReputacion.Location = new System.Drawing.Point(91, 49);
+            this.lblReputacion.Name = "lblReputacion";
+            this.lblReputacion.Size = new System.Drawing.Size(13, 13);
+            this.lblReputacion.TabIndex = 39;
+            this.lblReputacion.Text = "3";
+            // 
+            // lblEstrella
+            // 
+            this.lblEstrella.AutoSize = true;
+            this.lblEstrella.Font = new System.Drawing.Font("Wingdings", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
+            this.lblEstrella.Location = new System.Drawing.Point(113, 44);
+            this.lblEstrella.Name = "lblEstrella";
+            this.lblEstrella.Size = new System.Drawing.Size(29, 22);
+            this.lblEstrella.TabIndex = 38;
+            this.lblEstrella.Text = "¶";
+            // 
+            // lblReputacionText
+            // 
+            this.lblReputacionText.AutoSize = true;
+            this.lblReputacionText.Location = new System.Drawing.Point(74, 25);
+            this.lblReputacionText.Name = "lblReputacionText";
+            this.lblReputacionText.Size = new System.Drawing.Size(65, 13);
+            this.lblReputacionText.TabIndex = 37;
+            this.lblReputacionText.Text = "Reputacion:";
+            // 
             // lblUsername
             // 
             this.lblUsername.AutoSize = true;
@@ -442,34 +470,6 @@
             this.groupBox1.TabIndex = 32;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Publicación";
-            // 
-            // lblReputacionText
-            // 
-            this.lblReputacionText.AutoSize = true;
-            this.lblReputacionText.Location = new System.Drawing.Point(74, 25);
-            this.lblReputacionText.Name = "lblReputacionText";
-            this.lblReputacionText.Size = new System.Drawing.Size(65, 13);
-            this.lblReputacionText.TabIndex = 37;
-            this.lblReputacionText.Text = "Reputacion:";
-            // 
-            // lblEstrella
-            // 
-            this.lblEstrella.AutoSize = true;
-            this.lblEstrella.Font = new System.Drawing.Font("Wingdings", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
-            this.lblEstrella.Location = new System.Drawing.Point(101, 44);
-            this.lblEstrella.Name = "lblEstrella";
-            this.lblEstrella.Size = new System.Drawing.Size(29, 22);
-            this.lblEstrella.TabIndex = 38;
-            this.lblEstrella.Text = "¶";
-            // 
-            // lblReputacion
-            // 
-            this.lblReputacion.AutoSize = true;
-            this.lblReputacion.Location = new System.Drawing.Point(91, 49);
-            this.lblReputacion.Name = "lblReputacion";
-            this.lblReputacion.Size = new System.Drawing.Size(13, 13);
-            this.lblReputacion.TabIndex = 39;
-            this.lblReputacion.Text = "3";
             // 
             // PublicacionForm
             // 
