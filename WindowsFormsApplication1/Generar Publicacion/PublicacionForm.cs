@@ -105,10 +105,22 @@ namespace ME.UI
                         btnCancelar.Text = "Cancelar";
                         btnGuardar.Text = "Guardar";
 
-                        habilitarTodo(true);
+                        if (publicacion.estado.cod_estado == 4 /* Pausada */ ||
+                            publicacion.estado.cod_estado == 3 /* Activa */)
+                        {
+                            habilitarTodo(false);
 
-                        btnGuardar.Enabled = true;
-                        btnGuardar.Visible = true;
+                            cmbBoxEstado.Enabled = true;
+
+                            btnGuardar.Enabled = true;
+                            btnGuardar.Visible = true;
+                        }
+                        else {
+                            habilitarTodo(true);
+
+                            btnGuardar.Enabled = true;
+                            btnGuardar.Visible = true;
+                        }
                     break;
 
                     case TipoAccion.Buy:
@@ -119,8 +131,13 @@ namespace ME.UI
 
                         habilitarTodo(false);
 
-                        btnGuardar.Enabled = true;
-                        btnGuardar.Visible = true;
+                        if (publicacion.estado.cod_estado == 4 /* Pausada */) {
+                            btnGuardar.Enabled = false;
+                            btnGuardar.Visible = true;
+                        } else {
+                            btnGuardar.Enabled = true;
+                            btnGuardar.Visible = true;
+                        }
                     break;
 
                     default: // TipoAccion.View: 
@@ -144,8 +161,6 @@ namespace ME.UI
         {
 //            txtDescripcion.Focus();
 
-            numStock.Enabled = (esNuevaPubli || esModificable);
-
             if (UserLogged.esEmpresa && (esNuevaPubli || esModificable)) {
                 List<Rubro> listaRubro = new List<Rubro>();
                 listaRubro.Add(RubroHandler.ObtenerRubro("Electrónicos"));
@@ -168,8 +183,12 @@ namespace ME.UI
             cmbBoxVisibilidad.DisplayMember = "descripcion";
 
             estados = EstadoHandler.ListarEstados();
-            if (esNuevaPubli)
+            if (esNuevaPubli) {
                 estados.RemoveAll(est => (est.nombre == "Publicada" || est.nombre == "Finalizada"));
+            }
+            else if (PublicacionExistente.estado.cod_estado == 3 /* Activa */) { // esModificable y está Activa
+                estados.RemoveAll(est => (est.nombre == "Publicada" || est.nombre == "Borrador"));
+            }
 
             cmbBoxEstado.DataSource = estados;
             cmbBoxEstado.ValueMember = "cod_estado";
@@ -198,7 +217,7 @@ namespace ME.UI
                 cmbBoxPreguntas.SelectedValue = false;
                 cmbBoxEstado.SelectedItem = estados.Find(est => est.nombre == "Borrador");
                 lblReputacion.Text = String.Empty;
-            } else {
+            } else { // es Modificacion o Compra/Oferta
                 lblUsername.Text = PublicacionExistente.username;
                 txtDescripcion.Text = PublicacionExistente.descripcion;
                 cmbBoxTipoPubli.SelectedValue = PublicacionExistente.tipo_publi.cod_tipo_publi;
@@ -218,6 +237,11 @@ namespace ME.UI
                     lblFinalizada.Text = String.Empty;
                     lblFinalizada.Visible = false;
                 }
+
+                if (PublicacionExistente.estado.cod_estado == 5 /* Finalizada */) {
+
+                }
+
                 cmbBoxRubro.SelectedValue = PublicacionExistente.rubro.cod_rubro;
                 cmbBoxEnvio.SelectedValue = PublicacionExistente.con_envio;
                 cmbBoxPreguntas.SelectedValue = PublicacionExistente.con_preguntas;
