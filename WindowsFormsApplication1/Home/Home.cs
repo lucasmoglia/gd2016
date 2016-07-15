@@ -34,23 +34,22 @@ namespace ME.UI
         private void Home_Load(object sender, EventArgs e)
         {
             this.Text = string.Concat(DateTime.Parse(ConfigurationManager.AppSettings["fecha"].ToString()).Date.ToShortDateString(), "  - Bienvenido ", UserLogged.username, "!");
-
-            if (UserLogged.esAdmin) {
-                administracionToolStripMenuItem.Enabled = true;
-                administracionToolStripMenuItem.Visible = true;
-                venderToolStripMenuItem.Visible = false;
-            } else {
-                administracionToolStripMenuItem.Enabled = false;
-                administracionToolStripMenuItem.Visible = false;
-                venderToolStripMenuItem.Visible = true;
-
-                if (UserLogged.roles.Any(r => r.cod_rol == 1)) //Empresa
-                {
-                    comprarToolStripMenuItem.Visible = false;
-                }
-            }
             pnlMaster.Controls.Clear();
             pnlMaster.Controls.Add(new HomeControl());
+
+            comprarToolStripMenuItem.Visible = !UserLogged.esAdmin && !UserLogged.roles.Any(r => r.cod_rol == 1) && UserLogged.funcionalidades.Any(f => f.cod_funcionalidad == 0);
+            venderToolStripMenuItem.Visible = !UserLogged.esAdmin && UserLogged.funcionalidades.Any(f => f.cod_funcionalidad == 1);
+            calificarToolStripMenuItem.Visible = UserLogged.funcionalidades.Any(f => f.cod_funcionalidad == 2);
+            misFacturasToolStripMenuItem.Visible = UserLogged.funcionalidades.Any(f => f.cod_funcionalidad == 6);
+            miHistorialToolStripMenuItem.Visible = UserLogged.funcionalidades.Any(f => f.cod_funcionalidad == 5);
+            reportesToolStripMenuItem.Visible = UserLogged.funcionalidades.Any(f => f.cod_funcionalidad == 7);
+            administracionToolStripMenuItem.Visible = UserLogged.esAdmin;
+            misDatosToolStripMenuItem.Visible = UserLogged.funcionalidades.Any(f => f.cod_funcionalidad == 4);
+            
+            /*Menu admin funcionalidad*/
+            usuariosToolStripMenuItem.Visible = UserLogged.funcionalidades.Any(f => f.cod_funcionalidad == 8);
+            rolesToolStripMenuItem1.Visible = UserLogged.funcionalidades.Any(f => f.cod_funcionalidad == 9);
+            visibilidadesToolStripMenuItem.Visible = UserLogged.funcionalidades.Any(f => f.cod_funcionalidad == 10);
         }
 
         private void inicioToolStripMenuItem_Click(object sender, EventArgs e)

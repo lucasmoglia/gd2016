@@ -34,6 +34,7 @@ namespace ME.UI
         {
             InitializeComponent();
             btnResetPass.Visible = false;
+            btnEditUser.Visible = UserLogged.funcionalidades.Any(f => f.cod_funcionalidad == 7);
             FillGrid();
         }
 

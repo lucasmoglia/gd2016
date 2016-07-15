@@ -20,7 +20,7 @@ namespace ME.UI
         public MisPublicacionesUserControl()
         {
             InitializeComponent();
-
+            btnEditar.Visible = UserLogged.funcionalidades.Any(f => f.cod_funcionalidad == 3);
             FillGrid();
         }
 
