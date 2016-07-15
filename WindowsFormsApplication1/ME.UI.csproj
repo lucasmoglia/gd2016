@@ -128,6 +128,12 @@
     <Compile Include="ComprarOfertar\ComprarOfertarUserControl.Designer.cs">
       <DependentUpon>ComprarOfertarUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Generar Publicacion\MisPublicacionesUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Generar Publicacion\MisPublicacionesUserControl.Designer.cs">
+      <DependentUpon>MisPublicacionesUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Generar Publicacion\PublicacionForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -210,6 +216,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ComprarOfertar\ComprarOfertarUserControl.resx">
       <DependentUpon>ComprarOfertarUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Generar Publicacion\MisPublicacionesUserControl.resx">
+      <DependentUpon>MisPublicacionesUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Generar Publicacion\PublicacionForm.resx">
       <DependentUpon>PublicacionForm.cs</DependentUpon>
