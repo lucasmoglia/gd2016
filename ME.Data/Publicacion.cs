@@ -177,7 +177,7 @@ namespace ME.Data
             }
         }
 
-        public static List<Publicacion> GetPublicaciones(byte estado, List<decimal> rubros, string descripcion, decimal cod_usuario)
+        public static List<Publicacion> GetPublicaciones(bool quiereComprar, List<decimal> rubros, string descripcion, decimal cod_usuario)
         {
             List<Publicacion> publicacionList = new List<Publicacion>();
 
@@ -205,10 +205,11 @@ namespace ME.Data
 
                 command.Parameters.Add("@descripcion", SqlDbType.NVarChar).Value = descripcion;
                 command.Parameters.Add("@usuario", SqlDbType.Decimal).Value = cod_usuario;
+                command.Parameters.Add("@quiereComprar", SqlDbType.Bit).Value = quiereComprar;
                 
                 // parámetros para la paginación.
-                command.Parameters.Add("@PageSize", SqlDbType.Int).Value = Globales.TamanioPag_Publi;  // sacar variables gobales.
-                command.Parameters.Add("@PageNumber", SqlDbType.Int).Value = Globales.NumPag_Publi += 1;  // sacar variables gobales.
+                command.Parameters.Add("@PageSize", SqlDbType.Int).Value = Globales.TamanioPag_Publi;  
+                command.Parameters.Add("@PageNumber", SqlDbType.Int).Value = Globales.NumPag_Publi += 1;
 
                 SqlParameter param_TotalPags = new SqlParameter("@TotalPags", SqlDbType.Int);
                 param_TotalPags.Direction = ParameterDirection.Output;

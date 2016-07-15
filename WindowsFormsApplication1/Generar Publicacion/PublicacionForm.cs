@@ -197,7 +197,7 @@ namespace ME.UI
                 cmbBoxEnvio.SelectedValue = false;
                 cmbBoxPreguntas.SelectedValue = false;
                 cmbBoxEstado.SelectedItem = estados.Find(est => est.nombre == "Borrador");
-                lblReputacion.Text = "0";
+                lblReputacion.Text = String.Empty;
             } else {
                 lblUsername.Text = PublicacionExistente.username;
                 txtDescripcion.Text = PublicacionExistente.descripcion;
