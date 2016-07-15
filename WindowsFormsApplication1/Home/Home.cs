@@ -42,14 +42,14 @@ namespace ME.UI
             calificarToolStripMenuItem.Visible = UserLogged.funcionalidades.Any(f => f.cod_funcionalidad == 2);
             misFacturasToolStripMenuItem.Visible = UserLogged.funcionalidades.Any(f => f.cod_funcionalidad == 6);
             miHistorialToolStripMenuItem.Visible = UserLogged.funcionalidades.Any(f => f.cod_funcionalidad == 5);
-            reportesToolStripMenuItem.Visible = UserLogged.funcionalidades.Any(f => f.cod_funcionalidad == 7);
+            reportesToolStripMenuItem.Visible = UserLogged.esAdmin || UserLogged.funcionalidades.Any(f => f.cod_funcionalidad == 7);
             administracionToolStripMenuItem.Visible = UserLogged.esAdmin;
             misDatosToolStripMenuItem.Visible = UserLogged.funcionalidades.Any(f => f.cod_funcionalidad == 4);
-            
+            misPublicacionesToolStripMenuItem.Visible = !UserLogged.esAdmin;
             /*Menu admin funcionalidad*/
-            usuariosToolStripMenuItem.Visible = UserLogged.funcionalidades.Any(f => f.cod_funcionalidad == 8);
-            rolesToolStripMenuItem1.Visible = UserLogged.funcionalidades.Any(f => f.cod_funcionalidad == 9);
-            visibilidadesToolStripMenuItem.Visible = UserLogged.funcionalidades.Any(f => f.cod_funcionalidad == 10);
+            usuariosToolStripMenuItem.Visible = UserLogged.esAdmin || UserLogged.funcionalidades.Any(f => f.cod_funcionalidad == 8);
+            rolesToolStripMenuItem1.Visible = UserLogged.esAdmin || UserLogged.funcionalidades.Any(f => f.cod_funcionalidad == 9);
+            visibilidadesToolStripMenuItem.Visible = UserLogged.esAdmin || UserLogged.funcionalidades.Any(f => f.cod_funcionalidad == 10);
         }
 
         private void inicioToolStripMenuItem_Click(object sender, EventArgs e)
