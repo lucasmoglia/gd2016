@@ -45,6 +45,8 @@ namespace ME.UI
             bindingNavigator1.BindingSource = bindSourcePubli;
             bindSourcePubli.CurrentChanged += new System.EventHandler(bindSourcePubli_CurrentChanged);
             bindSourcePubli.DataSource = new PageOffsetList(gvPublicaciones.RowCount);
+
+            btnEditar.Visible = gvPublicaciones.RowCount > 0;
         }
 
         private void bindSourcePubli_CurrentChanged(object sender, EventArgs e)

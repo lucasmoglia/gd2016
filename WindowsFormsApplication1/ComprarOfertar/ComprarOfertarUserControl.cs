@@ -36,7 +36,7 @@ namespace ME.UI
             Globales.PagsEnCache_Publi = 0;
 
             
-            listaPublicaciones = PublicacionHandler.ListarPublicaciones(true, null, String.Empty);
+            listaPublicaciones = PublicacionHandler.ListarPublicaciones(true, string.Empty, String.Empty);
             //Init Grid
             gvPublicaciones.DataSource = listaPublicaciones;
             gvPublicaciones.Columns["visibilidad"].Visible = false;

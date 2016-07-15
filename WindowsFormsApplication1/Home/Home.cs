@@ -46,6 +46,8 @@ namespace ME.UI
             administracionToolStripMenuItem.Visible = UserLogged.esAdmin;
             misDatosToolStripMenuItem.Visible = UserLogged.funcionalidades.Any(f => f.cod_funcionalidad == 4);
             misPublicacionesToolStripMenuItem.Visible = !UserLogged.esAdmin;
+            miCuentaToolStripMenuItem.Visible = !UserLogged.esAdmin;
+
             /*Menu admin funcionalidad*/
             usuariosToolStripMenuItem.Visible = UserLogged.esAdmin || UserLogged.funcionalidades.Any(f => f.cod_funcionalidad == 8);
             rolesToolStripMenuItem1.Visible = UserLogged.esAdmin || UserLogged.funcionalidades.Any(f => f.cod_funcionalidad == 9);

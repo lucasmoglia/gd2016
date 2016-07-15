@@ -31,7 +31,6 @@ namespace ME.Data
             }
             set
             {
-                cod_rol_seleccionado = value;
                 funcionalidades = Funcionalidad.GetFuncionalidadesByRol(value);
             }
         }

@@ -51,7 +51,7 @@ namespace ME.UI
                     ddlRubro.SelectedText = usuario.rubro.ToString();
                     txtMailC.Text = usuario.mail;
                     txtUserNameC.Text = usuario.username;
-                    txtPasswordC.Enabled = false;
+                    txtPasswordC.Text = string.Empty;
                     txtTelefonoC.Text = usuario.telefono;
                     txtDirCalleC.Text = usuario.dir_calle;
                     txtDirNumeroC.Text = usuario.dir_nro;
@@ -71,7 +71,7 @@ namespace ME.UI
                     txtCUIT.Text = usuario.cuit;
                     txtMailEmpresa.Text = usuario.mail;
                     txtUsernameE.Text = usuario.username;
-                    txtPasswordE.Enabled = false;
+                    txtPasswordE.Text = string.Empty;
                     txtTelefonoEmpresa.Text = usuario.telefono;
                     txtDomCalleE.Text = usuario.dir_calle;
                     txtDomNumeroE.Text = usuario.dir_nro;

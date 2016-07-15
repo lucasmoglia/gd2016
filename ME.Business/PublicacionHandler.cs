@@ -27,7 +27,7 @@ namespace ME.Business
 
         public static List<Publicacion> ListarMisPublicaciones()
         {
-            return Publicacion.GetPublicaciones(false, null, string.Empty, UserLogged.cod_usuario);
+            return Publicacion.GetPublicaciones(false, string.Empty, string.Empty, UserLogged.cod_usuario);
         }
 
         public static Publicacion Guardar(decimal cod_publi, bool esNueva, string descripcion, decimal stock, DateTime fechaInicio, DateTime fechaVenc, decimal precio, decimal cod_visibilidad,
