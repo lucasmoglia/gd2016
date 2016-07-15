@@ -49,7 +49,7 @@ namespace ME.Business
                 ids_funcionalidades[i] = funcionalidades[i].cod_funcionalidad;
             }
 
-            Rol.Actualizar(cod_rol, ids_funcionalidades);
+            Rol.Actualizar(cod_rol, descripcion, ids_funcionalidades);
         }
     
         public static void Eliminar (decimal cod_rol)

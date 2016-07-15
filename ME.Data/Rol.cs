@@ -139,7 +139,7 @@ namespace ME.Data
             return result;
         }
     
-        public static void Actualizar(decimal cod_rol, decimal[] funcionalidades)
+        public static void Actualizar(decimal cod_rol, string descripcion, decimal[] funcionalidades)
         {
             using (SqlConnection connection = MEEntity.GetConnection())
             {
@@ -158,6 +158,8 @@ namespace ME.Data
                     
                 SqlParameter param_cod_rol = command.Parameters.AddWithValue("@cod_rol", cod_rol);
                 param_cod_rol.SqlDbType = SqlDbType.Decimal;
+                SqlParameter param_desc = command.Parameters.AddWithValue("@nombre", descripcion);
+                param_cod_rol.SqlDbType = SqlDbType.NVarChar;
 
                 SqlParameter param_func = command.Parameters.AddWithValue("@funcionalidades", _dt);
                 param_func.SqlDbType = SqlDbType.Structured;
