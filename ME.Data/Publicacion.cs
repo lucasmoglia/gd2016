@@ -188,21 +188,22 @@ namespace ME.Data
 
                 //command.Parameters.Add("@estado", SqlDbType.Decimal).Value = estado;
 
-                DataTable rubrosTable = null;
+                //DataTable rubrosTable = null;
 
-                if (rubros != null) {
-                    rubrosTable = new DataTable(); // Crea el Tipo Tabla Rubros, para pasar por parámetro.
-                    rubrosTable.Columns.Add("cod_rubro", typeof(decimal));
+                //if (rubros != null) {
+                //    rubrosTable = new DataTable(); // Crea el Tipo Tabla Rubros, para pasar por parámetro.
+                //    rubrosTable.Columns.Add("cod_rubro", typeof(decimal));
 
-                    for (var i = 0; i < rubros.Count(); i++) {
-                        rubrosTable.Rows.Add(new Object[] { rubros[i] });
-                    }
-                }
+                //    for (var i = 0; i < rubros.Count(); i++) {
+                //        rubrosTable.Rows.Add(new Object[] { rubros[i] });
+                //    }
+                //}
                 
-                SqlParameter param_Rubros = command.Parameters.AddWithValue("@rubros", rubrosTable);
-                param_Rubros.SqlDbType = SqlDbType.Structured;
-                param_Rubros.TypeName = "[DE_UNA].Rubros";
+                //SqlParameter param_Rubros = command.Parameters.AddWithValue("@rubros", rubrosTable);
+                //param_Rubros.SqlDbType = SqlDbType.Structured;
+                //param_Rubros.TypeName = "[DE_UNA].Rubros";
 
+                command.Parameters.Add("@rubros", SqlDbType.NVarChar).Value = rubros;
                 command.Parameters.Add("@descripcion", SqlDbType.NVarChar).Value = descripcion;
                 command.Parameters.Add("@usuario", SqlDbType.Decimal).Value = cod_usuario;
                 command.Parameters.Add("@quiereComprar", SqlDbType.Bit).Value = quiereComprar;

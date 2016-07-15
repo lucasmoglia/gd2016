@@ -190,7 +190,7 @@ namespace ME.UI
         {
             if (bindNavPubli.PositionItem.Text != string.Empty && int.Parse(bindNavPubli.PositionItem.Text) * 10 == listaPublicaciones.Count)
             {
-                listaPublicaciones.AddRange(PublicacionHandler.ListarPublicaciones(true, cod_rubros, descripcion));
+                listaPublicaciones.AddRange(PublicacionHandler.ListarPublicaciones(true, /*cod_rubros*/ rubros, descripcion));
                 gvPublicaciones.DataSource = listaPublicaciones;
                 gvPublicaciones.Refresh();
                 bindSourcePubli.DataSource = new PageOffsetList(gvPublicaciones.RowCount);
