@@ -182,5 +182,26 @@ namespace ME.Data
             return MEEntity.ExecuteSP("[DE_UNA].[DesbloquearUsuario]", parameters);
 
         }
+
+
+
+        public static decimal reputacion(decimal cod_usuario)
+        {
+            decimal unValor = 0;
+            using (SqlConnection connection = MEEntity.GetConnection())
+            {
+                SqlCommand command = new SqlCommand("[DE_UNA].[ReputacionVendedor]", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add("@cod_usuario", SqlDbType.Decimal).Value = cod_usuario;
+
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                    unValor=decimal.Parse(reader[0].ToString());
+                return unValor;
+            }
+        }
+
     }
 }
