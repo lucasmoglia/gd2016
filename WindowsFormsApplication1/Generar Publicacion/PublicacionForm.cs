@@ -366,7 +366,7 @@ namespace ME.UI
 
         private void compraOsubasta()
         {
-            if (PublicacionExistente.stock > 0 /*&& PublicacionExistente.fecha_vencimiento.Date >= fechaConfig.Date*/)
+            if (PublicacionExistente.stock > 0 && PublicacionExistente.fecha_vencimiento.Date >= fechaConfig.Date)
             {// Tiene que haber stock y no estar vencida.
 
                 List<Compra> comprasSinCalificar = CompraHandler.ListarComprasSinCalificar(UserLogged.cod_usuario);
