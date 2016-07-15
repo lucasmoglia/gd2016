@@ -80,5 +80,10 @@ namespace ME.UI
             publi.valor = 0;
             this.Close();
         }
+
+        private void ComprarForm_Deactivate(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -50,7 +50,7 @@ namespace ME.Data
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
 
-                return reader.Read() ? Int32.Parse(reader["id_compra"].ToString()) : 0;
+                return reader.Read() ? Int32.Parse(reader[0].ToString()) : 0;
             }
         }
 
