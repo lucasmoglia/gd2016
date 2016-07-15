@@ -74,6 +74,7 @@ BEGIN
 	DROP PROCEDURE [DE_UNA].SetRolInactivo;
 	DROP PROCEDURE [DE_UNA].GetCompras;
 	DROP PROCEDURE [DE_UNA].GetFactura;
+	DROP PROCEDURE [DE_UNA].ReputacionVendedor;
 
 	DROP FUNCTION  [DE_UNA].fn_Get_Reputacion_Vendedor
 	DROP FUNCTION  [DE_UNA].fn_Cant_Compras_Por_Usuario
