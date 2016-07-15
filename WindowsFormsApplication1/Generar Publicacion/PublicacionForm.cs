@@ -186,8 +186,13 @@ namespace ME.UI
             if (esNuevaPubli) {
                 estados.RemoveAll(est => (est.nombre == "Publicada" || est.nombre == "Finalizada"));
             }
-            else if (PublicacionExistente.estado.cod_estado == 3 /* Activa */) { // esModificable y está Activa
-                estados.RemoveAll(est => (est.nombre == "Publicada" || est.nombre == "Borrador"));
+            else if (PublicacionExistente.estado.cod_estado == 3 /* Activa */)// esModificable y está Activa
+            { 
+                     estados.RemoveAll(est => (est.nombre == "Publicada" || est.nombre == "Borrador"));
+            }
+            else if (PublicacionExistente.estado.cod_estado == 1 /* Publicada */) // esModificable y está Publicada
+            {
+                estados.RemoveAll(est => (est.nombre == "Borrador"));
             }
 
             cmbBoxEstado.DataSource = estados;
@@ -236,10 +241,6 @@ namespace ME.UI
                 } else {
                     lblFinalizada.Text = String.Empty;
                     lblFinalizada.Visible = false;
-                }
-
-                if (PublicacionExistente.estado.cod_estado == 5 /* Finalizada */) {
-
                 }
 
                 cmbBoxRubro.SelectedValue = PublicacionExistente.rubro.cod_rubro;
