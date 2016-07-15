@@ -23,11 +23,17 @@ namespace ME.UI
         public ComprarOfertarUserControl()
         {
             InitializeComponent();
+            ComprarOfertar_Load();
 
+        }
+
+        private void ComprarOfertar_Load()
+        {
             Globales.NumPag_Publi = 0;
             Globales.TamanioPag_Publi = 10;
             Globales.TotalPags_Publi = 0;
             Globales.PagsEnCache_Publi = 0;
+
             
             listaPublicaciones = PublicacionHandler.ListarPublicaciones(true, null, String.Empty);
             //Init Grid
@@ -37,7 +43,7 @@ namespace ME.UI
             gvPublicaciones.Columns["rubro"].Visible = false;
             gvPublicaciones.Columns["tipo_publi"].Visible = false;
             gvPublicaciones.Columns["fecha_finalizacion"].Visible = false;
-            
+
             bindNavPubli.BindingSource = bindSourcePubli;
             bindSourcePubli.CurrentChanged += new System.EventHandler(bindSourcePubli_CurrentChanged);
             bindSourcePubli.DataSource = new PageOffsetList(gvPublicaciones.RowCount);
@@ -97,6 +103,7 @@ namespace ME.UI
                 if (publicacion.cod_usuario != UserLogged.cod_usuario) {
                     PublicacionForm publicacionForm = new PublicacionForm(publicacion, TipoAccion.Buy);
                     publicacionForm.ShowDialog(this);
+                    ComprarOfertar_Load();
                 } else {
                      MessageBox.Show("No puede Comprar/Ofertar a sí mismo", "Comprar/Ofertar", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -105,10 +112,6 @@ namespace ME.UI
 
         private void gvPublicaciones_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            if (UserLogged.esAdmin) {
-                btnEditPublicacion.Visible = true;
-                btnRemovePublicacion.Visible = true;
-            }
         }
 
         private void btnEditPublicacion_Click(object sender, EventArgs e)
@@ -121,6 +124,8 @@ namespace ME.UI
 
                 gvPublicaciones.Refresh();
                 this.Refresh();
+                ComprarOfertar_Load();
+
             }
         }
 
@@ -139,9 +144,10 @@ namespace ME.UI
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
+            //Traigo la descripción que voy a pasar como parámetro
             descripcion = (txtDescripcion.Text != descrVacia && txtDescripcion.Text != String.Empty)?
                             txtDescripcion.Text : String.Empty;
-
+            //Cargo los rubros seleccionados, si existen
             if (lstRubros.SelectedIndex > -1 && lstRubros.SelectedItems != null) {
                 rubros.Clear();
                 cod_rubros.Clear();
@@ -153,12 +159,13 @@ namespace ME.UI
                 }
 
                 cod_rubros.AddRange(rubros.ConvertAll(rubro => rubro.cod_rubro));
-                
-                listaPublicaciones = PublicacionHandler.ListarPublicaciones(true, cod_rubros, descripcion);
-                bindSourcePubli.DataSource = listaPublicaciones;
             }
-
+                
+            //Llamo a mis publicaciones por parametros de busqueda 
+            listaPublicaciones = PublicacionHandler.ListarPublicaciones(true, cod_rubros, descripcion);
+            gvPublicaciones.DataSource = listaPublicaciones;
             gvPublicaciones.Refresh();
+            bindSourcePubli.DataSource = new PageOffsetList(gvPublicaciones.RowCount);
         }
 
         private void btnVer_Click(object sender, EventArgs e)
@@ -174,10 +181,7 @@ namespace ME.UI
 
         private void bindNavNextItem_Click(object sender, EventArgs e)
         {
-            // La idea es que cuando se presiona siguiente y ya se pasaron 10 páginas, agregue 10 páginas más a la lista de Publicaciones.
-//            if ((((int)bindSourcePubli.Position + 1) % 10) == 0) //Si es múltiplo de 10 trae más páginas
-            //Si es múltiplo de 10 trae más páginas? tiene q traer si ya no hay mas en la lista de publicaciones
-            if (((int)bindSourcePubli.Position + 1) > Globales.PagsEnCache_Publi) 
+            if (bindNavPubli.PositionItem.Text != string.Empty && int.Parse(bindNavPubli.PositionItem.Text) * 10 == listaPublicaciones.Count)
             {
                 listaPublicaciones.AddRange(PublicacionHandler.ListarPublicaciones(true, cod_rubros, descripcion));
                 gvPublicaciones.DataSource = listaPublicaciones;

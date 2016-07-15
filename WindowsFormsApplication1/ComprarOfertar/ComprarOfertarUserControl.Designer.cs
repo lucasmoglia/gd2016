@@ -32,8 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ComprarOfertarUserControl));
             this.gvPublicaciones = new System.Windows.Forms.DataGridView();
             this.btnComprar = new System.Windows.Forms.Button();
-            this.btnEditPublicacion = new System.Windows.Forms.Button();
-            this.btnRemovePublicacion = new System.Windows.Forms.Button();
             this.bindNavPubli = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindSourcePubli = new System.Windows.Forms.BindingSource(this.components);
             this.bindNavCountItem = new System.Windows.Forms.ToolStripLabel();
@@ -92,31 +90,6 @@
             this.btnComprar.UseVisualStyleBackColor = true;
             this.btnComprar.Click += new System.EventHandler(this.btnComprar_Click);
             // 
-            // btnEditPublicacion
-            // 
-            this.btnEditPublicacion.BackColor = System.Drawing.Color.LimeGreen;
-            this.btnEditPublicacion.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnEditPublicacion.Location = new System.Drawing.Point(12, 411);
-            this.btnEditPublicacion.Name = "btnEditPublicacion";
-            this.btnEditPublicacion.Size = new System.Drawing.Size(63, 23);
-            this.btnEditPublicacion.TabIndex = 2;
-            this.btnEditPublicacion.Text = "Editar";
-            this.btnEditPublicacion.UseVisualStyleBackColor = false;
-            this.btnEditPublicacion.Visible = false;
-            this.btnEditPublicacion.Click += new System.EventHandler(this.btnEditPublicacion_Click);
-            // 
-            // btnRemovePublicacion
-            // 
-            this.btnRemovePublicacion.BackColor = System.Drawing.Color.DarkRed;
-            this.btnRemovePublicacion.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnRemovePublicacion.Location = new System.Drawing.Point(81, 411);
-            this.btnRemovePublicacion.Name = "btnRemovePublicacion";
-            this.btnRemovePublicacion.Size = new System.Drawing.Size(63, 23);
-            this.btnRemovePublicacion.TabIndex = 3;
-            this.btnRemovePublicacion.Text = "Borrar";
-            this.btnRemovePublicacion.UseVisualStyleBackColor = false;
-            this.btnRemovePublicacion.Visible = false;
-            // 
             // bindNavPubli
             // 
             this.bindNavPubli.AddNewItem = null;
@@ -149,8 +122,8 @@
             // bindNavCountItem
             // 
             this.bindNavCountItem.Name = "bindNavCountItem";
-            this.bindNavCountItem.Size = new System.Drawing.Size(37, 22);
-            this.bindNavCountItem.Text = "de {0}";
+            this.bindNavCountItem.Size = new System.Drawing.Size(35, 22);
+            this.bindNavCountItem.Text = "of {0}";
             this.bindNavCountItem.ToolTipText = "Total number of items";
             // 
             // bindNavFirstItem
@@ -310,8 +283,6 @@
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.bindNavPubli);
-            this.Controls.Add(this.btnRemovePublicacion);
-            this.Controls.Add(this.btnEditPublicacion);
             this.Controls.Add(this.btnComprar);
             this.Controls.Add(this.gvPublicaciones);
             this.Name = "ComprarOfertarUserControl";
@@ -333,8 +304,6 @@
 
         private System.Windows.Forms.DataGridView gvPublicaciones;
         private System.Windows.Forms.Button btnComprar;
-        private System.Windows.Forms.Button btnEditPublicacion;
-        private System.Windows.Forms.Button btnRemovePublicacion;
         private System.Windows.Forms.BindingNavigator bindNavPubli;
         private System.Windows.Forms.ToolStripLabel bindNavCountItem;
         private System.Windows.Forms.ToolStripButton bindNavFirstItem;
