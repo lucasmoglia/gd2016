@@ -35,5 +35,10 @@ namespace ME.Business
         {
             Usuario.Eliminar(cod_usuario, fecha_actual);
         }
+
+        public static decimal reputacion(decimal cod_usuario)
+        {
+            return Usuario.reputacion(cod_usuario);
+        }
     }
 }

@@ -182,5 +182,61 @@ namespace ME.Data
             return MEEntity.ExecuteSP("[DE_UNA].[DesbloquearUsuario]", parameters);
 
         }
+
+
+/*        public static decimal reputacion(decimal cod_usuario)
+        {
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@cod_usuario", cod_usuario));
+
+            return MEEntity.ExecuteSP("DE_UNA.ReputacionVendedor", parameters);
+        }
+        */
+
+
+
+        public static decimal reputacion(decimal cod_usuario)
+        {
+            decimal unValor = 0;
+            using (SqlConnection connection = MEEntity.GetConnection())
+            {
+                SqlCommand command = new SqlCommand("[DE_UNA].[ReputacionVendedor]", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add("@cod_usuario", SqlDbType.Decimal).Value = cod_usuario;
+
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                    unValor=decimal.Parse(reader[0].ToString());
+                return unValor;
+            }
+        }
+
+
+
+
+        /*
+        public static decimal reputacion(decimal cod_usuario)
+        {
+            using (SqlConnection connection = MEEntity.GetConnection())
+            {
+                SqlCommand command = new SqlCommand("select * from [DE_UNA].fn_Get_Reputacion_Vendedor(@cod_usuario)", connection);
+                command.CommandType = CommandType.Text;
+                command.Parameters.Add("@cod_usuario", SqlDbType.Decimal).Value = cod_usuario;
+
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                reader.Read();
+                return decimal.Parse(reader[0].ToString());
+
+            }
+        }
+*/
+
+
+
+
+
     }
 }
