@@ -146,5 +146,14 @@ namespace ME.UI
                 bindSourcePubli.DataSource = new PageOffsetList(gvPublicaciones.RowCount);
             }
         }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            Publicacion publicacion = (Publicacion)gvPublicaciones.SelectedRows[0].DataBoundItem;
+
+            PublicacionForm publicacionForm = new PublicacionForm(publicacion, TipoAccion.View);
+
+            publicacionForm.ShowDialog(this);
+        }
     }
 }
