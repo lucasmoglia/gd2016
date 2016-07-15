@@ -98,7 +98,9 @@ namespace ME.UI
 
         private void btnComprar_Click(object sender, EventArgs e)
         {
-            if (gvPublicaciones.SelectedRows != null) {
+//            if (gvPublicaciones.SelectedRows != null) {
+            if (gvPublicaciones.SelectedRows.Count>0)
+            {
                 Publicacion publicacion = (Publicacion)gvPublicaciones.SelectedRows[0].DataBoundItem;
 
                 if (publicacion.cod_usuario != UserLogged.cod_usuario) {
