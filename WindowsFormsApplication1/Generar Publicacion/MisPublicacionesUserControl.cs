@@ -137,7 +137,6 @@ namespace ME.UI
         }
 
         private void bindingNavigatorPositionItem_TextChanged(object sender, EventArgs e){
-
             if (bindingNavigator1.PositionItem.Text != string.Empty && int.Parse(bindingNavigator1.PositionItem.Text) * 10 == listaPublicaciones.Count)
             {
                 listaPublicaciones.Clear();
