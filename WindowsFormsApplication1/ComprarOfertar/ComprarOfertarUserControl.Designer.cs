@@ -64,6 +64,7 @@
             this.gvPublicaciones.AllowUserToDeleteRows = false;
             this.gvPublicaciones.AllowUserToOrderColumns = true;
             this.gvPublicaciones.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCellsExceptHeader;
+            this.gvPublicaciones.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.gvPublicaciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvPublicaciones.Cursor = System.Windows.Forms.Cursors.Hand;
             this.gvPublicaciones.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
@@ -122,8 +123,8 @@
             // bindNavCountItem
             // 
             this.bindNavCountItem.Name = "bindNavCountItem";
-            this.bindNavCountItem.Size = new System.Drawing.Size(35, 22);
-            this.bindNavCountItem.Text = "of {0}";
+            this.bindNavCountItem.Size = new System.Drawing.Size(37, 22);
+            this.bindNavCountItem.Text = "de {0}";
             this.bindNavCountItem.ToolTipText = "Total number of items";
             // 
             // bindNavFirstItem

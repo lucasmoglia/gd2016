@@ -97,6 +97,7 @@ namespace ME.UI
                 Form nuevaPublicacionForm = new PublicacionForm(publicacion, TipoAccion.Mod);
                 nuevaPublicacionForm.ShowDialog(this);
                 gvPublicaciones.Refresh();
+                this.FillGrid();
             }
         }
     
