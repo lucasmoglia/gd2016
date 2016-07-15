@@ -27,6 +27,11 @@ namespace ME.Business
             return Publicacion.GetPublicaciones(estado, rubros, descripcion, 0);
         }
 
+        public static List<Publicacion> ListarMisPublicaciones()
+        {
+            return Publicacion.GetPublicaciones(0, null, string.Empty, UserLogged.cod_usuario);
+        }
+
         public static Publicacion Guardar(decimal cod_publi, bool esNueva, string descripcion, decimal stock, DateTime fechaInicio, DateTime fechaVenc, decimal precio, decimal cod_visibilidad,
                                   decimal cod_estado, decimal cod_rubro, decimal cod_usuario, decimal cod_tipo_publi, bool con_envio, bool con_preguntas, DateTime ? fecha_finalizacion)
         {
