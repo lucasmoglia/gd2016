@@ -115,6 +115,7 @@
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Comprar";
+            this.Deactivate += new System.EventHandler(this.ComprarForm_Deactivate);
             this.Load += new System.EventHandler(this.ComprarForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numMontoCant)).EndInit();
             this.groupCompra.ResumeLayout(false);

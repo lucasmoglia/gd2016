@@ -346,7 +346,7 @@ namespace ME.UI
                 List<Compra> comprasSinCalificar = CompraHandler.ListarComprasSinCalificar(UserLogged.cod_usuario);
 
                 // PARA CONTROLAR QUE NO TENGA MAS DE 3 COMPRAS SIN CALIFICACIONES.
-                if (comprasSinCalificar != null && comprasSinCalificar.Count <= 3)
+                if (comprasSinCalificar != null && comprasSinCalificar.Count < 3)
                 {
                     esDirecta = PublicacionExistente.tipo_publi.cod_tipo_publi == 1; /* Compra Inmediata */
                     ComprarForm formDeCompra = null;
@@ -433,6 +433,7 @@ namespace ME.UI
             else if (esCompra) 
             {
                 compraOsubasta();
+                this.Close();
             }
         }
 

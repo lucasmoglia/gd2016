@@ -23,12 +23,17 @@ namespace ME.UI
         public ComprarOfertarUserControl()
         {
             InitializeComponent();
+            ComprarOfertar_Load();
 
+        }
+
+        private void ComprarOfertar_Load()
+        {
             Globales.NumPag_Publi = 0;
             Globales.TamanioPag_Publi = 10;
             Globales.TotalPags_Publi = 0;
             Globales.PagsEnCache_Publi = 0;
-            
+
             listaPublicaciones = PublicacionHandler.ListarPublicaciones(1, null, String.Empty);
             //Init Grid
             gvPublicaciones.DataSource = listaPublicaciones;
@@ -37,7 +42,7 @@ namespace ME.UI
             gvPublicaciones.Columns["rubro"].Visible = false;
             gvPublicaciones.Columns["tipo_publi"].Visible = false;
             gvPublicaciones.Columns["fecha_finalizacion"].Visible = false;
-            
+
             bindNavPubli.BindingSource = bindSourcePubli;
             bindSourcePubli.CurrentChanged += new System.EventHandler(bindSourcePubli_CurrentChanged);
             bindSourcePubli.DataSource = new PageOffsetList(gvPublicaciones.RowCount);
@@ -97,6 +102,7 @@ namespace ME.UI
                 if (publicacion.cod_usuario != UserLogged.cod_usuario) {
                     PublicacionForm publicacionForm = new PublicacionForm(publicacion, TipoAccion.Buy);
                     publicacionForm.ShowDialog(this);
+                    ComprarOfertar_Load();
                 } else {
                      MessageBox.Show("No puede Comprar/Ofertar a sí mismo", "Comprar/Ofertar", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -121,6 +127,8 @@ namespace ME.UI
 
                 gvPublicaciones.Refresh();
                 this.Refresh();
+                ComprarOfertar_Load();
+
             }
         }
 
