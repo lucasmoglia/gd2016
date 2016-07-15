@@ -43,7 +43,7 @@
             this.bindSourcePubli = new System.Windows.Forms.BindingSource(this.components);
             this.gvPublicaciones = new System.Windows.Forms.DataGridView();
             this.btnEditar = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnVerDetalle = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindSourcePubli)).BeginInit();
@@ -166,21 +166,21 @@
             this.btnEditar.UseVisualStyleBackColor = true;
             this.btnEditar.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button1
+            // btnVerDetalle
             // 
-            this.button1.Location = new System.Drawing.Point(679, 341);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Ver Detalle";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.btnVerDetalle.Location = new System.Drawing.Point(679, 341);
+            this.btnVerDetalle.Name = "btnVerDetalle";
+            this.btnVerDetalle.Size = new System.Drawing.Size(75, 23);
+            this.btnVerDetalle.TabIndex = 3;
+            this.btnVerDetalle.Text = "Ver Detalle";
+            this.btnVerDetalle.UseVisualStyleBackColor = true;
+            this.btnVerDetalle.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // MisPublicacionesUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnVerDetalle);
             this.Controls.Add(this.btnEditar);
             this.Controls.Add(this.gvPublicaciones);
             this.Controls.Add(this.bindingNavigator1);
@@ -211,6 +211,6 @@
         private System.Windows.Forms.BindingSource bindSourcePubli;
         private System.Windows.Forms.DataGridView gvPublicaciones;
         private System.Windows.Forms.Button btnEditar;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnVerDetalle;
     }
 }

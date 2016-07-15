@@ -47,6 +47,7 @@ namespace ME.UI
             bindSourcePubli.DataSource = new PageOffsetList(gvPublicaciones.RowCount);
 
             btnEditar.Visible = gvPublicaciones.RowCount > 0;
+            btnVerDetalle.Visible = gvPublicaciones.RowCount > 0; 
         }
 
         private void bindSourcePubli_CurrentChanged(object sender, EventArgs e)
