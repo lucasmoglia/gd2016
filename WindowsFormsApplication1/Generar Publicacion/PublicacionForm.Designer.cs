@@ -44,6 +44,7 @@
             this.lblDescripción = new System.Windows.Forms.Label();
             this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.groupCaracteristicas = new System.Windows.Forms.GroupBox();
+            this.lblFinalizada = new System.Windows.Forms.Label();
             this.cmbBoxPreguntas = new System.Windows.Forms.ComboBox();
             this.cmbBoxEnvio = new System.Windows.Forms.ComboBox();
             this.lblPreguntas = new System.Windows.Forms.Label();
@@ -61,7 +62,9 @@
             this.groupTipoPublicacion = new System.Windows.Forms.GroupBox();
             this.groupVigencia = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lblFinalizada = new System.Windows.Forms.Label();
+            this.lblReputacionText = new System.Windows.Forms.Label();
+            this.lblEstrella = new System.Windows.Forms.Label();
+            this.lblReputacion = new System.Windows.Forms.Label();
             this.groupMonto.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numStock)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numPrecio)).BeginInit();
@@ -96,6 +99,7 @@
             // 
             // btnCancelar
             // 
+            this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancelar.Location = new System.Drawing.Point(550, 372);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
@@ -254,6 +258,17 @@
             this.groupCaracteristicas.TabStop = false;
             this.groupCaracteristicas.Text = "Características";
             // 
+            // lblFinalizada
+            // 
+            this.lblFinalizada.AutoSize = true;
+            this.lblFinalizada.Enabled = false;
+            this.lblFinalizada.Location = new System.Drawing.Point(191, 58);
+            this.lblFinalizada.Name = "lblFinalizada";
+            this.lblFinalizada.Size = new System.Drawing.Size(57, 13);
+            this.lblFinalizada.TabIndex = 38;
+            this.lblFinalizada.Text = "Finalizada:";
+            this.lblFinalizada.Visible = false;
+            // 
             // cmbBoxPreguntas
             // 
             this.cmbBoxPreguntas.FormattingEnabled = true;
@@ -360,6 +375,9 @@
             // 
             // groupPropietario
             // 
+            this.groupPropietario.Controls.Add(this.lblReputacion);
+            this.groupPropietario.Controls.Add(this.lblEstrella);
+            this.groupPropietario.Controls.Add(this.lblReputacionText);
             this.groupPropietario.Controls.Add(this.lblUsername);
             this.groupPropietario.Controls.Add(this.lblIdUsuario);
             this.groupPropietario.Location = new System.Drawing.Point(172, 7);
@@ -376,8 +394,9 @@
             this.lblUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUsername.Location = new System.Drawing.Point(6, 49);
             this.lblUsername.Name = "lblUsername";
-            this.lblUsername.Size = new System.Drawing.Size(0, 13);
+            this.lblUsername.Size = new System.Drawing.Size(53, 13);
             this.lblUsername.TabIndex = 36;
+            this.lblUsername.Text = "username";
             // 
             // lblIdUsuario
             // 
@@ -424,16 +443,33 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Publicación";
             // 
-            // lblFinalizada
+            // lblReputacionText
             // 
-            this.lblFinalizada.AutoSize = true;
-            this.lblFinalizada.Enabled = false;
-            this.lblFinalizada.Location = new System.Drawing.Point(191, 58);
-            this.lblFinalizada.Name = "lblFinalizada";
-            this.lblFinalizada.Size = new System.Drawing.Size(57, 13);
-            this.lblFinalizada.TabIndex = 38;
-            this.lblFinalizada.Text = "Finalizada:";
-            this.lblFinalizada.Visible = false;
+            this.lblReputacionText.AutoSize = true;
+            this.lblReputacionText.Location = new System.Drawing.Point(74, 25);
+            this.lblReputacionText.Name = "lblReputacionText";
+            this.lblReputacionText.Size = new System.Drawing.Size(65, 13);
+            this.lblReputacionText.TabIndex = 37;
+            this.lblReputacionText.Text = "Reputacion:";
+            // 
+            // lblEstrella
+            // 
+            this.lblEstrella.AutoSize = true;
+            this.lblEstrella.Font = new System.Drawing.Font("Wingdings", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
+            this.lblEstrella.Location = new System.Drawing.Point(101, 44);
+            this.lblEstrella.Name = "lblEstrella";
+            this.lblEstrella.Size = new System.Drawing.Size(29, 22);
+            this.lblEstrella.TabIndex = 38;
+            this.lblEstrella.Text = "¶";
+            // 
+            // lblReputacion
+            // 
+            this.lblReputacion.AutoSize = true;
+            this.lblReputacion.Location = new System.Drawing.Point(91, 49);
+            this.lblReputacion.Name = "lblReputacion";
+            this.lblReputacion.Size = new System.Drawing.Size(13, 13);
+            this.lblReputacion.TabIndex = 39;
+            this.lblReputacion.Text = "3";
             // 
             // PublicacionForm
             // 
@@ -505,5 +541,8 @@
         private System.Windows.Forms.Label lblUsername;
         private System.Windows.Forms.Label lblIdUsuario;
         private System.Windows.Forms.Label lblFinalizada;
+        private System.Windows.Forms.Label lblReputacion;
+        private System.Windows.Forms.Label lblEstrella;
+        private System.Windows.Forms.Label lblReputacionText;
     }
 }

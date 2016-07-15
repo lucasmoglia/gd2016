@@ -34,7 +34,8 @@ namespace ME.UI
             Globales.TotalPags_Publi = 0;
             Globales.PagsEnCache_Publi = 0;
 
-            listaPublicaciones = PublicacionHandler.ListarPublicaciones(1, null, String.Empty);
+            
+            listaPublicaciones = PublicacionHandler.ListarPublicaciones(true, null, String.Empty);
             //Init Grid
             gvPublicaciones.DataSource = listaPublicaciones;
             gvPublicaciones.Columns["visibilidad"].Visible = false;
@@ -111,10 +112,6 @@ namespace ME.UI
 
         private void gvPublicaciones_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            if (UserLogged.esAdmin) {
-                btnEditPublicacion.Visible = true;
-                btnRemovePublicacion.Visible = true;
-            }
         }
 
         private void btnEditPublicacion_Click(object sender, EventArgs e)
@@ -147,9 +144,10 @@ namespace ME.UI
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
+            //Traigo la descripción que voy a pasar como parámetro
             descripcion = (txtDescripcion.Text != descrVacia && txtDescripcion.Text != String.Empty)?
                             txtDescripcion.Text : String.Empty;
-
+            //Cargo los rubros seleccionados, si existen
             if (lstRubros.SelectedIndex > -1 && lstRubros.SelectedItems != null) {
                 rubros.Clear();
                 cod_rubros.Clear();
@@ -161,12 +159,13 @@ namespace ME.UI
                 }
 
                 cod_rubros.AddRange(rubros.ConvertAll(rubro => rubro.cod_rubro));
-                
-                listaPublicaciones = PublicacionHandler.ListarPublicaciones(1, cod_rubros, descripcion);
-                bindSourcePubli.DataSource = listaPublicaciones;
             }
-
+                
+            //Llamo a mis publicaciones por parametros de busqueda 
+            listaPublicaciones = PublicacionHandler.ListarPublicaciones(true, cod_rubros, descripcion);
+            gvPublicaciones.DataSource = listaPublicaciones;
             gvPublicaciones.Refresh();
+            bindSourcePubli.DataSource = new PageOffsetList(gvPublicaciones.RowCount);
         }
 
         private void btnVer_Click(object sender, EventArgs e)
@@ -182,10 +181,9 @@ namespace ME.UI
 
         private void bindNavNextItem_Click(object sender, EventArgs e)
         {
-            // La idea es que cuando se presiona  siguiente y ya se pasaron 10 páginas, agregue 10 páginas más a la lista de Publicaciones.
-            if ((((int)bindSourcePubli.Position + 1) % 10) == 0) //Si es múltiplo de 10 trae más páginas
+            if (bindNavPubli.PositionItem.Text != string.Empty && int.Parse(bindNavPubli.PositionItem.Text) * 10 == listaPublicaciones.Count)
             {
-                listaPublicaciones.AddRange(PublicacionHandler.ListarPublicaciones(1, cod_rubros, descripcion));
+                listaPublicaciones.AddRange(PublicacionHandler.ListarPublicaciones(true, cod_rubros, descripcion));
                 gvPublicaciones.DataSource = listaPublicaciones;
                 gvPublicaciones.Refresh();
                 bindSourcePubli.DataSource = new PageOffsetList(gvPublicaciones.RowCount);

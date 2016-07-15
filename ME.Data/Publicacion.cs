@@ -37,13 +37,13 @@ namespace ME.Data
         public bool con_envio              { get; set; }
         public bool con_preguntas          { get; set; }
         public DateTime ? fecha_finalizacion { get; set; }
+        public decimal reputacion { get; set; }
 
 
         public Publicacion(decimal cod_publi, string descripcion, ulong stock, DateTime fecha_inicio, DateTime fecha_vencimiento, decimal precio_producto,
-                           decimal cod_visibilidad, string  visibilidad, decimal costo_publicar, decimal porcentaje_venta, decimal costo_envio,
-                           decimal cod_estado, string  estado, decimal cod_rubro, string  desc_corta, string  desc_larga,
-                           //UsuarioModel usuario, 
-                           decimal cod_usuario, string username, decimal cod_tipo_publi, string tipo_publicacion, bool con_envio, bool con_preguntas, DateTime ? fecha_finalizacion)
+                           decimal cod_visibilidad, string visibilidad, decimal costo_publicar, decimal porcentaje_venta, decimal costo_envio,
+                           decimal cod_estado, string estado, decimal cod_rubro, string desc_corta, string desc_larga, decimal cod_usuario, string username, 
+                           decimal cod_tipo_publi, string tipo_publicacion, bool con_envio, bool con_preguntas, DateTime? fecha_finalizacion, decimal reputacion)
         {
             this.cod_publi = cod_publi;
             this.descripcion = descripcion;
@@ -61,6 +61,7 @@ namespace ME.Data
             this.con_envio = con_envio;
             this.con_preguntas = con_preguntas;
             this.fecha_finalizacion = fecha_finalizacion == DateTime.MinValue ? null : fecha_finalizacion;
+            this.reputacion = reputacion;
         }
 
         public string Descr_visibilidad() {
@@ -166,6 +167,7 @@ namespace ME.Data
                         , bool.Parse(reader["con_envio"].ToString())
                         , bool.Parse(reader["con_preguntas"].ToString())
                         , reader["fecha_finalizacion"] != DBNull.Value ? DateTime.Parse(reader["fecha_finalizacion"].ToString()) : DateTime.MinValue
+                        , 0
                     );
 
                     return publicacion;
@@ -175,7 +177,7 @@ namespace ME.Data
             }
         }
 
-        public static List<Publicacion> GetPublicaciones(byte estado, List<decimal> rubros, string descripcion, decimal cod_usuario)
+        public static List<Publicacion> GetPublicaciones(bool quiereComprar, List<decimal> rubros, string descripcion, decimal cod_usuario)
         {
             List<Publicacion> publicacionList = new List<Publicacion>();
 
@@ -184,8 +186,7 @@ namespace ME.Data
                 SqlCommand command = new SqlCommand("[DE_UNA].[GetPublicaciones]", connection);
                 command.CommandType = CommandType.StoredProcedure;
 
-                command.Parameters.Add("@estado", SqlDbType.Decimal).Value = estado;
-
+                //command.Parameters.Add("@estado", SqlDbType.Decimal).Value = estado;
 
                 DataTable rubrosTable = null;
 
@@ -204,15 +205,15 @@ namespace ME.Data
 
                 command.Parameters.Add("@descripcion", SqlDbType.NVarChar).Value = descripcion;
                 command.Parameters.Add("@usuario", SqlDbType.Decimal).Value = cod_usuario;
+                command.Parameters.Add("@quiereComprar", SqlDbType.Bit).Value = quiereComprar;
                 
                 // parámetros para la paginación.
-                command.Parameters.Add("@PageSize", SqlDbType.Int).Value = Globales.TamanioPag_Publi;  // sacar variables gobales.
-                command.Parameters.Add("@PageNumber", SqlDbType.Int).Value = Globales.NumPag_Publi += 1;  // sacar variables gobales.
+                command.Parameters.Add("@PageSize", SqlDbType.Int).Value = Globales.TamanioPag_Publi;  
+                command.Parameters.Add("@PageNumber", SqlDbType.Int).Value = Globales.NumPag_Publi += 1;
 
                 SqlParameter param_TotalPags = new SqlParameter("@TotalPags", SqlDbType.Int);
                 param_TotalPags.Direction = ParameterDirection.Output;
                 command.Parameters.Add(param_TotalPags);
-
 
                 SqlParameter param_BloquePags = new SqlParameter("@bloqueDePaginas", SqlDbType.Int);
                 param_BloquePags.Direction = ParameterDirection.Output;
@@ -249,7 +250,8 @@ namespace ME.Data
                         , reader["tipo_publi"].ToString()
                         , bool.Parse(reader["con_envio"].ToString())
                         , bool.Parse(reader["con_preguntas"].ToString())
-                        , reader["fecha_finalizacion"] != DBNull.Value ? DateTime.Parse(reader["fecha_finalizacion"].ToString()) : DateTime.MinValue 
+                        , reader["fecha_finalizacion"] != DBNull.Value ? DateTime.Parse(reader["fecha_finalizacion"].ToString()) : DateTime.MinValue
+                        , decimal.Parse(reader["reputacion"].ToString())
                     );
 
                     publicacionList.Add(publicacion);

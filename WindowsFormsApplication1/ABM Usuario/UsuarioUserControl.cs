@@ -21,7 +21,7 @@ namespace ME.UI
 
         private void FillGrid()
         {
-            listaUsuarios = UsuarioHandler.GetUsuarios(true);
+            listaUsuarios = UsuarioHandler.GetUsuarios(false);
             safe_listaUsuarios = listaUsuarios; //Copia para hacer el filtrado
             gvClientes.DataSource = listaUsuarios;
             gvClientes.Columns.Remove("cod_usuario");

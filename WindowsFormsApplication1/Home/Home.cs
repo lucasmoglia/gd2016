@@ -38,9 +38,16 @@ namespace ME.UI
             if (UserLogged.esAdmin) {
                 administracionToolStripMenuItem.Enabled = true;
                 administracionToolStripMenuItem.Visible = true;
+                venderToolStripMenuItem.Visible = false;
             } else {
                 administracionToolStripMenuItem.Enabled = false;
                 administracionToolStripMenuItem.Visible = false;
+                venderToolStripMenuItem.Visible = true;
+
+                if (UserLogged.roles.Any(r => r.cod_rol == 1)) //Empresa
+                {
+                    comprarToolStripMenuItem.Visible = false;
+                }
             }
             pnlMaster.Controls.Clear();
             pnlMaster.Controls.Add(new HomeControl());
@@ -149,6 +156,12 @@ namespace ME.UI
         {
             pnlMaster.Controls.Clear();
             pnlMaster.Controls.Add(new ListadoEstadisticoUserControl());
+        }
+
+        private void misPublicacionesToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            pnlMaster.Controls.Clear();
+            pnlMaster.Controls.Add(new MisPublicacionesUserControl());
         }
     }
 }
