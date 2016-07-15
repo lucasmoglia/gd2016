@@ -37,8 +37,8 @@ namespace ME.UI
             pnlMaster.Controls.Clear();
             pnlMaster.Controls.Add(new HomeControl());
 
-            comprarToolStripMenuItem.Visible = !UserLogged.esAdmin && !UserLogged.roles.Any(r => r.cod_rol == 1) && UserLogged.funcionalidades.Any(f => f.cod_funcionalidad == 0);
-            venderToolStripMenuItem.Visible = !UserLogged.esAdmin && UserLogged.funcionalidades.Any(f => f.cod_funcionalidad == 1);
+            comprarToolStripMenuItem.Visible = UserLogged.activo && !UserLogged.esAdmin && !UserLogged.roles.Any(r => r.cod_rol == 1) && UserLogged.funcionalidades.Any(f => f.cod_funcionalidad == 0);
+            venderToolStripMenuItem.Visible = UserLogged.activo && !UserLogged.esAdmin && UserLogged.funcionalidades.Any(f => f.cod_funcionalidad == 1);
             calificarToolStripMenuItem.Visible = UserLogged.funcionalidades.Any(f => f.cod_funcionalidad == 2);
             misFacturasToolStripMenuItem.Visible = UserLogged.funcionalidades.Any(f => f.cod_funcionalidad == 6);
             miHistorialToolStripMenuItem.Visible = UserLogged.funcionalidades.Any(f => f.cod_funcionalidad == 5);
@@ -163,6 +163,12 @@ namespace ME.UI
         {
             pnlMaster.Controls.Clear();
             pnlMaster.Controls.Add(new MisPublicacionesUserControl());
+        }
+
+        private void misDatosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NuevoUsuarioForm nuevoUsuarioForm = new NuevoUsuarioForm(UsuarioHandler.GetUsuarios(false).Where(u => u.cod_usuario == UserLogged.cod_usuario).FirstOrDefault());
+            nuevoUsuarioForm.ShowDialog(this);
         }
     }
 }
